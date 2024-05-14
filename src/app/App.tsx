@@ -1,5 +1,7 @@
+import RouterComponent from "@/router";
+
 function App() {
-  return <h1>Hi SWP391</h1>;
+  return <RouterComponent />;
 }
 
 export default App;

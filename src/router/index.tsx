@@ -1,4 +1,6 @@
-import Admin from "@/pages/Admin";
+import Loading from "@/components/Loading";
+import ErrorPage from "@/pages/404";
+import Login from "@/pages/Login";
 import {
   createBrowserRouter,
   Navigate,
@@ -7,8 +9,10 @@ import {
 const RouterComponent = () => {
   const router = createBrowserRouter([
     { index: true, element: <Navigate to="login" /> },
-    { element: <Admin /> },
+    { path: "login", element: <Login /> },
+    { path: "*", element: <ErrorPage /> },
   ]);
+  return <RouterProvider fallbackElement={<Loading />} router={router} />;
 };
 
 export default RouterComponent;

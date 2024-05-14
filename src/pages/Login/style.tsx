@@ -1,3 +1,3 @@
-import styled from "styled-components";
+import { styled } from "@mui/material";
 
-export const LoginStyle = styled.div``;
+export const LoginStyle = styled("div")({});
