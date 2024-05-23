@@ -1,6 +1,4 @@
-import Axios from "axios";
-
-import { API_URL } from "@/config";
+import axios from "@/config/axios";
 import { ApiRequest, HttpMethod } from "@/types/core";
 
 export type AxiosCustomRequest = {
@@ -18,8 +16,8 @@ const request: ApiRequest = (
   params = {},
   body = {}
 ) =>
-  Axios<AxiosCustomRequest>({
-    url: API_URL + endpoint,
+  axios<AxiosCustomRequest>({
+    url: endpoint,
     method,
     headers: Object.assign({}, headers),
     params: Object.assign(params),

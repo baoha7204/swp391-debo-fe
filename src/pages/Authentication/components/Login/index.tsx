@@ -3,6 +3,7 @@ import { Box, Divider, Grid, Typography } from "@mui/material";
 import Logo from "@/components/Logo";
 import MyTextField from "@/components/MyTextField";
 import MyButton from "@/components/MyButton";
+import MyGoogleLogin from "../MyGoogleLogin";
 
 const Login = () => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -21,7 +22,7 @@ const Login = () => {
       }}
     >
       <Logo />
-      <div>
+      <Grid>
         <Typography
           sx={{
             fontSize: 20,
@@ -65,9 +66,9 @@ const Login = () => {
             Sign In
           </MyButton>
         </Box>
-      </div>
+      </Grid>
       <Divider />
-      <Grid container>
+      <Grid container flexDirection={"column"}>
         <Grid item>
           <Typography
             sx={{
@@ -76,6 +77,29 @@ const Login = () => {
             }}
           >
             For Admin
+          </Typography>
+        </Grid>
+        <Grid item>
+          <MyGoogleLogin />
+        </Grid>
+        <Grid container justifyContent={"center"} gap={1}>
+          <Typography
+            sx={{
+              fontSize: 14,
+              fontWeight: 400,
+              textAlign: "center",
+            }}
+          >
+            Don't have an account?
+          </Typography>
+          <Typography
+            sx={{
+              color: (theme) => theme.palette.primary.light,
+              display: "inline",
+              cursor: "pointer",
+            }}
+          >
+            Sign up now
           </Typography>
         </Grid>
       </Grid>
