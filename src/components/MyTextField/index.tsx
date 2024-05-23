@@ -1,13 +1,13 @@
-import { BaseTextFieldProps, Grid, TextField, Typography } from "@mui/material";
+import { Grid, TextField, TextFieldProps, Typography } from "@mui/material";
 
 export type MyTextFieldProps = {
-  outsideLabel: string;
+  outsideLabel?: string;
 };
 
 const MyTextField = ({
   outsideLabel,
   ...textFieldProps
-}: BaseTextFieldProps & MyTextFieldProps) => (
+}: TextFieldProps & MyTextFieldProps) => (
   <Grid container>
     <Typography
       sx={{
