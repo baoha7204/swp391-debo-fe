@@ -1,39 +1,55 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap");
+
 * {
+    font-family: "Manrope", "sans-serif";
     padding: 0;
     margin: 0;
 }
 
-.container {
+.branchHeader-container {
     display: grid;
     grid-template-columns: repeat(10, 1fr);
 }
 
-.container .left-header {
+.branchHeader-container .left-header {
     display: flex;
     font-size: 25px;
     align-items: center;
     font-weight: 700;
 }
 
-.container .right-header {
+.branchHeader-container .right-header {
     grid-column: 10;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.container .right-header .add-icon {
+.branchHeader-container .center-header {
     display: flex;
-    right: 20%;
-}
-
-.container .right-header .small-info {
-    display: flex;
+    grid-column: 5;
     justify-content: center;
     align-items: center;
-    gap: 10px;
+    font-size: 30px;
+    font-weight: 900;
+    color: #4660E7;
 }
 
-.container .right-header .small-info ul {
+.branchHeader-container .right-header .small-info {
+    display: flex;
+    border: 0px solid;
+    padding: 5px 10px;
+    border-radius: 20px;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+
+}
+
+.branchHeader-container .right-header .small-info ul {
     list-style: none;
+}
+
+.branchHeader-container .right-header .small-info ul li:first-child {
+    font-weight: 700;
 }

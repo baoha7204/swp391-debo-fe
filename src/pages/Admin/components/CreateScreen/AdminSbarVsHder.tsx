@@ -20,6 +20,14 @@ import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import Logo from '@/components/Logo';
 import BranchHeader from '../../adminBranch/CreateBranch/BranchHeader';
+import EventIcon from '@mui/icons-material/Event';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import HealthAndSafetyIcon from '@mui/icons-material/HealthAndSafety';
+import GroupIcon from '@mui/icons-material/Group';
+import AccountBoxIcon from '@mui/icons-material/AccountBox';
+import StoreIcon from '@mui/icons-material/Store';
+import SettingsIcon from '@mui/icons-material/Settings';
+import ReportIcon from '@mui/icons-material/Report';
 
 const drawerWidth = 240;
 
@@ -92,7 +100,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
     }),
 );
 
-export default function AdminSbarVsHder() {
+export default function AdminSbarVsHder({ children }: any) {
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
 
@@ -107,12 +115,14 @@ export default function AdminSbarVsHder() {
     return (
         <Box sx={{
             display: 'flex',
+
         }}>
             <CssBaseline />
-            <AppBar position="fixed" open={open}>
+            <AppBar position="fixed" open={open}
+            >
                 <Toolbar
                     sx={{
-                        backgroundColor: (theme) => theme.palette.common.white
+                        backgroundColor: (theme) => theme.palette.common.white,
                     }}
                 >
                     <IconButton
@@ -123,12 +133,14 @@ export default function AdminSbarVsHder() {
                         sx={{
                             marginRight: 5,
                             ...(open && { display: 'none' }),
+
                         }}
                     >
                         <MenuIcon />
                     </IconButton>
                     <Typography noWrap component="div" sx={{ color: 'black', paddingLeft: 0.5, paddingRight: 0.5 }}>
-                        <BranchHeader />
+                        {/* <BranchHeader /> */}
+                        {children[0]}
                     </Typography>
                 </Toolbar>
             </AppBar>
@@ -149,7 +161,7 @@ export default function AdminSbarVsHder() {
                 </DrawerHeader>
                 <Divider />
                 <List>
-                    {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
+                    {['Reservations', 'Patients'].map((text, index) => (
                         <ListItem key={text} disablePadding sx={{ display: 'block' }}>
                             <ListItemButton
                                 sx={{
@@ -165,7 +177,7 @@ export default function AdminSbarVsHder() {
                                         justifyContent: 'center',
                                     }}
                                 >
-                                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                                    {index % 2 === 0 ? <EventIcon /> : <AccountCircleIcon />}
                                 </ListItemIcon>
                                 <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
                             </ListItemButton>
@@ -174,7 +186,7 @@ export default function AdminSbarVsHder() {
                 </List>
                 <Divider />
                 <List>
-                    {['All mail', 'Trash', 'Spam'].map((text, index) => (
+                    {['Treatments', 'Staff List'].map((text, index) => (
                         <ListItem key={text} disablePadding sx={{ display: 'block' }}>
                             <ListItemButton
                                 sx={{
@@ -190,7 +202,57 @@ export default function AdminSbarVsHder() {
                                         justifyContent: 'center',
                                     }}
                                 >
-                                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                                    {index % 2 === 0 ? <HealthAndSafetyIcon /> : <GroupIcon />}
+                                </ListItemIcon>
+                                <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
+                            </ListItemButton>
+                        </ListItem>
+                    ))}
+                </List>
+                <Divider />
+                <List>
+                    {['Account', 'Branch'].map((text, index) => (
+                        <ListItem key={text} disablePadding sx={{ display: 'block' }}>
+                            <ListItemButton
+                                sx={{
+                                    minHeight: 48,
+                                    justifyContent: open ? 'initial' : 'center',
+                                    px: 2.5,
+                                }}
+                            >
+                                <ListItemIcon
+                                    sx={{
+                                        minWidth: 0,
+                                        mr: open ? 3 : 'auto',
+                                        justifyContent: 'center',
+                                    }}
+                                >
+                                    {index % 2 === 0 ? <AccountBoxIcon /> : <StoreIcon />}
+                                </ListItemIcon>
+                                <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
+                            </ListItemButton>
+                        </ListItem>
+                    ))}
+                </List>
+                {/* <Divider /> */}
+                <List sx={{ top: 200 }}>
+                    {['Report', 'Setting'].map((text, index) => (
+                        <ListItem key={text} disablePadding sx={{ display: 'block' }}>
+                            <ListItemButton
+                                sx={{
+                                    minHeight: 48,
+                                    justifyContent: open ? 'initial' : 'center',
+                                    px: 2.5,
+                                }}
+                            >
+                                <ListItemIcon
+                                    sx={{
+                                        minWidth: 0,
+                                        mr: open ? 3 : 'auto',
+                                        justifyContent: 'center',
+                                    }}
+                                >
+                                    {index % 2 === 0 ? <ReportIcon /> : <SettingsIcon />}
                                 </ListItemIcon>
                                 <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
                             </ListItemButton>
@@ -198,10 +260,9 @@ export default function AdminSbarVsHder() {
                     ))}
                 </List>
             </Drawer>
-            <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-                <DrawerHeader
-
-                />
+            <Box component="main" sx={{ flexGrow: 1, p: 1, }}>
+                <DrawerHeader />
+                {children[1]}
             </Box>
         </Box>
     );
