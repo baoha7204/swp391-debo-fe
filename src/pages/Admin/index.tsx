@@ -1,5 +1,11 @@
+import AdminSbarVsHder from "./components/CreateScreen/AdminSbarVsHder";
+
 const Admin = () => {
-  return <div>Admin Page</div>;
+  return (
+    <>
+      <AdminSbarVsHder />
+    </>
+  )
 };
 
 export default Admin;

@@ -1,7 +1,9 @@
 import RouterComponent from "@/router";
 
+import Admin from "@/pages/Admin";
+
 function App() {
-  return <RouterComponent />;
+  return <Admin />;
 }
 
 export default App;

@@ -1,0 +1,39 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+}
+
+.container .left-header {
+    display: flex;
+    font-size: 25px;
+    align-items: center;
+    font-weight: 700;
+}
+
+.container .right-header {
+    grid-column: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container .right-header .add-icon {
+    display: flex;
+    right: 20%;
+}
+
+.container .right-header .small-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.container .right-header .small-info ul {
+    list-style: none;
+}
