@@ -1,18 +1,25 @@
-import Loading from "@/components/Loading";
-import ErrorPage from "@/pages/404";
-import AuthenticationPage from "@/pages/Authentication";
 import {
   createBrowserRouter,
   Navigate,
   RouterProvider,
 } from "react-router-dom";
+
+import ErrorPage from "@/pages/404";
+import AuthenticationPage from "@/pages/Authentication";
+import CircularIndeterminate from "@/components/CircularIndeterminate";
+
 const RouterComponent = () => {
   const router = createBrowserRouter([
-    { index: true, element: <Navigate to="login" /> },
-    { path: "login", element: <AuthenticationPage /> },
+    { index: true, element: <Navigate to="auth" /> },
+    { path: "auth", element: <AuthenticationPage /> },
     { path: "*", element: <ErrorPage /> },
   ]);
-  return <RouterProvider fallbackElement={<Loading />} router={router} />;
+  return (
+    <RouterProvider
+      fallbackElement={<CircularIndeterminate />}
+      router={router}
+    />
+  );
 };
 
 export default RouterComponent;
