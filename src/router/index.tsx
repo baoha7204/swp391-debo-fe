@@ -7,11 +7,13 @@ import {
 import ErrorPage from "@/pages/404";
 import AuthenticationPage from "@/pages/Authentication";
 import CircularIndeterminate from "@/components/CircularIndeterminate";
+import UnauthorizedPage from "@/pages/403";
 
 const RouterComponent = () => {
   const router = createBrowserRouter([
-    { index: true, element: <Navigate to="auth" /> },
-    { path: "auth", element: <AuthenticationPage /> },
+    { index: true, element: <Navigate to="login" /> },
+    { path: "unauthorized", element: <UnauthorizedPage /> },
+    { path: "login", element: <AuthenticationPage /> },
     { path: "*", element: <ErrorPage /> },
   ]);
   return (

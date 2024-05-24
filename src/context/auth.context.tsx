@@ -8,7 +8,6 @@ import {
 
 type AuthType = {
   user?: string;
-  roles?: string[];
   accessToken?: string;
 } | null;
 

@@ -1,22 +1,14 @@
 import axios from "@/config/axios";
-import { ApiRequest, HttpMethod } from "@/types/core";
+import { ApiResponse, EmptyObj } from "@/types/core";
 
-export type AxiosCustomRequest = {
-  url: string;
-  method: HttpMethod;
-  headers: Record<string, string>;
-  params: Record<string, string>;
-  data: Record<string, string>;
-};
-
-const request: ApiRequest = (
-  endpoint,
-  method,
+const request = <T = EmptyObj>(
+  endpoint: string,
+  method: string,
   headers = {},
   params = {},
   body = {}
 ) =>
-  axios<AxiosCustomRequest>({
+  axios<ApiResponse<T>>({
     url: endpoint,
     method,
     headers: Object.assign({}, headers),
@@ -24,16 +16,28 @@ const request: ApiRequest = (
     data: body,
   });
 
-const get = (endpoint: string, params = {}, headers = {}) =>
-  request(endpoint, "GET", headers, params);
+const get = <T = EmptyObj>(endpoint: string, params = {}, headers = {}) =>
+  request<T>(endpoint, "GET", headers, params);
 
-const post = (endpoint: string, body = {}, params = {}, headers = {}) =>
-  request(endpoint, "POST", headers, params, body);
+const post = <T = EmptyObj>(
+  endpoint: string,
+  body = {},
+  params = {},
+  headers = {}
+) => request<T>(endpoint, "POST", headers, params, body);
 
-const put = (endpoint: string, body = {}, params = {}, headers = {}) =>
-  request(endpoint, "PUT", headers, params, body);
+const put = <T = EmptyObj>(
+  endpoint: string,
+  body = {},
+  params = {},
+  headers = {}
+) => request<T>(endpoint, "PUT", headers, params, body);
 
-const remove = (endpoint: string, body = {}, params = {}, headers = {}) =>
-  request(endpoint, "DELETE", headers, params, body);
+const remove = <T = EmptyObj>(
+  endpoint: string,
+  body = {},
+  params = {},
+  headers = {}
+) => request<T>(endpoint, "DELETE", headers, params, body);
 
 export { request, get, post, put, remove };

@@ -2,6 +2,9 @@ export const formatUserName = (firstName: string, lastName: string) => {
   return [firstName, lastName].join(" ");
 };
 
+export const VietnamesePhoneNumberRegex =
+  /(03|05|07|08|09|01[2|6|8|9])+([0-9]{8})\b/;
+
 export const DateFormatS = (props: string | number | Date) => {
   const date = new Date(props);
   // const hour = date.getUTCHours();

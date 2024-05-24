@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { IconButton, InputAdornment, TextFieldProps } from "@mui/material";
+import { IconButton, InputAdornment } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 
 import MyTextField, { MyTextFieldProps } from "../MyTextField";
@@ -9,7 +9,8 @@ const PasswordField = ({
   name = "password",
   id = "password",
   label = "Password",
-}: TextFieldProps & MyTextFieldProps) => {
+  ...rest
+}: MyTextFieldProps) => {
   const [showPassword, setShowPassword] = useState(false);
   const handleClickShowPassword = () => setShowPassword((show) => !show);
   return (
@@ -21,7 +22,6 @@ const PasswordField = ({
       label={label}
       type={showPassword ? "text" : "password"}
       id={id}
-      autoComplete="current-password"
       InputProps={{
         endAdornment: (
           <InputAdornment position="end">
@@ -35,6 +35,7 @@ const PasswordField = ({
           </InputAdornment>
         ),
       }}
+      {...rest}
     />
   );
 };

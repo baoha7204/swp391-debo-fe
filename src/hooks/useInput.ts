@@ -11,7 +11,7 @@ const useInput = (key: string, initValue: LocalStorageInitValue<string>) => {
       setValue(e.target.value),
   };
 
-  return [value, reset, attributeObj];
+  return [value, reset, attributeObj] as const;
 };
 
 export default useInput;

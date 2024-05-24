@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import { Outlet } from "react-router-dom";
+
 import useRefreshToken from "@/hooks/useRefreshToken";
 import useAuth from "@/hooks/useAuth";
 import useLocalStorage from "@/hooks/useLocalStorage";
-import CircularIndeterminate from "../CircularIndeterminate";
+import CircularIndeterminate from "@/components/CircularIndeterminate";
 import { toastError } from "@/utils/toast";
 
 const PersistLogin = () => {

@@ -1,15 +1,16 @@
-import { Box } from "@mui/material";
+import { Box, Checkbox, FormControlLabel } from "@mui/material";
+import { DevTool } from "@hookform/devtools";
 
-import MyTextField from "@/components/MyTextField";
-import PasswordField from "@/components/PasswordField";
 import MyButton from "@/components/MyButton";
+import useToggle from "@/hooks/useToggle";
+import useLogin from "./hooks/useLogin";
+import FormInputText from "@/components/Form/FormInputText";
 
 const LoginForm = () => {
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log(data.get("email"));
-  };
+  const [handleSubmit, isSubmitting, control] = useLogin();
+
+  const [check, toggleCheck] = useToggle("persist", false);
+
   return (
     <Box
       component="form"
@@ -22,20 +23,37 @@ const LoginForm = () => {
         gap: 2,
       }}
     >
-      <MyTextField
+      <FormInputText
+        control={control}
+        name="user"
         outsideLabel="Login"
         required
         fullWidth
-        id="email"
+        id="user"
         label="Email or phone number"
-        name="email"
-        autoComplete="email"
         autoFocus
       />
-      <PasswordField />
-      <MyButton type="submit" fullWidth variant="contained">
+      <FormInputText isPassword control={control} name="password" />
+      <MyButton
+        type="submit"
+        fullWidth
+        variant="contained"
+        disabled={isSubmitting}
+      >
         Sign in
       </MyButton>
+      <FormControlLabel
+        control={
+          <Checkbox
+            value="remember"
+            checked={check}
+            onChange={toggleCheck}
+            color="primary"
+          />
+        }
+        label="Remember me"
+      />
+      <DevTool control={control} placement="top-left" />
     </Box>
   );
 };
