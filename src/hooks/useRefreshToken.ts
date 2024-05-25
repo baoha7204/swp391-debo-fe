@@ -4,6 +4,7 @@ import axios from "@/config/axios";
 import useAuth from "./useAuth";
 import { API_ENDPOINTS } from "@/utils/api";
 import { Token } from "@/types/core";
+import { ROLE } from "@/constant/core";
 
 const useRefreshToken = () => {
   const { auth, setAuth } = useAuth();
@@ -14,7 +15,7 @@ const useRefreshToken = () => {
       : undefined;
     const roles = decoded?.roles || [];
 
-    const endpoint = roles.includes("admin")
+    const endpoint = roles.includes(ROLE.ADMIN)
       ? API_ENDPOINTS.AUTH.REFRESH_TOKEN_GOOGLE
       : API_ENDPOINTS.AUTH.REFRESH_TOKEN_CREDENTIALS;
     const response = await axios(endpoint, {
