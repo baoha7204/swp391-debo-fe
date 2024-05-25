@@ -36,18 +36,22 @@ const useRegister = () => {
     }
 
     const { email, password } = data;
-    post("/register", {
+    post("/register", true, {
       email,
       password,
-    }).then((res) => {
-      const { data } = res;
-      if (!data.success) {
-        return errorToastHandler(data);
-      }
-      // successfully registered
-      toastSuccess("Register successfully!");
-      navigate(from, { replace: true });
-    });
+    })
+      .then((res) => {
+        const { data } = res;
+        if (!data.success) {
+          return errorToastHandler(data);
+        }
+        // successfully registered
+        toastSuccess("Register successfully!");
+        navigate(from, { replace: true });
+      })
+      .catch((err) => {
+        errorToastHandler(err.response);
+      });
   };
 
   useEffect(() => {

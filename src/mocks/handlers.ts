@@ -6,13 +6,14 @@ export const handlers = [
     await delay(2000);
   }),
   http.post("/register", async ({ request }) => {
+    await delay(2000);
     const body = await request.json();
     const { email, password } = body;
     if (!email || !password)
       return HttpResponse.json(
         {
           success: false,
-          message: "Username and password are required.",
+          message: "Email and password are required.",
           data: {},
         },
         { status: 400 }
@@ -23,7 +24,7 @@ export const handlers = [
         {
           success: false,
           data: {},
-          message: "Username already exists.",
+          message: "Email already exists.",
         },
         { status: 409 }
       );
@@ -46,7 +47,7 @@ export const handlers = [
         {
           success: true,
           data: result,
-          message: "Username already exists.",
+          message: "User created!.",
         },
         { status: 201 }
       );

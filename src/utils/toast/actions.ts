@@ -1,11 +1,16 @@
 import { HTTP_STATUS } from "@/constant/core";
 import { toastError } from ".";
-import { ApiResponse, EmptyObj } from "@/types/core";
 
 export const DEFAULT_ERROR = "An error occurred, please try again later";
-export const NO_SERVER_RESPONSE_ERROR = "No server response";
 
-export const errorToastHandler = <T = EmptyObj>(res: ApiResponse<T>) => {
+export const errorToastHandler = (res: any) => {
+  if (res.data.message) {
+    return toastError(res.data.message);
+  }
+  if (res.message) {
+    return toastError(res.message);
+  }
+
   let message = DEFAULT_ERROR;
   switch (res.status) {
     case HTTP_STATUS.BAD_REQUEST:

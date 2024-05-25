@@ -38,7 +38,7 @@ export default function useLogin() {
     }
 
     const { user, password } = data;
-    post<AuthResponseType>("/login", {
+    post<AuthResponseType>("/login", true, {
       user,
       password,
     }).then((res) => {

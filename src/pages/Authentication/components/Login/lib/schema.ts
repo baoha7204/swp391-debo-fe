@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-import { EmailSchema, PhoneSchema } from "@/lib/schema";
+import { PhoneSchema } from "@/lib/schema";
 
 export const LoginFormSchema = z.object({
   // user is either email or phone number
@@ -8,7 +8,7 @@ export const LoginFormSchema = z.object({
     .string()
     .min(1, { message: "Email/phone number is required" })
     .max(256, { message: "Email/phone number must not exceed 256 characters" })
-    .and(EmailSchema)
+    .email({ message: "Invalid email/phone number" })
     .or(PhoneSchema),
   password: z
     .string()
