@@ -1,15 +1,13 @@
-import AdminSbarVsHder from "./components/CreateScreen/AdminSbarVsHder";
-import BranchHeader from "./adminBranch/CreateBranch/BranchHeader";
-import BranchBodyTabs from "./adminBranch/CreateBranch/BranchBodyTabs";
-import BranchCreateBody from "./adminBranch/CreateBranch/BranchCreateBody";
+import CreateBranch from "./adminBranch/CreateBranch/CreateBranch";
+import CreateTreatment from "./adminBranch/CreateTreatment/CreateTreatment";
+import CreateStaff from "./adminBranch/CreateStaff/CreateStaff";
 
 const Admin = () => {
   return (
     <>
-      <AdminSbarVsHder>
-        <BranchHeader />
-        <BranchCreateBody />
-      </AdminSbarVsHder>
+      {/* <CreateBranch /> */}
+      {/* <CreateTreatment /> */}
+      <CreateStaff />
     </>
   )
 };

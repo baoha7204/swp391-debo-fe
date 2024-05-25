@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import './BranchCreateBody.css'
+import '../CreateBranch/BranchCreateBody.css'
 import { alpha } from '@mui/material/styles';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -24,6 +24,11 @@ import FilterListIcon from '@mui/icons-material/FilterList';
 import { visuallyHidden } from '@mui/utils';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import Button from '@mui/material/Button';
+import { create } from 'domain';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
 
 // interface Data {
 //     id: number;
@@ -54,34 +59,41 @@ import Button from '@mui/material/Button';
 
 interface Data {
     id: number,
-    address: string,
-    mail: string,
+    username: string,
+    password: string,
+    name: string,
     phoneN: number,
-    altphoneN: number,
+    role: number,
 }
 
 function createData(
     id: number,
-    address: string,
-    mail: string,
+    username: string,
+    password: string,
+    name: string,
     phoneN: number,
-    altphoneN: number,
+    role: number,
 ): Data {
     return {
         id,
-        address,
-        mail,
+        username,
+        password,
+        name,
         phoneN,
-        altphoneN,
+        role,
     };
 }
 
 const rows = [
-    createData(1, '92 an duong vuong, long thanh bac, hoa thanh, tay ninh', 'huynhtd97@gmail.com', 827693877878, 123456789),
-    createData(2, '92 an duong vuong, long thanh bac, hoa thanh, tay ninh', 'huynhtd97@gmail.com', 827693878, 123456789),
-    createData(3, '92 an duong vuong, long thanh bac, hoa thanh, tay ninh', 'huynhtd97@gmail.com', 827693878, 123456789),
-    createData(4, '92 an duong vuong, long thanh bac, hoa thanh, tay ninh', 'huynhtd97@gmail.com', 827693878, 123456789),
-
+    createData(1, 'admin', '12345', 'Huynh Thong Duong', 827693878, 0),
+    createData(1, 'admin', '12345', 'Huynh Thong Duong', 827693878, 0),
+    createData(1, 'admin', '12345', 'Huynh Thong Duong', 827693878, 0),
+    createData(1, 'admin', '12345', 'Huynh Thong Duong', 827693878, 0),
+    createData(1, 'admin', '12345', 'Huynh Thong Duong', 827693878, 0),
+    createData(1, 'admin', '12345', 'Huynh Thong Duong', 827693878, 0),
+    createData(1, 'admin', '12345', 'Huynh Thong Duong', 827693878, 0),
+    createData(1, 'admin', '12345', 'Huynh Thong Duong', 827693878, 0),
+    createData(1, 'admin', '12345', 'Huynh Thong Duong', 827693878, 0),
 ];
 
 // const rows = [
@@ -149,16 +161,22 @@ interface HeadCell {
 
 const headCells: readonly HeadCell[] = [
     {
-        id: 'address',
+        id: 'username',
         numeric: false,
         disablePadding: true,
-        label: 'Branch Address',
+        label: 'Username',
     },
     {
-        id: 'mail',
+        id: 'password',
         numeric: false,
         disablePadding: true,
-        label: 'Branch Mail',
+        label: 'Password',
+    },
+    {
+        id: 'name',
+        numeric: false,
+        disablePadding: true,
+        label: 'Name',
     },
     {
         id: 'phoneN',
@@ -167,10 +185,10 @@ const headCells: readonly HeadCell[] = [
         label: 'Mobile Phone',
     },
     {
-        id: 'altphoneN',
+        id: 'role',
         numeric: false,
         disablePadding: true,
-        label: 'Alt Mobile Phone',
+        label: 'Role',
     },
 ];
 
@@ -285,10 +303,10 @@ function EnhancedTableToolbar(props: EnhancedTableToolbarProps) {
     );
 }
 
-function BranchCreateBody() {
+function StaffCreateBody() {
 
     const [order, setOrder] = React.useState<Order>('asc');
-    const [orderBy, setOrderBy] = React.useState<keyof Data>('mail');
+    const [orderBy, setOrderBy] = React.useState<keyof Data>('name');
     const [selected, setSelected] = React.useState<readonly number[]>([]);
     const [page, setPage] = React.useState(0);
     const [dense, setDense] = React.useState(false);
@@ -359,15 +377,21 @@ function BranchCreateBody() {
         [order, orderBy, page, rowsPerPage],
     );
 
+    const [role, setRole] = React.useState('');
+
+    const handleChange = (event: SelectChangeEvent) => {
+        setRole(event.target.value as string);
+    };
+
     return (
         <>
             <div className="branchCreate-container">
                 <div className="box-header">
-                    <h1>Branch Information</h1>
+                    <h1>Staff Information</h1>
                 </div>
                 <div className="box-body">
                     <div className="branch-address">
-                        <h3>Branch Address:</h3>
+                        <h3>Username:</h3>
                         <div className="box">
                             <Box
                                 component="form"
@@ -378,12 +402,12 @@ function BranchCreateBody() {
                                 autoComplete="off"
                             >
 
-                                <TextField id="outlined-basic" label="Address" variant="outlined" />
+                                <TextField id="outlined-basic" label="Username" variant="outlined" />
                             </Box>
                         </div>
                     </div>
                     <div className="branch-mail">
-                        <h3>Branch Mail:</h3>
+                        <h3>Password:</h3>
                         <div className="box">
                             <Box
                                 component="form"
@@ -394,12 +418,14 @@ function BranchCreateBody() {
                                 autoComplete="off"
                             >
 
-                                <TextField id="outlined-basic" label="Mail" variant="outlined" />
+                                <TextField id="outlined-basic" label="Password" variant="outlined"
+                                // helperText="Ex: 1 years -> input 365 days"
+                                />
                             </Box>
                         </div>
                     </div>
                     <div className="branch-mobile">
-                        <h3>Branch Mobile Number:</h3>
+                        <h3>Name:</h3>
                         <div className="box">
                             <Box
                                 component="form"
@@ -410,8 +436,13 @@ function BranchCreateBody() {
                                 autoComplete="off"
                             >
 
-                                <TextField id="outlined-basic" label="Mobile Number" variant="outlined" />
+                                <TextField id="outlined-basic" label="Name" variant="outlined" />
                             </Box>
+                        </div>
+                    </div>
+                    <div className="branch-mobile">
+                        <h3>Mobile Phone:</h3>
+                        <div className="box">
                             <Box
                                 component="form"
                                 sx={{
@@ -421,10 +452,37 @@ function BranchCreateBody() {
                                 autoComplete="off"
                             >
 
-
-                                <TextField id="outlined-basic" label="Alt Mobile Number" variant="outlined" />
+                                <TextField id="outlined-basic" label="Mobile Phone" variant="outlined" />
                             </Box>
                         </div>
+                    </div>
+                    <div className="branch-mobile">
+                        <h3>Role:</h3>
+                        <Box
+                            component="form"
+                            sx={{
+                                '& > :not(style)': { m: 1, width: '35ch' },
+                            }}
+                            noValidate
+                            autoComplete="off">
+                            <FormControl fullWidth>
+                                <InputLabel id="demo-simple-select-label">Role</InputLabel>
+                                <Select
+                                    labelId="demo-simple-select-label"
+                                    id="demo-simple-select"
+                                    value={role}
+                                    label="Role"
+                                    onChange={handleChange}
+                                >
+                                    <MenuItem value="">
+                                        <em>None</em>
+                                    </MenuItem>
+                                    <MenuItem value={10}>Dentist</MenuItem>
+                                    <MenuItem value={20}>General Staff</MenuItem>
+                                    <MenuItem value={30}>Branch Manager</MenuItem>
+                                </Select>
+                            </FormControl>
+                        </Box>
                     </div>
                     <div className="create-branch-button"
                         style={{
@@ -440,7 +498,7 @@ function BranchCreateBody() {
                                 '& > :not(style)': { m: 0, width: '15ch', },
                             }}
                         >
-                            <Button>Add</Button>
+                            <Button sx={{}}>Create</Button>
                         </ButtonGroup>
                     </div>
                 </div>
@@ -494,11 +552,12 @@ function BranchCreateBody() {
                                                         scope="row"
                                                         padding="none"
                                                     >
-                                                        {row.address}
+                                                        {row.username}
                                                     </TableCell>
-                                                    <TableCell align="left" sx={{ padding: '0' }}>{row.mail}</TableCell>
+                                                    <TableCell align="left" sx={{ padding: '0' }}>{row.password}</TableCell>
+                                                    <TableCell align="left" sx={{ padding: '0' }}>{row.name}</TableCell>
                                                     <TableCell align="left" sx={{ padding: '0' }}>{row.phoneN}</TableCell>
-                                                    <TableCell align="left" sx={{ padding: '0' }}>{row.altphoneN}</TableCell>
+                                                    <TableCell align="left" sx={{ padding: '0' }}>{row.role}</TableCell>
 
                                                 </TableRow>
                                             );
@@ -536,4 +595,4 @@ function BranchCreateBody() {
     );
 }
 
-export default BranchCreateBody;
+export default StaffCreateBody;

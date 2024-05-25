@@ -145,13 +145,14 @@ export default function AdminSbarVsHder({ children }: any) {
                 </Toolbar>
             </AppBar>
             <Drawer
-
+                sx={{
+                    justifyContent: 'space-between'
+                }}
                 variant="permanent" open={open}
             >
                 <DrawerHeader
                     sx={{
-                        justifyContent: 'space-around',
-
+                        justifyContent: 'space-around'
                     }}
                 >
                     <Logo />

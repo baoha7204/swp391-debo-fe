@@ -12,6 +12,7 @@
     grid-template-rows: repeat(2, 1fr);
     grid-template-columns: repeat(2, 1fr);
     padding-bottom: 2rem;
+    padding-left: 1rem;
 }
 
 .branchCreate-container .box-body .branch-address {
