@@ -5,11 +5,12 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 import { LoginFormSchema } from "../lib/schema";
 import { LoginInputs } from "../types/core";
-import { handleSubmitForm } from "@/usecases/handleLoginInput";
+import { handleSubmitForm } from "@/usecases/handleSubmitForm";
 import useAuth from "@/hooks/useAuth";
 import { post } from "@/utils/apiCaller";
 import { errorToastHandler } from "@/utils/toast/actions";
 import { AuthResponseType } from "@/pages/Authentication/types/core";
+import { API_ENDPOINTS } from "@/utils/api";
 
 export default function useLogin() {
   const { setAuth } = useAuth();
@@ -38,7 +39,7 @@ export default function useLogin() {
     }
 
     const { user, password } = data;
-    post<AuthResponseType>("/login", true, {
+    post<AuthResponseType>(API_ENDPOINTS.AUTH.LOGIN_CREDENTIALS, true, {
       user,
       password,
     }).then((res) => {

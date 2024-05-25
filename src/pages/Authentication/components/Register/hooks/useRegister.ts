@@ -6,9 +6,10 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { RegisterFormSchema } from "../lib/schema";
 import { post } from "@/utils/apiCaller";
 import { RegisterInputs } from "../types/core";
-import { handleSubmitForm } from "@/usecases/handleLoginInput";
+import { handleSubmitForm } from "@/usecases/handleSubmitForm";
 import { errorToastHandler } from "@/utils/toast/actions";
 import { toastSuccess } from "@/utils/toast";
+import { API_ENDPOINTS } from "@/utils/api";
 
 const useRegister = () => {
   const navigate = useNavigate();
@@ -36,7 +37,7 @@ const useRegister = () => {
     }
 
     const { email, password } = data;
-    post("/register", true, {
+    post(API_ENDPOINTS.AUTH.REGISTER, true, {
       email,
       password,
     })

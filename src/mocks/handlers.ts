@@ -13,10 +13,10 @@ export const handlers = [
       return HttpResponse.json(
         {
           success: false,
-          message: "Email and password are required.",
+          message: "Validation failed.",
           data: {},
         },
-        { status: 400 }
+        { status: 422 }
       );
     const dulplicateUser = users.find((user) => user.email === email);
     if (dulplicateUser) {

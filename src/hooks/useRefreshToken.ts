@@ -1,11 +1,23 @@
+import { decodeToken } from "react-jwt";
+
 import axios from "@/config/axios";
 import useAuth from "./useAuth";
+import { API_ENDPOINTS } from "@/utils/api";
+import { Token } from "@/types/core";
 
 const useRefreshToken = () => {
-  const { setAuth } = useAuth();
+  const { auth, setAuth } = useAuth();
 
   const refresh = async () => {
-    const response = await axios.get("/refresh", {
+    const decoded = auth?.accessToken
+      ? decodeToken<Token>(auth.accessToken)
+      : undefined;
+    const roles = decoded?.roles || [];
+
+    const endpoint = roles.includes("admin")
+      ? API_ENDPOINTS.AUTH.REFRESH_TOKEN_GOOGLE
+      : API_ENDPOINTS.AUTH.REFRESH_TOKEN_CREDENTIALS;
+    const response = await axios(endpoint, {
       withCredentials: true,
     });
     setAuth((prev) => {
@@ -13,7 +25,6 @@ const useRefreshToken = () => {
       console.log(response.data.accessToken);
       return {
         ...prev,
-        roles: response.data.roles, 
         accessToken: response.data.accessToken,
       };
     });

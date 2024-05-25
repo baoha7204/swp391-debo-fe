@@ -1,17 +1,10 @@
-import { useGoogleLogin } from "@react-oauth/google";
 import { Grid } from "@mui/material";
 
 import MyButton from "@/components/MyButton";
+import useGoogleSignin from "./hooks/useGoogleSignin";
 
 const MyGoogleLogin = () => {
-  const handleGoogleLogin = useGoogleLogin({
-    onSuccess: (response) => {
-      console.log(response);
-    },
-    onError: (error) => {
-      console.log(error);
-    },
-  });
+  const handleGoogleLogin = useGoogleSignin();
   return (
     <MyButton onClick={() => handleGoogleLogin()} fullWidth variant="contained">
       <Grid container justifyContent={"center"} alignItems={"center"} gap={1}>

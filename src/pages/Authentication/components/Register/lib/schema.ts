@@ -12,12 +12,11 @@ export const RegisterFormSchema = z
       .and(EmailSchema),
     password: z
       .string()
-      .min(1, { message: "Password is required" })
+      .min(8, { message: "Password is required" })
       .max(128, { message: "Password must not exceed 128 characters" }),
     confirmPassword: z
       .string()
-      .min(1, { message: "Password is required" })
-      .max(128, { message: "Password must not exceed 128 characters" }),
+      .min(1, { message: "Confirm password is required" }),
   })
   .refine((values) => values.password === values.confirmPassword, {
     message: "Passwords do not match",
