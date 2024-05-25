@@ -7,7 +7,6 @@ type HttpMethod = "GET" | "POST" | "PUT" | "DELETE";
 type ApiRequest<T> = Promise<AxiosResponse<ApiResponse<T>>>;
 
 type ApiResponse<T = EmptyObj> = {
-  status: number;
   success: boolean;
   data: T;
   message: string;

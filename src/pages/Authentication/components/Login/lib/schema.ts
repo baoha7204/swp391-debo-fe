@@ -1,11 +1,6 @@
 import { z } from "zod";
 
-import { VietnamesePhoneNumberRegex } from "@/utils/helper";
-
-export const EmailSchema = z
-  .string()
-  .email({ message: "Invalid email address" });
-export const PhoneSchema = z.string().regex(VietnamesePhoneNumberRegex);
+import { EmailSchema, PhoneSchema } from "@/lib/schema";
 
 export const LoginFormSchema = z.object({
   // user is either email or phone number
@@ -13,7 +8,7 @@ export const LoginFormSchema = z.object({
     .string()
     .min(1, { message: "Email/phone number is required" })
     .max(256, { message: "Email/phone number must not exceed 256 characters" })
-    .or(EmailSchema)
+    .and(EmailSchema)
     .or(PhoneSchema),
   password: z
     .string()

@@ -1,15 +1,13 @@
 import { Box } from "@mui/material";
+import { DevTool } from "@hookform/devtools";
 
 import MyButton from "@/components/MyButton";
-import MyTextField from "@/components/MyTextField";
-import PasswordField from "@/components/PasswordField";
+import useRegister from "./hooks/useRegister";
+import FormInputText from "@/components/Form/FormInputText";
 
 const RegisterForm = () => {
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log(data.get("email"));
-  };
+  const [handleSubmit, isSubmitting, control] = useRegister();
+
   return (
     <Box
       component="form"
@@ -22,26 +20,39 @@ const RegisterForm = () => {
         gap: 2,
       }}
     >
-      <MyTextField
+      <FormInputText
+        control={control}
+        name="email"
         outsideLabel="Email"
+        label="example@gmail.com"
         required
         fullWidth
         id="email"
-        label="example@gmail.com"
-        name="email"
-        autoComplete="email"
         autoFocus
       />
-      <PasswordField label="Must be 8 characters" />
-      <PasswordField
+      <FormInputText
+        isPassword
+        control={control}
+        name="password"
+        label="Must be 8 characters"
+      />
+      <FormInputText
+        isPassword
+        control={control}
         outsideLabel="Confirm password"
         label="Repeat password"
         name="confirmPassword"
         id="confirmPassword"
       />
-      <MyButton type="submit" fullWidth variant="contained">
+      <MyButton
+        type="submit"
+        fullWidth
+        variant="contained"
+        disabled={isSubmitting}
+      >
         Sign up
       </MyButton>
+      <DevTool control={control} placement="top-left" />
     </Box>
   );
 };

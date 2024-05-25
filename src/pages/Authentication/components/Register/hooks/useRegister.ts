@@ -1,53 +1,51 @@
 import { useEffect } from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { useLocation, useNavigate } from "react-router-dom";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { SubmitHandler, useForm } from "react-hook-form";
 
-import { LoginFormSchema } from "../lib/schema";
-import { LoginInputs } from "../types/core";
-import { handleSubmitForm } from "@/usecases/handleLoginInput";
-import useAuth from "@/hooks/useAuth";
+import { RegisterFormSchema } from "../lib/schema";
 import { post } from "@/utils/apiCaller";
+import { RegisterInputs } from "../types/core";
+import { handleSubmitForm } from "@/usecases/handleLoginInput";
 import { errorToastHandler } from "@/utils/toast/actions";
-import { AuthResponseType } from "@/pages/Authentication/types/core";
+import { toastSuccess } from "@/utils/toast";
 
-export default function useLogin() {
-  const { setAuth } = useAuth();
+const useRegister = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
-
   const {
     handleSubmit,
     reset,
     control,
     formState: { isSubmitSuccessful, isSubmitting },
-  } = useForm<LoginInputs>({
-    resolver: zodResolver(LoginFormSchema),
+  } = useForm<RegisterInputs>({
+    resolver: zodResolver(RegisterFormSchema),
     defaultValues: {
-      user: "",
+      email: "",
       password: "",
+      confirmPassword: "",
     },
   });
 
-  const onSubmit: SubmitHandler<LoginInputs> = (data) => {
-    const result = handleSubmitForm<LoginInputs>(data, LoginFormSchema);
+  const onSubmit: SubmitHandler<RegisterInputs> = (data) => {
+    const result = handleSubmitForm<RegisterInputs>(data, RegisterFormSchema);
 
     if (!result || result.error) {
       return;
     }
 
-    const { user, password } = data;
-    post<AuthResponseType>("/login", {
-      user,
+    const { email, password } = data;
+    post("/register", {
+      email,
       password,
     }).then((res) => {
       const { data } = res;
       if (!data.success) {
         return errorToastHandler(data);
       }
-      const accessToken = data.data.accessToken;
-      setAuth({ user, accessToken });
+      // successfully registered
+      toastSuccess("Register successfully!");
       navigate(from, { replace: true });
     });
   };
@@ -59,4 +57,6 @@ export default function useLogin() {
   }, [isSubmitSuccessful, reset]);
 
   return [handleSubmit(onSubmit), isSubmitting, control] as const;
-}
+};
+
+export default useRegister;
