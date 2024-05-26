@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import '../CreateBranch/BranchCreateBody.css'
+import '@/styles/globals.css'
 import { alpha } from '@mui/material/styles';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -24,7 +24,6 @@ import FilterListIcon from '@mui/icons-material/FilterList';
 import { visuallyHidden } from '@mui/utils';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import Button from '@mui/material/Button';
-import { create } from 'domain';
 
 // interface Data {
 //     id: number;
@@ -55,39 +54,33 @@ import { create } from 'domain';
 
 interface Data {
     id: number,
-    name: string,
-    day: number,
-    month: number,
-    year: number,
-    cost: number,
+    address: string,
+    mail: string,
+    phoneN: number,
+    altphoneN: number,
 }
 
 function createData(
     id: number,
-    name: string,
-    day: number,
-    month: number,
-    year: number,
-    cost: number,
+    address: string,
+    mail: string,
+    phoneN: number,
+    altphoneN: number,
 ): Data {
     return {
         id,
-        name,
-        day,
-        month,
-        year,
-        cost,
+        address,
+        mail,
+        phoneN,
+        altphoneN,
     };
 }
 
 const rows = [
-    createData(1, 'dental', 0, 5, 0, 500000000),
-    createData(1, 'dental', 0, 5, 0, 500000000),
-    createData(1, 'dental', 0, 5, 0, 500000000),
-    createData(1, 'dental', 0, 5, 0, 500000000),
-    createData(1, 'dental', 0, 5, 0, 500000000),
-    createData(1, 'dental', 0, 5, 0, 500000000),
-    createData(1, 'dental', 0, 5, 0, 500000000),
+    createData(1, '92 an duong vuong, long thanh bac, hoa thanh, tay ninh', 'huynhtd97@gmail.com', 827693877878, 123456789),
+    createData(2, '92 an duong vuong, long thanh bac, hoa thanh, tay ninh', 'huynhtd97@gmail.com', 827693878, 123456789),
+    createData(3, '92 an duong vuong, long thanh bac, hoa thanh, tay ninh', 'huynhtd97@gmail.com', 827693878, 123456789),
+    createData(4, '92 an duong vuong, long thanh bac, hoa thanh, tay ninh', 'huynhtd97@gmail.com', 827693878, 123456789),
 
 ];
 
@@ -156,34 +149,28 @@ interface HeadCell {
 
 const headCells: readonly HeadCell[] = [
     {
-        id: 'name',
+        id: 'address',
         numeric: false,
         disablePadding: true,
-        label: 'Treatment Name',
+        label: 'Branch Address',
     },
     {
-        id: 'year',
+        id: 'mail',
         numeric: false,
         disablePadding: true,
-        label: 'Year (y)',
+        label: 'Branch Mail',
     },
     {
-        id: 'month',
+        id: 'phoneN',
         numeric: false,
         disablePadding: true,
-        label: 'Month (m)',
+        label: 'Mobile Phone',
     },
     {
-        id: 'day',
+        id: 'altphoneN',
         numeric: false,
         disablePadding: true,
-        label: 'Day (d)',
-    },
-    {
-        id: 'cost',
-        numeric: false,
-        disablePadding: true,
-        label: 'Cost (đ)',
+        label: 'Alt Mobile Phone',
     },
 ];
 
@@ -298,10 +285,10 @@ function EnhancedTableToolbar(props: EnhancedTableToolbarProps) {
     );
 }
 
-function TreatmentCreateBody() {
+function BranchCreateBody() {
 
     const [order, setOrder] = React.useState<Order>('asc');
-    const [orderBy, setOrderBy] = React.useState<keyof Data>('name');
+    const [orderBy, setOrderBy] = React.useState<keyof Data>('mail');
     const [selected, setSelected] = React.useState<readonly number[]>([]);
     const [page, setPage] = React.useState(0);
     const [dense, setDense] = React.useState(false);
@@ -376,11 +363,11 @@ function TreatmentCreateBody() {
         <>
             <div className="branchCreate-container">
                 <div className="box-header">
-                    <h1>Treatment Information</h1>
+                    <h1>Branch Information</h1>
                 </div>
                 <div className="box-body">
                     <div className="branch-address">
-                        <h3>Treatment Name:</h3>
+                        <h3>Branch Address:</h3>
                         <div className="box">
                             <Box
                                 component="form"
@@ -391,12 +378,12 @@ function TreatmentCreateBody() {
                                 autoComplete="off"
                             >
 
-                                <TextField id="outlined-basic" label="Treatment Name" variant="outlined" />
+                                <TextField id="outlined-basic" label="Address" variant="outlined" />
                             </Box>
                         </div>
                     </div>
                     <div className="branch-mail">
-                        <h3>Approximate Time:</h3>
+                        <h3>Branch Mail:</h3>
                         <div className="box">
                             <Box
                                 component="form"
@@ -407,14 +394,12 @@ function TreatmentCreateBody() {
                                 autoComplete="off"
                             >
 
-                                <TextField id="outlined-basic" label="Days" variant="outlined"
-                                    helperText="Ex: 1 years -> input 365 days"
-                                />
+                                <TextField id="outlined-basic" label="Mail" variant="outlined" />
                             </Box>
                         </div>
                     </div>
                     <div className="branch-mobile">
-                        <h3>Approximate Cost:</h3>
+                        <h3>Branch Mobile Number:</h3>
                         <div className="box">
                             <Box
                                 component="form"
@@ -425,7 +410,19 @@ function TreatmentCreateBody() {
                                 autoComplete="off"
                             >
 
-                                <TextField id="outlined-basic" label="Approximate Cost" variant="outlined" />
+                                <TextField id="outlined-basic" label="Mobile Number" variant="outlined" />
+                            </Box>
+                            <Box
+                                component="form"
+                                sx={{
+                                    '& > :not(style)': { m: 1, width: '35ch' },
+                                }}
+                                noValidate
+                                autoComplete="off"
+                            >
+
+
+                                <TextField id="outlined-basic" label="Alt Mobile Number" variant="outlined" />
                             </Box>
                         </div>
                     </div>
@@ -443,7 +440,7 @@ function TreatmentCreateBody() {
                                 '& > :not(style)': { m: 0, width: '15ch', },
                             }}
                         >
-                            <Button sx={{}}>Add</Button>
+                            <Button>Add</Button>
                         </ButtonGroup>
                     </div>
                 </div>
@@ -497,12 +494,11 @@ function TreatmentCreateBody() {
                                                         scope="row"
                                                         padding="none"
                                                     >
-                                                        {row.name}
+                                                        {row.address}
                                                     </TableCell>
-                                                    <TableCell align="left" sx={{ padding: '0' }}>{row.year}</TableCell>
-                                                    <TableCell align="left" sx={{ padding: '0' }}>{row.month}</TableCell>
-                                                    <TableCell align="left" sx={{ padding: '0' }}>{row.day}</TableCell>
-                                                    <TableCell align="left" sx={{ padding: '0' }}>{row.cost}</TableCell>
+                                                    <TableCell align="left" sx={{ padding: '0' }}>{row.mail}</TableCell>
+                                                    <TableCell align="left" sx={{ padding: '0' }}>{row.phoneN}</TableCell>
+                                                    <TableCell align="left" sx={{ padding: '0' }}>{row.altphoneN}</TableCell>
 
                                                 </TableRow>
                                             );
@@ -540,4 +536,4 @@ function TreatmentCreateBody() {
     );
 }
 
-export default TreatmentCreateBody;
+export default BranchCreateBody;

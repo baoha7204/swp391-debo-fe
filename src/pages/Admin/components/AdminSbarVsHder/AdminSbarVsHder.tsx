@@ -19,7 +19,7 @@ import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import Logo from '@/components/Logo';
-import BranchHeader from '../../adminBranch/CreateBranch/BranchHeader';
+import BranchHeader from '../../adminCreate/CreateBranch/BranchHeader';
 import EventIcon from '@mui/icons-material/Event';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import HealthAndSafetyIcon from '@mui/icons-material/HealthAndSafety';
@@ -162,7 +162,7 @@ export default function AdminSbarVsHder({ children }: any) {
                 </DrawerHeader>
                 <Divider />
                 <List>
-                    {['Reservations', 'Patients'].map((text, index) => (
+                    {['Reservations', 'Branchs'].map((text, index) => (
                         <ListItem key={text} disablePadding sx={{ display: 'block' }}>
                             <ListItemButton
                                 sx={{
@@ -178,7 +178,7 @@ export default function AdminSbarVsHder({ children }: any) {
                                         justifyContent: 'center',
                                     }}
                                 >
-                                    {index % 2 === 0 ? <EventIcon /> : <AccountCircleIcon />}
+                                    {index % 2 === 0 ? <EventIcon /> : <StoreIcon />}
                                 </ListItemIcon>
                                 <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
                             </ListItemButton>
@@ -187,7 +187,7 @@ export default function AdminSbarVsHder({ children }: any) {
                 </List>
                 <Divider />
                 <List>
-                    {['Treatments', 'Staff List'].map((text, index) => (
+                    {['Treatments', 'Patients'].map((text, index) => (
                         <ListItem key={text} disablePadding sx={{ display: 'block' }}>
                             <ListItemButton
                                 sx={{
@@ -203,7 +203,7 @@ export default function AdminSbarVsHder({ children }: any) {
                                         justifyContent: 'center',
                                     }}
                                 >
-                                    {index % 2 === 0 ? <HealthAndSafetyIcon /> : <GroupIcon />}
+                                    {index % 2 === 0 ? <HealthAndSafetyIcon /> : <AccountCircleIcon />}
                                 </ListItemIcon>
                                 <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
                             </ListItemButton>
@@ -212,7 +212,7 @@ export default function AdminSbarVsHder({ children }: any) {
                 </List>
                 <Divider />
                 <List>
-                    {['Account', 'Branch'].map((text, index) => (
+                    {['Account', 'Staffs'].map((text, index) => (
                         <ListItem key={text} disablePadding sx={{ display: 'block' }}>
                             <ListItemButton
                                 sx={{
@@ -228,7 +228,7 @@ export default function AdminSbarVsHder({ children }: any) {
                                         justifyContent: 'center',
                                     }}
                                 >
-                                    {index % 2 === 0 ? <AccountBoxIcon /> : <StoreIcon />}
+                                    {index % 2 === 0 ? <AccountBoxIcon /> : <GroupIcon />}
                                 </ListItemIcon>
                                 <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
                             </ListItemButton>
@@ -237,7 +237,7 @@ export default function AdminSbarVsHder({ children }: any) {
                 </List>
                 {/* <Divider /> */}
                 <List sx={{ top: 200 }}>
-                    {['Report', 'Setting'].map((text, index) => (
+                    {['Reports', 'Setting'].map((text, index) => (
                         <ListItem key={text} disablePadding sx={{ display: 'block' }}>
                             <ListItemButton
                                 sx={{

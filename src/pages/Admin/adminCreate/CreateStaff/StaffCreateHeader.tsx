@@ -1,7 +1,7 @@
 import Fab from '@mui/material/Fab';
 import Avatar from '@mui/material/Avatar';
 import { ManageAccounts } from '@mui/icons-material';
-import '../CreateBranch/BranchHeader.css'
+import '@/styles/globals.css'
 
 function StaffCreateHeader({ children }: any) {
     return (

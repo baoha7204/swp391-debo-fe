@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import '../CreateBranch/BranchCreateBody.css'
+import '@/styles/globals.css'
 import { alpha } from '@mui/material/styles';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -61,8 +61,11 @@ interface Data {
     id: number,
     username: string,
     password: string,
-    name: string,
+    fName: string,
+    lName: string,
+    mail: string,
     phoneN: number,
+    gender: number,
     role: number,
 }
 
@@ -70,30 +73,36 @@ function createData(
     id: number,
     username: string,
     password: string,
-    name: string,
+    fName: string,
+    lName: string,
+    mail: string,
     phoneN: number,
+    gender: number,
     role: number,
 ): Data {
     return {
         id,
         username,
         password,
-        name,
+        fName,
+        lName,
+        mail,
         phoneN,
+        gender,
         role,
     };
 }
 
 const rows = [
-    createData(1, 'admin', '12345', 'Huynh Thong Duong', 827693878, 0),
-    createData(1, 'admin', '12345', 'Huynh Thong Duong', 827693878, 0),
-    createData(1, 'admin', '12345', 'Huynh Thong Duong', 827693878, 0),
-    createData(1, 'admin', '12345', 'Huynh Thong Duong', 827693878, 0),
-    createData(1, 'admin', '12345', 'Huynh Thong Duong', 827693878, 0),
-    createData(1, 'admin', '12345', 'Huynh Thong Duong', 827693878, 0),
-    createData(1, 'admin', '12345', 'Huynh Thong Duong', 827693878, 0),
-    createData(1, 'admin', '12345', 'Huynh Thong Duong', 827693878, 0),
-    createData(1, 'admin', '12345', 'Huynh Thong Duong', 827693878, 0),
+    createData(1, 'admin', '12345', 'Huynh', 'Thong Duong', 'huynhtd97@gmail.com', 827693878, 1, 0),
+    createData(2, 'admin', '12345', 'Huynh', 'Thong Duong', 'huynhtd97@gmail.com', 827693878, 1, 0),
+    createData(3, 'admin', '12345', 'Huynh', 'Thong Duong', 'huynhtd97@gmail.com', 827693878, 1, 0),
+    createData(4, 'admin', '12345', 'Huynh', 'Thong Duong', 'huynhtd97@gmail.com', 827693878, 1, 0),
+    createData(5, 'admin', '12345', 'Huynh', 'Thong Duong', 'huynhtd97@gmail.com', 827693878, 1, 0),
+    createData(6, 'admin', '12345', 'Huynh', 'Thong Duong', 'huynhtd97@gmail.com', 827693878, 1, 0),
+    createData(7, 'admin', '12345', 'Huynh', 'Thong Duong', 'huynhtd97@gmail.com', 827693878, 1, 0),
+    createData(8, 'admin', '12345', 'Huynh', 'Thong Duong', 'huynhtd97@gmail.com', 827693878, 1, 0),
+    createData(9, 'admin', '12345', 'Huynh', 'Thong Duong', 'huynhtd97@gmail.com', 827693878, 1, 0),
 ];
 
 // const rows = [
@@ -173,16 +182,35 @@ const headCells: readonly HeadCell[] = [
         label: 'Password',
     },
     {
-        id: 'name',
+        id: 'fName',
         numeric: false,
         disablePadding: true,
-        label: 'Name',
+        label: 'First Name',
+    },
+    {
+        id: 'lName',
+        numeric: false,
+        disablePadding: true,
+        label: 'Last Name',
+    },
+    {
+        id: 'mail',
+        numeric: false,
+        disablePadding: true,
+        label: 'Mail',
     },
     {
         id: 'phoneN',
         numeric: false,
         disablePadding: true,
         label: 'Mobile Phone',
+    },
+
+    {
+        id: 'gender',
+        numeric: false,
+        disablePadding: true,
+        label: 'Gender',
     },
     {
         id: 'role',
@@ -306,7 +334,7 @@ function EnhancedTableToolbar(props: EnhancedTableToolbarProps) {
 function StaffCreateBody() {
 
     const [order, setOrder] = React.useState<Order>('asc');
-    const [orderBy, setOrderBy] = React.useState<keyof Data>('name');
+    const [orderBy, setOrderBy] = React.useState<keyof Data>('lName');
     const [selected, setSelected] = React.useState<readonly number[]>([]);
     const [page, setPage] = React.useState(0);
     const [dense, setDense] = React.useState(false);
@@ -379,8 +407,14 @@ function StaffCreateBody() {
 
     const [role, setRole] = React.useState('');
 
-    const handleChange = (event: SelectChangeEvent) => {
+    const handleChangeRole = (event: SelectChangeEvent) => {
         setRole(event.target.value as string);
+    };
+
+    const [gender, setGender] = React.useState('');
+
+    const handleChangeGender = (event: SelectChangeEvent) => {
+        setGender(event.target.value as string);
     };
 
     return (
@@ -430,13 +464,26 @@ function StaffCreateBody() {
                             <Box
                                 component="form"
                                 sx={{
-                                    '& > :not(style)': { m: 1, width: '35ch' },
+                                    '& > :not(style)': { m: 1, width: '16.7ch' },
                                 }}
                                 noValidate
                                 autoComplete="off"
                             >
 
-                                <TextField id="outlined-basic" label="Name" variant="outlined" />
+                                <TextField id="outlined-basic" label="First Name" variant="outlined" />
+                            </Box>
+                        </div>
+                        <div className="box">
+                            <Box
+                                component="form"
+                                sx={{
+                                    '& > :not(style)': { m: 1, width: '16.7ch' },
+                                }}
+                                noValidate
+                                autoComplete="off"
+                            >
+
+                                <TextField id="outlined-basic" label="Last Name" variant="outlined" />
                             </Box>
                         </div>
                     </div>
@@ -457,6 +504,50 @@ function StaffCreateBody() {
                         </div>
                     </div>
                     <div className="branch-mobile">
+                        <h3>Mail:</h3>
+                        <div className="box">
+                            <Box
+                                component="form"
+                                sx={{
+                                    '& > :not(style)': { m: 1, width: '35ch' },
+                                }}
+                                noValidate
+                                autoComplete="off"
+                            >
+
+                                <TextField id="outlined-basic" label="Mail" variant="outlined" />
+                            </Box>
+                        </div>
+                    </div>
+                    <div className="branch-mobile">
+                        <h3>Gender:</h3>
+                        <Box
+                            component="form"
+                            sx={{
+                                '& > :not(style)': { m: 1, width: '35ch' },
+                            }}
+                            noValidate
+                            autoComplete="off">
+                            <FormControl fullWidth>
+                                <InputLabel id="demo-simple-select-label">Gender</InputLabel>
+                                <Select
+                                    labelId="demo-simple-select-label"
+                                    id="demo-simple-select"
+                                    value={gender}
+                                    label="Gender"
+                                    onChange={handleChangeGender}
+                                >
+                                    {/* <MenuItem value="">
+                                        <em>None</em>
+                                    </MenuItem> */}
+                                    <MenuItem value={15}>Male</MenuItem>
+                                    <MenuItem value={25}>Female</MenuItem>
+                                    <MenuItem value={35}>Other</MenuItem>
+                                </Select>
+                            </FormControl>
+                        </Box>
+                    </div>
+                    <div className="branch-mobile">
                         <h3>Role:</h3>
                         <Box
                             component="form"
@@ -472,11 +563,11 @@ function StaffCreateBody() {
                                     id="demo-simple-select"
                                     value={role}
                                     label="Role"
-                                    onChange={handleChange}
+                                    onChange={handleChangeRole}
                                 >
-                                    <MenuItem value="">
+                                    {/* <MenuItem value="">
                                         <em>None</em>
-                                    </MenuItem>
+                                    </MenuItem> */}
                                     <MenuItem value={10}>Dentist</MenuItem>
                                     <MenuItem value={20}>General Staff</MenuItem>
                                     <MenuItem value={30}>Branch Manager</MenuItem>
@@ -555,8 +646,11 @@ function StaffCreateBody() {
                                                         {row.username}
                                                     </TableCell>
                                                     <TableCell align="left" sx={{ padding: '0' }}>{row.password}</TableCell>
-                                                    <TableCell align="left" sx={{ padding: '0' }}>{row.name}</TableCell>
+                                                    <TableCell align="left" sx={{ padding: '0' }}>{row.fName}</TableCell>
+                                                    <TableCell align="left" sx={{ padding: '0' }}>{row.lName}</TableCell>
                                                     <TableCell align="left" sx={{ padding: '0' }}>{row.phoneN}</TableCell>
+                                                    <TableCell align="left" sx={{ padding: '0' }}>{row.mail}</TableCell>
+                                                    <TableCell align="left" sx={{ padding: '0' }}>{row.gender}</TableCell>
                                                     <TableCell align="left" sx={{ padding: '0' }}>{row.role}</TableCell>
 
                                                 </TableRow>

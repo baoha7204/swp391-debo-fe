@@ -1,13 +1,15 @@
-import CreateBranch from "./adminBranch/CreateBranch/CreateBranch";
-import CreateTreatment from "./adminBranch/CreateTreatment/CreateTreatment";
-import CreateStaff from "./adminBranch/CreateStaff/CreateStaff";
+import CreateBranch from "./adminCreate/CreateBranch/CreateBranch";
+import CreateTreatment from "./adminCreate/CreateTreatment/CreateTreatment";
+import CreateStaff from "./adminCreate/CreateStaff/CreateStaff";
+import ListStaff from "./adminList/ListStaff/ListStaff";
 
 const Admin = () => {
   return (
     <>
       {/* <CreateBranch /> */}
       {/* <CreateTreatment /> */}
-      <CreateStaff />
+      {/* <CreateStaff /> */}
+      <ListStaff />
     </>
   )
 };

@@ -1,9 +1,9 @@
 import Fab from '@mui/material/Fab';
 import Avatar from '@mui/material/Avatar';
 import { ManageAccounts } from '@mui/icons-material';
-import '../CreateBranch/BranchHeader.css'
+import '@/styles/globals.css'
 
-function TreatmentCreateHeader({ children }: any) {
+function StaffListHeader({ children }: any) {
     return (
         <div className="branchHeader-container">
             <div className="left-header">
@@ -29,4 +29,4 @@ function TreatmentCreateHeader({ children }: any) {
     );
 }
 
-export default TreatmentCreateHeader;
+export default StaffListHeader;
