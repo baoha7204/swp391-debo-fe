@@ -22,7 +22,10 @@ const RouterComponent = () => {
     // Public routes
     { index: true, element: <Navigate to="login" /> },
     { path: "unauthorized", element: <UnauthorizedPage /> },
-    { path: "login", element: <AuthenticationPage /> },
+    ...["login", "register"].map((path) => ({
+      path,
+      element: <AuthenticationPage />,
+    })),
     { path: "*", element: <ErrorPage /> },
     // Protected routes
     {

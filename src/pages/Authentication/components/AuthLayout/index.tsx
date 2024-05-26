@@ -12,12 +12,19 @@ import LoginForm from "../Login/LoginForm";
 import RegisterForm from "../Register/RegisterForm";
 import MyGoogleLogin from "../MyGoogleLogin";
 import AuthModeOffer from "../AuthModeOffer";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const AuthLayout = () => {
-  const [authMode, setAuthMode] = useState<"signin" | "signup">("signin");
+  const location = useLocation();
+  const [authMode, setAuthMode] = useState<"signin" | "signup">(() =>
+    location.pathname === "/login" ? "signin" : "signup"
+  );
+  const navigate = useNavigate();
 
-  const handleAuthModeChange = () =>
+  const handleAuthModeChange = () => {
     setAuthMode(authMode === "signin" ? "signup" : "signin");
+    navigate(authMode === "signin" ? "/register" : "/login");
+  };
 
   return (
     <Grid container component="main" sx={{ height: "100vh" }}>
