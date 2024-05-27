@@ -30,7 +30,7 @@ const useRegister = () => {
   });
 
   const onSubmit: SubmitHandler<RegisterInputs> = (data) => {
-    const result = handleSubmitForm<RegisterInputs>(data, RegisterFormSchema);
+    const result = handleSubmitForm(data, RegisterFormSchema);
 
     if (!result || result.error) {
       return;

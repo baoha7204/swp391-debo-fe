@@ -32,17 +32,23 @@ export default function useLogin() {
   });
 
   const onSubmit: SubmitHandler<LoginInputs> = (data) => {
-    const result = handleSubmitForm<LoginInputs>(data, LoginFormSchema);
+    const result = handleSubmitForm(data, LoginFormSchema);
 
-    if (!result || result.error) {
+    if (!result || !result.success || result.error) {
       return;
     }
 
-    const { user, password } = data;
-    post<AuthResponseType>(API_ENDPOINTS.AUTH.LOGIN_CREDENTIALS, true, {
-      user,
-      password,
-    }).then((res) => {
+    const isEmail = data.user.includes("@");
+    const { user, password } = result.data;
+    const body = isEmail
+      ? { email: user, password }
+      : { phoneNumber: user, password };
+
+    post<AuthResponseType>(
+      API_ENDPOINTS.AUTH.LOGIN_CREDENTIALS,
+      true,
+      body
+    ).then((res) => {
       const { data } = res;
       if (!data.success) {
         return errorToastHandler(data);

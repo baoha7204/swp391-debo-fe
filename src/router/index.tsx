@@ -22,6 +22,7 @@ const RouterComponent = () => {
     // Public routes
     { index: true, element: <Navigate to="login" /> },
     { path: "unauthorized", element: <UnauthorizedPage /> },
+    { path: "calendar", element: <CalendarPage /> },
     ...["login", "register"].map((path) => ({
       path,
       element: <AuthenticationPage />,

@@ -4,8 +4,6 @@ const MyButton = ({ children, ...buttonProps }: ButtonProps) => (
   <Button
     {...buttonProps}
     sx={{
-      mt: 3,
-      mb: 2,
       color: (theme) => theme.palette.secondary.main,
       textTransform: "none",
       fontSize: 15,

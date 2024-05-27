@@ -48,7 +48,7 @@ const AuthLayout = () => {
             mx: 6,
             display: "flex",
             flexDirection: "column",
-            gap: 5,
+            gap: 3,
           }}
         >
           <Logo />
@@ -70,7 +70,7 @@ const AuthLayout = () => {
             </Grid>
           </Grid>
           <Divider />
-          <Grid container flexDirection={"column"}>
+          <Grid container flexDirection={"column"} sx={{ gap: 1 }}>
             {authMode === "signin" && (
               <>
                 <Grid item>
