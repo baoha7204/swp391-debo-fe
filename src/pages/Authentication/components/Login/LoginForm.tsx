@@ -1,5 +1,4 @@
 import { Box, Checkbox, FormControlLabel } from "@mui/material";
-import { DevTool } from "@hookform/devtools";
 
 import MyButton from "@/components/MyButton";
 import useToggle from "@/hooks/useToggle";
@@ -53,7 +52,6 @@ const LoginForm = () => {
         }
         label="Remember me"
       />
-      <DevTool control={control} placement="top-left" />
     </Box>
   );
 };

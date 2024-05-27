@@ -1,5 +1,4 @@
 import { Box } from "@mui/material";
-import { DevTool } from "@hookform/devtools";
 
 import MyButton from "@/components/MyButton";
 import useRegister from "./hooks/useRegister";
@@ -52,7 +51,6 @@ const RegisterForm = () => {
       >
         Sign up
       </MyButton>
-      <DevTool control={control} placement="top-left" />
     </Box>
   );
 };

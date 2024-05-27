@@ -46,7 +46,7 @@ export default function useLogin() {
 
     post<AuthResponseType>(
       API_ENDPOINTS.AUTH.LOGIN_CREDENTIALS,
-      true,
+      false,
       body
     ).then((res) => {
       const { data } = res;

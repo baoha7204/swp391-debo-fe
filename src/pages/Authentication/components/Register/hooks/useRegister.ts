@@ -37,7 +37,7 @@ const useRegister = () => {
     }
 
     const { email, password } = data;
-    post(API_ENDPOINTS.AUTH.REGISTER, true, {
+    post(API_ENDPOINTS.AUTH.REGISTER, false, {
       email,
       password,
     })

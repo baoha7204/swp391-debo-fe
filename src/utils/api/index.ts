@@ -7,4 +7,7 @@ export const API_ENDPOINTS = {
     REFRESH_TOKEN_CREDENTIALS: "auth/credentials/refreshToken",
     REFRESH_TOKEN_GOOGLE: "auth/google/refreshToken",
   },
+  PATIENT: {
+    CALENDAR: "patient/calendar",
+  },
 };

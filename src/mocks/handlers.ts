@@ -1,9 +1,20 @@
 import { http, HttpResponse, delay } from "msw";
 import users from "./users.json";
+import { CalendarPatientEvents } from "./mock-data";
 
 export const handlers = [
   http.post("/login", async ({ request }) => {
     await delay(2000);
+  }),
+  http.get("/patient/calendar", async ({ request }) => {
+    await delay(2000);
+    return HttpResponse.json(
+      {
+        success: true,
+        data: CalendarPatientEvents,
+      },
+      { status: 200 }
+    );
   }),
   http.post("/register", async ({ request }) => {
     await delay(2000);

@@ -1,5 +1,11 @@
+import { addSeconds, differenceInDays, endOfDay, startOfDay } from "date-fns";
+
 export const formatUserName = (firstName: string, lastName: string) => {
   return [firstName, lastName].join(" ");
+};
+
+export const formatDentistName = (firstName: string, lastName: string) => {
+  return ["Dr.", firstName, lastName].join(" ");
 };
 
 export const VietnamesePhoneNumberRegex =
@@ -23,3 +29,7 @@ export function percentToNumber(percent = 0) {
   const roundedNumber = parseFloat(percent.toFixed(2));
   return roundedNumber;
 }
+
+export const differenceInDaysOmitTime = (start: Date, end: Date) => {
+  return differenceInDays(endOfDay(addSeconds(end, -1)), startOfDay(start));
+};
