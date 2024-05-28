@@ -14,7 +14,7 @@ const MyTextField = ({
         color: (theme) => theme.palette.text.primary,
         fontSize: 11,
         fontWeight: 400,
-        paddingLeft: 2,
+        paddingLeft: 0,
       }}
     >
       {outsideLabel}

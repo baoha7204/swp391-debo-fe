@@ -25,6 +25,7 @@ import { visuallyHidden } from '@mui/utils';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import Button from '@mui/material/Button';
 import { create } from 'domain';
+import MyTextField from '@/components/MyTextField';
 
 // interface Data {
 //     id: number;
@@ -376,7 +377,7 @@ function TreatmentCreateBody() {
         <>
             <div className="branchCreate-container">
                 <div className="box-header">
-                    <h1>Treatment Information</h1>
+                    <h1 style={{ marginBottom: 15 }}>Treatment Information</h1>
                 </div>
                 <div className="box-body">
                     <div className="branch-address">
@@ -385,13 +386,13 @@ function TreatmentCreateBody() {
                             <Box
                                 component="form"
                                 sx={{
-                                    '& > :not(style)': { m: 1, width: '35ch' },
+                                    '& > :not(style)': { m: 0, width: '35ch' },
                                 }}
                                 noValidate
                                 autoComplete="off"
                             >
 
-                                <TextField id="outlined-basic" label="Treatment Name" variant="outlined" />
+                                <MyTextField outsideLabel='' id="treatment-name" label="Treatment Name" variant="outlined" sx={{ m: 1, p: 0, width: '35ch' }} />
                             </Box>
                         </div>
                     </div>
@@ -401,16 +402,15 @@ function TreatmentCreateBody() {
                             <Box
                                 component="form"
                                 sx={{
-                                    '& > :not(style)': { m: 1, width: '35ch' },
+                                    '& > :not(style)': { mb: 1, width: '35ch' },
                                 }}
                                 noValidate
                                 autoComplete="off"
                             >
 
-                                <TextField id="outlined-basic" label="Days" variant="outlined"
-                                    helperText="Ex: 1 years -> input 365 days"
-                                />
+                                <MyTextField outsideLabel='Ex: 1 years -> input 365 days' id="treatment-time" label="Approximate Time" variant="outlined" sx={{ m: 1, p: 0, width: '35ch' }} />
                             </Box>
+
                         </div>
                     </div>
                     <div className="branch-mobile">
@@ -419,13 +419,13 @@ function TreatmentCreateBody() {
                             <Box
                                 component="form"
                                 sx={{
-                                    '& > :not(style)': { m: 1, width: '35ch' },
+                                    '& > :not(style)': { m: 0, width: '35ch' },
                                 }}
                                 noValidate
                                 autoComplete="off"
                             >
 
-                                <TextField id="outlined-basic" label="Approximate Cost" variant="outlined" />
+                                <MyTextField outsideLabel='' id="treatment-cost" label="Approximate Cost" variant="outlined" sx={{ m: 1, p: 0, width: '35ch' }} />
                             </Box>
                         </div>
                     </div>

@@ -29,6 +29,7 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
+import MyTextField from '@/components/MyTextField';
 
 // interface Data {
 //     id: number;
@@ -421,22 +422,23 @@ function StaffCreateBody() {
         <>
             <div className="branchCreate-container">
                 <div className="box-header">
-                    <h1>Staff Information</h1>
+                    <h1 style={{ marginBottom: 15 }}>Staff Information</h1>
                 </div>
                 <div className="box-body">
+
                     <div className="branch-address">
                         <h3>Username:</h3>
                         <div className="box">
                             <Box
                                 component="form"
                                 sx={{
-                                    '& > :not(style)': { m: 1, width: '35ch' },
+                                    '& > :not(style)': { m: 0, width: '35ch' },
                                 }}
                                 noValidate
                                 autoComplete="off"
                             >
 
-                                <TextField id="outlined-basic" label="Username" variant="outlined" />
+                                <MyTextField outsideLabel='' id="username" label="Username" variant="outlined" sx={{ m: 1, p: 0, width: '35ch' }} />
                             </Box>
                         </div>
                     </div>
@@ -446,15 +448,13 @@ function StaffCreateBody() {
                             <Box
                                 component="form"
                                 sx={{
-                                    '& > :not(style)': { m: 1, width: '35ch' },
+                                    '& > :not(style)': { m: 0, width: '35ch' },
                                 }}
                                 noValidate
                                 autoComplete="off"
                             >
 
-                                <TextField id="outlined-basic" label="Password" variant="outlined"
-                                // helperText="Ex: 1 years -> input 365 days"
-                                />
+                                <MyTextField outsideLabel='' id="password" label="Password" variant="outlined" sx={{ m: 1, p: 0, width: '35ch' }} />
                             </Box>
                         </div>
                     </div>
@@ -464,26 +464,26 @@ function StaffCreateBody() {
                             <Box
                                 component="form"
                                 sx={{
-                                    '& > :not(style)': { m: 1, width: '16.7ch' },
+                                    '& > :not(style)': { m: 0, width: '17.5ch' },
                                 }}
                                 noValidate
                                 autoComplete="off"
                             >
 
-                                <TextField id="outlined-basic" label="First Name" variant="outlined" />
+                                <MyTextField outsideLabel='' id="first-name" label="First Name" variant="outlined" sx={{ m: 1, p: 0, width: '35ch' }} />
                             </Box>
                         </div>
                         <div className="box">
                             <Box
                                 component="form"
                                 sx={{
-                                    '& > :not(style)': { m: 1, width: '16.7ch' },
+                                    '& > :not(style)': { m: 0, width: '17.5ch' },
                                 }}
                                 noValidate
                                 autoComplete="off"
                             >
 
-                                <TextField id="outlined-basic" label="Last Name" variant="outlined" />
+                                <MyTextField outsideLabel='' id="last-name" label="Last Name" variant="outlined" sx={{ m: 1, p: 0, width: '35ch' }} />
                             </Box>
                         </div>
                     </div>
@@ -493,13 +493,13 @@ function StaffCreateBody() {
                             <Box
                                 component="form"
                                 sx={{
-                                    '& > :not(style)': { m: 1, width: '35ch' },
+                                    '& > :not(style)': { m: 0, width: '35ch' },
                                 }}
                                 noValidate
                                 autoComplete="off"
                             >
 
-                                <TextField id="outlined-basic" label="Mobile Phone" variant="outlined" />
+                                <MyTextField outsideLabel='' id="mobile-phone" label="Mobile Phone" variant="outlined" sx={{ m: 1, p: 0, width: '35ch' }} />
                             </Box>
                         </div>
                     </div>
@@ -509,13 +509,13 @@ function StaffCreateBody() {
                             <Box
                                 component="form"
                                 sx={{
-                                    '& > :not(style)': { m: 1, width: '35ch' },
+                                    '& > :not(style)': { m: 0, width: '35ch' },
                                 }}
                                 noValidate
                                 autoComplete="off"
                             >
 
-                                <TextField id="outlined-basic" label="Mail" variant="outlined" />
+                                <MyTextField outsideLabel='' id="staff-mail" label="Mail" variant="outlined" sx={{ m: 1, p: 0, width: '35ch' }} />
                             </Box>
                         </div>
                     </div>
@@ -524,11 +524,11 @@ function StaffCreateBody() {
                         <Box
                             component="form"
                             sx={{
-                                '& > :not(style)': { m: 1, width: '35ch' },
+                                '& > :not(style)': { m: 1, p: 0, width: '33.5ch' },
                             }}
                             noValidate
                             autoComplete="off">
-                            <FormControl fullWidth>
+                            <FormControl fullWidth >
                                 <InputLabel id="demo-simple-select-label">Gender</InputLabel>
                                 <Select
                                     labelId="demo-simple-select-label"
@@ -552,7 +552,7 @@ function StaffCreateBody() {
                         <Box
                             component="form"
                             sx={{
-                                '& > :not(style)': { m: 1, width: '35ch' },
+                                '& > :not(style)': { m: 1, width: '33.5ch' },
                             }}
                             noValidate
                             autoComplete="off">
@@ -684,7 +684,7 @@ function StaffCreateBody() {
                         />
                     </Box>
                 </div>
-            </div>
+            </div >
         </>
     );
 }

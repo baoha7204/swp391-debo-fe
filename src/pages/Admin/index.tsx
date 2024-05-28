@@ -6,10 +6,10 @@ import ListStaff from "./adminList/ListStaff/ListStaff";
 const Admin = () => {
   return (
     <>
-      {/* <CreateBranch /> */}
+      <CreateBranch />
       {/* <CreateTreatment /> */}
       {/* <CreateStaff /> */}
-      <ListStaff />
+      {/* <ListStaff /> */}
     </>
   )
 };

@@ -16,10 +16,7 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
 import Logo from '@/components/Logo';
-import BranchHeader from '../../adminCreate/CreateBranch/BranchHeader';
 import EventIcon from '@mui/icons-material/Event';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import HealthAndSafetyIcon from '@mui/icons-material/HealthAndSafety';
@@ -28,6 +25,11 @@ import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import StoreIcon from '@mui/icons-material/Store';
 import SettingsIcon from '@mui/icons-material/Settings';
 import ReportIcon from '@mui/icons-material/Report';
+import Fab from '@mui/material/Fab';
+import Avatar from '@mui/material/Avatar';
+import { ManageAccounts } from '@mui/icons-material';
+import '@/styles/globals.css'
+
 
 const drawerWidth = 240;
 
@@ -138,9 +140,28 @@ export default function AdminSbarVsHder({ children }: any) {
                     >
                         <MenuIcon />
                     </IconButton>
-                    <Typography noWrap component="div" sx={{ color: 'black', paddingLeft: 0.5, paddingRight: 0.5 }}>
+                    <Typography noWrap component="div" sx={{ color: (theme) => theme.palette.text.primary, paddingLeft: 0.5, paddingRight: 0.5 }}>
                         {/* <BranchHeader /> */}
-                        {children[0]}
+                        <div className="branchHeader-container">
+                            <div className="left-header">
+                                {children[0]}
+                            </div>
+                            <div className="center-header">
+                                DEBO Clinic
+                            </div>
+                            <div className="right-header" >
+                                <div className="small-info">
+                                    <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+                                    <ul>
+                                        <li>Hi Duong</li>
+                                        <li>Admin</li>
+                                    </ul>
+                                    <Fab size="small" color="primary" aria-label="add" >
+                                        <ManageAccounts />
+                                    </Fab>
+                                </div>
+                            </div>
+                        </div>
                     </Typography>
                 </Toolbar>
             </AppBar>
@@ -163,12 +184,13 @@ export default function AdminSbarVsHder({ children }: any) {
                 <Divider />
                 <List>
                     {['Reservations', 'Branchs'].map((text, index) => (
-                        <ListItem key={text} disablePadding sx={{ display: 'block' }}>
+                        <ListItem key={text} disablePadding sx={{ display: 'block', color: (theme) => (theme).palette.primary.main, }}>
                             <ListItemButton
                                 sx={{
                                     minHeight: 48,
                                     justifyContent: open ? 'initial' : 'center',
                                     px: 2.5,
+
                                 }}
                             >
                                 <ListItemIcon
@@ -176,11 +198,12 @@ export default function AdminSbarVsHder({ children }: any) {
                                         minWidth: 0,
                                         mr: open ? 3 : 'auto',
                                         justifyContent: 'center',
+                                        color: (theme) => theme.palette.primary.main
                                     }}
                                 >
                                     {index % 2 === 0 ? <EventIcon /> : <StoreIcon />}
                                 </ListItemIcon>
-                                <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
+                                <ListItemText primary={text} sx={{ opacity: open ? 1 : 0, color: (theme) => theme.palette.text.primary }} />
                             </ListItemButton>
                         </ListItem>
                     ))}
@@ -188,7 +211,7 @@ export default function AdminSbarVsHder({ children }: any) {
                 <Divider />
                 <List>
                     {['Treatments', 'Patients'].map((text, index) => (
-                        <ListItem key={text} disablePadding sx={{ display: 'block' }}>
+                        <ListItem key={text} disablePadding sx={{ display: 'block', color: (theme) => (theme).palette.primary.main }}>
                             <ListItemButton
                                 sx={{
                                     minHeight: 48,
@@ -201,11 +224,12 @@ export default function AdminSbarVsHder({ children }: any) {
                                         minWidth: 0,
                                         mr: open ? 3 : 'auto',
                                         justifyContent: 'center',
+                                        color: (theme) => theme.palette.primary.main
                                     }}
                                 >
                                     {index % 2 === 0 ? <HealthAndSafetyIcon /> : <AccountCircleIcon />}
                                 </ListItemIcon>
-                                <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
+                                <ListItemText primary={text} sx={{ opacity: open ? 1 : 0, color: (theme) => (theme).palette.text.primary }} />
                             </ListItemButton>
                         </ListItem>
                     ))}
@@ -213,7 +237,7 @@ export default function AdminSbarVsHder({ children }: any) {
                 <Divider />
                 <List>
                     {['Account', 'Staffs'].map((text, index) => (
-                        <ListItem key={text} disablePadding sx={{ display: 'block' }}>
+                        <ListItem key={text} disablePadding sx={{ display: 'block', color: (theme) => (theme).palette.primary.main }}>
                             <ListItemButton
                                 sx={{
                                     minHeight: 48,
@@ -226,11 +250,12 @@ export default function AdminSbarVsHder({ children }: any) {
                                         minWidth: 0,
                                         mr: open ? 3 : 'auto',
                                         justifyContent: 'center',
+                                        color: (theme) => theme.palette.primary.main
                                     }}
                                 >
                                     {index % 2 === 0 ? <AccountBoxIcon /> : <GroupIcon />}
                                 </ListItemIcon>
-                                <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
+                                <ListItemText primary={text} sx={{ opacity: open ? 1 : 0, color: (theme) => (theme).palette.text.primary }} />
                             </ListItemButton>
                         </ListItem>
                     ))}
@@ -238,7 +263,7 @@ export default function AdminSbarVsHder({ children }: any) {
                 {/* <Divider /> */}
                 <List sx={{ top: 200 }}>
                     {['Reports', 'Setting'].map((text, index) => (
-                        <ListItem key={text} disablePadding sx={{ display: 'block' }}>
+                        <ListItem key={text} disablePadding sx={{ display: 'block', color: (theme) => (theme).palette.primary.main }}>
                             <ListItemButton
                                 sx={{
                                     minHeight: 48,
@@ -251,11 +276,12 @@ export default function AdminSbarVsHder({ children }: any) {
                                         minWidth: 0,
                                         mr: open ? 3 : 'auto',
                                         justifyContent: 'center',
+                                        color: (theme) => theme.palette.primary.main
                                     }}
                                 >
                                     {index % 2 === 0 ? <ReportIcon /> : <SettingsIcon />}
                                 </ListItemIcon>
-                                <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
+                                <ListItemText primary={text} sx={{ opacity: open ? 1 : 0, color: (theme) => (theme).palette.text.primary }} />
                             </ListItemButton>
                         </ListItem>
                     ))}

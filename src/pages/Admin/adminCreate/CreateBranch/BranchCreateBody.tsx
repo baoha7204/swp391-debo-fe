@@ -24,6 +24,9 @@ import FilterListIcon from '@mui/icons-material/FilterList';
 import { visuallyHidden } from '@mui/utils';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import Button from '@mui/material/Button';
+import MyTextField from '@/components/MyTextField';
+import Grid from '@mui/material/Grid';
+import { CssBaseline } from '@mui/material';
 
 // interface Data {
 //     id: number;
@@ -360,76 +363,106 @@ function BranchCreateBody() {
     );
 
     return (
-        <>
-            <div className="branchCreate-container">
-                <div className="box-header">
-                    <h1>Branch Information</h1>
-                </div>
-                <div className="box-body">
-                    <div className="branch-address">
-                        <h3>Branch Address:</h3>
-                        <div className="box">
-                            <Box
-                                component="form"
-                                sx={{
-                                    '& > :not(style)': { m: 1, width: '35ch' },
-                                }}
-                                noValidate
-                                autoComplete="off"
-                            >
-
-                                <TextField id="outlined-basic" label="Address" variant="outlined" />
-                            </Box>
-                        </div>
-                    </div>
-                    <div className="branch-mail">
-                        <h3>Branch Mail:</h3>
-                        <div className="box">
-                            <Box
-                                component="form"
-                                sx={{
-                                    '& > :not(style)': { m: 1, width: '35ch' },
-                                }}
-                                noValidate
-                                autoComplete="off"
-                            >
-
-                                <TextField id="outlined-basic" label="Mail" variant="outlined" />
-                            </Box>
-                        </div>
-                    </div>
-                    <div className="branch-mobile">
-                        <h3>Branch Mobile Number:</h3>
-                        <div className="box">
-                            <Box
-                                component="form"
-                                sx={{
-                                    '& > :not(style)': { m: 1, width: '35ch' },
-                                }}
-                                noValidate
-                                autoComplete="off"
-                            >
-
-                                <TextField id="outlined-basic" label="Mobile Number" variant="outlined" />
-                            </Box>
-                            <Box
-                                component="form"
-                                sx={{
-                                    '& > :not(style)': { m: 1, width: '35ch' },
-                                }}
-                                noValidate
-                                autoComplete="off"
-                            >
-
-
-                                <TextField id="outlined-basic" label="Alt Mobile Number" variant="outlined" />
-                            </Box>
-                        </div>
-                    </div>
-                    <div className="create-branch-button"
-                        style={{
-                            display: 'flex',
+        <Box>
+            <div className="box-header">
+                <h1 style={{ marginBottom: 15 }}>Branch Information</h1>
+            </div>
+            <Grid
+                container
+                // component=''
+                className='create-screen'
+            >
+                <Grid
+                    item
+                    xs={false}
+                    sm={false}
+                    md={6}
+                >
+                    <Box
+                        sx={{
+                            display: "flex",
+                            flexDirection: "row",
                             alignItems: 'center'
+                        }}
+                    >
+                        <h3>Branch Address: </h3>
+                        <Box
+                            component="form"
+                            noValidate
+                            autoComplete="off"
+                        >
+                            <MyTextField outsideLabel='' required fullWidth id="branch-address" label="Address" sx={{ m: 1, p: 0 }} />
+                        </Box>
+                    </Box>
+                    <Box
+                        sx={{
+                            display: 'flex',
+                            flexDirection: 'row',
+                            alignItems: 'center'
+                        }}
+                    >
+                        <h3>Branch Mobile Number:</h3>
+                        <Box
+                            sx={{
+                                display: 'flex',
+                                flexDirection: 'column',
+
+                            }}
+                        >
+                            <Box
+                                component="form"
+                                noValidate
+                                autoComplete="off"
+                            >
+
+                                <MyTextField required fullWidth
+                                    outsideLabel='' id="branch-mobile" label="Mobile Phone" variant="outlined" sx={{ m: 1, p: 0 }} />
+                            </Box>
+                            <Box
+                                component="form"
+                                noValidate
+                                autoComplete="off"
+                            >
+                                <MyTextField required fullWidth
+                                    outsideLabel='' id="branch-alt-mobile" label="Alt Mobile Phone" variant="outlined" sx={{ m: 1, p: 0 }} />
+                            </Box>
+                        </Box>
+                    </Box>
+                </Grid>
+                <Grid
+                    item
+                    xs={false}
+                    sm={false}
+                    md={6}
+                >
+                    <Box
+                        sx={{
+                            display: "flex",
+                            flexDirection: "row",
+                            alignItems: 'center'
+                        }}
+                    >
+                        <h3>Branch Mail:</h3>
+                        <div className="box" style={{}}>
+                            <Box
+                                component="form"
+                                sx={{
+                                    '& > :not(style)': { m: 0, width: '100%' },
+
+                                }}
+                                noValidate
+                                autoComplete="off"
+                            >
+
+                                <MyTextField required
+                                    fullWidth outsideLabel='' id="branch-mail" label="Mail" variant="outlined" sx={{ m: 1, p: 0 }} />
+                            </Box>
+                        </div>
+                    </Box>
+                    <Box
+                        sx={{
+                            display: 'flex',
+                            justifyContent: 'center'
                         }}
                     >
                         <ButtonGroup
@@ -437,102 +470,110 @@ function BranchCreateBody() {
                             variant="contained"
                             aria-label="Disabled button group"
                             sx={{
-                                '& > :not(style)': { m: 0, width: '15ch', },
+                                '& > :not(style)': { mt: 2, width: '15ch', },
                             }}
                         >
                             <Button>Add</Button>
                         </ButtonGroup>
-                    </div>
-                </div>
-                <div className="branch-create-table">
-                    <Box sx={{ width: '100%' }}>
-                        <Paper sx={{ width: '100%', mb: 2 }}>
-                            <EnhancedTableToolbar numSelected={selected.length} />
-                            <TableContainer>
-                                <Table
-                                    sx={{ minWidth: 750 }}
-                                    aria-labelledby="tableTitle"
-                                    size={dense ? 'small' : 'medium'}
-
-                                >
-                                    <EnhancedTableHead
-                                        numSelected={selected.length}
-                                        order={order}
-                                        orderBy={orderBy}
-                                        onSelectAllClick={handleSelectAllClick}
-                                        onRequestSort={handleRequestSort}
-                                        rowCount={rows.length}
-                                    />
-                                    <TableBody>
-                                        {visibleRows.map((row, index) => {
-                                            const isItemSelected = isSelected(row.id);
-                                            const labelId = `enhanced-table-checkbox-${index}`;
-
-                                            return (
-                                                <TableRow
-                                                    hover
-                                                    onClick={(event) => handleClick(event, row.id)}
-                                                    role="checkbox"
-                                                    aria-checked={isItemSelected}
-                                                    tabIndex={-1}
-                                                    key={row.id}
-                                                    selected={isItemSelected}
-                                                    sx={{ cursor: 'pointer' }}
-                                                >
-                                                    <TableCell padding="checkbox">
-                                                        <Checkbox
-                                                            color="primary"
-                                                            checked={isItemSelected}
-                                                            inputProps={{
-                                                                'aria-labelledby': labelId,
-                                                            }}
-                                                        />
-                                                    </TableCell>
-                                                    <TableCell
-                                                        component="th"
-                                                        id={labelId}
-                                                        scope="row"
-                                                        padding="none"
-                                                    >
-                                                        {row.address}
-                                                    </TableCell>
-                                                    <TableCell align="left" sx={{ padding: '0' }}>{row.mail}</TableCell>
-                                                    <TableCell align="left" sx={{ padding: '0' }}>{row.phoneN}</TableCell>
-                                                    <TableCell align="left" sx={{ padding: '0' }}>{row.altphoneN}</TableCell>
-
-                                                </TableRow>
-                                            );
-                                        })}
-                                        {emptyRows > 0 && (
-                                            <TableRow
-                                                style={{
-                                                    height: (dense ? 33 : 53) * emptyRows,
-                                                }}
-                                            >
-                                                <TableCell colSpan={6} />
-                                            </TableRow>
-                                        )}
-                                    </TableBody>
-                                </Table>
-                            </TableContainer>
-                            <TablePagination
-                                rowsPerPageOptions={[5, 10, 25]}
-                                component="div"
-                                count={rows.length}
-                                rowsPerPage={rowsPerPage}
-                                page={page}
-                                onPageChange={handleChangePage}
-                                onRowsPerPageChange={handleChangeRowsPerPage}
-                            />
-                        </Paper>
-                        <FormControlLabel
-                            control={<Switch checked={dense} onChange={handleChangeDense} />}
-                            label="Dense padding"
-                        />
                     </Box>
-                </div>
+                </Grid>
+            </Grid>
+            <div className="branch-create-table">
+                <Box sx={{ width: '100%' }}>
+                    <Paper sx={{
+                        width: '100%', mb: 2,
+                    }}>
+                        <EnhancedTableToolbar numSelected={selected.length} />
+                        <TableContainer >
+                            <Table
+                                aria-labelledby="tableTitle"
+                                size={dense ? 'small' : 'medium'}
+                                sx={{
+
+                                }}
+                            >
+                                <EnhancedTableHead
+                                    numSelected={selected.length}
+                                    order={order}
+                                    orderBy={orderBy}
+                                    onSelectAllClick={handleSelectAllClick}
+                                    onRequestSort={handleRequestSort}
+                                    rowCount={rows.length}
+                                />
+                                <TableBody>
+                                    {visibleRows.map((row, index) => {
+                                        const isItemSelected = isSelected(row.id);
+                                        const labelId = `enhanced-table-checkbox-${index}`;
+
+                                        return (
+                                            <TableRow
+                                                hover
+                                                onClick={(event) => handleClick(event, row.id)}
+                                                role="checkbox"
+                                                aria-checked={isItemSelected}
+                                                tabIndex={-1}
+                                                key={row.id}
+                                                selected={isItemSelected}
+                                                sx={{ cursor: 'pointer', }}
+                                            >
+                                                <TableCell padding="checkbox">
+                                                    <Checkbox
+                                                        color="primary"
+                                                        checked={isItemSelected}
+                                                        inputProps={{
+                                                            'aria-labelledby': labelId,
+                                                        }}
+                                                    />
+                                                </TableCell>
+                                                <TableCell
+                                                    component="th"
+                                                    id={labelId}
+                                                    // scope="row"
+                                                    padding="none"
+                                                    sx={{
+                                                        whiteSpace: 'nowrap',
+                                                        overflow: 'hidden',
+                                                        textOverflow: 'ellipsis',
+                                                    }}
+                                                >
+                                                    {row.address}
+                                                </TableCell>
+                                                <TableCell align="left" sx={{ padding: '0' }}>{row.mail}</TableCell>
+                                                <TableCell align="left" sx={{ padding: '0' }}>{row.phoneN}</TableCell>
+                                                <TableCell align="left" sx={{ padding: '0' }}>{row.altphoneN}</TableCell>
+
+                                            </TableRow>
+                                        );
+                                    })}
+                                    {emptyRows > 0 && (
+                                        <TableRow
+                                            style={{
+                                                height: (dense ? 33 : 53) * emptyRows,
+                                            }}
+                                        >
+                                            <TableCell colSpan={6} />
+                                        </TableRow>
+                                    )}
+                                </TableBody>
+                            </Table>
+                        </TableContainer>
+                        <TablePagination
+                            rowsPerPageOptions={[5, 10, 25]}
+                            component="div"
+                            count={rows.length}
+                            rowsPerPage={rowsPerPage}
+                            page={page}
+                            onPageChange={handleChangePage}
+                            onRowsPerPageChange={handleChangeRowsPerPage}
+                        />
+                    </Paper>
+                    <FormControlLabel
+                        control={<Switch checked={dense} onChange={handleChangeDense} />}
+                        label="Dense padding"
+                    />
+                </Box>
             </div>
-        </>
+        </Box>
     );
 }
 

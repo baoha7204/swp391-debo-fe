@@ -1,4 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap");
+@import '/node_modules/normalize.css/normalize.css';
+
 
 /* ADMIN */
 
@@ -62,7 +64,6 @@
 
 .branchCreate-container .box-body {
     display: grid;
-    grid-template-rows: repeat(2, 1fr);
     grid-template-columns: repeat(2, 1fr);
     padding-bottom: 2rem;
     padding-left: 1rem;
@@ -83,8 +84,28 @@
     align-items: center;
 }
 
-.branchCreate-container .box-body h3 {
-    width: 150px;
+.create-screen h3 {
+    width: 200px;
+    text-align: right;
+}
+
+.branchCreate-container h3 {
+    width: 200px;
+    text-align: right;
+}
+
+@media (max-width: 1100px) {
+    .branchCreate-container .box-body {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        padding-bottom: 2rem;
+        padding-left: 1rem;
+    }
+
+    .branchCreate-container .box-body .box .my-text-field {
+        display: inline-flex;
+        width: 500px;
+    }
 }
 
 /* ADMIN */

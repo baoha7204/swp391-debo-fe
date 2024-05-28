@@ -1,13 +1,10 @@
 import AdminSbarVsHder from "../../components/AdminSbarVsHder/AdminSbarVsHder";
 import StaffCreateBody from "./StaffCreateBody";
-import StaffCreateHeader from "./StaffCreateHeader";
 
 function CreateStaff() {
     return (
         <AdminSbarVsHder>
-            <StaffCreateHeader>
-                Create Staff
-            </StaffCreateHeader>
+            Create Staff
             <StaffCreateBody>
 
             </StaffCreateBody>
