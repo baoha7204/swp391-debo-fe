@@ -1,5 +1,3 @@
-import RouterComponent from "@/router";
-
 import Admin from "@/pages/Admin";
 
 function App() {

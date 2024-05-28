@@ -1,6 +1,7 @@
 import { createTheme } from "@mui/material";
 
 const themes = createTheme({
+  direction: "ltr",
   typography: {
     fontFamily: ["Manrope", "sans-serif"].join(","),
   },

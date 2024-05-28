@@ -1,4 +1,4 @@
-import AdminSbarVsHder from "../../components/AdminSbarVsHder/AdminSbarVsHder";
+import AdminSbarVsHder from "../../components/AdminLayout/AdminSbarVsHder";
 import TreatmentCreateBody from "./TreatmentCreateBody";
 
 function CreateTreatment() {
