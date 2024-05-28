@@ -38,6 +38,10 @@ const RouterComponent = () => {
           element: <RequireAuth allowedRoles={[ROLE.PATIENT]} />,
           children: [
             {
+              index: true,
+              element: <Navigate to="dashboard" />,
+            },
+            {
               path: "calendar",
               element: <CalendarPage />,
             },

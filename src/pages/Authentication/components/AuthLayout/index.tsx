@@ -13,6 +13,7 @@ import RegisterForm from "../Register/RegisterForm";
 import MyGoogleLogin from "../MyGoogleLogin";
 import AuthModeOffer from "../AuthModeOffer";
 import { useLocation, useNavigate } from "react-router-dom";
+import backgroundUrl from "/assets/Login-Background.jpg";
 
 const AuthLayout = () => {
   const location = useLocation();
@@ -35,7 +36,7 @@ const AuthLayout = () => {
         sm={4}
         md={8}
         sx={{
-          backgroundImage: "url(https://source.unsplash.com/random?wallpapers)",
+          backgroundImage: `url(${backgroundUrl})`,
           backgroundRepeat: "no-repeat",
           backgroundSize: "cover",
           backgroundPosition: "center",

@@ -11,12 +11,12 @@ import { post } from "@/utils/apiCaller";
 import { errorToastHandler } from "@/utils/toast/actions";
 import { AuthResponseType } from "@/pages/Authentication/types/core";
 import { API_ENDPOINTS } from "@/utils/api";
+import { getRoles } from "@/utils/jwt";
 
 export default function useLogin() {
   const { setAuth } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
-  const from = location.state?.from?.pathname || "/";
 
   const {
     handleSubmit,
@@ -50,12 +50,22 @@ export default function useLogin() {
       body
     ).then((res) => {
       const { data } = res;
-      if (!data.success) {
+      const accessToken = data.data?.accessToken;
+      if (!data.success || !accessToken) {
         return errorToastHandler(data);
       }
-      const accessToken = data.data.accessToken;
+
       setAuth({ user, accessToken });
-      navigate(from, { replace: true });
+      const from = location.state?.from?.pathname;
+      if (from) {
+        return navigate(from, { replace: true });
+      }
+
+      const result = getRoles(accessToken);
+      if (!result.success) {
+        return;
+      }
+      navigate(result.data[0]);
     });
   };
 
