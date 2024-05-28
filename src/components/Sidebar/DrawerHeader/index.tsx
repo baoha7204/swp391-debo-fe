@@ -1,12 +1,11 @@
 import { useContext } from "react";
-import IconButton from "@mui/material/IconButton";
 import { useTheme } from "@mui/material";
+import { SidebarContext } from "@/context/sidebar.context";
+import IconButton from "@mui/material/IconButton";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-
 import Logo from "@/components/Logo";
 import DrawerHeaderStyle from "./style";
-import { SidebarContext } from "@/context/sidebar.context";
 
 const DrawerHeader = () => {
   const theme = useTheme();

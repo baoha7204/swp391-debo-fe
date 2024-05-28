@@ -1,5 +1,5 @@
-import { PropsWithChildren } from "react";
 import { CssBaseline, Grid, Paper } from "@mui/material";
+import { PropsWithChildren } from "react";
 
 const AuthLayout = ({ children }: PropsWithChildren) => (
   <Grid container component="main" sx={{ height: "100vh" }}>

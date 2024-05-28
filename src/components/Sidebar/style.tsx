@@ -1,4 +1,4 @@
-import { Theme, CSSObject, styled } from "@mui/material/styles";
+import { Theme, CSSObject, styled } from "@mui/material";
 import MuiDrawer from "@mui/material/Drawer";
 
 import { drawerWidth } from "../Header/style";

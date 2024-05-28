@@ -1,10 +1,9 @@
+import { useContext } from "react";
+import { SidebarContext } from "@/context/sidebar.context";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import { useContext } from "react";
-
-import { SidebarContext } from "@/context/sidebar.context";
 
 export type SidebarItemProps = {
   key: string;

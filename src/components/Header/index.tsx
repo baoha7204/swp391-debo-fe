@@ -1,14 +1,13 @@
 import { useContext } from "react";
+import { ManageAccounts } from "@mui/icons-material";
+import { SidebarContext } from "@/context/sidebar.context";
 import Fab from "@mui/material/Fab";
 import Avatar from "@mui/material/Avatar";
 import IconButton from "@mui/material/IconButton";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import MenuIcon from "@mui/icons-material/Menu";
-import { ManageAccounts } from "@mui/icons-material";
-
 import AppBar from "./style";
-import { SidebarContext } from "@/context/sidebar.context";
 
 type HeaderProps = {
   info: {
