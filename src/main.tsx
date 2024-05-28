@@ -7,13 +7,16 @@ import "./styles/globals.css";
 import themes from "./config/themes/index.ts";
 import { UserProvider } from "./context/user.context.tsx";
 import Toast from "./components/Toast/index.tsx";
+import { SidebarProvider } from "./context/sidebar.context.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <ThemeProvider theme={themes}>
       <UserProvider>
-        <App />
-        <Toast />
+        <SidebarProvider>
+          <App />
+          <Toast />
+        </SidebarProvider>
       </UserProvider>
     </ThemeProvider>
   </React.StrictMode>
