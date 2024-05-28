@@ -11,7 +11,7 @@ const Admin = () => {
       {/* <CreateStaff /> */}
       {/* <ListStaff /> */}
     </>
-  )
+  );
 };
 
 export default Admin;
