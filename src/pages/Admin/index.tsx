@@ -6,8 +6,8 @@ import ListStaff from "./adminList/ListStaff/ListStaff";
 const Admin = () => {
   return (
     <>
-      <CreateBranch />
-      {/* <CreateTreatment /> */}
+      {/* <CreateBranch /> */}
+      <CreateTreatment />
       {/* <CreateStaff /> */}
       {/* <ListStaff /> */}
     </>

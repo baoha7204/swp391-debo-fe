@@ -1,6 +1,5 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
 import '@/styles/globals.css'
 import { alpha } from '@mui/material/styles';
 import Table from '@mui/material/Table';
@@ -24,8 +23,8 @@ import FilterListIcon from '@mui/icons-material/FilterList';
 import { visuallyHidden } from '@mui/utils';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import Button from '@mui/material/Button';
-import { create } from 'domain';
 import MyTextField from '@/components/MyTextField';
+import { Grid } from '@mui/material';
 
 // interface Data {
 //     id: number;
@@ -375,10 +374,11 @@ function TreatmentCreateBody() {
 
     return (
         <>
-            <div className="branchCreate-container">
-                <div className="box-header">
-                    <h1 style={{ marginBottom: 15 }}>Treatment Information</h1>
-                </div>
+            <Box>
+                <Grid container className='create-screen'></Grid>
+                <Box sx={{ m: 2 }}>
+                    <h1 >Treatment Information</h1>
+                </Box>
                 <div className="box-body">
                     <div className="branch-address">
                         <h3>Treatment Name:</h3>
@@ -429,10 +429,11 @@ function TreatmentCreateBody() {
                             </Box>
                         </div>
                     </div>
-                    <div className="create-branch-button"
-                        style={{
+                    <Box
+                        sx={{
                             display: 'flex',
-                            alignItems: 'center'
+                            justifyContent: 'center',
+                            height: 'auto'
                         }}
                     >
                         <ButtonGroup
@@ -440,12 +441,12 @@ function TreatmentCreateBody() {
                             variant="contained"
                             aria-label="Disabled button group"
                             sx={{
-                                '& > :not(style)': { m: 0, width: '15ch', },
+                                '& > :not(style)': { mt: 2, width: '15ch', },
                             }}
                         >
-                            <Button sx={{}}>Add</Button>
+                            <Button>Add</Button>
                         </ButtonGroup>
-                    </div>
+                    </Box>
                 </div>
                 <div className="branch-create-table">
                     <Box sx={{ width: '100%' }}>
@@ -535,7 +536,7 @@ function TreatmentCreateBody() {
                         />
                     </Box>
                 </div>
-            </div>
+            </Box>
         </>
     );
 }

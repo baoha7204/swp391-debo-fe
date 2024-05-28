@@ -1,6 +1,5 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
 import '@/styles/globals.css'
 import { alpha } from '@mui/material/styles';
 import Table from '@mui/material/Table';
@@ -26,34 +25,6 @@ import ButtonGroup from '@mui/material/ButtonGroup';
 import Button from '@mui/material/Button';
 import MyTextField from '@/components/MyTextField';
 import Grid from '@mui/material/Grid';
-import { CssBaseline } from '@mui/material';
-
-// interface Data {
-//     id: number;
-//     calories: number;
-//     carbs: number;
-//     fat: number;
-//     name: string;
-//     protein: number;
-// }
-
-// function createData(
-//     id: number,
-//     name: string,
-//     calories: number,
-//     fat: number,
-//     carbs: number,
-//     protein: number,
-// ): Data {
-//     return {
-//         id,
-//         name,
-//         calories,
-//         fat,
-//         carbs,
-//         protein,
-//     };
-// }
 
 interface Data {
     id: number,
@@ -87,22 +58,6 @@ const rows = [
 
 ];
 
-// const rows = [
-//     createData(1, 'Cupcake', 305, 3.7, 67, 4.3),
-//     createData(2, 'Donut', 452, 25.0, 51, 4.9),
-//     createData(3, 'Eclair', 262, 16.0, 24, 6.0),
-//     createData(4, 'Frozen yoghurt', 159, 6.0, 24, 4.0),
-//     createData(5, 'Gingerbread', 356, 16.0, 49, 3.9),
-//     createData(6, 'Honeycomb', 408, 3.2, 87, 6.5),
-//     createData(7, 'Ice cream sandwich', 237, 9.0, 37, 4.3),
-//     createData(8, 'Jelly Bean', 375, 0.0, 94, 0.0),
-//     createData(9, 'KitKat', 518, 26.0, 65, 7.0),
-//     createData(10, 'Lollipop', 392, 0.2, 98, 0.0),
-//     createData(11, 'Marshmallow', 318, 0, 81, 2.0),
-//     createData(12, 'Nougat', 360, 19.0, 9, 37.0),
-//     createData(13, 'Oreo', 437, 18.0, 63, 4.0),
-// ];
-
 function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
     if (b[orderBy] < a[orderBy]) {
         return -1;
@@ -127,10 +82,6 @@ function getComparator<Key extends keyof any>(
         : (a, b) => -descendingComparator(a, b, orderBy);
 }
 
-// Since 2020 all major browsers ensure sort stability with Array.prototype.sort().
-// stableSort() brings sort stability to non-modern browsers (notably IE11). If you
-// only support modern browsers you can replace stableSort(exampleArray, exampleComparator)
-// with exampleArray.slice().sort(exampleComparator)
 function stableSort<T>(array: readonly T[], comparator: (a: T, b: T) => number) {
     const stabilizedThis = array.map((el, index) => [el, index] as [T, number]);
     stabilizedThis.sort((a, b) => {
@@ -364,9 +315,9 @@ function BranchCreateBody() {
 
     return (
         <Box>
-            <div className="box-header">
-                <h1 style={{ marginBottom: 15 }}>Branch Information</h1>
-            </div>
+            <Box sx={{ m: 2 }}>
+                <h1 >Branch Information</h1>
+            </Box>
             <Grid
                 container
                 // component=''
@@ -478,101 +429,110 @@ function BranchCreateBody() {
                     </Box>
                 </Grid>
             </Grid>
-            <div className="branch-create-table">
-                <Box sx={{ width: '100%' }}>
-                    <Paper sx={{
-                        width: '100%', mb: 2,
-                    }}>
-                        <EnhancedTableToolbar numSelected={selected.length} />
-                        <TableContainer >
-                            <Table
-                                aria-labelledby="tableTitle"
-                                size={dense ? 'small' : 'medium'}
-                                sx={{
 
-                                }}
-                            >
-                                <EnhancedTableHead
-                                    numSelected={selected.length}
-                                    order={order}
-                                    orderBy={orderBy}
-                                    onSelectAllClick={handleSelectAllClick}
-                                    onRequestSort={handleRequestSort}
-                                    rowCount={rows.length}
-                                />
-                                <TableBody>
-                                    {visibleRows.map((row, index) => {
-                                        const isItemSelected = isSelected(row.id);
-                                        const labelId = `enhanced-table-checkbox-${index}`;
+            <Box sx={{ width: '100%' }}>
+                <Paper sx={{
+                    width: '100%', mb: 2,
+                }}>
+                    <EnhancedTableToolbar numSelected={selected.length} />
+                    <TableContainer >
+                        <Table
+                            aria-labelledby="tableTitle"
+                            size={dense ? 'small' : 'medium'}
+                            sx={{
 
-                                        return (
-                                            <TableRow
-                                                hover
-                                                onClick={(event) => handleClick(event, row.id)}
-                                                role="checkbox"
-                                                aria-checked={isItemSelected}
-                                                tabIndex={-1}
-                                                key={row.id}
-                                                selected={isItemSelected}
-                                                sx={{ cursor: 'pointer', }}
-                                            >
-                                                <TableCell padding="checkbox">
-                                                    <Checkbox
-                                                        color="primary"
-                                                        checked={isItemSelected}
-                                                        inputProps={{
-                                                            'aria-labelledby': labelId,
-                                                        }}
-                                                    />
-                                                </TableCell>
-                                                <TableCell
-                                                    component="th"
-                                                    id={labelId}
-                                                    // scope="row"
-                                                    padding="none"
-                                                    sx={{
-                                                        whiteSpace: 'nowrap',
-                                                        overflow: 'hidden',
-                                                        textOverflow: 'ellipsis',
-                                                    }}
-                                                >
-                                                    {row.address}
-                                                </TableCell>
-                                                <TableCell align="left" sx={{ padding: '0' }}>{row.mail}</TableCell>
-                                                <TableCell align="left" sx={{ padding: '0' }}>{row.phoneN}</TableCell>
-                                                <TableCell align="left" sx={{ padding: '0' }}>{row.altphoneN}</TableCell>
+                            }}
+                        >
+                            <EnhancedTableHead
+                                numSelected={selected.length}
+                                order={order}
+                                orderBy={orderBy}
+                                onSelectAllClick={handleSelectAllClick}
+                                onRequestSort={handleRequestSort}
+                                rowCount={rows.length}
+                            />
+                            <TableBody>
+                                {visibleRows.map((row, index) => {
+                                    const isItemSelected = isSelected(row.id);
+                                    const labelId = `enhanced-table-checkbox-${index}`;
 
-                                            </TableRow>
-                                        );
-                                    })}
-                                    {emptyRows > 0 && (
+                                    return (
                                         <TableRow
-                                            style={{
-                                                height: (dense ? 33 : 53) * emptyRows,
-                                            }}
+                                            hover
+                                            onClick={(event) => handleClick(event, row.id)}
+                                            role="checkbox"
+                                            aria-checked={isItemSelected}
+                                            tabIndex={-1}
+                                            key={row.id}
+                                            selected={isItemSelected}
+                                            sx={{ cursor: 'pointer', }}
                                         >
-                                            <TableCell colSpan={6} />
+                                            <TableCell padding="checkbox">
+                                                <Checkbox
+                                                    color="primary"
+                                                    checked={isItemSelected}
+                                                    inputProps={{
+                                                        'aria-labelledby': labelId,
+                                                    }}
+                                                />
+                                            </TableCell>
+                                            <TableCell
+                                                component="th"
+                                                id={labelId}
+                                                scope="row"
+                                                padding="none"
+                                                sx={{
+                                                    // whiteSpace: 'nowrap',
+                                                    overflow: 'hidden',
+                                                    textOverflow: 'ellipsis',
+                                                }}
+                                            >
+                                                {row.address}
+                                            </TableCell>
+                                            <TableCell align="left" sx={{
+                                                padding: '0', overflow: 'hidden',
+                                                textOverflow: 'ellipsis',
+                                            }}>{row.mail}</TableCell>
+                                            <TableCell align="left" sx={{
+                                                padding: '0', overflow: 'hidden',
+                                                textOverflow: 'ellipsis',
+                                            }}>{row.phoneN}</TableCell>
+                                            <TableCell align="left" sx={{
+                                                padding: '0', overflow: 'hidden',
+                                                textOverflow: 'ellipsis',
+                                            }}>{row.altphoneN}</TableCell>
+
                                         </TableRow>
-                                    )}
-                                </TableBody>
-                            </Table>
-                        </TableContainer>
-                        <TablePagination
-                            rowsPerPageOptions={[5, 10, 25]}
-                            component="div"
-                            count={rows.length}
-                            rowsPerPage={rowsPerPage}
-                            page={page}
-                            onPageChange={handleChangePage}
-                            onRowsPerPageChange={handleChangeRowsPerPage}
-                        />
-                    </Paper>
-                    <FormControlLabel
-                        control={<Switch checked={dense} onChange={handleChangeDense} />}
-                        label="Dense padding"
+                                    );
+                                })}
+                                {emptyRows > 0 && (
+                                    <TableRow
+                                        style={{
+                                            height: (dense ? 33 : 53) * emptyRows,
+                                        }}
+                                    >
+                                        <TableCell colSpan={6} />
+                                    </TableRow>
+                                )}
+                            </TableBody>
+                        </Table>
+                    </TableContainer>
+                    <TablePagination
+                        rowsPerPageOptions={[5, 10, 25]}
+                        component="div"
+                        count={rows.length}
+                        rowsPerPage={rowsPerPage}
+                        page={page}
+                        onPageChange={handleChangePage}
+                        onRowsPerPageChange={handleChangeRowsPerPage}
                     />
-                </Box>
-            </div>
+                </Paper>
+                <FormControlLabel
+                    control={<Switch checked={dense} onChange={handleChangeDense} />}
+                    label="Dense padding"
+                />
+            </Box>
+
         </Box>
     );
 }

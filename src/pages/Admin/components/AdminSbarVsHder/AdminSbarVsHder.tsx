@@ -117,11 +117,9 @@ export default function AdminSbarVsHder({ children }: any) {
     return (
         <Box sx={{
             display: 'flex',
-
         }}>
             <CssBaseline />
-            <AppBar position="fixed" open={open}
-            >
+            <AppBar position="fixed" open={open}>
                 <Toolbar
                     sx={{
                         backgroundColor: (theme) => theme.palette.common.white,
@@ -135,7 +133,6 @@ export default function AdminSbarVsHder({ children }: any) {
                         sx={{
                             marginRight: 5,
                             ...(open && { display: 'none' }),
-
                         }}
                     >
                         <MenuIcon />
