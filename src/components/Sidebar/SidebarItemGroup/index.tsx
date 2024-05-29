@@ -1,15 +1,12 @@
 import List from "@mui/material/List";
-import SidebarItem from "../SidebarItem";
+import SidebarItem, { SidebarItemProps } from "../SidebarItem";
 
-export type ItemGroupProps = {
-  text: string;
-  icon: JSX.Element;
-};
+export type SidebarItemGroupProps = SidebarItemProps[];
 
-const SidebarItemGroup = ({ group }: { group: ItemGroupProps[] }) => (
+const SidebarItemGroup = ({ group }: { group: SidebarItemGroupProps }) => (
   <List>
     {group.map((value) => (
-      <SidebarItem text={value.text} icon={value.icon} />
+      <SidebarItem {...value} />
     ))}
   </List>
 );

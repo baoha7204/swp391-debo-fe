@@ -10,7 +10,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import AddIcon from "@mui/icons-material/Add";
 import AppBar from "./style";
 
-type HeaderProps = {
+export type HeaderProps = {
   info: {
     username: string;
     role: string;

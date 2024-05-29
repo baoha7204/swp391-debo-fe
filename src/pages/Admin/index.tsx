@@ -1,18 +1,45 @@
-import CreateBranch from "./adminCreate/CreateBranch/CreateBranch";
-import AdminSidebar from "./components/AdminSidebar";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import HealthAndSafetyIcon from "@mui/icons-material/HealthAndSafety";
+import GroupIcon from "@mui/icons-material/Group";
+import AccountBoxIcon from "@mui/icons-material/AccountBox";
+import SettingsIcon from "@mui/icons-material/Settings";
+import ReportIcon from "@mui/icons-material/Report";
+import EventIcon from "@mui/icons-material/Event";
+import StoreIcon from "@mui/icons-material/Store";
+import { Outlet } from "react-router-dom";
+
 import DefaultLayout from "@/components/Layout/DefaultLayout";
-import AdminHeader from "./components/AdminHeader";
 
-const components = [{ name: "CreateBranch", component: <CreateBranch /> }];
+const SidebarAdminBody = [
+  { title: "Reservations", path: "", icon: <EventIcon /> },
+  { title: "Branchs", path: "branch", icon: <StoreIcon /> },
+  {
+    title: "Treatments",
+    path: "treatment",
+    icon: <HealthAndSafetyIcon />,
+  },
+  { title: "Patients", path: "", icon: <AccountCircleIcon /> },
+  { title: "Account", path: "", icon: <AccountBoxIcon /> },
+  { title: "Staffs", path: "staff", icon: <GroupIcon /> },
+  { title: "Reports", path: "", icon: <ReportIcon /> },
+  { title: "Setting", path: "", icon: <SettingsIcon /> },
+];
 
-const Admin = () => {
+const AdminInfo = {
+  username: "Duong",
+  role: "Admin",
+  avt: "/static/images/avatar/1.jpg",
+};
+
+const AdminLayout = () => {
   return (
-    <DefaultLayout>
-      <AdminHeader name={components[0].name} />
-      <AdminSidebar />
-      {components[0].component}
+    <DefaultLayout
+      sidebarBody={SidebarAdminBody}
+      header={{ info: AdminInfo, name: "Create Branch" }}
+    >
+      <Outlet />
     </DefaultLayout>
   );
 };
 
-export default Admin;
+export default AdminLayout;
