@@ -7,6 +7,7 @@ import IconButton from "@mui/material/IconButton";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import MenuIcon from "@mui/icons-material/Menu";
+import AddIcon from "@mui/icons-material/Add";
 import AppBar from "./style";
 
 type HeaderProps = {
@@ -16,9 +17,16 @@ type HeaderProps = {
     avt: string;
   };
   name: string;
+  isAllowedBooking?: boolean;
+  onCreateBooking?: () => void;
 };
 
-const Header = ({ name, info }: HeaderProps) => {
+const Header = ({
+  name,
+  info,
+  isAllowedBooking = true,
+  onCreateBooking,
+}: HeaderProps) => {
   const { open, handleDrawerOpen } = useContext(SidebarContext);
 
   return (
@@ -54,12 +62,22 @@ const Header = ({ name, info }: HeaderProps) => {
             <div className="center-header">DEBO Clinic</div>
             <div className="right-header">
               <div className="small-info">
-                <Avatar alt="Remy Sharp" src={info.avt} />
+                {isAllowedBooking && (
+                  <Fab
+                    size="small"
+                    color="primary"
+                    aria-label="add"
+                    onClick={onCreateBooking}
+                  >
+                    <AddIcon />
+                  </Fab>
+                )}
+                <Avatar alt={name} src={info.avt} />
                 <ul>
                   <li>Hi {info.username}</li>
                   <li>{info.role}</li>
                 </ul>
-                <Fab size="small" color="primary" aria-label="add">
+                <Fab size="small" color="primary" aria-label="manage-accounts">
                   <ManageAccounts />
                 </Fab>
               </div>
