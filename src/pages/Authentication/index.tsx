@@ -1,9 +1,4 @@
 import AuthLayout from "./components/AuthLayout";
-import Login from "./components/Login";
 
-const AuthenticationPage = () => (
-  <AuthLayout>
-    <Login />
-  </AuthLayout>
-);
+const AuthenticationPage = () => <AuthLayout />;
 export default AuthenticationPage;

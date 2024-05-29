@@ -4,23 +4,18 @@ type EmptyObj = Record<string, never>;
 
 type HttpMethod = "GET" | "POST" | "PUT" | "DELETE";
 
-type ApiRequest = (
-  endpoint: string,
-  method: HttpMethod,
-  headers?: Record<string, string>,
-  params?: Record<string, string>,
-  body?: Record<string, string>
-) => Promise<AxiosResponse>;
+type ApiRequest<T> = Promise<AxiosResponse<ApiResponse<T>>>;
 
 type ApiResponse<T = EmptyObj> = {
+  statusCode: number;
   success: boolean;
   data: T;
   message: string;
 };
 
+// TODO: Token types need to be updated
 type Token = {
-  sub: string;
-  exp: number;
+  roles: string[];
 };
 
 export type { EmptyObj, HttpMethod, ApiRequest, ApiResponse, Token };
