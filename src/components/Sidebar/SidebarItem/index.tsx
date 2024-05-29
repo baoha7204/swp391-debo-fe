@@ -6,15 +6,15 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 
 export type SidebarItemProps = {
-  key: string;
+  text: string;
   icon: JSX.Element;
 };
 
-const SidebarItem = ({ key, icon }: SidebarItemProps) => {
+const SidebarItem = ({ text, icon }: SidebarItemProps) => {
   const { open } = useContext(SidebarContext);
   return (
     <ListItem
-      key={key}
+      key={text}
       disablePadding
       sx={{
         display: "block",
@@ -39,7 +39,7 @@ const SidebarItem = ({ key, icon }: SidebarItemProps) => {
           {icon}
         </ListItemIcon>
         <ListItemText
-          primary={key}
+          primary={text}
           sx={{
             opacity: open ? 1 : 0,
             color: (theme) => theme.palette.text.primary,

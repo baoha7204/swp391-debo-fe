@@ -9,7 +9,7 @@ export type ItemGroupProps = {
 const SidebarItemGroup = ({ group }: { group: ItemGroupProps[] }) => (
   <List>
     {group.map((value) => (
-      <SidebarItem key={value.text} icon={value.icon} />
+      <SidebarItem text={value.text} icon={value.icon} />
     ))}
   </List>
 );
