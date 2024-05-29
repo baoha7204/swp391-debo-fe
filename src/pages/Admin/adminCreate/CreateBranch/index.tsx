@@ -15,7 +15,6 @@ import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import Checkbox from '@mui/material/Checkbox';
 import IconButton from '@mui/material/IconButton';
-import Tooltip from '@mui/material/Tooltip';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -25,6 +24,7 @@ import ButtonGroup from '@mui/material/ButtonGroup';
 import Button from '@mui/material/Button';
 import MyTextField from '@/components/MyTextField';
 import Grid from '@mui/material/Grid';
+import Tooltip from '@mui/material/Tooltip';
 
 interface Data {
     id: number,
@@ -170,6 +170,9 @@ function EnhancedTableHead(props: EnhancedTableProps) {
                             active={orderBy === headCell.id}
                             direction={orderBy === headCell.id ? order : 'asc'}
                             onClick={createSortHandler(headCell.id)}
+                            sx={{
+
+                            }}
                         >
                             {headCell.label}
                             {orderBy === headCell.id ? (
@@ -239,7 +242,7 @@ function EnhancedTableToolbar(props: EnhancedTableToolbarProps) {
     );
 }
 
-function BranchCreateBody() {
+function CreateBranch() {
 
     const [order, setOrder] = React.useState<Order>('asc');
     const [orderBy, setOrderBy] = React.useState<keyof Data>('mail');
@@ -394,21 +397,18 @@ function BranchCreateBody() {
                         }}
                     >
                         <h3>Branch Mail:</h3>
-                        <div className="box" style={{}}>
-                            <Box
-                                component="form"
-                                sx={{
-                                    '& > :not(style)': { m: 0, width: '100%' },
+                        <Box
+                            component="form"
+                            sx={{
+                                '& > :not(style)': { m: 0, width: '100%' },
 
-                                }}
-                                noValidate
-                                autoComplete="off"
-                            >
-
-                                <MyTextField required
-                                    fullWidth outsideLabel='' id="branch-mail" label="Mail" variant="outlined" sx={{ m: 1, p: 0 }} />
-                            </Box>
-                        </div>
+                            }}
+                            noValidate
+                            autoComplete="off"
+                        >
+                            <MyTextField required
+                                fullWidth outsideLabel='' id="branch-mail" label="Mail" variant="outlined" sx={{ m: 1, p: 0 }} />
+                        </Box>
                     </Box>
                     <Box
                         sx={{
@@ -429,7 +429,6 @@ function BranchCreateBody() {
                     </Box>
                 </Grid>
             </Grid>
-
             <Box sx={{ width: '100%' }}>
                 <Paper sx={{
                     width: '100%', mb: 2,
@@ -482,7 +481,8 @@ function BranchCreateBody() {
                                                 scope="row"
                                                 padding="none"
                                                 sx={{
-                                                    // whiteSpace: 'nowrap',
+                                                    maxWidth: '200px',
+                                                    whiteSpace: 'nowrap',
                                                     overflow: 'hidden',
                                                     textOverflow: 'ellipsis',
                                                 }}
@@ -490,16 +490,25 @@ function BranchCreateBody() {
                                                 {row.address}
                                             </TableCell>
                                             <TableCell align="left" sx={{
-                                                padding: '0', overflow: 'hidden',
+                                                maxWidth: '100px',
+                                                whiteSpace: 'nowrap',
+                                                overflow: 'hidden',
                                                 textOverflow: 'ellipsis',
+                                                p: 0
                                             }}>{row.mail}</TableCell>
                                             <TableCell align="left" sx={{
-                                                padding: '0', overflow: 'hidden',
+                                                maxWidth: '70px',
+                                                whiteSpace: 'nowrap',
+                                                overflow: 'hidden',
                                                 textOverflow: 'ellipsis',
+                                                p: 0
                                             }}>{row.phoneN}</TableCell>
                                             <TableCell align="left" sx={{
-                                                padding: '0', overflow: 'hidden',
+                                                maxWidth: '70px',
+                                                whiteSpace: 'nowrap',
+                                                overflow: 'hidden',
                                                 textOverflow: 'ellipsis',
+                                                p: 0
                                             }}>{row.altphoneN}</TableCell>
 
                                         </TableRow>
@@ -532,9 +541,8 @@ function BranchCreateBody() {
                     label="Dense padding"
                 />
             </Box>
-
         </Box>
     );
 }
 
-export default BranchCreateBody;
+export default CreateBranch;

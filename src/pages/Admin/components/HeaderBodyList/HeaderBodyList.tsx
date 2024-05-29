@@ -2,10 +2,12 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
-import AdminAppBar from '../../components/AdminAppBar/AdminAppBar';
+import AdminAppBar from '../AdminAppBar/AdminAppBar';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import Button from '@mui/material/Button';
 import MedicalInformationIcon from '@mui/icons-material/MedicalInformation';
+import { types } from 'util';
+import { Tracing } from 'trace_events';
 
 interface TabPanelProps {
     children?: React.ReactNode;
@@ -40,7 +42,7 @@ function a11yProps(index: number) {
     };
 }
 
-export default function StaffListBody() {
+export default function HeaderBodyList({ children }: any) {
     const [value, setValue] = React.useState(0);
 
     const handleChange = (event: React.SyntheticEvent, newValue: number) => {
@@ -51,9 +53,9 @@ export default function StaffListBody() {
         <Box sx={{ width: '100%' }}>
             <Box sx={{ borderBottom: 1, borderColor: 'divider', display: 'flex', justifyContent: 'space-between', marginRight: '20px' }}>
                 <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-                    <Tab label="Dentist Staff" {...a11yProps(0)} />
-                    <Tab label="General Staff" {...a11yProps(1)} />
-                    <Tab label="Branch Manager" {...a11yProps(2)} />
+                    <Tab label='{children[0]}' {...a11yProps(0)} />
+                    <Tab label='{children[1]}' {...a11yProps(1)} />
+                    <Tab label='{children[2]}' {...a11yProps(2)} />
                 </Tabs>
                 <ButtonGroup
                     disableElevation
@@ -69,24 +71,21 @@ export default function StaffListBody() {
             <CustomTabPanel value={value} index={0}>
                 <AdminAppBar>
                     <MedicalInformationIcon sx={{ display: { md: 'flex' }, mr: 1 }} />
-                    Dentist Staff
+                    {children[0]}
                 </AdminAppBar>
             </CustomTabPanel>
             <CustomTabPanel value={value} index={1}>
                 <AdminAppBar>
                     <MedicalInformationIcon sx={{ display: { md: 'flex' }, mr: 1 }} />
-                    General Staff
+                    {children[1]}
                 </AdminAppBar>
             </CustomTabPanel>
             <CustomTabPanel value={value} index={2}>
                 <AdminAppBar>
                     <MedicalInformationIcon sx={{ display: { md: 'flex' }, mr: 1 }} />
-                    Branch Manager
+                    {children[2]}
                 </AdminAppBar>
             </CustomTabPanel>
-
-
-
         </Box>
     );
 }
