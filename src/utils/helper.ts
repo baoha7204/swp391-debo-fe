@@ -33,3 +33,5 @@ export function percentToNumber(percent = 0) {
 export const differenceInDaysOmitTime = (start: Date, end: Date) => {
   return differenceInDays(endOfDay(addSeconds(end, -1)), startOfDay(start));
 };
+
+export const sanitizeString = (str: string) => str.toLocaleLowerCase().trim();

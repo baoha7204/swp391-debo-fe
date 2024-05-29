@@ -15,7 +15,7 @@ type ApiResponse<T = EmptyObj> = {
 
 // TODO: Token types need to be updated
 type Token = {
-  roles: string[];
+  role: string;
 };
 
 export type { EmptyObj, HttpMethod, ApiRequest, ApiResponse, Token };

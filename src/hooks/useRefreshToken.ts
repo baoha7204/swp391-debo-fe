@@ -5,6 +5,7 @@ import useAuth from "./useAuth";
 import { API_ENDPOINTS } from "@/utils/api";
 import { Token } from "@/types/core";
 import { ROLE } from "@/constant/core";
+import { sanitizeString } from "@/utils/helper";
 
 const useRefreshToken = () => {
   const { auth, setAuth } = useAuth();
@@ -13,11 +14,12 @@ const useRefreshToken = () => {
     const decoded = auth?.accessToken
       ? decodeToken<Token>(auth.accessToken)
       : undefined;
-    const roles = decoded?.roles || [];
+    const role = decoded?.role || "";
 
-    const endpoint = roles.includes(ROLE.ADMIN)
-      ? API_ENDPOINTS.AUTH.REFRESH_TOKEN_GOOGLE
-      : API_ENDPOINTS.AUTH.REFRESH_TOKEN_CREDENTIALS;
+    const endpoint =
+      sanitizeString(role) === ROLE.ADMIN
+        ? API_ENDPOINTS.AUTH.REFRESH_TOKEN_GOOGLE
+        : API_ENDPOINTS.AUTH.REFRESH_TOKEN_CREDENTIALS;
     const response = await axios(endpoint, {
       withCredentials: true,
     });

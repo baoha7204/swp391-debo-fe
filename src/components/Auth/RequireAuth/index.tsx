@@ -2,6 +2,7 @@ import { useLocation, Navigate, Outlet } from "react-router-dom";
 import useAuth from "@/hooks/useAuth";
 import { decodeToken } from "react-jwt";
 import { Token } from "@/types/core";
+import { sanitizeString } from "@/utils/helper";
 
 export type RequireAuthProps = {
   allowedRoles: string[];
@@ -15,9 +16,9 @@ const RequireAuth = ({ allowedRoles }: RequireAuthProps) => {
     ? decodeToken<Token>(auth.accessToken)
     : undefined;
 
-  const roles = decoded?.roles || [];
+  const role = decoded?.role || "";
 
-  return roles.find((role) => allowedRoles?.includes(role)) ? (
+  return allowedRoles.includes(sanitizeString(role)) ? (
     <Outlet />
   ) : auth?.accessToken ? (
     <Navigate to="/unauthorized" state={{ from: location }} replace />
