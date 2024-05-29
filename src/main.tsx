@@ -1,13 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { ThemeProvider } from "@emotion/react";
-import { GoogleOAuthProvider } from "@react-oauth/google";
-
-import App from "./app/App.tsx";
-import { AuthProvider } from "./context/auth.context.tsx";
 import themes from "./config/themes/index.ts";
-import Toast from "./components/Toast/index.tsx";
+import { AuthProvider } from "./context/auth.context.tsx";
+import App from "./app/App.tsx";
 import "./styles/globals.css";
+import Toast from "./components/Toast/index.tsx";
+import { SidebarProvider } from "./context/sidebar.context.tsx";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 
 async function enableMocking() {
   // eslint-disable-next-line no-undef
@@ -23,9 +23,11 @@ enableMocking().then(() => {
     <ThemeProvider theme={themes}>
       <AuthProvider>
         <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID!}>
-          <React.StrictMode>
-            <App />
-          </React.StrictMode>
+          <SidebarProvider>
+            <React.StrictMode>
+              <App />
+            </React.StrictMode>
+          </SidebarProvider>
         </GoogleOAuthProvider>
         <Toast />
       </AuthProvider>
