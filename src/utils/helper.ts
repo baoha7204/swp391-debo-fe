@@ -35,3 +35,7 @@ export const differenceInDaysOmitTime = (start: Date, end: Date) => {
 };
 
 export const sanitizeString = (str: string) => str.toLocaleLowerCase().trim();
+
+export const getHourFormat = (hourFormat: "12" | "24") => {
+  return hourFormat === "12" ? "hh:mm a" : "HH:mm";
+};
