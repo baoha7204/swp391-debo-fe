@@ -17,9 +17,12 @@ const SidebarPatientBody = [
 const PatientRoutes = [
   { path: "dashboard", breadcrumb: "Dashboard" },
   { path: "calendar", breadcrumb: "Calendar" },
+  { path: "booking", breadcrumb: "Booking" },
   { path: "payment", breadcrumb: "Payment" },
   { path: "appointments", breadcrumb: "Appointments" },
   { path: "appointments/:id", breadcrumb: "Appointment Detail" },
+  { path: "appointments/:id/info", breadcrumb: "Info" },
+  { path: "appointments/:id/notes", breadcrumb: "Notes" },
   { path: "settings", breadcrumb: "Settings" },
 ];
 
