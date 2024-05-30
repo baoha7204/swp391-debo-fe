@@ -9,9 +9,18 @@ import DefaultLayout from "@/components/Layout/DefaultLayout";
 const SidebarPatientBody = [
   { title: "Home", path: "", icon: <HomeIcon /> },
   { title: "Calendar", path: "calendar", icon: <EventIcon /> },
-  { title: "My Payment", path: "payment", icon: <PaymentsIcon /> },
   // TODO: implement these features
+  { title: "My Payment", path: "payment", icon: <PaymentsIcon /> },
   { title: "Setting", path: "", icon: <SettingsIcon /> },
+];
+
+const PatientRoutes = [
+  { path: "dashboard", breadcrumb: "Dashboard" },
+  { path: "calendar", breadcrumb: "Calendar" },
+  { path: "payment", breadcrumb: "Payment" },
+  { path: "appointments", breadcrumb: "Appointments" },
+  { path: "appointments/:id", breadcrumb: "Appointment Detail" },
+  { path: "settings", breadcrumb: "Settings" },
 ];
 
 const PatientInfo = {
@@ -24,7 +33,7 @@ const PatientLayout = () => {
   return (
     <DefaultLayout
       sidebarBody={SidebarPatientBody}
-      header={{ info: PatientInfo, name: "Patient layout" }}
+      header={{ info: PatientInfo, routes: PatientRoutes }}
     >
       <Outlet />
     </DefaultLayout>

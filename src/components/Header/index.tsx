@@ -9,6 +9,8 @@ import Typography from "@mui/material/Typography";
 import MenuIcon from "@mui/icons-material/Menu";
 import AddIcon from "@mui/icons-material/Add";
 import AppBar from "./style";
+import MyBreadcrumbs from "../MyBreadcrumbs";
+import { RouteBreadcrumb, withBreadcrumbs } from "@/hoc/withBreadcrumbs";
 
 export type HeaderProps = {
   info: {
@@ -16,18 +18,19 @@ export type HeaderProps = {
     role: string;
     avt: string;
   };
-  name: string;
   isAllowedBooking?: boolean;
   onCreateBooking?: () => void;
+  routes: RouteBreadcrumb[];
 };
 
 const Header = ({
-  name,
+  routes,
   info,
   isAllowedBooking = true,
   onCreateBooking,
 }: HeaderProps) => {
   const { open, handleDrawerOpen } = useContext(SidebarContext);
+  const Breadcrumbs = withBreadcrumbs(routes)(MyBreadcrumbs);
 
   return (
     <AppBar position="fixed" open={open}>
@@ -52,13 +55,16 @@ const Header = ({
           noWrap
           component="div"
           sx={{
+            width: "100%",
             color: (theme) => theme.palette.text.primary,
             paddingLeft: 0.5,
             paddingRight: 0.5,
           }}
         >
           <div className="branchHeader-container">
-            <div className="left-header">{name}</div>
+            <div className="left-header">
+              <Breadcrumbs />
+            </div>
             <div className="center-header">DEBO Clinic</div>
             <div className="right-header">
               <div className="small-info">
@@ -72,7 +78,7 @@ const Header = ({
                     <AddIcon />
                   </Fab>
                 )}
-                <Avatar alt={name} src={info.avt} />
+                <Avatar alt={info.username} src={info.avt} />
                 <ul>
                   <li>Hi {info.username}</li>
                   <li>{info.role}</li>

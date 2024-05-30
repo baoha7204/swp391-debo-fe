@@ -21,6 +21,8 @@ import CreateStaff from "@/pages/Admin/adminCreate/CreateStaff/CreateStaff";
 import CreateTreatment from "@/pages/Admin/adminCreate/CreateTreatment/CreateTreatment";
 import PatientLayout from "@/pages/Patient";
 import Calendar from "@/pages/Patient/Calendar";
+import PatientAppointmentList from "@/pages/Patient/Appointment/AppointmentList";
+import AppointmentDetail from "@/components/Appointment/AppointmentDetail";
 
 const RouterComponent = () => {
   const router = createBrowserRouter([
@@ -35,6 +37,14 @@ const RouterComponent = () => {
         { path: "calendar", element: <Calendar /> },
         { path: "booking", element: <BookingPage /> },
         { path: "dashboard", element: <DashboardPage /> },
+        {
+          path: "appointments",
+          element: <PatientAppointmentList />,
+        },
+        {
+          path: "appointments/:id",
+          element: <AppointmentDetail />,
+        },
       ],
     },
     ...["login", "register"].map((path) => ({
