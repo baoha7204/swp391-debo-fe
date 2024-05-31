@@ -4,17 +4,19 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
+import { Link } from "react-router-dom";
 
 export type SidebarItemProps = {
-  text: string;
+  title: string;
+  path: string;
   icon: JSX.Element;
 };
 
-const SidebarItem = ({ text, icon }: SidebarItemProps) => {
+const SidebarItem = ({ title, path, icon }: SidebarItemProps) => {
   const { open } = useContext(SidebarContext);
   return (
     <ListItem
-      key={text}
+      key={title}
       disablePadding
       sx={{
         display: "block",
@@ -22,6 +24,8 @@ const SidebarItem = ({ text, icon }: SidebarItemProps) => {
       }}
     >
       <ListItemButton
+        component={Link}
+        to={path}
         sx={{
           minHeight: 48,
           justifyContent: open ? "initial" : "center",
@@ -39,7 +43,7 @@ const SidebarItem = ({ text, icon }: SidebarItemProps) => {
           {icon}
         </ListItemIcon>
         <ListItemText
-          primary={text}
+          primary={title}
           sx={{
             opacity: open ? 1 : 0,
             color: (theme) => theme.palette.text.primary,

@@ -1,14 +1,19 @@
 
-import HeaderBodyList from "../../components/HeaderBodyList/HeaderBodyList";
-import { Typography } from "@mui/material";
+import BodyList from "../../components/BodyList";
 
 function ListStaff() {
   return (
-    <HeaderBodyList>
-      <Typography>Dentist Staff</Typography>
-      <Typography>General Staff</Typography>
-      <Typography>Branch Manager</Typography>
-    </HeaderBodyList>
+    <>
+      <BodyList
+        id={1}
+        name="Huynh Duong"
+        role="dentist"
+        gender="male"
+        phone={2}
+        mail="huynhtd97@gmail.com"
+      >
+      </BodyList >
+    </>
   );
 }
 

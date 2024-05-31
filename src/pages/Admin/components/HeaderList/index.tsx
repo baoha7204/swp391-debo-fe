@@ -6,8 +6,6 @@ import AdminAppBar from '../AdminAppBar/AdminAppBar';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import Button from '@mui/material/Button';
 import MedicalInformationIcon from '@mui/icons-material/MedicalInformation';
-import { types } from 'util';
-import { Tracing } from 'trace_events';
 
 interface TabPanelProps {
     children?: React.ReactNode;
@@ -42,7 +40,14 @@ function a11yProps(index: number) {
     };
 }
 
-export default function HeaderBodyList({ children }: any) {
+interface IHeaderBodyList {
+    allowMore3?: boolean;
+    children: React.ReactNode[];
+    showButton?: boolean;
+    buttonContent?: string;
+}
+
+export default function HeaderList({ allowMore3, children, buttonContent, showButton }: IHeaderBodyList) {
     const [value, setValue] = React.useState(0);
 
     const handleChange = (event: React.SyntheticEvent, newValue: number) => {
@@ -53,39 +58,33 @@ export default function HeaderBodyList({ children }: any) {
         <Box sx={{ width: '100%' }}>
             <Box sx={{ borderBottom: 1, borderColor: 'divider', display: 'flex', justifyContent: 'space-between', marginRight: '20px' }}>
                 <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-                    <Tab label='{children[0]}' {...a11yProps(0)} />
-                    <Tab label='{children[1]}' {...a11yProps(1)} />
-                    <Tab label='{children[2]}' {...a11yProps(2)} />
+                    <Tab label={children[0]} {...a11yProps(0)} />
+                    <Tab label={children[1]} {...a11yProps(1)} />
+                    {allowMore3 == true && children.length > 2 && (
+                        <Tab label={children[2]} {...a11yProps(2)} />
+                    )}
                 </Tabs>
-                <ButtonGroup
-                    disableElevation
-                    variant="contained"
-                    aria-label="Disabled button group"
-                    sx={{
-                        '& > :not(style)': { m: 0, width: '20ch', marginBottom: '5px' },
-                    }}
-                >
-                    <Button sx={{}}>Add New Staff</Button>
-                </ButtonGroup>
+                {showButton == true &&
+                    <ButtonGroup
+                        disableElevation
+                        variant="contained"
+                        aria-label="Disabled button group"
+                        sx={{
+                            '& > :not(style)': { m: 0, width: '20ch', marginBottom: '5px' },
+                        }}
+                    >
+                        <Button>{buttonContent}</Button>
+                    </ButtonGroup>
+                }
             </Box>
-            <CustomTabPanel value={value} index={0}>
-                <AdminAppBar>
-                    <MedicalInformationIcon sx={{ display: { md: 'flex' }, mr: 1 }} />
-                    {children[0]}
-                </AdminAppBar>
-            </CustomTabPanel>
-            <CustomTabPanel value={value} index={1}>
-                <AdminAppBar>
-                    <MedicalInformationIcon sx={{ display: { md: 'flex' }, mr: 1 }} />
-                    {children[1]}
-                </AdminAppBar>
-            </CustomTabPanel>
-            <CustomTabPanel value={value} index={2}>
-                <AdminAppBar>
-                    <MedicalInformationIcon sx={{ display: { md: 'flex' }, mr: 1 }} />
-                    {children[2]}
-                </AdminAppBar>
-            </CustomTabPanel>
-        </Box>
+            {children.map((child, index) => (
+                <CustomTabPanel value={value} index={index} key={index}>
+                    <AdminAppBar>
+                        <MedicalInformationIcon sx={{ display: { md: 'flex' }, mr: 1 }} />
+                        {child}
+                    </AdminAppBar>
+                </CustomTabPanel>
+            ))}
+        </Box >
     );
 }

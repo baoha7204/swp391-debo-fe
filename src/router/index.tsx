@@ -16,6 +16,12 @@ import AuthenticationPage from "@/pages/Authentication";
 import CalendarPage from "@/pages/Patient/Calendar";
 import BookingPage from "@/pages/Patient/Booking";
 import DashboardPage from "@/pages/Patient/Dashboard";
+import AdminLayout from "@/pages/Admin";
+import CreateBranch from "@/pages/Admin/adminCreate/CreateBranch/index.tsx";
+import CreateStaff from "@/pages/Admin/adminCreate/CreateStaff/CreateStaff";
+import CreateTreatment from "@/pages/Admin/adminCreate/CreateTreatment/CreateTreatment";
+import ListStaff from "@/pages/Admin/adminList/ListStaff";
+import AdminList from "@/pages/Admin/adminList";
 
 const RouterComponent = () => {
   const router = createBrowserRouter([
@@ -78,6 +84,37 @@ const RouterComponent = () => {
           path: "staff",
           element: <RequireAuth allowedRoles={[ROLE.STAFF]} />,
           children: [],
+        },
+      ],
+    },
+    // Admin test routes
+    {
+      path: "adminTest",
+      element: <AdminLayout />,
+      children: [
+        {
+          index: true,
+          element: <Navigate to="branch" />,
+        },
+        {
+          path: "branch",
+          element: <CreateBranch />,
+        },
+        {
+          path: "staff",
+          element: <CreateStaff />,
+        },
+        {
+          path: "treatment",
+          element: <CreateTreatment />,
+        },
+        {
+          path: "listStaff",
+          element: <ListStaff />,
+        },
+        {
+          path: "adminList",
+          element: <AdminList />,
         },
       ],
     },

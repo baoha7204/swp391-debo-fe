@@ -7,18 +7,26 @@ import IconButton from "@mui/material/IconButton";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import MenuIcon from "@mui/icons-material/Menu";
+import AddIcon from "@mui/icons-material/Add";
 import AppBar from "./style";
 
-type HeaderProps = {
+export type HeaderProps = {
   info: {
     username: string;
     role: string;
     avt: string;
   };
-  name: string;
+  headerName: any;
+  isAllowedBooking?: boolean;
+  onCreateBooking?: () => void;
 };
 
-const Header = ({ name, info }: HeaderProps) => {
+const Header = ({
+  headerName,
+  info,
+  isAllowedBooking = true,
+  onCreateBooking,
+}: HeaderProps) => {
   const { open, handleDrawerOpen } = useContext(SidebarContext);
 
   return (
@@ -50,16 +58,28 @@ const Header = ({ name, info }: HeaderProps) => {
           }}
         >
           <div className="branchHeader-container">
-            <div className="left-header">{name}</div>
+            <div className="left-header">
+              {headerName}
+            </div>
             <div className="center-header">DEBO Clinic</div>
             <div className="right-header">
               <div className="small-info">
-                <Avatar alt="Remy Sharp" src={info.avt} />
+                {isAllowedBooking && (
+                  <Fab
+                    size="small"
+                    color="primary"
+                    aria-label="add"
+                    onClick={onCreateBooking}
+                  >
+                    <AddIcon />
+                  </Fab>
+                )}
+                <Avatar alt={info.username} src={info.avt} />
                 <ul>
                   <li>Hi {info.username}</li>
                   <li>{info.role}</li>
                 </ul>
-                <Fab size="small" color="primary" aria-label="add">
+                <Fab size="small" color="primary" aria-label="manage-accounts">
                   <ManageAccounts />
                 </Fab>
               </div>
