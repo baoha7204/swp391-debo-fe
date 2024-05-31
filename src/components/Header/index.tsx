@@ -1,8 +1,6 @@
 import { useContext } from "react";
-import { ManageAccounts } from "@mui/icons-material";
 import { SidebarContext } from "@/context/sidebar.context";
 import Fab from "@mui/material/Fab";
-import Avatar from "@mui/material/Avatar";
 import IconButton from "@mui/material/IconButton";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
@@ -11,6 +9,7 @@ import AddIcon from "@mui/icons-material/Add";
 import AppBar from "./style";
 import MyBreadcrumbs from "../MyBreadcrumbs";
 import { RouteBreadcrumb, withBreadcrumbs } from "@/hoc/withBreadcrumbs";
+import AccountMenu from "../AccountMenu";
 
 export type HeaderProps = {
   info: {
@@ -78,14 +77,11 @@ const Header = ({
                     <AddIcon />
                   </Fab>
                 )}
-                <Avatar alt={info.username} src={info.avt} />
+                <AccountMenu {...info} />
                 <ul>
                   <li>Hi {info.username}</li>
                   <li>{info.role}</li>
                 </ul>
-                <Fab size="small" color="primary" aria-label="manage-accounts">
-                  <ManageAccounts />
-                </Fab>
               </div>
             </div>
           </div>
