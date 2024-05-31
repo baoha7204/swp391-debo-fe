@@ -1,11 +1,18 @@
-import { addSeconds, differenceInDays, endOfDay, startOfDay } from "date-fns";
+import {
+  addSeconds,
+  differenceInDays,
+  endOfDay,
+  startOfDay,
+  format,
+} from "date-fns";
+import { enUS } from "date-fns/locale";
 
 export const formatUserName = (firstName: string, lastName: string) => {
   return [firstName, lastName].join(" ");
 };
 
-export const formatDentistName = (firstName: string, lastName: string) => {
-  return ["Dr.", firstName, lastName].join(" ");
+export const formatDentistName = (name: string) => {
+  return ["Dr.", name].join(" ");
 };
 
 export const VietnamesePhoneNumberRegex =
@@ -39,3 +46,11 @@ export const sanitizeString = (str: string) => str.toLocaleLowerCase().trim();
 export const getHourFormat = (hourFormat: "12" | "24") => {
   return hourFormat === "12" ? "hh:mm a" : "HH:mm";
 };
+
+export const formatDate = (date: Date) =>
+  format(date, `dd MMMM yyyy ${getHourFormat("12")}`, {
+    locale: enUS,
+  });
+
+export const isValidDate = (date: unknown) =>
+  date instanceof Date && !isNaN(date.getTime());

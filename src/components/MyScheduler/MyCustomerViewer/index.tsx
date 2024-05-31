@@ -2,11 +2,9 @@ import { ProcessedEvent } from "@aldabil/react-scheduler/types";
 import { Box, IconButton, Typography } from "@mui/material";
 import ClearRoundedIcon from "@mui/icons-material/ClearRounded";
 import EventNoteRoundedIcon from "@mui/icons-material/EventNoteRounded";
-import { format } from "date-fns";
-import { enUS } from "date-fns/locale";
 
 import { PopperInner } from "./style";
-import { getHourFormat } from "@/utils/helper";
+import { formatDate } from "@/utils/helper";
 import EventActions from "./EventActions";
 import { toastInfo } from "@/utils/toast";
 
@@ -16,7 +14,6 @@ export type MyCustomViewerProps = {
 };
 
 const MyCustomViewer = ({ event, close }: MyCustomViewerProps) => {
-  const hFormat = getHourFormat("12");
   return (
     <PopperInner>
       <Box
@@ -58,11 +55,7 @@ const MyCustomViewer = ({ event, close }: MyCustomViewerProps) => {
           noWrap
         >
           <EventNoteRoundedIcon />
-          {`${format(event.start, `dd MMMM yyyy ${hFormat}`, {
-            locale: enUS,
-          })} - ${format(event.end, `dd MMMM yyyy ${hFormat}`, {
-            locale: enUS,
-          })}`}
+          {`${formatDate(event.start)} - ${formatDate(event.end)}`}
         </Typography>
       </div>
     </PopperInner>

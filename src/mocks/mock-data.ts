@@ -1,3 +1,4 @@
+import { AppointmentListData } from "@/components/Appointment/AppointmentList/types/core";
 import { ProcessedEvent } from "@aldabil/react-scheduler/types";
 
 const CalendarPatientEvents: ProcessedEvent[] = [
@@ -65,4 +66,127 @@ const CalendarPatientEvents: ProcessedEvent[] = [
   },
 ];
 
-export { CalendarPatientEvents };
+const AppointmentPatientLists: AppointmentListData[] = [
+  {
+    id: 1,
+    name: "Check up for Teeth Cleaning",
+    status: "Pending",
+    treatment: "Teeth Cleaning",
+    dentist: "Jane Doe",
+    date: new Date(),
+  },
+  {
+    id: 2,
+    name: "Teeth Cleaning",
+    status: "Pending",
+    treatment: "Teeth Cleaning",
+    dentist: "Jane Doe",
+    date: new Date(),
+  },
+  {
+    id: 3,
+    name: "Check up for Root Canal",
+    status: "Pending",
+    treatment: "Root Canal",
+    dentist: "Jane Doe",
+    date: new Date(),
+  },
+  {
+    id: 4,
+    name: "Regular Check up",
+    status: "Pending",
+    treatment: "Common Check up",
+    dentist: "Jane Doe",
+    date: new Date(),
+  },
+  {
+    id: 5,
+    name: "Regular Check up",
+    status: "Pending",
+    treatment: "Common Check up",
+    dentist: "Jane Doe",
+    date: new Date(),
+  },
+  {
+    id: 6,
+    name: "Check up for Teeth Whitening",
+    status: "Pending",
+    treatment: "Teeth Whitening",
+    dentist: "Jane Doe",
+    date: new Date(),
+  },
+  {
+    id: 7,
+    name: "Teeth Whitening",
+    status: "Pending",
+    treatment: "Teeth Whitening",
+    dentist: "Jane Doe",
+    date: new Date(),
+  },
+  {
+    id: 8,
+    name: "Teeth Whitening",
+    status: "Pending",
+    treatment: "Teeth Whitening",
+    dentist: "Jane Doe",
+    date: new Date(),
+  },
+  {
+    id: 9,
+    name: "Teeth Whitening",
+    status: "Pending",
+    treatment: "Teeth Whitening",
+    dentist: "Jane Doe",
+    date: new Date(),
+  },
+  {
+    id: 10,
+    name: "Teeth Whitening",
+    status: "Pending",
+    treatment: "Teeth Whitening",
+    dentist: "Jane Doe",
+    date: new Date(),
+  },
+  {
+    id: 11,
+    name: "Teeth Whitening",
+    status: "Pending",
+    treatment: "Teeth Whitening",
+    dentist: "Jane Doe",
+    date: new Date(),
+  },
+  {
+    id: 12,
+    name: "Teeth Whitening",
+    status: "Pending",
+    treatment: "Teeth Whitening",
+    dentist: "Jane Doe",
+    date: new Date(),
+  },
+  {
+    id: 13,
+    name: "Teeth Whitening",
+    status: "Pending",
+    treatment: "Teeth Whitening",
+    dentist: "Jane Doe",
+    date: new Date(),
+  },
+  {
+    id: 14,
+    name: "Teeth Whitening",
+    status: "Pending",
+    treatment: "Teeth Whitening",
+    dentist: "Jane Doe",
+    date: new Date(),
+  },
+  {
+    id: 15,
+    name: "Teeth Whitening",
+    status: "Pending",
+    treatment: "Teeth Whitening",
+    dentist: "Jane Doe",
+    date: new Date(),
+  },
+];
+
+export { CalendarPatientEvents, AppointmentPatientLists };
