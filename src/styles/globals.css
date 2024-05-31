@@ -9,8 +9,8 @@
 }
 
 .branchHeader-container {
-  display: grid;
-  grid-template-columns: repeat(10, 1fr);
+  display: flex;
+  justify-content: space-between;
 }
 
 .branchHeader-container .left-header {
@@ -21,7 +21,6 @@
 }
 
 .branchHeader-container .right-header {
-  grid-column: 10;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -29,7 +28,6 @@
 
 .branchHeader-container .center-header {
   display: flex;
-  grid-column: 5;
   justify-content: center;
   align-items: center;
   font-size: 30px;
