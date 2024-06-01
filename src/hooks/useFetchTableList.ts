@@ -1,22 +1,21 @@
 import { useEffect, useState } from "react";
 import { toastError } from "@/utils/toast";
 import { TableControl } from "./useControlTable";
-import { AppointmentListData } from "@/components/Appointment/AppointmentList/types/core";
 import { get } from "@/utils/apiCaller";
 
-export type AppointmentListDataResponse = {
-  list: AppointmentListData[];
+export type ListDataResponse<T> = {
+  list: T[];
   total: number;
 };
 
-const useFetchAppointmentList = ({
+const useFetchTableList = <T>({
   url,
   controller,
 }: {
   url: string;
   controller: TableControl;
 }) => {
-  const [list, setList] = useState<AppointmentListData[]>([]);
+  const [list, setList] = useState<T[]>([]);
   const [count, setCount] = useState(0);
 
   useEffect(() => {
@@ -24,7 +23,7 @@ const useFetchAppointmentList = ({
 
     const fetchRemote = async () => {
       try {
-        const response = await get<AppointmentListDataResponse>(
+        const response = await get<ListDataResponse<T>>(
           url,
           // TODO: set false to true -> protected route
           false,
@@ -61,4 +60,4 @@ const useFetchAppointmentList = ({
   return [list, count] as const;
 };
 
-export default useFetchAppointmentList;
+export default useFetchTableList;
