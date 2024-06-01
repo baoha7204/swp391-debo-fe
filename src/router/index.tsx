@@ -64,32 +64,33 @@ const RouterComponent = () => {
           element: <RequireAuth allowedRoles={[ROLE.PATIENT]} />,
           children: [
             {
-              index: true,
-              element: <Navigate to="dashboard" />,
-            },
-            {
-              path: "calendar",
-              element: <Calendar />,
-            },
-            {
-              path: "booking",
-              element: <BookingPage />,
-            },
-            {
-              path: "dashboard",
-              element: <DashboardPage />,
+              element: <PatientLayout />,
+              children: [
+                { index: true, element: <Navigate to="calendar" /> },
+                { path: "calendar", element: <Calendar /> },
+                { path: "booking", element: <BookingPage /> },
+                { path: "dashboard", element: <DashboardPage /> },
+                {
+                  path: "appointments",
+                  element: <PatientAppointmentList />,
+                },
+                {
+                  path: "appointments/:id",
+                  element: <AppointmentDetail />,
+                },
+              ],
             },
           ],
         },
         {
           // Admin routes
-          path: "admin",
+          path: ROLE.ADMIN,
           element: <RequireAuth allowedRoles={[ROLE.ADMIN]} />,
           children: [],
         },
         {
           // Dentist routes
-          path: "dentist",
+          path: ROLE.DENTIST,
           element: <RequireAuth allowedRoles={[ROLE.DENTIST]} />,
           children: [],
         },

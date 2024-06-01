@@ -65,7 +65,8 @@ export default function useLogin() {
       if (!result.success) {
         return;
       }
-      navigate(result.data[0]);
+
+      navigate("/" + result.data);
     });
   };
 
