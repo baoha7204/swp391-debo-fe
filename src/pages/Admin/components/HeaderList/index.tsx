@@ -25,7 +25,7 @@ function CustomTabPanel(props: TabPanelProps) {
             {...other}
         >
             {value === index && (
-                <Box sx={{ p: 3, display: 'inline-block' }}>
+                <Box sx={{ p: 3 }}>
                     {children}
                 </Box>
             )}
@@ -42,7 +42,10 @@ function a11yProps(index: number) {
 
 interface IHeaderBodyList {
     allowMore3?: boolean;
-    children: React.ReactNode[];
+    children: {
+        name: string[],
+        body: JSX.Element[]
+    }
     showButton?: boolean;
     buttonContent?: string;
 }
@@ -58,10 +61,10 @@ export default function HeaderList({ allowMore3, children, buttonContent, showBu
         <Box sx={{ width: '100%' }}>
             <Box sx={{ borderBottom: 1, borderColor: 'divider', display: 'flex', justifyContent: 'space-between', marginRight: '20px' }}>
                 <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-                    <Tab label={children[0]} {...a11yProps(0)} />
-                    <Tab label={children[1]} {...a11yProps(1)} />
-                    {allowMore3 == true && children.length > 2 && (
-                        <Tab label={children[2]} {...a11yProps(2)} />
+                    <Tab label={children.name[0]} {...a11yProps(0)} />
+                    <Tab label={children.name[1]} {...a11yProps(1)} />
+                    {allowMore3 == true && children.name.length > 2 && (
+                        <Tab label={children.name[2]} {...a11yProps(2)} />
                     )}
                 </Tabs>
                 {showButton == true &&
@@ -77,14 +80,26 @@ export default function HeaderList({ allowMore3, children, buttonContent, showBu
                     </ButtonGroup>
                 }
             </Box>
-            {children.map((child, index) => (
-                <CustomTabPanel value={value} index={index} key={index}>
-                    <AdminAppBar>
-                        <MedicalInformationIcon sx={{ display: { md: 'flex' }, mr: 1 }} />
+            <Box sx={{ display: 'inline-block' }}>
+                {children.name.map((child, index) => (
+                    <CustomTabPanel value={value} index={index} key={index}>
+                        <AdminAppBar>
+                            <MedicalInformationIcon sx={{ display: { md: 'flex' }, mr: 1 }} />
+                            {child}
+                        </AdminAppBar>
+                    </CustomTabPanel>
+                ))}
+            </Box>
+            <Box>
+                {children.body.map((child, index) => (
+                    <CustomTabPanel value={value} index={index} key={index}>
                         {child}
-                    </AdminAppBar>
-                </CustomTabPanel>
-            ))}
+                    </CustomTabPanel>
+                ))}
+            </Box>
+            <Box>
+
+            </Box>
         </Box >
     );
 }

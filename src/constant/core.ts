@@ -11,10 +11,10 @@ const HTTP_STATUS = {
 
 const ROLE = {
   ADMIN: "admin",
-  PATIENT: "patient",
+  PATIENT: "customer",
   DENTIST: "dentist",
-  MANAGER: "manager",
-  STAFF: "staff",
+  MANAGER: "clinic manager",
+  STAFF: "clinic staff",
 };
 
 export { STRING_EMPTY, HTTP_STATUS, ROLE };

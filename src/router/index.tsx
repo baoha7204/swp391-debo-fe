@@ -13,7 +13,6 @@ import PersistLogin from "@/components/Auth/PersistLogin";
 import UnauthorizedPage from "@/pages/403";
 import AuthenticationPage from "@/pages/Authentication";
 
-import CalendarPage from "@/pages/Patient/Calendar";
 import BookingPage from "@/pages/Patient/Booking";
 import DashboardPage from "@/pages/Patient/Dashboard";
 import AdminLayout from "@/pages/Admin";
@@ -22,13 +21,34 @@ import CreateStaff from "@/pages/Admin/adminCreate/CreateStaff/CreateStaff";
 import CreateTreatment from "@/pages/Admin/adminCreate/CreateTreatment/CreateTreatment";
 import ListStaff from "@/pages/Admin/adminList/ListStaff";
 import AdminList from "@/pages/Admin/adminList";
+import PatientLayout from "@/pages/Patient";
+import Calendar from "@/pages/Patient/Calendar";
+import PatientAppointmentList from "@/pages/Patient/Appointment/AppointmentList";
+import AppointmentDetail from "@/components/Appointment/AppointmentDetail";
 
 const RouterComponent = () => {
   const router = createBrowserRouter([
     // Public routes
     { index: true, element: <Navigate to="login" /> },
     { path: "unauthorized", element: <UnauthorizedPage /> },
-    { path: "calendar", element: <CalendarPage /> },
+    {
+      path: "patientTest",
+      element: <PatientLayout />,
+      children: [
+        { index: true, element: <Navigate to="calendar" /> },
+        { path: "calendar", element: <Calendar /> },
+        { path: "booking", element: <BookingPage /> },
+        { path: "dashboard", element: <DashboardPage /> },
+        {
+          path: "appointments",
+          element: <PatientAppointmentList />,
+        },
+        {
+          path: "appointments/:id",
+          element: <AppointmentDetail />,
+        },
+      ],
+    },
     ...["login", "register"].map((path) => ({
       path,
       element: <AuthenticationPage />,
@@ -49,7 +69,7 @@ const RouterComponent = () => {
             },
             {
               path: "calendar",
-              element: <CalendarPage />,
+              element: <Calendar />,
             },
             {
               path: "booking",

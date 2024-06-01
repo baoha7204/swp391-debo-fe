@@ -9,6 +9,8 @@ import Typography from "@mui/material/Typography";
 import MenuIcon from "@mui/icons-material/Menu";
 import AddIcon from "@mui/icons-material/Add";
 import AppBar from "./style";
+import MyBreadcrumbs from "../MyBreadcrumbs";
+import { RouteBreadcrumb, withBreadcrumbs } from "@/hoc/withBreadcrumbs";
 
 export type HeaderProps = {
   info: {
@@ -16,18 +18,19 @@ export type HeaderProps = {
     role: string;
     avt: string;
   };
-  headerName: any;
   isAllowedBooking?: boolean;
   onCreateBooking?: () => void;
+  routes: RouteBreadcrumb[];
 };
 
 const Header = ({
-  headerName,
+  routes,
   info,
   isAllowedBooking = true,
   onCreateBooking,
 }: HeaderProps) => {
   const { open, handleDrawerOpen } = useContext(SidebarContext);
+  const Breadcrumbs = withBreadcrumbs(routes)(MyBreadcrumbs);
 
   return (
     <AppBar position="fixed" open={open}>
@@ -52,6 +55,7 @@ const Header = ({
           noWrap
           component="div"
           sx={{
+            width: "100%",
             color: (theme) => theme.palette.text.primary,
             paddingLeft: 0.5,
             paddingRight: 0.5,
@@ -59,7 +63,7 @@ const Header = ({
         >
           <div className="branchHeader-container">
             <div className="left-header">
-              {headerName}
+              <Breadcrumbs />
             </div>
             <div className="center-header">DEBO Clinic</div>
             <div className="right-header">

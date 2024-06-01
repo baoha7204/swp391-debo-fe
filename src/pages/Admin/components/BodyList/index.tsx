@@ -14,6 +14,7 @@ import { getComparator, stableSort, EnhancedTableHead, EnhancedTableToolbar, Ord
 
 export interface Data {
     id: number;
+    // avt: JSX.Element;
     name: string;
     role: string;
     gender: string;
@@ -66,7 +67,29 @@ export const headCells: readonly HeadCell[] = [
     },
 ];
 
-export default function BodyList({ id, name, role, gender, phone, mail }: Data) {
+function createData(
+    id: number,
+    name: string,
+    role: string,
+    gender: string,
+    phone: number,
+    mail: string
+): Data {
+    return {
+        id,
+        name,
+        role,
+        gender,
+        phone,
+        mail,
+    };
+}
+
+const rows = [
+    createData(1, 'name', 'role', 'gender', 1, 'mail')
+]
+
+export default function BodyList() {
     const [order, setOrder] = React.useState<Order>('asc');
     const [orderBy, setOrderBy] = React.useState<keyof Data>('name');
     const [selected, setSelected] = React.useState<readonly number[]>([]);
@@ -74,27 +97,7 @@ export default function BodyList({ id, name, role, gender, phone, mail }: Data) 
     const [dense, setDense] = React.useState(false);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
-    function createData(
-        id: number,
-        name: string,
-        role: string,
-        gender: string,
-        phone: number,
-        mail: string
-    ): Data {
-        return {
-            id,
-            name,
-            role,
-            gender,
-            phone,
-            mail,
-        };
-    }
 
-    const rows = [
-        createData(id, name, role, gender, phone, mail)
-    ]
 
     const handleRequestSort = (
         event: React.MouseEvent<unknown>,

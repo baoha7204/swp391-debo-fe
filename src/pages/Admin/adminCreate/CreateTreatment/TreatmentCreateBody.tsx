@@ -25,6 +25,11 @@ import ButtonGroup from '@mui/material/ButtonGroup';
 import Button from '@mui/material/Button';
 import MyTextField from '@/components/MyTextField';
 import { Grid } from '@mui/material';
+import useFetchData from '../../apis/staffListApi/staffListApi';
+import { log } from 'console';
+import useFetchAppointmentList from '@/hooks/useFetchAppointmentList';
+
+// https://localhost:7151/api/Treatments
 
 // interface Data {
 //     id: number;
@@ -299,6 +304,9 @@ function EnhancedTableToolbar(props: EnhancedTableToolbarProps) {
 }
 
 function TreatmentCreateBody() {
+    const data = useFetchAppointmentList('https://localhost:7151/api/Treatments');
+
+    console.log(data);
 
     const [order, setOrder] = React.useState<Order>('asc');
     const [orderBy, setOrderBy] = React.useState<keyof Data>('name');
@@ -371,6 +379,8 @@ function TreatmentCreateBody() {
             ),
         [order, orderBy, page, rowsPerPage],
     );
+
+    console.log(data);
 
     return (
         <>
@@ -492,7 +502,14 @@ function TreatmentCreateBody() {
                                                             }}
                                                         />
                                                     </TableCell>
-                                                    <TableCell
+                                                    {data.map((item: any) => {
+                                                        return (
+                                                            <TableRow key={item.id}>
+                                                                <TableCell>{item.name}</TableCell>
+                                                            </TableRow>
+                                                        );
+                                                    })}
+                                                    {/* <TableCell
                                                         component="th"
                                                         id={labelId}
                                                         scope="row"
@@ -503,7 +520,7 @@ function TreatmentCreateBody() {
                                                     <TableCell align="left" sx={{ padding: '0' }}>{row.year}</TableCell>
                                                     <TableCell align="left" sx={{ padding: '0' }}>{row.month}</TableCell>
                                                     <TableCell align="left" sx={{ padding: '0' }}>{row.day}</TableCell>
-                                                    <TableCell align="left" sx={{ padding: '0' }}>{row.cost}</TableCell>
+                                                    <TableCell align="left" sx={{ padding: '0' }}>{row.cost}</TableCell> */}
 
                                                 </TableRow>
                                             );

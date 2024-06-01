@@ -12,7 +12,6 @@ import { useLocation } from "react-router-dom";
 
 import DefaultLayout from "@/components/Layout/DefaultLayout";
 
-
 const SidebarAdminBody = [
   { title: "Reservations", path: "", icon: <EventIcon />, },
   { title: "Branchs", path: "branch", icon: <StoreIcon />, },
@@ -30,23 +29,11 @@ const AdminInfo = {
   avt: "/static/images/avatar/1.jpg",
 };
 
-const getTitleFromPath = (path: string) => {
-  const menuItem = SidebarAdminBody.find(item => `/adminTest/${item.path}` === path
-  );
-  return menuItem ? menuItem.title : ""; // Nếu không tìm thấy, trả về chuỗi trống
-};
-
 const AdminLayout = () => {
-
-  const currentPath = useLocation().pathname; // Sử dụng hook useLocation để lấy đường dẫn hiện tại
-
-  // Lấy title từ path hiện tại
-  const currentTitle = getTitleFromPath(currentPath);
-
   return (
     <DefaultLayout
       sidebarBody={SidebarAdminBody}
-      header={{ info: AdminInfo, headerName: currentTitle }}
+      header={{ info: AdminInfo, routes: [] }}
     >
       <Outlet />
     </DefaultLayout>

@@ -10,6 +10,7 @@ const useFetchCalendar = ({ url }: { url: string }) => {
   ): Promise<ProcessedEvent[]> => {
     console.log(params);
     // TODO: use get from apiCaller. Using fetch for demo purpose
+    // TODO: abort controller
     const response = await fetch(url);
     const data = await response.json();
     if (!data.success) {
