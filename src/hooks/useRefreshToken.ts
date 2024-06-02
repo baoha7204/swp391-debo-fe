@@ -1,11 +1,13 @@
 import { decodeToken } from "react-jwt";
 
-import axios from "@/config/axios";
 import useAuth from "./useAuth";
 import { API_ENDPOINTS } from "@/utils/api";
 import { Token } from "@/types/core";
 import { ROLE } from "@/constant/core";
 import { sanitizeString } from "@/utils/helper";
+import { post } from "@/utils/apiCaller";
+import { AuthResponseType } from "@/pages/Authentication/types/core";
+import { toastError } from "@/utils/toast";
 
 const useRefreshToken = () => {
   const { auth, setAuth } = useAuth();
@@ -20,18 +22,24 @@ const useRefreshToken = () => {
       sanitizeString(role) === ROLE.ADMIN
         ? API_ENDPOINTS.AUTH.REFRESH_TOKEN_GOOGLE
         : API_ENDPOINTS.AUTH.REFRESH_TOKEN_CREDENTIALS;
-    const response = await axios(endpoint, {
-      withCredentials: true,
-    });
+    const response = await post<AuthResponseType>(endpoint, true);
+    const { data } = response;
+
+    if (!data.success || !data.data) {
+      return toastError(data.message);
+    }
+
+    const result = data.data;
+
     setAuth((prev) => {
-      console.log(JSON.stringify(prev));
-      console.log(response.data.accessToken);
       return {
         ...prev,
-        accessToken: response.data.accessToken,
+        refreshToken: result.refreshToken,
+        accessToken: result.accessToken,
       };
     });
-    return response.data.accessToken;
+
+    return result.accessToken;
   };
   return refresh;
 };
