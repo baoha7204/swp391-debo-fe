@@ -51,11 +51,12 @@ export default function useLogin() {
     ).then((res) => {
       const { data } = res;
       const accessToken = data.data?.accessToken;
-      if (!data.success || !accessToken) {
+      const refreshToken = data.data?.refreshToken;
+      if (!data.success || !accessToken || !refreshToken) {
         return errorToastHandler(data);
       }
 
-      setAuth({ user, accessToken });
+      setAuth({ accessToken, refreshToken });
       const from = location.state?.from?.pathname;
       if (from) {
         return navigate(from, { replace: true });
