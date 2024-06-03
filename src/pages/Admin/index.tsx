@@ -14,8 +14,8 @@ import DefaultLayout from "@/components/Layout/DefaultLayout";
 
 const SidebarAdminBody = [
   { title: "Reservations", path: "", icon: <EventIcon />, },
-  { title: "Branchs", path: "branch", icon: <StoreIcon />, },
-  { title: "Treatments", path: "treatment", icon: <HealthAndSafetyIcon />, },
+  { title: "Branchs", path: "branchList", icon: <StoreIcon />, },
+  { title: "Treatments", path: "treatmentList", icon: <HealthAndSafetyIcon />, },
   { title: "Patients", path: "", icon: <AccountCircleIcon />, },
   { title: "Account", path: "", icon: <AccountBoxIcon />, },
   { title: "Staffs", path: "adminList", icon: <GroupIcon />, },

@@ -16,15 +16,16 @@ import AuthenticationPage from "@/pages/Authentication";
 import BookingPage from "@/pages/Patient/Booking";
 import DashboardPage from "@/pages/Patient/Dashboard";
 import AdminLayout from "@/pages/Admin";
-import CreateBranch from "@/pages/Admin/adminCreate/CreateBranch/index.tsx";
-import CreateStaff from "@/pages/Admin/adminCreate/CreateStaff/CreateStaff";
-import Treatments from "@/pages/Admin/adminCreate/Treatments/Treatments";
+import CreateBranch from "@/pages/Admin/adminCreate/Branchs/CreateBranch";
+import CreateStaff from "@/pages/Admin/adminCreate/Staffs/CreateStaff";
+import BranchList from "@/pages/Admin/adminCreate/Branchs/BranchList/BranchList";
+import TreatmentList from "@/pages/Admin/adminCreate/Treatments/TreatmentList/TreatmentList";
 import AdminList from "@/pages/Admin/adminList";
 import PatientLayout from "@/pages/Patient";
 import Calendar from "@/pages/Patient/Calendar";
 import PatientAppointmentList from "@/pages/Patient/Appointment/AppointmentList";
 import AppointmentDetail from "@/components/Appointment/AppointmentDetail";
-import CreateTreatmentForm from "@/pages/Admin/adminCreate/Treatments/CreateTreatmentForm";
+import CreateTreatment from "@/pages/Admin/adminCreate/Treatments/CreateTreatment";
 
 const RouterComponent = () => {
   const router = createBrowserRouter([
@@ -115,29 +116,31 @@ const RouterComponent = () => {
       children: [
         {
           index: true,
-          element: <Navigate to="branch" />,
+          element: <Navigate to="branchList" />,
         },
         {
-          path: "branch",
+          path: "branchList",
+          element: <BranchList />,
+        },
+        {
+          path: "createBranch",
           element: <CreateBranch />,
         },
         {
-          path: "treatment",
-          element: <Treatments />
+          path: "treatmentList",
+          element: <TreatmentList />
         },
         {
           path: "createTreatment",
-          element: <CreateTreatmentForm />
+          element: <CreateTreatment />
         },
         {
           path: "adminList",
           element: <AdminList />,
-          children: [
-            {
-              path: "staff",
-              element: <CreateStaff />,
-            },
-          ],
+        },
+        {
+          path: "createStaff",
+          element: <CreateStaff />,
         },
       ],
     },
