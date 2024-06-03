@@ -7,8 +7,8 @@ import {
 } from "react";
 
 type AuthType = {
-  user?: string;
   accessToken?: string;
+  refreshToken?: string;
 } | null;
 
 type AuthContextType<T> = {

@@ -5,7 +5,7 @@ import { AuthContext } from "@/context/auth.context";
 const useAuth = () => {
   const context = useContext(AuthContext);
   useDebugValue(context.auth, (auth) =>
-    auth?.user ? "Logged In" : "Logged Out"
+    auth?.accessToken ? "Logged In" : "Logged Out"
   );
   return context;
 };
