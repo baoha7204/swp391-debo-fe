@@ -18,7 +18,7 @@ const SidebarAdminBody = [
   { title: "Treatments", path: "treatment", icon: <HealthAndSafetyIcon />, },
   { title: "Patients", path: "", icon: <AccountCircleIcon />, },
   { title: "Account", path: "", icon: <AccountBoxIcon />, },
-  { title: "Staffs", path: "staff", icon: <GroupIcon />, },
+  { title: "Staffs", path: "adminList", icon: <GroupIcon />, },
   { title: "Reports", path: "", icon: <ReportIcon />, },
   { title: "Setting", path: "", icon: <SettingsIcon />, },
 ];

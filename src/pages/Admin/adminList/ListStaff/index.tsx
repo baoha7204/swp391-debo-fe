@@ -1,14 +1,8 @@
-
-import BodyList from "../../components/BodyList";
+import ListStaffTable from "./ListStaffTable";
 
 function ListStaff() {
   return (
-    <>
-      <BodyList
-
-      >
-      </BodyList >
-    </>
+    <ListStaffTable url={''} />
   );
 }
 

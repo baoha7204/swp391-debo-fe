@@ -10,4 +10,7 @@ export const API_ENDPOINTS = {
   PATIENT: {
     CALENDAR: "patient/calendar",
   },
+  TREATMENT: {
+    GET_ALL_TREATMENT: "Treatments",
+  },
 };

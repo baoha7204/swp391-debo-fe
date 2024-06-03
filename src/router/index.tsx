@@ -18,13 +18,13 @@ import DashboardPage from "@/pages/Patient/Dashboard";
 import AdminLayout from "@/pages/Admin";
 import CreateBranch from "@/pages/Admin/adminCreate/CreateBranch/index.tsx";
 import CreateStaff from "@/pages/Admin/adminCreate/CreateStaff/CreateStaff";
-import CreateTreatment from "@/pages/Admin/adminCreate/CreateTreatment/CreateTreatment";
-import ListStaff from "@/pages/Admin/adminList/ListStaff";
+import Treatments from "@/pages/Admin/adminCreate/Treatments/Treatments";
 import AdminList from "@/pages/Admin/adminList";
 import PatientLayout from "@/pages/Patient";
 import Calendar from "@/pages/Patient/Calendar";
 import PatientAppointmentList from "@/pages/Patient/Appointment/AppointmentList";
 import AppointmentDetail from "@/components/Appointment/AppointmentDetail";
+import CreateTreatmentForm from "@/pages/Admin/adminCreate/Treatments/CreateTreatmentForm";
 
 const RouterComponent = () => {
   const router = createBrowserRouter([
@@ -122,20 +122,22 @@ const RouterComponent = () => {
           element: <CreateBranch />,
         },
         {
-          path: "staff",
-          element: <CreateStaff />,
-        },
-        {
           path: "treatment",
-          element: <CreateTreatment />,
+          element: <Treatments />
         },
         {
-          path: "listStaff",
-          element: <ListStaff />,
+          path: "createTreatment",
+          element: <CreateTreatmentForm />
         },
         {
           path: "adminList",
           element: <AdminList />,
+          children: [
+            {
+              path: "staff",
+              element: <CreateStaff />,
+            },
+          ],
         },
       ],
     },

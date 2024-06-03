@@ -6,6 +6,7 @@ import AdminAppBar from '../AdminAppBar/AdminAppBar';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import Button from '@mui/material/Button';
 import MedicalInformationIcon from '@mui/icons-material/MedicalInformation';
+import { Link } from 'react-router-dom';
 
 interface TabPanelProps {
     children?: React.ReactNode;
@@ -76,7 +77,7 @@ export default function HeaderList({ allowMore3, children, buttonContent, showBu
                             '& > :not(style)': { m: 0, width: '20ch', marginBottom: '5px' },
                         }}
                     >
-                        <Button>{buttonContent}</Button>
+                        <Button component={Link} to="/staff">{buttonContent}</Button>
                     </ButtonGroup>
                 }
             </Box>
