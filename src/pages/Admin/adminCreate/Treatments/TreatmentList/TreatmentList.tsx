@@ -6,7 +6,7 @@ import { API_ENDPOINTS } from "@/utils/api";
 function TreatmentList() {
 
   return (
-    <Box>
+    <Box sx={{ p: '24px' }}>
       <TreatmentHeaders />
       <TreatmentTable url={API_ENDPOINTS.TREATMENT.GET_ALL_TREATMENT} />
     </Box>
