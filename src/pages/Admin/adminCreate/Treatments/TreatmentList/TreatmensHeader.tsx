@@ -5,7 +5,7 @@ import HealthAndSafetyIcon from "@mui/icons-material/HealthAndSafety";
 
 function TreatmentHeaders() {
     return (
-        <Box sx={{ display: 'flex', m: 1, justifyContent: 'space-between', alignItems: 'center', mb: 5 }}>
+        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: '46px' }}>
             <Box sx={{ display: 'inline-block' }}>
                 <AdminAppBar>
                     <HealthAndSafetyIcon sx={{ display: { md: 'flex' }, mr: 1 }} />
@@ -17,10 +17,10 @@ function TreatmentHeaders() {
                 variant="contained"
                 aria-label="Disabled button group"
                 sx={{
-                    '& > :not(style)': { m: 0, width: '25ch', height: '43px' },
+                    '& > :not(style)': { m: 0, p: 0, width: '20ch', height: '43px' },
                 }}
             >
-                <Button component={Link} to={"/adminTest/createBranch"} >Add new Branch</Button>
+                <Button component={Link} to={"/adminTest/createTreatment"} >Add new Treatment</Button>
             </ButtonGroup>
         </Box>
     );

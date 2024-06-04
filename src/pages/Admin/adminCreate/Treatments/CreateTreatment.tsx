@@ -1,9 +1,18 @@
-import MyTextField from "@/components/MyTextField";
+import FormInputText from "@/components/Form/FormInputText";
 import { Box, Button, ButtonGroup, Grid } from "@mui/material";
+import useTreatment from "./lib/useTreatment";
+import MyButton from "@/components/MyButton";
 
 function CreateTreatmentForm() {
+
+    const [handleSubmit, isSubmitting, control] = useTreatment();
+
     return (
-        <Box>
+        <Box
+            component="form"
+            noValidate
+            onSubmit={handleSubmit}
+        >
             <Box sx={{ m: 1 }}>
                 <h1>Treatment Create</h1>
             </Box>
@@ -25,13 +34,22 @@ function CreateTreatmentForm() {
                             alignItems: 'center'
                         }}
                     >
-                        <h3>Branch Address: </h3>
+                        <h3 style={{ marginBottom: '20px', marginRight: '20px' }}>Treatment Name: </h3>
                         <Box
                             component="form"
                             noValidate
                             autoComplete="off"
                         >
-                            <MyTextField outsideLabel='' required fullWidth id="branch-address" label="Address" sx={{ m: 1, p: 0 }} />
+                            <FormInputText
+                                control={control}
+                                name="name"
+                                outsideLabel=""
+                                required
+                                fullWidth
+                                label="Treatment Name"
+                                autoFocus
+                                sx={{ m: 1, p: 0 }}
+                            />
                         </Box>
                     </Box>
                     <Box
@@ -41,12 +59,11 @@ function CreateTreatmentForm() {
                             alignItems: 'center'
                         }}
                     >
-                        <h3>Branch Mobile Number:</h3>
+                        <h3 style={{ marginBottom: '20px', marginRight: '20px' }}>Description:</h3>
                         <Box
                             sx={{
                                 display: 'flex',
                                 flexDirection: 'column',
-
                             }}
                         >
                             <Box
@@ -54,17 +71,16 @@ function CreateTreatmentForm() {
                                 noValidate
                                 autoComplete="off"
                             >
-
-                                <MyTextField required fullWidth
-                                    outsideLabel='' id="branch-mobile" label="Mobile Phone" variant="outlined" sx={{ m: 1, p: 0 }} />
-                            </Box>
-                            <Box
-                                component="form"
-                                noValidate
-                                autoComplete="off"
-                            >
-                                <MyTextField required fullWidth
-                                    outsideLabel='' id="branch-alt-mobile" label="Alt Mobile Phone" variant="outlined" sx={{ m: 1, p: 0 }} />
+                                <FormInputText
+                                    control={control}
+                                    name="description"
+                                    outsideLabel=""
+                                    required
+                                    fullWidth
+                                    label="Treatment Description"
+                                    autoFocus
+                                    sx={{ m: 1, p: 0 }}
+                                />
                             </Box>
                         </Box>
                     </Box>
@@ -82,7 +98,7 @@ function CreateTreatmentForm() {
                             alignItems: 'center'
                         }}
                     >
-                        <h3>Branch Mail:</h3>
+                        <h3 style={{ marginBottom: '20px', marginRight: '20px' }}>Treatment Cost:</h3>
                         <Box
                             component="form"
                             sx={{
@@ -92,8 +108,16 @@ function CreateTreatmentForm() {
                             noValidate
                             autoComplete="off"
                         >
-                            <MyTextField required
-                                fullWidth outsideLabel='' id="branch-mail" label="Mail" variant="outlined" sx={{ m: 1, p: 0 }} />
+                            <FormInputText
+                                control={control}
+                                name="price"
+                                outsideLabel=""
+                                required
+                                fullWidth
+                                label="$"
+                                autoFocus
+                                sx={{ m: 1, p: 0 }}
+                            />
                         </Box>
                     </Box>
                 </Grid>
@@ -105,16 +129,13 @@ function CreateTreatmentForm() {
                     m: 1,
                 }}
             >
-                <ButtonGroup
-                    disableElevation
+                <MyButton
+                    type="submit"
                     variant="contained"
-                    aria-label="Disabled button group"
-                    sx={{
-                        '& > :not(style)': { m: 0, width: '15ch', },
-                    }}
+                    disabled={isSubmitting}
                 >
-                    <Button>Add</Button>
-                </ButtonGroup>
+                    Create
+                </MyButton>
             </Box>
         </Box>
     );

@@ -18,11 +18,7 @@ export default function useLogin() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const {
-    handleSubmit,
-    reset,
-    control,
-    formState: { isSubmitSuccessful, isSubmitting },
+  const { handleSubmit, reset, control, formState: { isSubmitSuccessful, isSubmitting },
   } = useForm<LoginInputs>({
     resolver: zodResolver(LoginFormSchema),
     defaultValues: {

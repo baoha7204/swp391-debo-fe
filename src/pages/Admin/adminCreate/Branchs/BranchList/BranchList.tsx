@@ -4,7 +4,7 @@ import BranchTable from "./BranchTable";
 
 function BranchList() {
     return (
-        <Box>
+        <Box sx={{ p: '24px' }}>
             <BranchHeader />
             <BranchTable url={''} />
         </Box>
