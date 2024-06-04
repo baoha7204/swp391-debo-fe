@@ -1,4 +1,3 @@
-import { AppointmentListData } from "@/components/Appointment/AppointmentList/types/core";
 import { ProcessedEvent } from "@aldabil/react-scheduler/types";
 
 const CalendarPatientEvents: ProcessedEvent[] = [
@@ -66,7 +65,7 @@ const CalendarPatientEvents: ProcessedEvent[] = [
   },
 ];
 
-const AppointmentPatientLists: AppointmentListData[] = [
+const AppointmentPatientLists = [
   {
     id: 1,
     name: "Check up for Teeth Cleaning",
@@ -189,4 +188,31 @@ const AppointmentPatientLists: AppointmentListData[] = [
   },
 ];
 
-export { CalendarPatientEvents, AppointmentPatientLists };
+const Branches = [
+  {
+    id: 1,
+    name: "Debo Thu Duc",
+    address: "123 Nguyen Van Linh, Thu Duc, Ho Chi Minh City",
+    img: "https://nhakhoaparkway.com/wp-content/uploads/2024/04/z5362944066112_f7a412cc26ab13922f8cc20fb3c9e069.jpg",
+  },
+  {
+    id: 2,
+    name: "Debo Quan 5",
+    address: "123 Nguyen Van Linh, Quan 5, Ho Chi Minh City",
+    img: "https://nhakhoaparkway.com/wp-content/uploads/2024/04/z5362944066112_f7a412cc26ab13922f8cc20fb3c9e069.jpg",
+  },
+  {
+    id: 3,
+    name: "Debo Quan 9",
+    address: "567 Nguyen Van Linh, Quan 9, Ho Chi Minh City",
+    img: "https://nhakhoaparkway.com/wp-content/uploads/2024/04/z5362944066112_f7a412cc26ab13922f8cc20fb3c9e069.jpg",
+  },
+  {
+    id: 4,
+    name: "Debo Tay Ninh",
+    address: "25 Lac Long Quan, TP Tay Ninh, Tay Ninh City",
+    img: "https://nhakhoaparkway.com/wp-content/uploads/2024/04/z5362944066112_f7a412cc26ab13922f8cc20fb3c9e069.jpg",
+  },
+];
+
+export { CalendarPatientEvents, AppointmentPatientLists, Branches };

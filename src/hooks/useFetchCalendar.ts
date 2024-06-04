@@ -11,6 +11,7 @@ const useFetchCalendar = ({ url }: { url: string }) => {
     console.log(params);
     // TODO: use get from apiCaller. Using fetch for demo purpose
     // TODO: abort controller
+    // TODO: use ErrorToastHandler to handle error
     const response = await fetch(url);
     const data = await response.json();
     if (!data.success) {

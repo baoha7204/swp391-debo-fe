@@ -1,36 +1,21 @@
 import { useEffect, useState } from "react";
-import { TableControl } from "./useControlTable";
+import { BranchCardProps } from "../BranchCard";
 import { get } from "@/utils/apiCaller";
 import { errorToastHandler } from "@/utils/toast/actions";
 
-export type ListDataResponse<T> = {
-  list: T[];
-  total: number;
-};
-
-const useFetchTableList = <T>({
-  url,
-  controller,
-}: {
-  url: string;
-  controller: TableControl;
-}) => {
-  const [list, setList] = useState<T[]>([]);
-  const [count, setCount] = useState(0);
+const useFetchAllBranch = () => {
+  const [branches, setBranches] = useState<BranchCardProps[]>([]);
 
   useEffect(() => {
     const abortController = new AbortController();
 
     const fetchRemote = async () => {
       try {
-        const response = await get<ListDataResponse<T>>(
-          url,
+        const response = await get<BranchCardProps[]>(
+          "http://localhost:5173/branches",
           // TODO: set false to true -> protected route
           false,
-          {
-            page: controller.page,
-            limit: controller.rowsPerPage,
-          },
+          undefined,
           {
             signal: abortController.signal,
           }
@@ -40,8 +25,7 @@ const useFetchTableList = <T>({
           errorToastHandler(data);
           return;
         }
-        setList(data.data.list);
-        setCount(data.data.total);
+        setBranches(data.data);
       } catch (error) {
         if (error.name !== "CanceledError") {
           errorToastHandler(error.response);
@@ -55,9 +39,9 @@ const useFetchTableList = <T>({
       console.log("aborting...");
       abortController.abort();
     };
-  }, [url, controller.page, controller.rowsPerPage]);
+  }, []);
 
-  return [list, count] as const;
+  return branches;
 };
 
-export default useFetchTableList;
+export default useFetchAllBranch;

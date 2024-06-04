@@ -44,31 +44,31 @@ export default function useLogin() {
       ? { email: user, password }
       : { phoneNumber: user, password };
 
-    post<AuthResponseType>(
-      API_ENDPOINTS.AUTH.LOGIN_CREDENTIALS,
-      false,
-      body
-    ).then((res) => {
-      const { data } = res;
-      const accessToken = data.data?.accessToken;
-      const refreshToken = data.data?.refreshToken;
-      if (!data.success || !accessToken || !refreshToken) {
-        return errorToastHandler(data);
-      }
+    post<AuthResponseType>(API_ENDPOINTS.AUTH.LOGIN_CREDENTIALS, false, body)
+      .then((res) => {
+        const { data } = res;
+        const accessToken = data.data?.accessToken;
+        const refreshToken = data.data?.refreshToken;
+        if (!data.success || !accessToken || !refreshToken) {
+          return errorToastHandler(data);
+        }
 
-      setAuth({ accessToken, refreshToken });
-      const from = location.state?.from?.pathname;
-      if (from) {
-        return navigate(from, { replace: true });
-      }
+        setAuth({ accessToken, refreshToken });
+        const from = location.state?.from?.pathname;
+        if (from) {
+          return navigate(from, { replace: true });
+        }
 
-      const result = getRoles(accessToken);
-      if (!result.success) {
-        return;
-      }
+        const result = getRoles(accessToken);
+        if (!result.success) {
+          return;
+        }
 
-      navigate("/" + result.data);
-    });
+        navigate("/" + result.data);
+      })
+      .catch((err) => {
+        errorToastHandler(err.response);
+      });
   };
 
   useEffect(() => {

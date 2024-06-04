@@ -7,7 +7,7 @@ import { ROLE } from "@/constant/core";
 import { sanitizeString } from "@/utils/helper";
 import { post } from "@/utils/apiCaller";
 import { AuthResponseType } from "@/pages/Authentication/types/core";
-import { toastError } from "@/utils/toast";
+import { errorToastHandler } from "@/utils/toast/actions";
 
 const useRefreshToken = () => {
   const { auth, setAuth } = useAuth();
@@ -26,7 +26,7 @@ const useRefreshToken = () => {
     const { data } = response;
 
     if (!data.success || !data.data) {
-      return toastError(data.message);
+      return errorToastHandler(data);
     }
 
     const result = data.data;

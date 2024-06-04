@@ -1,6 +1,10 @@
 import { http, HttpResponse, delay } from "msw";
 import users from "./users.json";
-import { AppointmentPatientLists, CalendarPatientEvents } from "./mock-data";
+import {
+  AppointmentPatientLists,
+  Branches,
+  CalendarPatientEvents,
+} from "./mock-data";
 
 export const handlers = [
   http.post("/login", async ({ request }) => {
@@ -94,5 +98,16 @@ export const handlers = [
         { status: 500 }
       );
     }
+  }),
+  http.get("/branches", async () => {
+    await delay(2000);
+    return HttpResponse.json(
+      {
+        success: true,
+        data: Branches,
+        message: "Fetched branches successfully.",
+      },
+      { status: 200 }
+    );
   }),
 ];
