@@ -54,7 +54,7 @@ interface IHeaderBodyList {
 export default function HeaderList({ allowMore3, children, buttonContent, showButton }: IHeaderBodyList) {
     const [value, setValue] = React.useState(0);
 
-    const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+    const handleChange = (_: React.SyntheticEvent, newValue: number) => {
         setValue(newValue);
     };
 

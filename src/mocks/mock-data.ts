@@ -1,6 +1,5 @@
-import { AppointmentListData } from "@/pages/Admin/adminAppointments/AppointmentList/style.tsx";
+import { AppointmentListData } from "@/components/Appointment/AppointmentList";
 import { ProcessedEvent } from "@aldabil/react-scheduler/types";
-import { TreatmentListData } from "@/pages/Admin/adminCreate/CreateTreatment/style.tsx";
 
 const CalendarPatientEvents: ProcessedEvent[] = [
   {
@@ -190,28 +189,4 @@ const AppointmentPatientLists: AppointmentListData[] = [
   },
 ];
 
-const TreatmentList: TreatmentListData[] = [
-  {
-    id: 1,
-    category: "Teeth Cleaning",
-    name: "Teeth Cleaning",
-    description: "Cleaning teeth",
-    price: 100,
-  },
-  {
-    id: 2,
-    category: "Teeth Whitening",
-    name: "Teeth Whitening",
-    description: "Whitening teeth",
-    price: 200,
-  },
-  {
-    id: 3,
-    category: "Root Canal",
-    name: "Root Canal",
-    description: "Root canal treatment",
-    price: 300,
-  },
-];
-
-export { CalendarPatientEvents, AppointmentPatientLists, TreatmentList };
+export { CalendarPatientEvents, AppointmentPatientLists };
