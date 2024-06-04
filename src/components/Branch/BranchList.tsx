@@ -4,6 +4,7 @@ import useFetchAllBranch from "./hooks/useFetchAllBranch";
 
 const BranchList = () => {
   const branches = useFetchAllBranch();
+
   return (
     <Grid container spacing={5}>
       {branches.map((branch) => (

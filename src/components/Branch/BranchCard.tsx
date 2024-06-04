@@ -10,18 +10,28 @@ import {
 } from "@mui/material";
 
 import LocationOnIcon from "@mui/icons-material/LocationOn";
+import { useContext } from "react";
+import { ProgressContext } from "../Booking/progress.context";
 
 export type BranchCardProps = {
   id: number;
   img: string;
   address: string;
   name: string;
+  onClick?: (id: string) => void;
 };
 
 const BranchCard = ({ id, img, address, name }: BranchCardProps) => {
+  const { handleDoneIncrement, setData } = useContext(ProgressContext);
+
+  const handleClick = () => {
+    handleDoneIncrement();
+    setData((prev) => ({ ...prev, branchId: id }));
+  };
+
   return (
     <Card sx={{ maxWidth: "100%" }}>
-      <CardActionArea>
+      <CardActionArea onClick={handleClick}>
         <CardMedia
           component="img"
           image={img}
@@ -63,6 +73,7 @@ const BranchCard = ({ id, img, address, name }: BranchCardProps) => {
             fontWeight: 800,
             backgroundColor: "secondary.main",
           }}
+          onClick={handleClick}
         >
           Select
         </Button>
