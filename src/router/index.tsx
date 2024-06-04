@@ -135,7 +135,7 @@ const RouterComponent = () => {
           element: <CreateTreatment />
         },
         {
-          path: "adminList",
+          path: "adminStaffList",
           element: <AdminList />,
         },
         {
