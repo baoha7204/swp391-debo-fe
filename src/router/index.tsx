@@ -28,123 +28,126 @@ import AppointmentDetail from "@/components/Appointment/AppointmentDetail";
 import CreateTreatment from "@/pages/Admin/adminCreate/Treatments/CreateTreatment";
 
 const RouterComponent = () => {
-  const router = createBrowserRouter([
-    // Public routes
-    { index: true, element: <Navigate to="login" /> },
-    { path: "unauthorized", element: <UnauthorizedPage /> },
-    {
-      path: "patientTest",
-      element: <PatientLayout />,
-      children: [
-        { index: true, element: <Navigate to="calendar" /> },
-        { path: "calendar", element: <Calendar /> },
-        { path: "booking", element: <BookingPage /> },
-        { path: "dashboard", element: <DashboardPage /> },
-        {
-          path: "appointments",
-          element: <PatientAppointmentList />,
-        },
-        {
-          path: "appointments/:id",
-          element: <AppointmentDetail />,
-        },
-      ],
-    },
-    ...["login", "register"].map((path) => ({
-      path,
-      element: <AuthenticationPage />,
-    })),
-    { path: "*", element: <ErrorPage /> },
-    // Protected routes
-    {
-      element: <PersistLogin />,
-      children: [
-        {
-          // Patient routes
-          path: "patient",
-          element: <RequireAuth allowedRoles={[ROLE.PATIENT]} />,
-          children: [
-            {
-              element: <PatientLayout />,
-              children: [
-                { index: true, element: <Navigate to="calendar" /> },
-                { path: "calendar", element: <Calendar /> },
-                { path: "booking", element: <BookingPage /> },
-                { path: "dashboard", element: <DashboardPage /> },
-                {
-                  path: "appointments",
-                  element: <PatientAppointmentList />,
-                },
-                {
-                  path: "appointments/:id",
-                  element: <AppointmentDetail />,
-                },
-              ],
-            },
-          ],
-        },
-        {
-          // Admin routes
-          path: ROLE.ADMIN,
-          element: <RequireAuth allowedRoles={[ROLE.ADMIN]} />,
-          children: [],
-        },
-        {
-          // Dentist routes
-          path: ROLE.DENTIST,
-          element: <RequireAuth allowedRoles={[ROLE.DENTIST]} />,
-          children: [],
-        },
-        {
-          // Manager routes
-          path: "manager",
-          element: <RequireAuth allowedRoles={[ROLE.MANAGER]} />,
-          children: [],
-        },
-        {
-          // Staff routes
-          path: "staff",
-          element: <RequireAuth allowedRoles={[ROLE.STAFF]} />,
-          children: [],
-        },
-      ],
-    },
-    // Admin test routes
-    {
-      path: "adminTest",
-      element: <AdminLayout />,
-      children: [
-        {
-          index: true,
-          element: <Navigate to="branchList" />,
-        },
-        {
-          path: "branchList",
-          element: <BranchList />,
-        },
-        {
-          path: "createBranch",
-          element: <CreateBranch />,
-        },
-        {
-          path: "treatmentList",
-          element: <TreatmentList />
-        },
-        {
-          path: "createTreatment",
-          element: <CreateTreatment />
-        },
-        {
-          path: "adminStaffList",
-          element: <AdminList />,
-        },
-        {
-          path: "createStaff",
-          element: <CreateStaff />,
-        },
-      ],
-    },
-  ]);
+  const router = createBrowserRouter(
+    [
+      // Public routes
+      { index: true, element: <Navigate to="login" /> },
+      { path: "unauthorized", element: <UnauthorizedPage /> },
+      {
+        path: "patientTest",
+        element: <PatientLayout />,
+        children: [
+          { index: true, element: <Navigate to="calendar" /> },
+          { path: "calendar", element: <Calendar /> },
+          { path: "booking", element: <BookingPage /> },
+          { path: "dashboard", element: <DashboardPage /> },
+          {
+            path: "appointments",
+            element: <PatientAppointmentList />,
+          },
+          {
+            path: "appointments/:id",
+            element: <AppointmentDetail />,
+          },
+        ],
+      },
+      ...["login", "register"].map((path) => ({
+        path,
+        element: <AuthenticationPage />,
+      })),
+      { path: "*", element: <ErrorPage /> },
+      // Protected routes
+      {
+        element: <PersistLogin />,
+        children: [
+          {
+            // Patient routes
+            path: "patient",
+            element: <RequireAuth allowedRoles={[ROLE.PATIENT]} />,
+            children: [
+              {
+                element: <PatientLayout />,
+                children: [
+                  { index: true, element: <Navigate to="calendar" /> },
+                  { path: "calendar", element: <Calendar /> },
+                  { path: "booking", element: <BookingPage /> },
+                  { path: "dashboard", element: <DashboardPage /> },
+                  {
+                    path: "appointments",
+                    element: <PatientAppointmentList />,
+                  },
+                  {
+                    path: "appointments/:id",
+                    element: <AppointmentDetail />,
+                  },
+                ],
+              },
+            ],
+          },
+          {
+            // Admin routes
+            path: ROLE.ADMIN,
+            element: <RequireAuth allowedRoles={[ROLE.ADMIN]} />,
+            children: [],
+          },
+          {
+            // Dentist routes
+            path: ROLE.DENTIST,
+            element: <RequireAuth allowedRoles={[ROLE.DENTIST]} />,
+            children: [],
+          },
+          {
+            // Manager routes
+            path: "manager",
+            element: <RequireAuth allowedRoles={[ROLE.MANAGER]} />,
+            children: [],
+          },
+          {
+            // Staff routes
+            path: "staff",
+            element: <RequireAuth allowedRoles={[ROLE.STAFF]} />,
+            children: [],
+          },
+        ],
+      },
+      // Admin test routes
+      {
+        path: "adminTest",
+        element: <AdminLayout />,
+        children: [
+          {
+            index: true,
+            element: <Navigate to="branchList" />,
+          },
+          {
+            path: "branchList",
+            element: <BranchList />,
+          },
+          {
+            path: "createBranch",
+            element: <CreateBranch />,
+          },
+          {
+            path: "treatmentList",
+            element: <TreatmentList />,
+          },
+          {
+            path: "createTreatment",
+            element: <CreateTreatment />,
+          },
+          {
+            path: "adminStaffList",
+            element: <AdminList />,
+          },
+          {
+            path: "createStaff",
+            element: <CreateStaff />,
+          },
+        ],
+      },
+    ],
+    { basename: "/swp391-debo-fe" }
+  );
   return (
     <RouterProvider
       fallbackElement={<CircularIndeterminate />}
