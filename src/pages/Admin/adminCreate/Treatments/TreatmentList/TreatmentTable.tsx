@@ -3,6 +3,7 @@ import MyTable from "@/components/Table/MyTable";
 
 export type TreatmentTableData = {
     id: number;
+    category: number;
     name: string;
     price: number;
     description: string;
@@ -10,6 +11,7 @@ export type TreatmentTableData = {
 
 const columns: readonly ListColumn<TreatmentTableData>[] = [
     { id: "name", label: "Name", isDetail: true, minWidth: 100 },
+    { id: "category", label: "Category", minWidth: 100 },
     { id: "price", label: "Price", minWidth: 100 },
     { id: "description", label: "description", minWidth: 170 },
 ];
