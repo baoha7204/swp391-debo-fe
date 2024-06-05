@@ -16,7 +16,7 @@ const SidebarAdminBody = [
   { title: "Reservations", path: "", icon: <EventIcon />, },
   { title: "Branchs", path: "branchList", icon: <StoreIcon />, },
   { title: "Treatments", path: "treatmentList", icon: <HealthAndSafetyIcon />, },
-  { title: "Patients", path: "", icon: <AccountCircleIcon />, },
+  { title: "Patients", path: "patientList", icon: <AccountCircleIcon />, },
   { title: "Account", path: "", icon: <AccountBoxIcon />, },
   { title: "Staffs", path: "adminStaffList", icon: <GroupIcon />, },
   { title: "Reports", path: "", icon: <ReportIcon />, },
@@ -24,12 +24,16 @@ const SidebarAdminBody = [
 ];
 
 const AdminRoutes = [
+  //List
   { path: "branchList", breadcrumb: "Branch List" },
-  { path: "createBranch", breadcrumb: "Create Branch" },
   { path: "treatmentList", breadcrumb: "Treatment List" },
-  { path: "createTreatment", breadcrumb: "Create Treatment" },
   { path: "adminStaffList", breadcrumb: "Staff List" },
-  { path: "createStaff", breadcrumb: "Create Staff" },
+  { path: "patientList", breadcrumb: "Patient List" },
+  //Create
+  { path: "branchList/createBranch", breadcrumb: "Create Branch" },
+  { path: "treatmentList/createTreatment", breadcrumb: "Create Treatment" },
+  { path: "adminStaffList/createStaff", breadcrumb: "Create Staff" },
+  //Detail
 ];
 
 const AdminInfo = {

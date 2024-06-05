@@ -20,7 +20,7 @@ function TreatmentHeaders() {
                     '& > :not(style)': { m: 0, p: 0, width: '20ch', height: '43px' },
                 }}
             >
-                <Button component={Link} to={"/adminTest/createTreatment"} >Add new Treatment</Button>
+                <Button component={Link} to={"/adminTest/treatmentList/createTreatment"} >Add new Treatment</Button>
             </ButtonGroup>
         </Box>
     );

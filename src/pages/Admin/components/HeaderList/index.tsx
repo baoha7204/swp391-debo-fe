@@ -77,7 +77,7 @@ export default function HeaderList({ allowMore3, children, buttonContent, showBu
                             '& > :not(style)': { m: 0, width: '20ch', marginBottom: '5px' },
                         }}
                     >
-                        <Button component={Link} to='/adminTest/createStaff' >{buttonContent}</Button>
+                        <Button component={Link} to='/adminTest/adminStaffList/createStaff' >{buttonContent}</Button>
                     </ButtonGroup>
                 }
             </Box>

@@ -11,6 +11,6 @@ export const API_ENDPOINTS = {
     CALENDAR: "patient/calendar",
   },
   TREATMENT: {
-    GET_ALL_TREATMENT: "Treatments",
+    GET_ALL_TREATMENT: "treatments",
   },
 };

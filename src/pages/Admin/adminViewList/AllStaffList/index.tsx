@@ -1,4 +1,4 @@
-import HeaderList from "../components/HeaderList";
+import HeaderList from "../../components/HeaderList";
 import ListStaff from "./ListStaff";
 
 function AdminList() {

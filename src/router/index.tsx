@@ -18,14 +18,16 @@ import DashboardPage from "@/pages/Patient/Dashboard";
 import AdminLayout from "@/pages/Admin";
 import CreateBranch from "@/pages/Admin/adminCreate/Branchs/CreateBranch";
 import CreateStaff from "@/pages/Admin/adminCreate/Staffs/CreateStaff";
-import BranchList from "@/pages/Admin/adminCreate/Branchs/BranchList/BranchList";
-import TreatmentList from "@/pages/Admin/adminCreate/Treatments/TreatmentList/TreatmentList";
-import AdminList from "@/pages/Admin/adminList";
+import BranchList from "@/pages/Admin/adminViewList/BranchList/BranchList";
+import TreatmentList from "@/pages/Admin/adminViewList/TreatmentList/TreatmentList";
+import AdminList from "@/pages/Admin/adminViewList/AllStaffList";
 import PatientLayout from "@/pages/Patient";
+import PatientList from "@/pages/Admin/adminViewList/PatientList/PatientList";
 import Calendar from "@/pages/Patient/Calendar";
 import PatientAppointmentList from "@/pages/Patient/Appointment/AppointmentList";
 import AppointmentDetail from "@/components/Appointment/AppointmentDetail";
 import CreateTreatment from "@/pages/Admin/adminCreate/Treatments/CreateTreatment";
+import PatientDetail from "@/pages/Admin/adminViewDetail/PatientDetail/PatientDetail";
 
 const RouterComponent = () => {
   const router = createBrowserRouter([
@@ -118,29 +120,40 @@ const RouterComponent = () => {
           index: true,
           element: <Navigate to="branchList" />,
         },
+        //List
         {
           path: "branchList",
           element: <BranchList />,
         },
         {
-          path: "createBranch",
-          element: <CreateBranch />,
-        },
-        {
           path: "treatmentList",
-          element: <TreatmentList />
-        },
-        {
-          path: "createTreatment",
-          element: <CreateTreatment />
+          element: <TreatmentList />,
         },
         {
           path: "adminStaffList",
           element: <AdminList />,
         },
         {
-          path: "createStaff",
+          path: "patientList",
+          element: <PatientList />,
+        },
+        //Create
+        {
+          path: "branchList/createBranch",
+          element: <CreateBranch />,
+        },
+        {
+          path: "treatmentList/createTreatment",
+          element: <CreateTreatment />,
+        },
+        {
+          path: "adminStaffList/createStaff",
           element: <CreateStaff />,
+        },
+        //Detail
+        {
+          path: "patientDetail",
+          element: <PatientDetail />,
         },
       ],
     },

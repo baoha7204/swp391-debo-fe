@@ -5,15 +5,15 @@ export type TreatmentTableData = {
     id: number;
     category: number;
     name: string;
-    price: number;
     description: string;
+    price: number;
 };
 
 const columns: readonly ListColumn<TreatmentTableData>[] = [
-    { id: "name", label: "Name", isDetail: true, minWidth: 100 },
     { id: "category", label: "Category", minWidth: 100 },
+    { id: "name", label: "Name", isDetail: true, minWidth: 100 },
+    { id: "description", label: "Description", minWidth: 170 },
     { id: "price", label: "Price", minWidth: 100 },
-    { id: "description", label: "description", minWidth: 170 },
 ];
 
 function TreatmentTable({ url }: { url: string }) {
