@@ -2,11 +2,11 @@ import { PhoneSchema } from "@/lib/schema";
 import { z } from "zod";
 
 export const staffSchema = z.object({
-    username: z
+    createUsername: z
         .string()
         .min(1, { message: "Username is required" })
         .max(256, { message: "Username must not exceed 256 characters" }),
-    password: z
+    createPassword: z
         .string()
         .min(1, { message: "Password is required" })
         .max(256, { message: "Password must not exceed 256 characters" }),

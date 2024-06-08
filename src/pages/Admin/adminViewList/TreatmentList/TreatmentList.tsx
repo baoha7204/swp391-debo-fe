@@ -8,7 +8,7 @@ function TreatmentList() {
   return (
     <Box sx={{ p: '24px' }}>
       <TreatmentHeaders />
-      <TreatmentTable url={API_ENDPOINTS.TREATMENT.GET_ALL_TREATMENT} />
+      <TreatmentTable url={API_ENDPOINTS.TREATMENT.TREATMENT} />
     </Box>
   );
 }

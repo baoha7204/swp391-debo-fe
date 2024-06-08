@@ -16,7 +16,7 @@ function CreateBranch() {
             onSubmit={handleSubmit}
         >
             <Box sx={{ m: 1 }}>
-                <h1 >Branch Information</h1>
+                <h1>Branch Information</h1>
             </Box>
             <Grid
                 container
@@ -36,11 +36,55 @@ function CreateBranch() {
                             alignItems: 'center',
                         }}
                     >
-                        <h3 style={{ marginBottom: '20px', marginRight: '20px' }}>Branch Address: </h3>
+                        <h3 style={{ marginBottom: '20px', marginRight: '20px' }}>Branch ID: </h3>
                         <Box>
-
                             <FormInputText
                                 control={control}
+                                id="id"
+                                name="id"
+                                outsideLabel=""
+                                required
+                                fullWidth
+                                label="Must input integer number"
+                                autoFocus
+                                sx={{ m: 1, p: 0 }}
+                            />
+                        </Box>
+                    </Box>
+                    <Box
+                        sx={{
+                            display: "flex",
+                            flexDirection: "row",
+                            alignItems: 'center',
+                        }}
+                    >
+                        <h3 style={{ marginBottom: '20px', marginRight: '20px' }}>Branch Name: </h3>
+                        <Box>
+                            <FormInputText
+                                control={control}
+                                id="name"
+                                name="name"
+                                outsideLabel=""
+                                required
+                                fullWidth
+                                label="Name"
+                                autoFocus
+                                sx={{ m: 1, p: 0 }}
+                            />
+                        </Box>
+                    </Box>
+                    <Box
+                        sx={{
+                            display: "flex",
+                            flexDirection: "row",
+                            alignItems: 'center',
+                        }}
+                    >
+                        <h3 style={{ marginBottom: '20px', marginRight: '20px' }}>Branch Address: </h3>
+                        <Box>
+                            <FormInputText
+                                control={control}
+                                id="address"
                                 name="address"
                                 outsideLabel=""
                                 required
@@ -51,37 +95,7 @@ function CreateBranch() {
                             />
                         </Box>
                     </Box>
-                    <Box
-                        sx={{
-                            display: "flex",
-                            flexDirection: "row",
-                            alignItems: 'center'
-                        }}
-                    >
-                        <h3 style={{ marginBottom: '20px', marginRight: '20px' }}>Branch Mail:</h3>
-                        <Box
-                            component="form"
-                            sx={{
-                                '& > :not(style)': { m: 0, width: '100%' },
 
-                            }}
-                            noValidate
-                            autoComplete="off"
-                        >
-                            <Box>
-                                <FormInputText
-                                    control={control}
-                                    name="email"
-                                    outsideLabel=""
-                                    required
-                                    fullWidth
-                                    label="Mail"
-                                    autoFocus
-                                    sx={{ m: 1, p: 0 }}
-                                />
-                            </Box>
-                        </Box>
-                    </Box>
                 </Grid>
                 <Grid
                     item
@@ -96,7 +110,7 @@ function CreateBranch() {
                             alignItems: 'center'
                         }}
                     >
-                        <h3 style={{ marginBottom: '20px', marginRight: '20px' }}>Branch Mobile Number:</h3>
+                        <h3 style={{ marginBottom: '20px', marginRight: '20px' }}>Branch Mobile:</h3>
                         <Box
                             sx={{
                                 display: 'flex',
@@ -106,6 +120,7 @@ function CreateBranch() {
                             <Box>
                                 <FormInputText
                                     control={control}
+                                    id="phone"
                                     name="phone"
                                     outsideLabel=""
                                     required
@@ -115,35 +130,44 @@ function CreateBranch() {
                                     sx={{ m: 1, p: 0 }}
                                 />
                             </Box>
-                            <Box>
-                                <FormInputText
-                                    control={control}
-                                    name="altPhone"
-                                    outsideLabel=""
-                                    fullWidth
-                                    label="Alt Mobile Phone"
-                                    autoFocus
-                                    sx={{ m: 1, p: 0 }} />
-                            </Box>
+                        </Box>
+                    </Box>
+                    <Box
+                        sx={{
+                            display: "flex",
+                            flexDirection: "row",
+                            alignItems: 'center'
+                        }}
+                    >
+                        <h3 style={{ marginBottom: '20px', marginRight: '20px' }}>Branch Mail:</h3>
+                        <Box>
+                            <FormInputText
+                                control={control}
+                                id="email"
+                                name="email"
+                                label="example@gmail.com"
+                                outsideLabel=""
+                                required
+                                fullWidth
+                                autoFocus
+                                sx={{ m: 1, p: 0 }}
+                            />
                         </Box>
                     </Box>
                 </Grid>
             </Grid>
-            <Box
+            <MyButton
                 sx={{
                     display: 'flex',
                     justifyContent: 'left',
                     m: 1
                 }}
+                type="submit"
+                variant="contained"
+                disabled={isSubmitting}
             >
-                <MyButton
-                    type="submit"
-                    variant="contained"
-                    disabled={isSubmitting}
-                >
-                    Create
-                </MyButton>
-            </Box>
+                Create
+            </MyButton>
         </Box>
     );
 }

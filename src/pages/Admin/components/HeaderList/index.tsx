@@ -5,7 +5,7 @@ import Tab from '@mui/material/Tab';
 import AdminAppBar from '../AdminAppBar/AdminAppBar';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import Button from '@mui/material/Button';
-import MedicalInformationIcon from '@mui/icons-material/MedicalInformation';
+import GroupIcon from '@mui/icons-material/Group';
 import { Link } from 'react-router-dom';
 
 interface TabPanelProps {
@@ -85,7 +85,7 @@ export default function HeaderList({ allowMore3, children, buttonContent, showBu
                 {children.name.map((child, index) => (
                     <CustomTabPanel value={value} index={index} key={index}>
                         <AdminAppBar>
-                            <MedicalInformationIcon sx={{ display: { md: 'flex' }, mr: 1 }} />
+                            <GroupIcon sx={{ display: { md: 'flex' }, mr: 1 }} />
                             {child}
                         </AdminAppBar>
                     </CustomTabPanel>

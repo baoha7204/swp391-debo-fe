@@ -28,6 +28,7 @@ import PatientAppointmentList from "@/pages/Patient/Appointment/AppointmentList"
 import AppointmentDetail from "@/components/Appointment/AppointmentDetail";
 import CreateTreatment from "@/pages/Admin/adminCreate/Treatments/CreateTreatment";
 import PatientDetail from "@/pages/Admin/adminViewDetail/PatientDetail/PatientDetail";
+import PatientDetailTest from "@/pages/Admin/adminViewDetail/PatientDetail/test";
 
 const RouterComponent = () => {
   const router = createBrowserRouter([
@@ -154,6 +155,10 @@ const RouterComponent = () => {
         {
           path: "patientDetail",
           element: <PatientDetail />,
+        },
+        {
+          path: "patientDetailTest",
+          element: <PatientDetailTest />,
         },
       ],
     },

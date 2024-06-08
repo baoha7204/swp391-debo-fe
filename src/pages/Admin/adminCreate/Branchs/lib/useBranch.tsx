@@ -1,36 +1,38 @@
 import { useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useLocation, useNavigate } from "react-router-dom";
 import { branchSchema } from "./branchSchema";
 import { handleSubmitForm } from "@/usecases/handleSubmitForm";
-import useAuth from "@/hooks/useAuth";
-import { post } from "@/utils/apiCaller";
-import { errorToastHandler } from "@/utils/toast/actions";
-import { AuthResponseType } from "@/pages/Authentication/types/core";
-import { API_ENDPOINTS } from "@/utils/api";
-import { getRoles } from "@/utils/jwt";
 import { z } from "zod";
+import { post } from "@/utils/apiCaller";
+import { API_ENDPOINTS } from "@/utils/api";
+import { errorToastHandler } from "@/utils/toast/actions";
+import { toastSuccess } from "@/utils/toast";
+import { useNavigate } from "react-router-dom";
 
 export type BranchInputs = z.infer<typeof branchSchema>;
 
-
 export default function useBranch() {
-    const { setAuth } = useAuth();
     const navigate = useNavigate();
-    const location = useLocation();
 
-    const { handleSubmit, reset, control, formState: { isSubmitSuccessful, isSubmitting },
+    const {
+        handleSubmit,
+        reset,
+        control,
+        formState: { isSubmitSuccessful, isSubmitting },
     } = useForm<BranchInputs>({
         resolver: zodResolver(branchSchema),
         defaultValues: {
+            id: 0,
             name: '',
             address: '',
             phone: '',
-            altPhone: '',
             email: '',
         },
     });
+
+    console.log('0');
+
 
     const onSubmit: SubmitHandler<BranchInputs> = (data) => {
         const result = handleSubmitForm(data, branchSchema);
@@ -38,34 +40,33 @@ export default function useBranch() {
         if (!result || !result.success || result.error) {
             return;
         }
+        console.log('1');
+        const { id, name, address, phone, email } = data;
 
-        post<AuthResponseType>(
-            API_ENDPOINTS.AUTH.LOGIN_CREDENTIALS,
-            false,
+        console.log(data);
 
-        ).then((res) => {
-            const { data } = res;
-            const accessToken = data.data?.accessToken;
-            const refreshToken = data.data?.refreshToken;
-            if (!data.success || !accessToken || !refreshToken) {
-                return errorToastHandler(data);
-            }
-
-            setAuth({ accessToken, refreshToken });
-            const from = location.state?.from?.pathname;
-            if (from) {
-                return navigate(from, { replace: true });
-            }
-
-            const result = getRoles(accessToken);
-            if (!result.success) {
-                return;
-            }
-
-            navigate("/" + result.data);
-        });
+        post(API_ENDPOINTS.BRANCH.BRANCH, false, {
+            id,
+            name,
+            address,
+            phone,
+            email,
+        })
+            .then((res) => {
+                const { data } = res;
+                if (!data.success) {
+                    return errorToastHandler(data);
+                }
+                // successfully
+                toastSuccess("Create successfully!");
+                navigate('adminTest/branchList');
+                console.log('2');
+            })
+            .catch((err) => {
+                console.log(err.response);
+                errorToastHandler(err.response);
+            });
     };
-
     useEffect(() => {
         if (isSubmitSuccessful) {
             reset();

@@ -2,6 +2,11 @@ import { PhoneSchema } from "@/lib/schema";
 import { z } from "zod";
 
 export const branchSchema = z.object({
+    id: z.coerce
+        .number({ required_error: "ID should be integer number" })
+        .int({ message: "ID should be integer number" })
+        .gt(1, { message: "ID must be at least 1" })
+        .safe(),
     name: z
         .string()
         .min(1, { message: "Name is required" })
@@ -13,10 +18,7 @@ export const branchSchema = z.object({
     phone: z
         .string()
         .min(1, { message: "Phone number is required" })
-        .max(256, { message: "Phone number must not exceed 256 characters" })
-        .and(PhoneSchema),
-    altPhone: z
-        .string()
+        .max(10, { message: "Phone number must not exceed 10 characters" })
         .and(PhoneSchema),
     email: z
         .string()

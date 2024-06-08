@@ -1,8 +1,39 @@
-import { Avatar, Box, Divider, Grid, Typography } from "@mui/material";
+import { Avatar, Box, Divider, Grid, Paper, Typography } from "@mui/material";
+
+export type PatientDetailData = {
+    id: string;
+    name: string;
+    email: string;
+    address: string;
+    birthday: string;
+    phone: string;
+    gender: string;
+}
+
+const PatientDetailList: PatientDetailData[] = [
+    {
+        id: "1",
+        name: "Huynh Thong Duong",
+        email: "huynhtd97@gmail.com",
+        address: "Ho Chi Minh City",
+        birthday: "1997-10-12",
+        phone: "0123456789",
+        gender: "male",
+    },
+    {
+        id: "2",
+        name: "Bao Ha Gaming",
+        email: "baoha@gmail.com",
+        address: "Ho Chi Minh City",
+        birthday: "1997-10-12",
+        phone: "0123456789",
+        gender: "female",
+    },
+];
 
 function PatientDetail() {
     return (
-        <Box>
+        <Paper>
             <Box sx={{ mx: 1, my: 2 }}>
                 <h1 >Patient Detail</h1>
             </Box>
@@ -15,8 +46,8 @@ function PatientDetail() {
                     >
                         <Avatar
                             sx={{
-                                width: '60%',
-                                height: 'auto',
+                                width: 'auto',
+                                height: 200,
                                 margin: 'auto',
                             }}
                             alt="Remy Sharp"
@@ -27,7 +58,10 @@ function PatientDetail() {
                                 textAlign: 'center',
                                 fontSize: '20px',
                                 fontWeight: 'bold',
-                                margin: '10px 0 0'
+                                margin: '10px 0 0',
+                                whiteSpace: 'nowrap',
+                                overflow: 'hidden',
+                                textOverflow: 'ellipsis',
                             }}
                         >
                             Huynh Thong Duong
@@ -37,7 +71,9 @@ function PatientDetail() {
                                 textAlign: 'center',
                                 fontSize: '16px',
                                 fontWeight: 'bold',
-                                margin: '10px 0'
+                                margin: '10px 0',
+                                overflow: 'hidden',
+                                textOverflow: 'ellipsis',
                             }}
                         >
                             huynhtd97@gmail.com
@@ -48,23 +84,26 @@ function PatientDetail() {
                     <Divider
                         orientation="vertical"
                         sx={{
-                            height: '100%',
+                            height: 300,
                             width: '2px',
                             color: 'black',
                         }}
                     >
-
                     </Divider>
                 </Grid>
-                <Grid item xs={7} md={7} lg={7} sx={{ mt: 5 }}>
+                <Grid item xs={7} md={7} lg={7} sx={{ display: 'flex', mt: 5 }}>
                     <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}
-                        sx={{
-                            margin: 'auto',
-                        }}
                     >
                         <Grid item xs={6}>
                             <h3>Address</h3>
-                            <Typography>
+                            <Typography
+                                sx={{
+                                    overflow: 'hidden',
+                                    display: '-webkit-box',
+                                    WebkitBoxOrient: 'vertical',
+                                    WebkitLineClamp: 2, // Limit the text to 2 lines
+                                    whiteSpace: 'normal' // Allow normal wrapping within the -webkit-box
+                                }}>
                                 Sốc visual trong MV chủ đề Anh Trai Say Hi: Song Luân - 2 Anh Tú
                             </Typography>
                         </Grid>
@@ -89,7 +128,10 @@ function PatientDetail() {
                     </Grid>
                 </Grid>
             </Grid>
-        </Box>
+            <Box>
+                <h1>Treatment History</h1>
+            </Box>
+        </Paper >
     );
 }
 

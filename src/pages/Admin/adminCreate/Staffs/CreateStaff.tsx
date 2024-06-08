@@ -6,7 +6,6 @@ import FormInputText from '@/components/Form/FormInputText';
 import FormSelect from '../../components/FormSelect/FormSelect';
 import MyButton from '@/components/MyButton';
 
-
 function StaffCreateBody() {
 
     const [handleSubmit, isSubmitting, control] = useStaff();
@@ -51,7 +50,7 @@ function StaffCreateBody() {
 
                                 <FormInputText
                                     control={control}
-                                    name="username"
+                                    name="createUsername"
                                     outsideLabel=""
                                     required
                                     fullWidth
@@ -79,7 +78,7 @@ function StaffCreateBody() {
                             >
                                 <FormInputText
                                     control={control}
-                                    name="password"
+                                    name="createPassword"
                                     outsideLabel=""
                                     required
                                     isPassword
