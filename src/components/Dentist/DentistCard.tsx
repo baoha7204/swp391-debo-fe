@@ -1,3 +1,5 @@
+import { useContext } from "react";
+import { ProgressContext } from "../Booking/progress.context";
 import {
   Button,
   Card,
@@ -5,27 +7,22 @@ import {
   CardActions,
   CardContent,
   CardMedia,
-  Grid,
   Typography,
 } from "@mui/material";
+import { formatDentistName } from "@/utils/helper";
 
-import LocationOnIcon from "@mui/icons-material/LocationOn";
-import { useContext } from "react";
-import { ProgressContext } from "../Booking/progress.context";
-
-export type BranchCardProps = {
+export type DentistCardProps = {
   id: number;
   img: string;
-  address: string;
   name: string;
 };
 
-const BranchCard = ({ id, img, address, name }: BranchCardProps) => {
+const DentistCard = ({ id, img, name }: DentistCardProps) => {
   const { handleDoneIncrement, setData } = useContext(ProgressContext);
 
   const handleClick = () => {
     handleDoneIncrement();
-    setData((prev) => ({ ...prev, branchId: id }));
+    setData((prev) => ({ ...prev, dentistId: id }));
   };
 
   return (
@@ -59,18 +56,8 @@ const BranchCard = ({ id, img, address, name }: BranchCardProps) => {
             fontWeight={700}
             component="div"
           >
-            {name}
+            {formatDentistName(name)}
           </Typography>
-          <Grid container spacing={0.5} alignItems="center">
-            <Grid item>
-              <LocationOnIcon />
-            </Grid>
-            <Grid item>
-              <Typography variant="body2" color="text.secondary">
-                {address}
-              </Typography>
-            </Grid>
-          </Grid>
         </CardContent>
       </CardActionArea>
       <CardActions>
@@ -90,4 +77,4 @@ const BranchCard = ({ id, img, address, name }: BranchCardProps) => {
   );
 };
 
-export default BranchCard;
+export default DentistCard;

@@ -10,6 +10,7 @@ import {
 type BookingType = {
   branchId?: number;
   treatmentId?: number;
+  dentistId?: number;
 } | null;
 
 type ProgressContextType = {

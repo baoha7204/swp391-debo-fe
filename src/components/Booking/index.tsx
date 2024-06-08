@@ -5,10 +5,14 @@ import LinearDeterminate from "../LinearDeterminate";
 import TreatmentList from "../Treatment/TreatmentList";
 import { ProgressContext, ProgressProvider } from "./progress.context";
 import { MAX_DONE } from "@/config";
+import DentistList from "../Dentist/DentistList";
+import SlotPicker from "./SlotPicker";
 
 const BookingStage = [
   { level: 0, component: <BranchList /> },
   { level: 1, component: <TreatmentList /> },
+  { level: 2, component: <DentistList /> },
+  { level: 3, component: <SlotPicker /> },
 ];
 
 const BookingContent = () => {
