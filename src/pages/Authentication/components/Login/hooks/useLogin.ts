@@ -14,7 +14,7 @@ import { API_ENDPOINTS } from "@/utils/api";
 import { getRoles } from "@/utils/jwt";
 
 export default function useLogin() {
-  const { setAuth } = useAuth();
+  const { setAccessToken, setRefreshToken } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -53,7 +53,8 @@ export default function useLogin() {
           return errorToastHandler(data);
         }
 
-        setAuth({ accessToken, refreshToken });
+        setAccessToken(accessToken);
+        setRefreshToken(refreshToken);
         const from = location.state?.from?.pathname;
         if (from) {
           return navigate(from, { replace: true });
@@ -68,6 +69,7 @@ export default function useLogin() {
       })
       .catch((err) => {
         errorToastHandler(err.response);
+        setRefreshToken("");
       });
   };
 
