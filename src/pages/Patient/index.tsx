@@ -1,6 +1,7 @@
 import EventIcon from "@mui/icons-material/Event";
 import HomeIcon from "@mui/icons-material/Home";
 import PaymentsIcon from "@mui/icons-material/Payments";
+import ChecklistIcon from "@mui/icons-material/Checklist";
 import { Outlet, useNavigate } from "react-router-dom";
 
 import DefaultLayout from "@/components/Layout/DefaultLayout";
@@ -9,6 +10,7 @@ const SidebarPatientBody = [
   { title: "Home", path: "", icon: <HomeIcon /> },
   { title: "Calendar", path: "calendar", icon: <EventIcon /> },
   // TODO: implement these features
+  { title: "Appointment List", path: "appointments", icon: <ChecklistIcon /> },
   { title: "My Payment", path: "payment", icon: <PaymentsIcon /> },
 ];
 

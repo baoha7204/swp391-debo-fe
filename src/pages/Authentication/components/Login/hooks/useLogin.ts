@@ -44,7 +44,7 @@ export default function useLogin() {
       ? { email: user, password }
       : { phoneNumber: user, password };
 
-    post<AuthResponseType>(API_ENDPOINTS.AUTH.LOGIN_CREDENTIALS, false, body)
+    post<AuthResponseType>(API_ENDPOINTS.AUTH.LOGIN_CREDENTIALS, body)
       .then((res) => {
         const { data } = res;
         const accessToken = data.data?.accessToken;

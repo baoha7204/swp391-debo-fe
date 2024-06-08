@@ -24,6 +24,7 @@ const useRegister = () => {
     resolver: zodResolver(RegisterFormSchema),
     defaultValues: {
       email: "",
+      phoneNumber: "",
       password: "",
       confirmPassword: "",
     },
@@ -36,10 +37,11 @@ const useRegister = () => {
       return;
     }
 
-    const { email, password } = data;
-    post(API_ENDPOINTS.AUTH.REGISTER, false, {
+    const { email, password, phoneNumber } = data;
+    post(API_ENDPOINTS.AUTH.REGISTER, {
       email,
       password,
+      phoneNumber,
     })
       .then((res) => {
         const { data } = res;

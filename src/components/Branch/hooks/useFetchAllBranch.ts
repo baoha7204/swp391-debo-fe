@@ -12,9 +12,8 @@ const useFetchAllBranch = () => {
     const fetchRemote = async () => {
       try {
         const response = await get<BranchCardProps[]>(
+          // TODO: set the correct url
           "http://localhost:5173/branches",
-          // TODO: set false to true -> protected route
-          false,
           undefined,
           {
             signal: abortController.signal,

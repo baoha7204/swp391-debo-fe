@@ -1,4 +1,4 @@
-import { EmailSchema } from "@/lib/schema";
+import { EmailSchema, PhoneSchema } from "@/lib/schema";
 import { z } from "zod";
 
 export const RegisterFormSchema = z
@@ -10,6 +10,11 @@ export const RegisterFormSchema = z
         message: "Email/phone number must not exceed 256 characters",
       })
       .and(EmailSchema),
+    phoneNumber: z
+      .string()
+      .min(1, { message: "Phone number is required" })
+      .max(10, { message: "Phone number must not exceed 10 characters" })
+      .and(PhoneSchema),
     password: z
       .string()
       .min(8, { message: "Password is required" })

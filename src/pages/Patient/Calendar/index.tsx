@@ -1,9 +1,10 @@
 import MyScheduler from "@/components/MyScheduler";
 import useFetchCalendar from "@/hooks/useFetchCalendar";
+import { API_ENDPOINTS } from "@/utils/api";
 
 const Calendar = () => {
   const { fetchRemote } = useFetchCalendar({
-    url: "http://localhost:5173/patient/calendar",
+    url: API_ENDPOINTS.PATIENT.CALENDAR,
   });
   return <MyScheduler getRemoteEvents={fetchRemote} />;
 };

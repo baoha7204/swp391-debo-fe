@@ -1,27 +1,32 @@
 import { ProcessedEvent, RemoteQuery } from "@aldabil/react-scheduler/types";
 
-import { DatetimeSchema } from "@/lib/schema";
-import { toastError } from "@/utils/toast";
+import { DateSchema } from "@/lib/schema";
 import { isParsingError } from "@/usecases/handleSubmitForm";
+import { errorToastHandler } from "@/utils/toast/actions";
+import useAxiosPrivate from "./useAxiosPrivate";
 
 const useFetchCalendar = ({ url }: { url: string }) => {
+  const axiosPrivate = useAxiosPrivate();
   const fetchRemote = async (
     params: RemoteQuery
   ): Promise<ProcessedEvent[]> => {
-    console.log(params);
-    // TODO: use get from apiCaller. Using fetch for demo purpose
-    // TODO: abort controller
-    // TODO: use ErrorToastHandler to handle error
-    const response = await fetch(url);
-    const data = await response.json();
+    const response = await axiosPrivate.get(url, {
+      params: {
+        start: params.start.toDateString(),
+        end: params.end.toDateString(),
+        view: params.view,
+      },
+    });
+    const data = response.data;
+    console.log(data);
     if (!data.success) {
-      toastError(data.message);
+      errorToastHandler(data);
       return new Promise((res) => res([]));
     }
     const events = data.data.map((event: Partial<ProcessedEvent>) => {
       if (
-        isParsingError(event.start, DatetimeSchema) ||
-        isParsingError(event.end, DatetimeSchema)
+        isParsingError(event.start, DateSchema) ||
+        isParsingError(event.end, DateSchema)
       ) {
         return new Promise((res) => res([]));
       }

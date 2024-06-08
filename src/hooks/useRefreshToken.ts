@@ -22,7 +22,7 @@ const useRefreshToken = () => {
       sanitizeString(role) === ROLE.ADMIN
         ? API_ENDPOINTS.AUTH.REFRESH_TOKEN_GOOGLE
         : API_ENDPOINTS.AUTH.REFRESH_TOKEN_CREDENTIALS;
-    const response = await post<AuthResponseType>(endpoint, true);
+    const response = await post<AuthResponseType>(endpoint);
     const { data } = response;
 
     if (!data.success || !data.data) {

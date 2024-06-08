@@ -25,8 +25,6 @@ const useFetchTableList = <T>({
       try {
         const response = await get<ListDataResponse<T>>(
           url,
-          // TODO: set false to true -> protected route
-          false,
           {
             page: controller.page,
             limit: controller.rowsPerPage,
