@@ -1,14 +1,18 @@
 import { Box, Divider } from "@mui/material";
 import { useContext, useState } from "react";
 import { Dayjs } from "dayjs";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import Slots from "./Slots";
 import { ProgressContext } from "../progress.context";
+import MyDatePicker from "@/components/MyDatePicker";
 
 const SlotPicker = () => {
   const { data, setData } = useContext(ProgressContext);
   const [chosenDate, setChosenDate] = useState<Dayjs | null>(null);
+
+  const handleDateChange = (newValue: Dayjs | null) => {
+    setChosenDate(newValue);
+    setData((prev) => ({ ...prev, date: newValue }));
+  };
 
   return (
     <Box
@@ -19,17 +23,11 @@ const SlotPicker = () => {
       }}
     >
       <Box>
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <DatePicker
-            label="Choose a date"
-            value={chosenDate}
-            onChange={(newValue) => {
-              setChosenDate(newValue);
-              setData((prev) => ({ ...prev, date: newValue }));
-            }}
-            disablePast
-          />
-        </LocalizationProvider>
+        <MyDatePicker
+          value={chosenDate}
+          onChange={handleDateChange}
+          label="Choose a date"
+        />
       </Box>
       <Divider flexItem />
       <Box>{data?.date && <Slots />}</Box>

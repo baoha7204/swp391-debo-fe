@@ -9,8 +9,8 @@ import DefaultLayout from "@/components/Layout/DefaultLayout";
 const SidebarPatientBody = [
   { title: "Home", path: "", icon: <HomeIcon /> },
   { title: "Calendar", path: "calendar", icon: <EventIcon /> },
-  // TODO: implement these features
   { title: "Appointment List", path: "appointments", icon: <ChecklistIcon /> },
+  // TODO: implement these features
   { title: "My Payment", path: "payment", icon: <PaymentsIcon /> },
 ];
 
