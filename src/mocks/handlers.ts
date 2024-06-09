@@ -4,6 +4,9 @@ import {
   AppointmentPatientLists,
   Branches,
   CalendarPatientEvents,
+  Dentists,
+  Slots,
+  Treatments,
 } from "./mock-data";
 
 export const handlers = [
@@ -106,6 +109,39 @@ export const handlers = [
         success: true,
         data: Branches,
         message: "Fetched branches successfully.",
+      },
+      { status: 200 }
+    );
+  }),
+  http.get("/treatments", async () => {
+    await delay(2000);
+    return HttpResponse.json(
+      {
+        success: true,
+        data: Treatments,
+        message: "Fetched treatments successfully.",
+      },
+      { status: 200 }
+    );
+  }),
+  http.get("/dentist", async () => {
+    await delay(2000);
+    return HttpResponse.json(
+      {
+        success: true,
+        data: Dentists,
+        message: "Fetched dentists successfully.",
+      },
+      { status: 200 }
+    );
+  }),
+  http.get("/slot", async () => {
+    await delay(2000);
+    return HttpResponse.json(
+      {
+        success: true,
+        data: Slots,
+        message: "Fetched slots successfully.",
       },
       { status: 200 }
     );

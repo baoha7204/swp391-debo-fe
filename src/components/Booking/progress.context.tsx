@@ -1,3 +1,4 @@
+import { Dayjs } from "dayjs";
 import { MAX_DONE } from "@/config";
 import {
   Dispatch,
@@ -11,6 +12,7 @@ type BookingType = {
   branchId?: number;
   treatmentId?: number;
   dentistId?: number;
+  date?: Dayjs | null;
 } | null;
 
 type ProgressContextType = {

@@ -4,6 +4,7 @@ import { get } from "@/utils/apiCaller";
 import { errorToastHandler } from "@/utils/toast/actions";
 
 const useFetchAllBranch = () => {
+  const [isLoading, setIsLoading] = useState(true);
   const [branches, setBranches] = useState<BranchCardProps[]>([]);
 
   useEffect(() => {
@@ -29,6 +30,9 @@ const useFetchAllBranch = () => {
         if (error.name !== "CanceledError") {
           errorToastHandler(error.response);
         }
+        setBranches([]);
+      } finally {
+        setIsLoading(false);
       }
     };
 
@@ -40,7 +44,7 @@ const useFetchAllBranch = () => {
     };
   }, []);
 
-  return branches;
+  return { branches, isLoading };
 };
 
 export default useFetchAllBranch;

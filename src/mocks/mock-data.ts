@@ -215,4 +215,81 @@ const Branches = [
   },
 ];
 
-export { CalendarPatientEvents, AppointmentPatientLists, Branches };
+const Treatments = [
+  {
+    id: 1,
+    category: "Hair",
+    name: "Haircut",
+    description: "Wash, cut, and blow-dry",
+    price: 30,
+  },
+  {
+    id: 2,
+    category: "Hair",
+    name: "Hair coloring",
+    description: "Coloring and blow-dry",
+    price: 50,
+  },
+  {
+    id: 3,
+    category: "Hair",
+    name: "Perm",
+    description: "Perm and blow-dry",
+    price: 70,
+  },
+  {
+    id: 4,
+    category: "Hair",
+    name: "Perm",
+    description: "Perm and blow-dry",
+    price: 70,
+  },
+  {
+    id: 5,
+    category: "Hair",
+    name: "Perm",
+    description: "Perm and blow-dry",
+    price: 70,
+  },
+  {
+    id: 6,
+    category: "Hair",
+    name: "Perm",
+    description: "Perm and blow-dry",
+    price: 70,
+  },
+];
+
+const Dentists = [
+  {
+    id: 1,
+    name: "John Doe",
+    img: "https://cdn4.iconfinder.com/data/icons/alternative-medicine-flat/64/male-therapist-doctor-dentist-avatar-512.png",
+  },
+  {
+    id: 2,
+    name: "Jane Smith",
+    img: "https://cdn4.iconfinder.com/data/icons/alternative-medicine-flat/64/male-therapist-doctor-dentist-avatar-512.png",
+  },
+  {
+    id: 3,
+    name: "Johnny Sins",
+    img: "https://cdn4.iconfinder.com/data/icons/alternative-medicine-flat/64/male-therapist-doctor-dentist-avatar-512.png",
+  },
+  {
+    id: 4,
+    name: "Bao Ha",
+    img: "https://cdn4.iconfinder.com/data/icons/alternative-medicine-flat/64/male-therapist-doctor-dentist-avatar-512.png",
+  },
+];
+
+const Slots = [7, 9, 11, 15, 17, 19];
+
+export {
+  CalendarPatientEvents,
+  AppointmentPatientLists,
+  Branches,
+  Treatments,
+  Dentists,
+  Slots,
+};

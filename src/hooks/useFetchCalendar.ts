@@ -18,7 +18,6 @@ const useFetchCalendar = ({ url }: { url: string }) => {
       },
     });
     const data = response.data;
-    console.log(data);
     if (!data.success) {
       errorToastHandler(data);
       return new Promise((res) => res([]));

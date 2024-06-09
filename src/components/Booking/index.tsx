@@ -1,10 +1,10 @@
 import { useContext } from "react";
 import { Paper } from "@mui/material";
-import BranchList from "../Branch/BranchList";
 import LinearDeterminate from "../LinearDeterminate";
-import TreatmentList from "../Treatment/TreatmentList";
 import { ProgressContext, ProgressProvider } from "./progress.context";
 import { MAX_DONE } from "@/config";
+import BranchList from "../Branch/BranchList";
+import TreatmentList from "../Treatment/TreatmentList";
 import DentistList from "../Dentist/DentistList";
 import SlotPicker from "./SlotPicker";
 
