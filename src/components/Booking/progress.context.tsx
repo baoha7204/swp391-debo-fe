@@ -8,11 +8,14 @@ import {
 } from "react";
 import useStep from "./hooks/useStep";
 import useProgressDone from "./hooks/useProgress";
+import { BranchCardProps } from "../Branch/BranchCard";
+import { TreatmentCardProps } from "../Treatment/TreatmentCard";
+import { DentistCardProps } from "../Dentist/DentistCard";
 
 type BookingType = {
-  branchId?: number;
-  treatmentId?: number;
-  dentistId?: number;
+  branch?: BranchCardProps;
+  treatment?: TreatmentCardProps;
+  dentist?: DentistCardProps;
   date?: Dayjs | null;
   slot?: number;
 } | null;

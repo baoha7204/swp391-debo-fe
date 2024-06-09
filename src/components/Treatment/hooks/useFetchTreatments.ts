@@ -12,7 +12,7 @@ const useFetchTreatments = () => {
   useEffect(() => {
     const abortController = new AbortController();
 
-    if (!data || !data.branchId) {
+    if (!data || !data.branch) {
       errorToastHandler({ message: "Please select a branch first." });
       setTreatments([]);
       setIsLoading(false);
@@ -25,7 +25,7 @@ const useFetchTreatments = () => {
           // TODO: set the correct url
           "http://localhost:5173/treatments",
           {
-            branch: data.branchId,
+            branch: data.branch?.id,
           },
           {
             signal: abortController.signal,

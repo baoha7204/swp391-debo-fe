@@ -17,11 +17,12 @@ export type DentistCardProps = {
   name: string;
 };
 
-const DentistCard = ({ id, img, name }: DentistCardProps) => {
+const DentistCard = (props: DentistCardProps) => {
+  const { img, name } = props;
   const { handleDoneIncrement, setData } = useContext(ProgressContext);
 
   const handleClick = () => {
-    setData((prev) => ({ ...prev, dentistId: id }));
+    setData((prev) => ({ ...prev, dentist: props }));
     handleDoneIncrement();
   };
 

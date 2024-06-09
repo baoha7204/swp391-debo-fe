@@ -20,11 +20,12 @@ export type BranchCardProps = {
   name: string;
 };
 
-const BranchCard = ({ id, img, address, name }: BranchCardProps) => {
+const BranchCard = (props: BranchCardProps) => {
+  const { img, address, name } = props;
   const { handleDoneIncrement, setData } = useContext(ProgressContext);
 
   const handleClick = () => {
-    setData((prev) => ({ ...prev, branchId: id }));
+    setData((prev) => ({ ...prev, branch: props }));
     handleDoneIncrement();
   };
 

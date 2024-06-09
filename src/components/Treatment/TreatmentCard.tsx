@@ -19,17 +19,12 @@ export type TreatmentCardProps = {
   price: number;
 };
 
-const TreatmentCard = ({
-  id,
-  category,
-  description,
-  price,
-  name,
-}: TreatmentCardProps) => {
+const TreatmentCard = (props: TreatmentCardProps) => {
+  const { category, description, price, name } = props;
   const { handleDoneIncrement, setData } = useContext(ProgressContext);
 
   const handleClick = () => {
-    setData((prev) => ({ ...prev, treatmentId: id }));
+    setData((prev) => ({ ...prev, treatment: props }));
     handleDoneIncrement();
   };
 

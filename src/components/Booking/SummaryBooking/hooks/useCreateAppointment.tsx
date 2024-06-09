@@ -11,13 +11,7 @@ const useCreateAppointment = () => {
   useEffect(() => {
     const abortController = new AbortController();
 
-    if (
-      !data ||
-      !data.dentistId ||
-      !data.treatmentId ||
-      !data.date ||
-      !data.slot
-    ) {
+    if (!data || !data.dentist || !data.treatment || !data.date || !data.slot) {
       errorToastHandler({ message: "Please choose previous sections first." });
       setIsLoading(false);
       setAppointment(null);
@@ -31,8 +25,8 @@ const useCreateAppointment = () => {
           // TODO: set the correct url
           "http://localhost:5173/appointment",
           {
-            treatId: data.treatmentId,
-            dentistId: data.dentistId,
+            treatId: data.treatment?.id,
+            dentistId: data.dentist?.id,
             date: data.date?.toDate().toDateString(),
             slot: data.slot,
           },

@@ -11,7 +11,7 @@ const useFetchSlots = () => {
   useEffect(() => {
     setIsLoading(true);
     const abortController = new AbortController();
-    if (!data || !data.dentistId || !data.date) {
+    if (!data || !data.dentist || !data.date) {
       errorToastHandler({ message: "Please select previous sections first." });
       setSlots([]);
       setIsLoading(false);
@@ -24,7 +24,7 @@ const useFetchSlots = () => {
           // TODO: set the correct url
           "http://localhost:5173/slot",
           {
-            dentist: data.dentistId,
+            dentist: data.dentist?.id,
             date: data.date?.toDate().toDateString(),
           },
           {

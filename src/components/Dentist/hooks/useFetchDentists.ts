@@ -12,7 +12,7 @@ const useFetchDentists = () => {
   useEffect(() => {
     const abortController = new AbortController();
 
-    if (!data || !data.treatmentId) {
+    if (!data || !data.treatment) {
       errorToastHandler({ message: "Please select a treatment first." });
       setDentists([]);
       setIsLoading(false);
@@ -25,7 +25,7 @@ const useFetchDentists = () => {
           // TODO: set the correct url
           "http://localhost:5173/dentist",
           {
-            treatment: data.treatmentId,
+            treatment: data.treatment?.id,
           },
           {
             signal: abortController.signal,
