@@ -3,19 +3,26 @@ import MyTable from "@/components/Table/MyTable";
 
 export type GeneralStaffTableData = {
     id: number;
-    fName: string;
-    lName: string;
+    firstName: string;
+    lastName: string;
     email: string;
-    role: string;
+    gender: boolean;
     phone: string;
 };
 
 const columns: readonly ListColumn<GeneralStaffTableData>[] = [
-    { id: "fName", label: "First Name", isDetail: true, minWidth: 100 },
-    { id: "lName", label: "Last Name", minWidth: 100 },
-    { id: "email", label: "Email", minWidth: 170 },
-    { id: "role", label: "Role", minWidth: 170 },
-    { id: "phone", label: "Phone", minWidth: 170 },
+    { id: "firstName", label: "First Name", minWidth: 100 },
+    { id: "lastName", label: "Last Name", minWidth: 100 },
+    { id: "email", label: "Email", minWidth: 100, isDetail: true, },
+    {
+        id: "gender", label: "Gender", minWidth: 100,
+        format: (value: any) => {
+            if (value === true) return "Male";
+            if (value === false) return "Female";
+            return "";
+        }
+    },
+    { id: "phone", label: "Phone", minWidth: 100 },
 ];
 
 function ListStaffTable({ url }: { url: string }) {

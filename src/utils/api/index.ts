@@ -17,7 +17,12 @@ export const API_ENDPOINTS = {
   BRANCH: {
     BRANCH: "branch",
   },
-  STAFF: {
-    STAFF: "staffs",
+  USERS: {
+    USERS: "Users",
+    CREATE_STAFF: "User/createstaff",
+    CREATE_DENTIST: "User/createdentist",
+    CREATE_MANAGER: "User/createmanager",
+    LIST_DENTIST: "User/dentistlist",
   },
+
 };

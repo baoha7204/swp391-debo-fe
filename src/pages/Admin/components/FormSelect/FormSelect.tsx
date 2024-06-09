@@ -6,12 +6,12 @@ type SelectProps<
     TName extends FieldPath<TFieldValues>
 > = UseControllerProps<TFieldValues, TName> & {
     label: string;
-    options: { value: string | number; label: string }[];
+    options: { value: string | number | boolean; label: string }[];
 };
 
 interface FormSelectProps<TFieldValues extends FieldValues, TName extends FieldPath<TFieldValues>> extends SelectProps<TFieldValues, TName> {
     label: string;
-    options: { value: string | number, label: string }[];
+    options: { value: string | number | boolean, label: string }[];
 }
 
 const FormSelect = <
@@ -35,11 +35,11 @@ const FormSelect = <
                         labelId={`${name}-label`}
                         value={value}
                         label={label}
-                        onChange={onChange}
+                        onChange={(event) => onChange(event.target.value === 'true')}
                         {...rest}
                     >
-                        {options.map((option) => (
-                            <MenuItem key={option.value} value={option.value}>
+                        {options.map((option, index) => (
+                            <MenuItem key={index} value={option.value.toString()}>
                                 {option.label}
                             </MenuItem>
                         ))}

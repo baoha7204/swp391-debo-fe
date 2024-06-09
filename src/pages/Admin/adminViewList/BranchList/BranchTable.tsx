@@ -3,17 +3,17 @@ import MyTable from "@/components/Table/MyTable";
 
 export type BranchTableData = {
     id: number;
+    name: string;
     address: string;
     phone: string;
-    altPeoples: string;
     email: string;
 };
 
 const columns: readonly ListColumn<BranchTableData>[] = [
-    { id: "address", label: "Address", isDetail: true, minWidth: 100 },
+    { id: "name", label: "Name", isDetail: true, minWidth: 100 },
+    { id: "address", label: "Address", minWidth: 100 },
     { id: "phone", label: "Phone", minWidth: 100 },
-    { id: "altPeoples", label: "Alt Peoples", minWidth: 170 },
-    { id: "email", label: "Email", minWidth: 170 },
+    { id: "email", label: "Email", minWidth: 100 },
 ];
 
 function BranchTable({ url }: { url: string }) {

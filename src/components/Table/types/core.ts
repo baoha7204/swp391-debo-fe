@@ -6,7 +6,8 @@ export type ListColumn<T> = {
   minWidth?: number;
   align?: "right";
   isDetail?: boolean;
-  format?: ((value: Date) => string) | ((value: string) => string);
+  isCategory?: boolean;
+  format?: ((value: Date) => string) | ((value: string) => string) | ((value: number) => string);
 };
 
 export type TableProps<T> = {

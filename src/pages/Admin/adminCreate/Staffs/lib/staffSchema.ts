@@ -2,11 +2,11 @@ import { PhoneSchema } from "@/lib/schema";
 import { z } from "zod";
 
 export const staffSchema = z.object({
-    createUsername: z
+    username: z
         .string()
         .min(1, { message: "Username is required" })
         .max(256, { message: "Username must not exceed 256 characters" }),
-    createPassword: z
+    password: z
         .string()
         .min(1, { message: "Password is required" })
         .max(256, { message: "Password must not exceed 256 characters" }),
@@ -26,12 +26,13 @@ export const staffSchema = z.object({
         .min(1, { message: "Phone number is required" })
         .max(256, { message: "Phone number must not exceed 256 characters" })
         .and(PhoneSchema),
-    role: z
-        .string()
-        .min(1, { message: "Role is required" })
-        .max(256, { message: "Role must not exceed 256 characters" }),
     gender: z
+        .boolean()
+        .nullable()
+        .default(null),
+    address: z
         .string()
-        .min(1, { message: "Gender is required" })
-        .max(256, { message: "Role must not exceed 256 characters" }),
+        .min(1, { message: "Address is required" })
+        .max(256, { message: "Address must not exceed 256 characters" }),
+
 });

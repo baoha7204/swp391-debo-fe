@@ -4,24 +4,29 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { staffSchema } from "./staffSchema";
 import { handleSubmitForm } from "@/usecases/handleSubmitForm";
 import { z } from "zod";
+import { post } from "@/utils/apiCaller";
+import { API_ENDPOINTS } from "@/utils/api";
+import { errorToastHandler } from "@/utils/toast/actions";
+import { toastSuccess } from "@/utils/toast";
+import { useNavigate } from "react-router-dom";
 
 export type StaffInputs = z.infer<typeof staffSchema>;
 
-
 export default function useStaff() {
+    const navigate = useNavigate();
 
     const { handleSubmit, reset, control, formState: { isSubmitSuccessful, isSubmitting },
     } = useForm<StaffInputs>({
         resolver: zodResolver(staffSchema),
         defaultValues: {
-            createUsername: '',
-            createPassword: '',
-            role: '',
+            username: '',
+            password: '',
             phone: '',
             email: '',
             firstName: '',
             lastName: '',
-            gender: '',
+            address: '',
+            gender: false,
         },
     });
 
@@ -31,7 +36,39 @@ export default function useStaff() {
         if (!result || !result.success || result.error) {
             return;
         }
+
+        const { address, username, password, phone, email, firstName, lastName, gender } = data;
+
+        console.log(gender);
+
+        post(API_ENDPOINTS.USERS.CREATE_DENTIST, false, {
+            username,
+            email,
+            password,
+            firstName,
+            lastName,
+            gender,
+            phone,
+            address,
+        })
+            .then((res) => {
+                const { data } = res;
+                if (!data.success) {
+                    console.log('1');
+
+                    return errorToastHandler(data);
+                }
+                // successfully
+                toastSuccess("Create successfully!");
+                navigate('/adminTest/adminStaffList');
+            })
+            .catch((err) => {
+                console.log(err.response);
+                errorToastHandler(err.response);
+            });
     };
+
+
 
     useEffect(() => {
         if (isSubmitSuccessful) {

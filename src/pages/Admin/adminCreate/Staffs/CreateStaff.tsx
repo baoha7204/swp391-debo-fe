@@ -18,7 +18,7 @@ function StaffCreateBody() {
                 onSubmit={handleSubmit}
             >
                 <Box sx={{ m: 1 }}>
-                    <h1>Staff Create</h1>
+                    <h1>Create</h1>
                 </Box>
                 <Grid
                     container
@@ -50,7 +50,7 @@ function StaffCreateBody() {
 
                                 <FormInputText
                                     control={control}
-                                    name="createUsername"
+                                    name="username"
                                     outsideLabel=""
                                     required
                                     fullWidth
@@ -71,17 +71,16 @@ function StaffCreateBody() {
                             <Box
                                 component="form"
                                 sx={{
-                                    '& > :not(style)': { m: 0, width: '87%' },
+                                    '& > :not(style)': { m: 0, width: '100%' },
                                 }}
                                 noValidate
                                 autoComplete="off"
                             >
                                 <FormInputText
                                     control={control}
-                                    name="createPassword"
+                                    name="password"
                                     outsideLabel=""
                                     required
-                                    isPassword
                                     fullWidth
                                     label="Password"
                                     autoFocus
@@ -161,7 +160,7 @@ function StaffCreateBody() {
                                 alignItems: 'center'
                             }}
                         >
-                            <h3 style={{ marginBottom: '20px', marginRight: '20px' }}>Name:</h3>
+                            <h3 style={{ marginBottom: '20px', marginRight: '20px' }}>Last Name:</h3>
                             <Box
                                 component="form"
                                 sx={{
@@ -180,6 +179,24 @@ function StaffCreateBody() {
                                     autoFocus
                                     sx={{ m: 1, p: 0 }}
                                 />
+                            </Box>
+                        </Box>
+                        <Box
+                            sx={{
+                                display: "flex",
+                                flexDirection: "row",
+                                alignItems: 'center'
+                            }}
+                        >
+                            <h3 style={{ marginBottom: '20px', marginRight: '20px' }}>First Name:</h3>
+                            <Box
+                                component="form"
+                                sx={{
+                                    '& > :not(style)': { m: 0, width: '100%' },
+                                }}
+                                noValidate
+                                autoComplete="off"
+                            >
                                 <FormInputText
                                     control={control}
                                     name="firstName"
@@ -187,6 +204,34 @@ function StaffCreateBody() {
                                     required
                                     fullWidth
                                     label="First Name"
+                                    autoFocus
+                                    sx={{ m: 1, p: 0 }}
+                                />
+                            </Box>
+                        </Box>
+                        <Box
+                            sx={{
+                                display: "flex",
+                                flexDirection: "row",
+                                alignItems: 'center'
+                            }}
+                        >
+                            <h3 style={{ marginBottom: '20px', marginRight: '20px' }}>Address:</h3>
+                            <Box
+                                component="form"
+                                sx={{
+                                    '& > :not(style)': { m: 0, width: '100%' },
+                                }}
+                                noValidate
+                                autoComplete="off"
+                            >
+                                <FormInputText
+                                    control={control}
+                                    name="address"
+                                    outsideLabel=""
+                                    required
+                                    fullWidth
+                                    label="Address"
                                     autoFocus
                                     sx={{ m: 1, p: 0 }}
                                 />
@@ -208,42 +253,13 @@ function StaffCreateBody() {
                                     m: 1, p: 0, width: '10ch',
                                 }}
                             >
-
                                 <FormSelect
                                     name="gender"
                                     control={control}
                                     label="Gender"
                                     options={[
-                                        { value: '15', label: 'Male' },
-                                        { value: '25', label: 'Female' },
-                                        { value: '35', label: 'Other' }
-                                    ]}
-                                />
-                            </Box>
-                        </Box>
-                        <Box
-                            sx={{
-                                display: "flex",
-                                flexDirection: "row",
-                                alignItems: 'center'
-                            }}
-                        >
-                            <h3 style={{ marginBottom: '20px', marginRight: '20px' }}>Role:</h3>
-                            <Box
-                                sx={{
-                                    m: 1, p: 0, width: '10ch',
-                                }}
-                                component="form"
-                                noValidate
-                                autoComplete="off">
-                                <FormSelect
-                                    name="role"
-                                    control={control}
-                                    label="Role"
-                                    options={[
-                                        { value: '15', label: 'Dentist' },
-                                        { value: '25', label: 'General' },
-                                        { value: '35', label: 'Manager' }
+                                        { value: true, label: 'Male' },
+                                        { value: false, label: 'Female' },
                                     ]}
                                 />
                             </Box>

@@ -13,22 +13,33 @@ import PersistLogin from "@/components/Auth/PersistLogin";
 import UnauthorizedPage from "@/pages/403";
 import AuthenticationPage from "@/pages/Authentication";
 
+////Customer////
 import BookingPage from "@/pages/Patient/Booking";
 import DashboardPage from "@/pages/Patient/Dashboard";
-import AdminLayout from "@/pages/Admin";
-import CreateBranch from "@/pages/Admin/adminCreate/Branchs/CreateBranch";
-import CreateStaff from "@/pages/Admin/adminCreate/Staffs/CreateStaff";
-import BranchList from "@/pages/Admin/adminViewList/BranchList/BranchList";
-import TreatmentList from "@/pages/Admin/adminViewList/TreatmentList/TreatmentList";
-import AdminList from "@/pages/Admin/adminViewList/AllStaffList";
 import PatientLayout from "@/pages/Patient";
-import PatientList from "@/pages/Admin/adminViewList/PatientList/PatientList";
 import Calendar from "@/pages/Patient/Calendar";
 import PatientAppointmentList from "@/pages/Patient/Appointment/AppointmentList";
 import AppointmentDetail from "@/components/Appointment/AppointmentDetail";
-import CreateTreatment from "@/pages/Admin/adminCreate/Treatments/CreateTreatment";
+
+////Manager////
+
+////Admin////
+import AdminLayout from "@/pages/Admin";
+//AdminList
+import BranchList from "@/pages/Admin/adminViewList/BranchList/BranchList";
+import TreatmentList from "@/pages/Admin/adminViewList/TreatmentList/TreatmentList";
+import AdminList from "@/pages/Admin/adminViewList/AllStaffList";
+import PatientList from "@/pages/Admin/adminViewList/PatientList/PatientList";
+//AdminDetail
 import PatientDetail from "@/pages/Admin/adminViewDetail/PatientDetail/PatientDetail";
-import PatientDetailTest from "@/pages/Admin/adminViewDetail/PatientDetail/test";
+import TreatmentDetail from "@/pages/Admin/adminViewDetail/TreatmentDetail/TreatmentDetail";
+import StaffDetail from "@/pages/Admin/adminViewDetail/StaffDetail/StaffDetail";
+import BranchDetail from "@/pages/Admin/adminViewDetail/BranchDetail/BranchDetail";
+//AdminCreate
+import CreateBranch from "@/pages/Admin/adminCreate/Branchs/CreateBranch";
+import CreateStaff from "@/pages/Admin/adminCreate/Staffs/CreateStaff";
+import CreateTreatment from "@/pages/Admin/adminCreate/Treatments/CreateTreatment";
+
 
 const RouterComponent = () => {
   const router = createBrowserRouter([
@@ -157,8 +168,16 @@ const RouterComponent = () => {
           element: <PatientDetail />,
         },
         {
-          path: "patientDetailTest",
-          element: <PatientDetailTest />,
+          path: "branchList/:id",
+          element: <BranchDetail />,
+        },
+        {
+          path: "treatmentList/:id",
+          element: <TreatmentDetail />,
+        },
+        {
+          path: "adminStaffList/:id",
+          element: <StaffDetail />,
         },
       ],
     },

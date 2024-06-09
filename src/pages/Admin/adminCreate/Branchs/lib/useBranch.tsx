@@ -31,16 +31,13 @@ export default function useBranch() {
         },
     });
 
-    console.log('0');
-
-
     const onSubmit: SubmitHandler<BranchInputs> = (data) => {
         const result = handleSubmitForm(data, branchSchema);
 
         if (!result || !result.success || result.error) {
             return;
         }
-        console.log('1');
+
         const { id, name, address, phone, email } = data;
 
         console.log(data);
@@ -60,7 +57,6 @@ export default function useBranch() {
                 // successfully
                 toastSuccess("Create successfully!");
                 navigate('adminTest/branchList');
-                console.log('2');
             })
             .catch((err) => {
                 console.log(err.response);

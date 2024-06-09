@@ -7,6 +7,16 @@ export const branchSchema = z.object({
         .int({ message: "ID should be integer number" })
         .gt(1, { message: "ID must be at least 1" })
         .safe(),
+    mngId: z.coerce
+        .number({ required_error: "Manager ID should be integer number" })
+        .int({ message: "Manager ID should be integer number" })
+        .gt(1, { message: "Manager ID must be at least 1" })
+        .safe(),
+    adminId: z.coerce
+        .number({ required_error: "Manager ID should be integer number" })
+        .int({ message: "Manager ID should be integer number" })
+        .gt(1, { message: "Manager ID must be at least 1" })
+        .safe(),
     name: z
         .string()
         .min(1, { message: "Name is required" })

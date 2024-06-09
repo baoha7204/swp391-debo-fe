@@ -1,4 +1,3 @@
-
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import HealthAndSafetyIcon from "@mui/icons-material/HealthAndSafety";
 import GroupIcon from "@mui/icons-material/Group";
@@ -10,7 +9,6 @@ import StoreIcon from "@mui/icons-material/Store";
 import { Outlet } from "react-router-dom";
 
 import DefaultLayout from "@/components/Layout/DefaultLayout";
-
 
 const SidebarAdminBody = [
   { title: "Reservations", path: "", icon: <EventIcon />, },
@@ -34,6 +32,9 @@ const AdminRoutes = [
   { path: "treatmentList/createTreatment", breadcrumb: "Create Treatment" },
   { path: "adminStaffList/createStaff", breadcrumb: "Create Staff" },
   //Detail
+  { path: "branchList/:id", breadcrumb: "Branch Detail" },
+  { path: "treatmentList/:id", breadcrumb: "Treatment Detail" },
+  { path: "adminStaffList/:id", breadcrumb: "Staff Detail" },
 ];
 
 const AdminInfo = {
