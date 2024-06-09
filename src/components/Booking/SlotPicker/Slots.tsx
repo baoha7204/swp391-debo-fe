@@ -3,12 +3,16 @@ import { Item } from "./style";
 import { formatTime } from "@/utils/helper";
 import useFetchSlots from "./hooks/useFetchSlots";
 import CircularIndeterminate from "@/components/CircularIndeterminate";
+import { useContext } from "react";
+import { ProgressContext } from "../progress.context";
 
 const Slots = () => {
+  const { setData, handleDoneIncrement } = useContext(ProgressContext);
   const { slots, isLoading } = useFetchSlots();
 
   const handleSlot = (slot: number) => {
-    console.log(slot);
+    setData((prev) => ({ ...prev, slot }));
+    handleDoneIncrement();
   };
 
   return isLoading ? (

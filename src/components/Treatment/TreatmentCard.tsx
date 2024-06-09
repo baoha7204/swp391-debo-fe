@@ -29,8 +29,8 @@ const TreatmentCard = ({
   const { handleDoneIncrement, setData } = useContext(ProgressContext);
 
   const handleClick = () => {
-    handleDoneIncrement();
     setData((prev) => ({ ...prev, treatmentId: id }));
+    handleDoneIncrement();
   };
 
   return (

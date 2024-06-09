@@ -1,29 +1,29 @@
 import { useContext } from "react";
-import { Paper } from "@mui/material";
+import { Box, Paper, Typography } from "@mui/material";
 import LinearDeterminate from "../LinearDeterminate";
 import { ProgressContext, ProgressProvider } from "./progress.context";
-import { MAX_DONE } from "@/config";
-import BranchList from "../Branch/BranchList";
-import TreatmentList from "../Treatment/TreatmentList";
-import DentistList from "../Dentist/DentistList";
-import SlotPicker from "./SlotPicker";
-
-const BookingStage = [
-  { level: 0, component: <BranchList /> },
-  { level: 1, component: <TreatmentList /> },
-  { level: 2, component: <DentistList /> },
-  { level: 3, component: <SlotPicker /> },
-];
+import { BookingStage, StepLabels } from "./config";
+import HorizontalLinearStepper from "../HorizontalLinearStepper";
 
 const BookingContent = () => {
-  const { done } = useContext(ProgressContext);
+  const { done, activeStep, isStepSkipped } = useContext(ProgressContext);
   return (
     <Paper
       elevation={0}
       sx={{ display: "flex", flexDirection: "column", gap: 2 }}
     >
-      <LinearDeterminate done={done} all={MAX_DONE} />
-      {BookingStage[done].component}
+      <HorizontalLinearStepper
+        steps={StepLabels}
+        activeStep={activeStep}
+        isStepSkipped={isStepSkipped}
+      />
+      {activeStep === 0 && (
+        <Box display="flex" flexDirection="column" gap={3}>
+          <LinearDeterminate done={done} all={BookingStage.length} />
+          <Typography variant="h5">{BookingStage[done].header}</Typography>
+          {BookingStage[done].component}
+        </Box>
+      )}
     </Paper>
   );
 };

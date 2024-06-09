@@ -24,8 +24,8 @@ const BranchCard = ({ id, img, address, name }: BranchCardProps) => {
   const { handleDoneIncrement, setData } = useContext(ProgressContext);
 
   const handleClick = () => {
-    handleDoneIncrement();
     setData((prev) => ({ ...prev, branchId: id }));
+    handleDoneIncrement();
   };
 
   return (

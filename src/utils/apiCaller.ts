@@ -18,24 +18,24 @@ const request = <T = EmptyObj>(
   return axios<ApiResponse<T>>(config);
 };
 
-const get = <T = EmptyObj>(endpoint: string, params = {}, headers = {}) =>
+const get = <T extends object>(endpoint: string, params = {}, headers = {}) =>
   request<T>(endpoint, "GET", headers, params);
 
-const post = <T = EmptyObj>(
+const post = <T extends object>(
   endpoint: string,
   body = {},
   params = {},
   headers = {}
 ) => request<T>(endpoint, "POST", headers, params, body);
 
-const put = <T = EmptyObj>(
+const put = <T extends object>(
   endpoint: string,
   body = {},
   params = {},
   headers = {}
 ) => request<T>(endpoint, "PUT", headers, params, body);
 
-const remove = <T = EmptyObj>(
+const remove = <T extends object>(
   endpoint: string,
   body = {},
   params = {},

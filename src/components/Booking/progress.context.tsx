@@ -1,5 +1,4 @@
 import { Dayjs } from "dayjs";
-import { MAX_DONE } from "@/config";
 import {
   Dispatch,
   PropsWithChildren,
@@ -7,12 +6,15 @@ import {
   createContext,
   useState,
 } from "react";
+import useStep from "./hooks/useStep";
+import useProgressDone from "./hooks/useProgress";
 
 type BookingType = {
   branchId?: number;
   treatmentId?: number;
   dentistId?: number;
   date?: Dayjs | null;
+  slot?: number;
 } | null;
 
 type ProgressContextType = {
@@ -21,6 +23,11 @@ type ProgressContextType = {
   done: number;
   handleDoneIncrement: () => void;
   handleDoneDecrement: () => void;
+  activeStep: number;
+  handleNext: () => void;
+  handleBack: () => void;
+  handleReset: () => void;
+  isStepSkipped: (step: number) => boolean;
 };
 
 const ProgressContext = createContext<ProgressContextType>({
@@ -29,19 +36,18 @@ const ProgressContext = createContext<ProgressContextType>({
   done: 0,
   handleDoneIncrement: () => {},
   handleDoneDecrement: () => {},
+  activeStep: 0,
+  handleNext: () => {},
+  handleBack: () => {},
+  handleReset: () => {},
+  isStepSkipped: () => false,
 });
 
 const ProgressProvider = ({ children }: PropsWithChildren) => {
   const [data, setData] = useState<BookingType>(null);
-  const [done, setDone] = useState(0);
-
-  const handleDoneIncrement = () => {
-    if (done < MAX_DONE) setDone(done + 1);
-  };
-
-  const handleDoneDecrement = () => {
-    if (done > 0) setDone(done - 1);
-  };
+  const { activeStep, handleNext, handleBack, handleReset, isStepSkipped } =
+    useStep();
+  const { done, handleDoneIncrement, handleDoneDecrement } = useProgressDone();
 
   const value = {
     data,
@@ -49,6 +55,11 @@ const ProgressProvider = ({ children }: PropsWithChildren) => {
     done,
     handleDoneIncrement,
     handleDoneDecrement,
+    activeStep,
+    isStepSkipped,
+    handleNext,
+    handleBack,
+    handleReset,
   };
 
   return (

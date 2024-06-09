@@ -21,8 +21,8 @@ const DentistCard = ({ id, img, name }: DentistCardProps) => {
   const { handleDoneIncrement, setData } = useContext(ProgressContext);
 
   const handleClick = () => {
-    handleDoneIncrement();
     setData((prev) => ({ ...prev, dentistId: id }));
+    handleDoneIncrement();
   };
 
   return (
