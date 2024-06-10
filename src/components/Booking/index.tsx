@@ -40,7 +40,7 @@ const BookingContent = () => {
         onBack={handleBackStep}
       />
       {activeStep === 0 && (
-        <Box display="flex" flexDirection="column" gap={3}>
+        <Box display="flex" flexDirection="column">
           <LinearDeterminate done={done} all={FirstStageLength} />
           <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
             <Button

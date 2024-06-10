@@ -5,13 +5,14 @@ import useFetchSlots from "./hooks/useFetchSlots";
 import CircularIndeterminate from "@/components/CircularIndeterminate";
 import { useContext } from "react";
 import { ProgressContext } from "../progress.context";
+import { Dayjs } from "dayjs";
 
-const Slots = () => {
+const Slots = ({ date }: { date: Dayjs }) => {
   const { setData, handleDoneIncrement } = useContext(ProgressContext);
-  const { slots, isLoading } = useFetchSlots();
+  const { slots, isLoading } = useFetchSlots(date);
 
   const handleSlot = (slot: number) => {
-    setData((prev) => ({ ...prev, slot }));
+    setData((prev) => ({ ...prev, date, slot }));
     handleDoneIncrement();
   };
 

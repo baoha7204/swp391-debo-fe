@@ -285,6 +285,21 @@ const Dentists = [
 
 const Slots = [7, 9, 11, 15, 17, 19];
 
+const PendingAppointment = {
+  id: 1,
+  treatId: 1,
+  paymentID: null,
+  dentId: 1,
+  tempDentId: null,
+  cusId: 1,
+  creatorId: 1,
+  isCreatedByStaff: false,
+  createdDate: new Date(),
+  startDate: new Date(),
+  timeSlot: 7,
+  status: "Pending",
+};
+
 export {
   CalendarPatientEvents,
   AppointmentPatientLists,
@@ -292,4 +307,5 @@ export {
   Treatments,
   Dentists,
   Slots,
+  PendingAppointment,
 };

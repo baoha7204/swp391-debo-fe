@@ -40,7 +40,7 @@ const DentistCard = (props: DentistCardProps) => {
         <CardMedia
           component="img"
           image={img}
-          alt="branch"
+          alt="dentist"
           sx={{
             height: {
               xs: 300,
@@ -51,12 +51,7 @@ const DentistCard = (props: DentistCardProps) => {
           }}
         />
         <CardContent>
-          <Typography
-            gutterBottom
-            variant="h5"
-            fontWeight={700}
-            component="div"
-          >
+          <Typography gutterBottom variant="h5" fontWeight={700}>
             {formatDentistName(name)}
           </Typography>
         </CardContent>

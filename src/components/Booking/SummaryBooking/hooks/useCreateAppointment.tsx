@@ -58,7 +58,7 @@ const useCreateAppointment = () => {
     };
   }, [data]);
 
-  return { appointment, isLoading };
+  return { data, appointment, isLoading };
 };
 
 export default useCreateAppointment;

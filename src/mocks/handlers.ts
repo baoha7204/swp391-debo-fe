@@ -5,6 +5,7 @@ import {
   Branches,
   CalendarPatientEvents,
   Dentists,
+  PendingAppointment,
   Slots,
   Treatments,
 } from "./mock-data";
@@ -144,6 +145,17 @@ export const handlers = [
         message: "Fetched slots successfully.",
       },
       { status: 200 }
+    );
+  }),
+  http.post("/appointment", async () => {
+    await delay(2000);
+    return HttpResponse.json(
+      {
+        success: true,
+        data: PendingAppointment,
+        message: "Fetched slots successfully.",
+      },
+      { status: 201 }
     );
   }),
 ];

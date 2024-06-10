@@ -2,8 +2,9 @@ import { useContext, useEffect, useState } from "react";
 import { ProgressContext } from "../../progress.context";
 import { errorToastHandler } from "@/utils/toast/actions";
 import { get } from "@/utils/apiCaller";
+import { Dayjs } from "dayjs";
 
-const useFetchSlots = () => {
+const useFetchSlots = (date: Dayjs) => {
   const { data } = useContext(ProgressContext);
   const [isLoading, setIsLoading] = useState(true);
   const [slots, setSlots] = useState<number[]>([]);
@@ -11,7 +12,7 @@ const useFetchSlots = () => {
   useEffect(() => {
     setIsLoading(true);
     const abortController = new AbortController();
-    if (!data || !data.dentist || !data.date) {
+    if (!data || !data.dentist) {
       errorToastHandler({ message: "Please select previous sections first." });
       setSlots([]);
       setIsLoading(false);
@@ -25,7 +26,7 @@ const useFetchSlots = () => {
           "http://localhost:5173/slot",
           {
             dentist: data.dentist?.id,
-            date: data.date?.toDate().toDateString(),
+            date: date.toDate().toDateString(),
           },
           {
             signal: abortController.signal,
@@ -53,7 +54,7 @@ const useFetchSlots = () => {
       console.log("aborting...");
       abortController.abort();
     };
-  }, [data]);
+  }, [data, date]);
 
   return { slots, isLoading };
 };

@@ -45,12 +45,7 @@ const TreatmentCard = (props: TreatmentCardProps) => {
               <ToothIcon />
             </Grid>
             <Grid item>
-              <Typography
-                gutterBottom
-                variant="h5"
-                fontWeight={700}
-                component="div"
-              >
+              <Typography variant="h5" fontWeight={700} component="div">
                 {name}
               </Typography>
             </Grid>
