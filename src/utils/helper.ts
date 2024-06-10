@@ -6,6 +6,7 @@ import {
   format,
 } from "date-fns";
 import { enUS } from "date-fns/locale";
+import dayjs from "dayjs";
 
 export const formatUserName = (firstName: string, lastName: string) => {
   return [firstName, lastName].join(" ");
@@ -54,3 +55,6 @@ export const formatDate = (date: Date) =>
 
 export const isValidDate = (date: unknown) =>
   date instanceof Date && !isNaN(date.getTime());
+
+export const formatTime = (time: number) =>
+  dayjs(time + "", "HH").format("HH:mm A");

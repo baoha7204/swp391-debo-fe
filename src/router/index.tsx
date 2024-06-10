@@ -13,7 +13,7 @@ import PersistLogin from "@/components/Auth/PersistLogin";
 import UnauthorizedPage from "@/pages/403";
 import AuthenticationPage from "@/pages/Authentication";
 
-import BookingPage from "@/pages/Patient/Booking";
+import BookingPage from "@/components/Booking";
 import DashboardPage from "@/pages/Patient/Dashboard";
 import AdminLayout from "@/pages/Admin";
 import CreateBranch from "@/pages/Admin/adminCreate/CreateBranch/CreateBranch";

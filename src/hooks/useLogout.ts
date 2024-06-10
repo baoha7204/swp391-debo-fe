@@ -1,7 +1,7 @@
 import useAuth from "./useAuth";
-import { toastError } from "@/utils/toast";
 import { API_ENDPOINTS } from "@/utils/api";
 import { post } from "@/utils/apiCaller";
+import { errorToastHandler } from "@/utils/toast/actions";
 
 const useLogout = () => {
   const { setAuth } = useAuth();
@@ -11,7 +11,7 @@ const useLogout = () => {
     try {
       await post(API_ENDPOINTS.AUTH.LOGOUT, true);
     } catch (err) {
-      toastError(err.message);
+      errorToastHandler(err.response);
     }
   };
 

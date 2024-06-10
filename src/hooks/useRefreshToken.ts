@@ -7,40 +7,44 @@ import { ROLE } from "@/constant/core";
 import { sanitizeString } from "@/utils/helper";
 import { post } from "@/utils/apiCaller";
 import { AuthResponseType } from "@/pages/Authentication/types/core";
-import { toastError } from "@/utils/toast";
+import { errorToastHandler } from "@/utils/toast/actions";
+import { useCallback } from "react";
 
 const useRefreshToken = () => {
-  const { auth, setAuth } = useAuth();
+  const { accessToken, refreshToken, setAccessToken, setRefreshToken } =
+    useAuth();
 
-  const refresh = async () => {
-    const decoded = auth?.accessToken
-      ? decodeToken<Token>(auth.accessToken)
-      : undefined;
-    const role = decoded?.role || "";
+  const decoded = accessToken ? decodeToken<Token>(accessToken) : undefined;
+  const role = decoded?.role || "";
 
-    const endpoint =
-      sanitizeString(role) === ROLE.ADMIN
-        ? API_ENDPOINTS.AUTH.REFRESH_TOKEN_GOOGLE
-        : API_ENDPOINTS.AUTH.REFRESH_TOKEN_CREDENTIALS;
-    const response = await post<AuthResponseType>(endpoint, true);
-    const { data } = response;
+  const endpoint =
+    sanitizeString(role) === ROLE.ADMIN
+      ? API_ENDPOINTS.AUTH.REFRESH_TOKEN_GOOGLE
+      : API_ENDPOINTS.AUTH.REFRESH_TOKEN_CREDENTIALS;
 
-    if (!data.success || !data.data) {
-      return toastError(data.message);
+  const refresh = useCallback(async () => {
+    try {
+      const response = await post<AuthResponseType>(endpoint, {
+        accessToken,
+        refreshToken,
+      });
+      const { data } = response;
+
+      if (!data.success || !data.data) {
+        return errorToastHandler(data);
+      }
+      const result = data.data;
+
+      setAccessToken(result.accessToken!);
+      setRefreshToken(result.refreshToken!);
+
+      return result.accessToken;
+    } catch (error) {
+      errorToastHandler(error.response);
+      setRefreshToken("");
     }
+  }, [endpoint, accessToken, refreshToken, setAccessToken, setRefreshToken]);
 
-    const result = data.data;
-
-    setAuth((prev) => {
-      return {
-        ...prev,
-        refreshToken: result.refreshToken,
-        accessToken: result.accessToken,
-      };
-    });
-
-    return result.accessToken;
-  };
   return refresh;
 };
 

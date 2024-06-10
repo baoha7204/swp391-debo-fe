@@ -30,6 +30,15 @@ const RegisterForm = () => {
         autoFocus
       />
       <FormInputText
+        control={control}
+        name="phoneNumber"
+        outsideLabel="Phone"
+        label="0123456789"
+        required
+        fullWidth
+        id="phoneNumber"
+      />
+      <FormInputText
         isPassword
         control={control}
         name="password"

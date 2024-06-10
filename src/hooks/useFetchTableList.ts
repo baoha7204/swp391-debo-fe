@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { toastError } from "@/utils/toast";
 import { TableControl } from "./useControlTable";
 import { get } from "@/utils/apiCaller";
+import { errorToastHandler } from "@/utils/toast/actions";
 
 export type ListDataResponse<T> = {
   list: T[];
@@ -25,8 +25,6 @@ const useFetchTableList = <T>({
       try {
         const response = await get<ListDataResponse<T>>(
           url,
-          // TODO: set false to true -> protected route
-          false,
           {
             page: controller.page,
             limit: controller.rowsPerPage,
@@ -37,14 +35,14 @@ const useFetchTableList = <T>({
         );
         const data = response.data;
         if (!data.success) {
-          toastError(data.message);
+          errorToastHandler(data);
           return;
         }
         setList(data.data.list);
         setCount(data.data.total);
       } catch (error) {
         if (error.name !== "CanceledError") {
-          console.error("error:", error.message);
+          errorToastHandler(error.response);
         }
       }
     };
