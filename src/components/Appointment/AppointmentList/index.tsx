@@ -1,14 +1,14 @@
 import { ListColumn } from "@/components/Table/types/core";
-import { formatDate, formatDentistName } from "@/utils/helper";
+import { formatDentistName } from "@/utils/helper";
 import MyTable from "@/components/Table/MyTable";
 
 export type AppointmentListData = {
-  id: number;
+  id: string;
   name: string;
   status: string;
   treatment: string;
   dentist: string;
-  date: Date;
+  start: Date;
 };
 
 const columns: readonly ListColumn<AppointmentListData>[] = [
@@ -22,15 +22,20 @@ const columns: readonly ListColumn<AppointmentListData>[] = [
     format: formatDentistName,
   },
   {
-    id: "date",
+    id: "start",
     label: "Date",
     minWidth: 200,
-    format: formatDate,
+    isDate: true,
   },
 ];
 
 const AppointmentList = ({ url }: { url: string }) => {
-  return <MyTable<AppointmentListData> url={url} columns={columns} />;
+  return (
+    <MyTable<AppointmentListData & { timeSlot: number }>
+      url={url}
+      columns={columns}
+    />
+  );
 };
 
 export default AppointmentList;

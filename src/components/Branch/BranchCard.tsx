@@ -12,16 +12,17 @@ import {
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import { useContext } from "react";
 import { ProgressContext } from "../Booking/progress.context";
+import DefaultDentalOffice from "/assets/Dental-Office.jpg";
 
 export type BranchCardProps = {
   id: number;
-  img: string;
+  avt: string | null;
   address: string;
   name: string;
 };
 
 const BranchCard = (props: BranchCardProps) => {
-  const { img, address, name } = props;
+  const { avt, address, name } = props;
   const { handleDoneIncrement, setData } = useContext(ProgressContext);
 
   const handleClick = () => {
@@ -42,7 +43,7 @@ const BranchCard = (props: BranchCardProps) => {
       <CardActionArea onClick={handleClick}>
         <CardMedia
           component="img"
-          image={img}
+          image={avt || DefaultDentalOffice}
           alt="branch"
           sx={{
             height: {

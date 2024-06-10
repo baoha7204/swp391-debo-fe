@@ -3,6 +3,8 @@ import { get } from "@/utils/apiCaller";
 import { errorToastHandler } from "@/utils/toast/actions";
 import { TreatmentCardProps } from "../TreatmentCard";
 import { ProgressContext } from "@/components/Booking/progress.context";
+import { ListDataResponse } from "@/hooks/useFetchTableList";
+import { API_ENDPOINTS } from "@/utils/api";
 
 const useFetchTreatments = () => {
   const { data } = useContext(ProgressContext);
@@ -21,11 +23,10 @@ const useFetchTreatments = () => {
 
     const fetchRemote = async () => {
       try {
-        const response = await get<TreatmentCardProps[]>(
-          // TODO: set the correct url
-          "http://localhost:5173/treatments",
+        const response = await get<ListDataResponse<TreatmentCardProps>>(
+          API_ENDPOINTS.TREATMENT.LIST,
           {
-            branch: data.branch?.id,
+            branchId: data.branch?.id,
           },
           {
             signal: abortController.signal,
@@ -36,7 +37,7 @@ const useFetchTreatments = () => {
           errorToastHandler(result);
           return;
         }
-        setTreatments(result.data);
+        setTreatments(result.data.list);
       } catch (error) {
         if (error.name !== "CanceledError") {
           errorToastHandler(error.response);

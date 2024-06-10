@@ -13,7 +13,7 @@ import ToothIcon from "@/assets/ToothIcon";
 
 export type TreatmentCardProps = {
   id: number;
-  category: string;
+  category: number;
   name: string;
   description: string;
   price: number;
@@ -51,7 +51,7 @@ const TreatmentCard = (props: TreatmentCardProps) => {
             </Grid>
           </Grid>
           <Typography variant="body1" color="text.secondary">
-            {category}
+            {category === 1 ? "Medical" : "Cosmetic"}
           </Typography>
           <Typography variant="body2" color="text.secondary">
             {description}

@@ -9,8 +9,14 @@ export const API_ENDPOINTS = {
   },
   PATIENT: {
     CALENDAR: "patient/calendar",
+    APPOINTMENT: {
+      LIST: "patient/appointments",
+    },
   },
   BRANCH: {
-    LIST: "branches",
+    LIST: "branch",
+  },
+  TREATMENT: {
+    LIST: "treatments",
   },
 };

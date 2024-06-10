@@ -58,3 +58,21 @@ export const isValidDate = (date: unknown) =>
 
 export const formatTime = (time: number) =>
   dayjs(time + "", "HH").format("HH:mm A");
+
+export const formatDateSlot = (
+  slot: number,
+  date?: Date,
+  format = "YYYY-MM-DDTHH"
+) => {
+  const dateRes = dayjs(date).format("YYYY-MM-DD");
+  return dayjs(`${dateRes}T${slot}`, format).toDate();
+};
+
+export const formatDateSlotString = (
+  slot: number,
+  date?: Date,
+  format = "YYYY-MM-DDTHH"
+) => {
+  const dateRes = dayjs(date).format("YYYY-MM-DD");
+  return dayjs(`${dateRes}T${slot}`, format).format("YYYY-MM-DD HH:mm A");
+};
