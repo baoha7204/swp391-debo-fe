@@ -1,6 +1,14 @@
 import { http, HttpResponse, delay } from "msw";
 import users from "./users.json";
-import { AppointmentPatientLists, CalendarPatientEvents } from "./mock-data";
+import {
+  AppointmentPatientLists,
+  Branches,
+  CalendarPatientEvents,
+  Dentists,
+  PendingAppointment,
+  Slots,
+  Treatments,
+} from "./mock-data";
 
 export const handlers = [
   http.post("/login", async ({ request }) => {
@@ -94,5 +102,60 @@ export const handlers = [
         { status: 500 }
       );
     }
+  }),
+  http.get("/branches", async () => {
+    await delay(2000);
+    return HttpResponse.json(
+      {
+        success: true,
+        data: Branches,
+        message: "Fetched branches successfully.",
+      },
+      { status: 200 }
+    );
+  }),
+  http.get("/treatments", async () => {
+    await delay(2000);
+    return HttpResponse.json(
+      {
+        success: true,
+        data: Treatments,
+        message: "Fetched treatments successfully.",
+      },
+      { status: 200 }
+    );
+  }),
+  http.get("/dentist", async () => {
+    await delay(2000);
+    return HttpResponse.json(
+      {
+        success: true,
+        data: Dentists,
+        message: "Fetched dentists successfully.",
+      },
+      { status: 200 }
+    );
+  }),
+  http.get("/slot", async () => {
+    await delay(2000);
+    return HttpResponse.json(
+      {
+        success: true,
+        data: Slots,
+        message: "Fetched slots successfully.",
+      },
+      { status: 200 }
+    );
+  }),
+  http.post("/appointment", async () => {
+    await delay(2000);
+    return HttpResponse.json(
+      {
+        success: true,
+        data: PendingAppointment,
+        message: "Fetched slots successfully.",
+      },
+      { status: 201 }
+    );
   }),
 ];

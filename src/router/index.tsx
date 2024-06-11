@@ -13,8 +13,7 @@ import PersistLogin from "@/components/Auth/PersistLogin";
 import UnauthorizedPage from "@/pages/403";
 import AuthenticationPage from "@/pages/Authentication";
 
-////Customer////
-import BookingPage from "@/pages/Patient/Booking";
+import BookingPage from "@/components/Booking";
 import DashboardPage from "@/pages/Patient/Dashboard";
 import PatientLayout from "@/pages/Patient";
 import Calendar from "@/pages/Patient/Calendar";
@@ -31,11 +30,10 @@ import TreatmentList from "@/pages/Admin/adminViewList/TreatmentList/TreatmentLi
 import AdminList from "@/pages/Admin/adminViewList/AllStaffList";
 import PatientList from "@/pages/Admin/adminViewList/PatientList/PatientList";
 //AdminDetail
+import BranchDetail from "@/pages/Admin/adminViewDetail/BranchDetail/BranchDetail";
 import PatientDetail from "@/pages/Admin/adminViewDetail/PatientDetail/PatientDetail";
 import TreatmentDetail from "@/pages/Admin/adminViewDetail/TreatmentDetail/TreatmentDetail";
 import StaffDetail from "@/pages/Admin/adminViewDetail/StaffDetail/StaffDetail";
-import BranchDetail from "@/pages/Admin/adminViewDetail/BranchDetail/BranchDetail";
-import BranchTableDetail from "@/pages/Admin/adminViewDetail/BranchDetail";
 //AdminCreate
 import CreateBranch from "@/pages/Admin/adminCreate/Branchs/CreateBranch";
 import CreateStaff from "@/pages/Admin/adminCreate/Staffs/CreateStaff";
@@ -170,7 +168,7 @@ const RouterComponent = () => {
         },
         {
           path: "branchList/:id",
-          element: <BranchTableDetail />,
+          element: <BranchDetail />,
         },
         {
           path: "treatmentList/:id",

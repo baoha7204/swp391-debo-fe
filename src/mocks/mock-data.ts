@@ -66,7 +66,7 @@ const CalendarPatientEvents: ProcessedEvent[] = [
   },
 ];
 
-const AppointmentPatientLists: AppointmentListData[] = [
+const AppointmentPatientLists = [
   {
     id: 1,
     name: "Check up for Teeth Cleaning",
@@ -189,4 +189,124 @@ const AppointmentPatientLists: AppointmentListData[] = [
   },
 ];
 
-export { CalendarPatientEvents, AppointmentPatientLists };
+const Branches = [
+  {
+    id: 1,
+    name: "Debo Thu Duc",
+    address: "123 Nguyen Van Linh, Thu Duc, Ho Chi Minh City",
+    img: "https://nhakhoaparkway.com/wp-content/uploads/2024/04/z5362944066112_f7a412cc26ab13922f8cc20fb3c9e069.jpg",
+  },
+  {
+    id: 2,
+    name: "Debo Quan 5",
+    address: "123 Nguyen Van Linh, Quan 5, Ho Chi Minh City",
+    img: "https://nhakhoaparkway.com/wp-content/uploads/2024/04/z5362944066112_f7a412cc26ab13922f8cc20fb3c9e069.jpg",
+  },
+  {
+    id: 3,
+    name: "Debo Quan 9",
+    address: "567 Nguyen Van Linh, Quan 9, Ho Chi Minh City",
+    img: "https://nhakhoaparkway.com/wp-content/uploads/2024/04/z5362944066112_f7a412cc26ab13922f8cc20fb3c9e069.jpg",
+  },
+  {
+    id: 4,
+    name: "Debo Tay Ninh",
+    address: "25 Lac Long Quan, TP Tay Ninh, Tay Ninh City",
+    img: "https://nhakhoaparkway.com/wp-content/uploads/2024/04/z5362944066112_f7a412cc26ab13922f8cc20fb3c9e069.jpg",
+  },
+];
+
+const Treatments = [
+  {
+    id: 1,
+    category: "Hair",
+    name: "Haircut",
+    description: "Wash, cut, and blow-dry",
+    price: 30,
+  },
+  {
+    id: 2,
+    category: "Hair",
+    name: "Hair coloring",
+    description: "Coloring and blow-dry",
+    price: 50,
+  },
+  {
+    id: 3,
+    category: "Hair",
+    name: "Perm",
+    description: "Perm and blow-dry",
+    price: 70,
+  },
+  {
+    id: 4,
+    category: "Hair",
+    name: "Perm",
+    description: "Perm and blow-dry",
+    price: 70,
+  },
+  {
+    id: 5,
+    category: "Hair",
+    name: "Perm",
+    description: "Perm and blow-dry",
+    price: 70,
+  },
+  {
+    id: 6,
+    category: "Hair",
+    name: "Perm",
+    description: "Perm and blow-dry",
+    price: 70,
+  },
+];
+
+const Dentists = [
+  {
+    id: 1,
+    name: "John Doe",
+    img: "https://cdn4.iconfinder.com/data/icons/alternative-medicine-flat/64/male-therapist-doctor-dentist-avatar-512.png",
+  },
+  {
+    id: 2,
+    name: "Jane Smith",
+    img: "https://cdn4.iconfinder.com/data/icons/alternative-medicine-flat/64/male-therapist-doctor-dentist-avatar-512.png",
+  },
+  {
+    id: 3,
+    name: "Johnny Sins",
+    img: "https://cdn4.iconfinder.com/data/icons/alternative-medicine-flat/64/male-therapist-doctor-dentist-avatar-512.png",
+  },
+  {
+    id: 4,
+    name: "Bao Ha",
+    img: "https://cdn4.iconfinder.com/data/icons/alternative-medicine-flat/64/male-therapist-doctor-dentist-avatar-512.png",
+  },
+];
+
+const Slots = [7, 9, 11, 15, 17, 19];
+
+const PendingAppointment = {
+  id: 1,
+  treatId: 1,
+  paymentID: null,
+  dentId: 1,
+  tempDentId: null,
+  cusId: 1,
+  creatorId: 1,
+  isCreatedByStaff: false,
+  createdDate: new Date(),
+  startDate: new Date(),
+  timeSlot: 7,
+  status: "Pending",
+};
+
+export {
+  CalendarPatientEvents,
+  AppointmentPatientLists,
+  Branches,
+  Treatments,
+  Dentists,
+  Slots,
+  PendingAppointment,
+};

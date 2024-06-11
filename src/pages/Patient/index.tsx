@@ -1,17 +1,17 @@
-import SettingsIcon from "@mui/icons-material/Settings";
 import EventIcon from "@mui/icons-material/Event";
 import HomeIcon from "@mui/icons-material/Home";
 import PaymentsIcon from "@mui/icons-material/Payments";
-import { Outlet } from "react-router-dom";
+import ChecklistIcon from "@mui/icons-material/Checklist";
+import { Outlet, useNavigate } from "react-router-dom";
 
 import DefaultLayout from "@/components/Layout/DefaultLayout";
 
 const SidebarPatientBody = [
   { title: "Home", path: "", icon: <HomeIcon /> },
   { title: "Calendar", path: "calendar", icon: <EventIcon /> },
+  { title: "Appointment List", path: "appointments", icon: <ChecklistIcon /> },
   // TODO: implement these features
   { title: "My Payment", path: "payment", icon: <PaymentsIcon /> },
-  { title: "Setting", path: "", icon: <SettingsIcon /> },
 ];
 
 const PatientRoutes = [
@@ -33,10 +33,17 @@ const PatientInfo = {
 };
 
 const PatientLayout = () => {
+  const navigate = useNavigate();
   return (
     <DefaultLayout
       sidebarBody={SidebarPatientBody}
-      header={{ info: PatientInfo, routes: PatientRoutes }}
+      header={{
+        info: PatientInfo,
+        routes: PatientRoutes,
+        onCreateBooking: () => {
+          navigate("booking");
+        },
+      }}
     >
       <Outlet />
     </DefaultLayout>

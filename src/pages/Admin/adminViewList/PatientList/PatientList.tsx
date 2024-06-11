@@ -1,5 +1,5 @@
-import PatientListTable from "./PatientListTable";
-import PatientListHeader from "./PatientListHeader";
+import PatientListTable from "@/components/Patient/PatientList/PatientListTable";
+import PatientListHeader from "@/components/Patient/PatientList/PatientListHeader";
 import { Box } from "@mui/material";
 
 function PatientList() {
