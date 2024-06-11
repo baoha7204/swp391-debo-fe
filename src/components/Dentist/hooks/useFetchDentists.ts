@@ -3,6 +3,7 @@ import { get } from "@/utils/apiCaller";
 import { errorToastHandler } from "@/utils/toast/actions";
 import { ProgressContext } from "@/components/Booking/progress.context";
 import { DentistCardProps } from "../DentistCard";
+import { API_ENDPOINTS } from "@/utils/api";
 
 const useFetchDentists = () => {
   const { data } = useContext(ProgressContext);
@@ -22,8 +23,7 @@ const useFetchDentists = () => {
     const fetchRemote = async () => {
       try {
         const response = await get<DentistCardProps[]>(
-          // TODO: set the correct url
-          "http://localhost:5173/dentist",
+          API_ENDPOINTS.DENTIST.LIST,
           {
             treatment: data.treatment?.id,
           },
