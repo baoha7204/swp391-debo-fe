@@ -3,6 +3,7 @@ import { ProgressContext } from "../../progress.context";
 import { errorToastHandler } from "@/utils/toast/actions";
 import { get } from "@/utils/apiCaller";
 import { Dayjs } from "dayjs";
+import { API_ENDPOINTS } from "@/utils/api";
 
 const useFetchSlots = (date: Dayjs) => {
   const { data } = useContext(ProgressContext);
@@ -22,8 +23,7 @@ const useFetchSlots = (date: Dayjs) => {
     const fetchRemote = async () => {
       try {
         const response = await get<number[]>(
-          // TODO: set the correct url
-          "http://localhost:5173/slot",
+          API_ENDPOINTS.SLOT.LIST,
           {
             dentist: data.dentist?.id,
             date: date.toDate().toDateString(),

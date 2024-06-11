@@ -24,4 +24,10 @@ export const API_ENDPOINTS = {
   DENTIST: {
     LIST: "dentists",
   },
+  SLOT: {
+    LIST: "slot",
+  },
+  APPOINTMENT: {
+    ONE: "appointment",
+  },
 };

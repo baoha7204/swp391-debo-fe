@@ -1,7 +1,5 @@
 import { ProcessedEvent, RemoteQuery } from "@aldabil/react-scheduler/types";
 
-import { DateSchema } from "@/lib/schema";
-import { isParsingError } from "@/usecases/handleSubmitForm";
 import { errorToastHandler } from "@/utils/toast/actions";
 import useAxiosPrivate from "./useAxiosPrivate";
 import { formatDateSlot } from "@/utils/helper";
@@ -24,9 +22,6 @@ const useFetchCalendar = ({ url }: { url: string }) => {
       return new Promise((res) => res([]));
     }
     const events = data.data.value.map((event: Partial<ProcessedEvent>) => {
-      if (isParsingError(event.start, DateSchema)) {
-        return new Promise((res) => res([]));
-      }
       const startTimeSlot = formatDateSlot(event.timeSlot, event.start);
       const endTimeSlot = formatDateSlot(event.timeSlot + 1, event.start);
       return {
