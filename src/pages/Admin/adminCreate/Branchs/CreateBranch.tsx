@@ -4,9 +4,11 @@ import Grid from '@mui/material/Grid';
 import FormInputText from '@/components/Form/FormInputText';
 import useBranch from './lib/useBranch';
 import MyButton from '@/components/MyButton';
+import { useParams } from 'react-router-dom';
 
 function CreateBranch() {
 
+    const { id } = useParams<string>();
     const [handleSubmit, isSubmitting, control] = useBranch();
 
     return (
@@ -16,11 +18,10 @@ function CreateBranch() {
             onSubmit={handleSubmit}
         >
             <Box sx={{ m: 1 }}>
-                <h1>Branch Information</h1>
+                <h1>{id ? "Update Branch" : "Add New Branch"}</h1>
             </Box>
             <Grid
                 container
-                // component=''
                 className='create-screen'
             >
                 <Grid

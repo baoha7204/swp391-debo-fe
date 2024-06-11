@@ -35,6 +35,7 @@ import PatientDetail from "@/pages/Admin/adminViewDetail/PatientDetail/PatientDe
 import TreatmentDetail from "@/pages/Admin/adminViewDetail/TreatmentDetail/TreatmentDetail";
 import StaffDetail from "@/pages/Admin/adminViewDetail/StaffDetail/StaffDetail";
 import BranchDetail from "@/pages/Admin/adminViewDetail/BranchDetail/BranchDetail";
+import BranchTableDetail from "@/pages/Admin/adminViewDetail/BranchDetail";
 //AdminCreate
 import CreateBranch from "@/pages/Admin/adminCreate/Branchs/CreateBranch";
 import CreateStaff from "@/pages/Admin/adminCreate/Staffs/CreateStaff";
@@ -169,7 +170,7 @@ const RouterComponent = () => {
         },
         {
           path: "branchList/:id",
-          element: <BranchDetail />,
+          element: <BranchTableDetail />,
         },
         {
           path: "treatmentList/:id",
