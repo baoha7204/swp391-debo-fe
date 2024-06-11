@@ -13,4 +13,7 @@ export const API_ENDPOINTS = {
   BRANCH: {
     LIST: "branches",
   },
+  DENTIST: {
+    CALENDAR: "dentist/calendar",
+  },
 };
