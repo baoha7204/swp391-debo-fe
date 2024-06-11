@@ -17,6 +17,11 @@ export const API_ENDPOINTS = {
     LIST: "branch",
   },
   TREATMENT: {
-    LIST: "treatments",
+    LIST: {
+      BY_BRANCH: "treatments/branch",
+    },
+  },
+  DENTIST: {
+    LIST: "dentists",
   },
 };
