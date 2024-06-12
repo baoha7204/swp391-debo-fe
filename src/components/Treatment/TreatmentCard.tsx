@@ -16,7 +16,7 @@ export type TreatmentCardProps = {
   category: number;
   name: string;
   description: string;
-  price: number;
+  price: number | null;
 };
 
 const TreatmentCard = (props: TreatmentCardProps) => {
@@ -80,10 +80,12 @@ const TreatmentCard = (props: TreatmentCardProps) => {
           </Grid>
           <Grid item>
             <Typography variant="body1" color="primary.main" fontWeight="700">
-              {price.toLocaleString("it-IT", {
-                style: "currency",
-                currency: "VND",
-              })}
+              {price
+                ? price.toLocaleString("it-IT", {
+                    style: "currency",
+                    currency: "VND",
+                  })
+                : "Free"}
             </Typography>
           </Grid>
         </Grid>

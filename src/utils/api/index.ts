@@ -24,6 +24,7 @@ export const API_ENDPOINTS = {
   },
   DENTIST: {
     LIST: "dentists",
+    CALENDAR: "dentist/calendar",
   },
   SLOT: {
     LIST: "slot",
@@ -42,5 +43,4 @@ export const API_ENDPOINTS = {
     LIST_MANAGER: "User/managerlist",
     LIST_STAFF: "User/stafflist",
   },
-
 };

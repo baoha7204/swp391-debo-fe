@@ -19,6 +19,10 @@ import PatientLayout from "@/pages/Patient";
 import Calendar from "@/pages/Patient/Calendar";
 import PatientAppointmentList from "@/pages/Patient/Appointment/AppointmentList";
 import AppointmentDetail from "@/components/Appointment/AppointmentDetail";
+import DentistLayout from "@/pages/Dentist";
+import DentistAppointmentList from "@/pages/Dentist/Appointment";
+import DentistDashboardPage from "@/pages/Dentist/Dashboard";
+import DentistCalendar from "@/pages/Dentist/Calendar";
 
 ////Manager////
 
@@ -40,7 +44,6 @@ import CreateStaff from "@/pages/Admin/adminCreate/Staffs/Staff/CreateStaff";
 import CreateManager from "@/pages/Admin/adminCreate/Staffs/Manager/CreateManager";
 import CreateDentist from "@/pages/Admin/adminCreate/Staffs/Dentist/CreateDentist";
 
-
 const RouterComponent = () => {
   const router = createBrowserRouter([
     // Public routes
@@ -57,6 +60,23 @@ const RouterComponent = () => {
         {
           path: "appointments",
           element: <PatientAppointmentList />,
+        },
+        {
+          path: "appointments/:id",
+          element: <AppointmentDetail />,
+        },
+      ],
+    },
+    {
+      path: "dentistTest",
+      element: <DentistLayout />,
+      children: [
+        { index: true, element: <Navigate to="calendar" /> },
+        { path: "calendar", element: <DentistCalendar /> },
+        { path: "dashboard", element: <DentistDashboardPage /> },
+        {
+          path: "appointments",
+          element: <DentistAppointmentList />,
         },
         {
           path: "appointments/:id",
@@ -107,7 +127,24 @@ const RouterComponent = () => {
           // Dentist routes
           path: ROLE.DENTIST,
           element: <RequireAuth allowedRoles={[ROLE.DENTIST]} />,
-          children: [],
+          children: [
+            {
+              element: <DentistLayout />,
+              children: [
+                { index: true, element: <Navigate to="calendar" /> },
+                { path: "calendar", element: <DentistCalendar /> },
+                { path: "dashboard", element: <DentistDashboardPage /> },
+                {
+                  path: "appointments",
+                  element: <DentistAppointmentList />,
+                },
+                {
+                  path: "appointments/:id",
+                  element: <AppointmentDetail />,
+                },
+              ],
+            },
+          ],
         },
         {
           // Manager routes
