@@ -35,7 +35,7 @@ const TreatmentCardSummary = (props: TreatmentCardProps) => {
             </Grid>
           </Grid>
           <Typography variant="body1" color="text.secondary">
-            {category}
+            {category === 1 ? "Medical" : "Cosmetic"}
           </Typography>
           <Typography variant="body2" color="text.secondary">
             {description}

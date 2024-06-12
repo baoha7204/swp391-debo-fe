@@ -7,13 +7,18 @@ import {
   CardContent,
   Typography,
 } from "@mui/material";
+import DefaultDentist from "/assets/Dentist.jpg";
 
 const DentistCardSummary = (props: DentistCardProps) => {
-  const { name, img } = props;
+  const { name, avt } = props;
   return (
     <Card>
       <CardActionArea sx={{ display: "flex", justifyContent: "flex-start" }}>
-        <Avatar alt="Dentist" src={img} sx={{ width: 100, height: 100 }} />
+        <Avatar
+          alt="Dentist"
+          src={avt || DefaultDentist}
+          sx={{ width: 100, height: 100 }}
+        />
         <CardContent>
           <Typography
             gutterBottom
