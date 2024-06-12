@@ -44,7 +44,6 @@ import CreateStaff from "@/pages/Admin/adminCreate/Staffs/Staff/CreateStaff";
 import CreateManager from "@/pages/Admin/adminCreate/Staffs/Manager/CreateManager";
 import CreateDentist from "@/pages/Admin/adminCreate/Staffs/Dentist/CreateDentist";
 
-
 const RouterComponent = () => {
   const router = createBrowserRouter([
     // Public routes
@@ -128,7 +127,24 @@ const RouterComponent = () => {
           // Dentist routes
           path: ROLE.DENTIST,
           element: <RequireAuth allowedRoles={[ROLE.DENTIST]} />,
-          children: [],
+          children: [
+            {
+              element: <DentistLayout />,
+              children: [
+                { index: true, element: <Navigate to="calendar" /> },
+                { path: "calendar", element: <DentistCalendar /> },
+                { path: "dashboard", element: <DentistDashboardPage /> },
+                {
+                  path: "appointments",
+                  element: <DentistAppointmentList />,
+                },
+                {
+                  path: "appointments/:id",
+                  element: <AppointmentDetail />,
+                },
+              ],
+            },
+          ],
         },
         {
           // Manager routes
