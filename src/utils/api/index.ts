@@ -17,6 +17,7 @@ export const API_ENDPOINTS = {
     LIST: "branch",
   },
   TREATMENT: {
+    TREATMENT: "treatments",
     LIST: {
       BY_BRANCH: "treatments/branch",
     },
@@ -30,4 +31,16 @@ export const API_ENDPOINTS = {
   APPOINTMENT: {
     ONE: "appointment",
   },
+  USERS: {
+    USERS: "Users",
+    //Create
+    CREATE_STAFF: "User/createstaff",
+    CREATE_DENTIST: "User/createdentist",
+    CREATE_MANAGER: "User/createmanager",
+    //List
+    LIST_DENTIST: "User/dentistlist",
+    LIST_MANAGER: "User/managerlist",
+    LIST_STAFF: "User/stafflist",
+  },
+
 };

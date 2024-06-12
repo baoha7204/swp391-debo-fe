@@ -1,6 +1,5 @@
 import { Box } from "@mui/material";
 import { SyntheticEvent, useState } from "react";
-import { useParams } from "react-router-dom";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import AppointmentInfo from "./AppointmentInfo";

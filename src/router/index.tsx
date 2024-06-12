@@ -15,14 +15,31 @@ import AuthenticationPage from "@/pages/Authentication";
 
 import BookingPage from "@/components/Booking";
 import DashboardPage from "@/pages/Patient/Dashboard";
-import AdminLayout from "@/pages/Admin";
-import CreateBranch from "@/pages/Admin/adminCreate/CreateBranch/CreateBranch";
-import CreateStaff from "@/pages/Admin/adminCreate/CreateStaff/CreateStaff";
-import CreateTreatment from "@/pages/Admin/adminCreate/CreateTreatment/CreateTreatment";
 import PatientLayout from "@/pages/Patient";
 import Calendar from "@/pages/Patient/Calendar";
 import PatientAppointmentList from "@/pages/Patient/Appointment/AppointmentList";
 import AppointmentDetail from "@/components/Appointment/AppointmentDetail";
+
+////Manager////
+
+////Admin////
+import AdminLayout from "@/pages/Admin";
+//AdminList
+import BranchList from "@/pages/Admin/adminViewList/BranchList/BranchList";
+import TreatmentList from "@/pages/Admin/adminViewList/TreatmentList/TreatmentList";
+import AdminAllStaffList from "@/pages/Admin/adminViewList/AllStaffList";
+import PatientList from "@/pages/Admin/adminViewList/PatientList/PatientList";
+//AdminDetail
+import AllStaffsDetail from "@/pages/Admin/adminViewDetail/AllStaffsDetail/AllStaffsDetail";
+import BranchDetail from "@/pages/Admin/adminViewDetail/BranchDetail/BranchDetail";
+import TreatmentDetail from "@/pages/Admin/adminViewDetail/TreatmentDetail/TreatmentDetail";
+//AdminCreate
+import CreateBranch from "@/pages/Admin/adminCreate/Branchs/CreateBranch";
+import CreateTreatment from "@/pages/Admin/adminCreate/Treatments/CreateTreatment";
+import CreateStaff from "@/pages/Admin/adminCreate/Staffs/Staff/CreateStaff";
+import CreateManager from "@/pages/Admin/adminCreate/Staffs/Manager/CreateManager";
+import CreateDentist from "@/pages/Admin/adminCreate/Staffs/Dentist/CreateDentist";
+
 
 const RouterComponent = () => {
   const router = createBrowserRouter([
@@ -113,20 +130,63 @@ const RouterComponent = () => {
       children: [
         {
           index: true,
-          element: <Navigate to="branch" />,
+          element: <Navigate to="branchList" />,
+        },
+        //List
+        {
+          path: "branchList",
+          element: <BranchList />,
         },
         {
-          path: "branch",
+          path: "treatmentList",
+          element: <TreatmentList />,
+        },
+        {
+          path: "adminAllStaffList",
+          element: <AdminAllStaffList />,
+        },
+        {
+          path: "patientList",
+          element: <PatientList />,
+        },
+        //Create
+        {
+          path: "branchList/createBranch",
           element: <CreateBranch />,
         },
         {
-          path: "staff",
+          path: "treatmentList/createTreatment",
+          element: <CreateTreatment />,
+        },
+        {
+          path: "adminAllStaffList/createStaff",
           element: <CreateStaff />,
         },
         {
-          path: "treatment",
-          element: <CreateTreatment />,
+          path: "adminAllStaffList/createDentist",
+          element: <CreateDentist />,
         },
+        {
+          path: "adminAllStaffList/createManager",
+          element: <CreateManager />,
+        },
+        //Detail
+        {
+          path: "branchList/:id",
+          element: <BranchDetail />,
+        },
+        {
+          path: "treatmentList/:id",
+          element: <TreatmentDetail />,
+        },
+        {
+          path: "adminAllStaffList/:id",
+          element: <AllStaffsDetail />,
+        },
+        // {
+        //   path: "patientList/:id",
+        //   element: <PatientDetail />,
+        // },
       ],
     },
   ]);

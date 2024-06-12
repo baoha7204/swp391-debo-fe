@@ -11,18 +11,32 @@ import { Outlet } from "react-router-dom";
 import DefaultLayout from "@/components/Layout/DefaultLayout";
 
 const SidebarAdminBody = [
-  { title: "Reservations", path: "", icon: <EventIcon /> },
-  { title: "Branchs", path: "branch", icon: <StoreIcon /> },
-  {
-    title: "Treatments",
-    path: "treatment",
-    icon: <HealthAndSafetyIcon />,
-  },
-  { title: "Patients", path: "", icon: <AccountCircleIcon /> },
-  { title: "Account", path: "", icon: <AccountBoxIcon /> },
-  { title: "Staffs", path: "staff", icon: <GroupIcon /> },
-  { title: "Reports", path: "", icon: <ReportIcon /> },
-  { title: "Setting", path: "", icon: <SettingsIcon /> },
+  { title: "Reservations", path: "", icon: <EventIcon />, },
+  { title: "Branchs", path: "branchList", icon: <StoreIcon />, },
+  { title: "Treatments", path: "treatmentList", icon: <HealthAndSafetyIcon />, },
+  { title: "Patients", path: "patientList", icon: <AccountCircleIcon />, },
+  { title: "Account", path: "", icon: <AccountBoxIcon />, },
+  { title: "Staffs", path: "adminAllStaffList", icon: <GroupIcon />, },
+  { title: "Reports", path: "", icon: <ReportIcon />, },
+  { title: "Setting", path: "", icon: <SettingsIcon />, },
+];
+
+const AdminRoutes = [
+  //List
+  { path: "branchList", breadcrumb: "Branch List" },
+  { path: "treatmentList", breadcrumb: "Treatment List" },
+  { path: "adminAllStaffList", breadcrumb: "List All Staff" },
+  { path: "patientList", breadcrumb: "Patient List" },
+  //Create
+  { path: "branchList/createBranch", breadcrumb: "Create Branch" },
+  { path: "treatmentList/createTreatment", breadcrumb: "Create Treatment" },
+  { path: "adminAllStaffList/createDentist", breadcrumb: "Create Dentist" },
+  { path: "adminAllStaffList/createStaff", breadcrumb: "Create Staff" },
+  { path: "adminAllStaffList/createManager", breadcrumb: "Create Manager" },
+  //Detail
+  { path: "branchList/:id", breadcrumb: "Branch Detail" },
+  { path: "treatmentList/:id", breadcrumb: "Treatment Detail" },
+  { path: "adminStaffList/:id", breadcrumb: "Staff Detail" },
 ];
 
 const AdminInfo = {
@@ -35,7 +49,7 @@ const AdminLayout = () => {
   return (
     <DefaultLayout
       sidebarBody={SidebarAdminBody}
-      header={{ info: AdminInfo, name: "Create Branch" }}
+      header={{ info: AdminInfo, routes: AdminRoutes }}
     >
       <Outlet />
     </DefaultLayout>
