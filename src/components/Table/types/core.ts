@@ -6,7 +6,6 @@ export type ListColumn<T> = {
   minWidth?: number;
   align?: "right";
   isDetail?: boolean;
-  isCategory?: boolean;
   format?: ((value: Date) => string) | ((value: string) => string) | ((value: number) => string);
 };
 
