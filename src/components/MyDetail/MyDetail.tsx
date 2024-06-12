@@ -42,31 +42,34 @@ const MyDetail = <T extends RowData>({ url, columns }: TableProps<T>) => {
     console.log(state);
 
     return (
-        <Paper sx={{ padding: 2 }}>
-            <Grid container spacing={2}>
-                {columns.map((column) => {
-                    let formattedValue = state && state[column.id];
-                    if (column.format) {
-                        formattedValue = column.format(formattedValue);
-                    }
-                    return (
-                        <Grid item xs={12} sm={6} md={4} key={column.id.toString()}>
-                            <Typography variant="h6"
-                                sx={{ color: (theme) => theme.palette.text.secondary }}
-                            >{column.label}</Typography>
-                            <Typography variant="body1"
-                                sx={{
-                                    color: (theme) => theme.palette.text.primary,
-                                    fontWeight: "bold"
-                                }}
-                            >
-                                {formattedValue}
-                            </Typography>
-                        </Grid>
-                    );
-                })}
-            </Grid>
-        </Paper >
+        <Box>
+            <Paper sx={{ padding: 2 }}>
+                <Grid container spacing={2}>
+                    {columns.map((column) => {
+                        let formattedValue = state && state[column.id];
+                        if (column.format) {
+                            formattedValue = column.format(formattedValue);
+                        }
+                        return (
+                            <Grid item xs={12} sm={6} md={4} key={column.id.toString()}>
+                                <Typography variant="h6"
+                                    sx={{ color: (theme) => theme.palette.text.secondary }}
+                                >{column.label}</Typography>
+                                <Typography variant="body1"
+                                    sx={{
+                                        color: (theme) => theme.palette.text.primary,
+                                        fontWeight: "bold"
+                                    }}
+                                >
+                                    {formattedValue}
+                                </Typography>
+                            </Grid>
+                        );
+                    })}
+                </Grid>
+            </Paper >
+
+        </Box>
     );
 }
 

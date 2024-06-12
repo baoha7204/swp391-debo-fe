@@ -12,17 +12,20 @@ export const API_ENDPOINTS = {
   },
   TREATMENT: {
     TREATMENT: "treatments",
-    TREATMENT_ID: "treatments/:id",
   },
   BRANCH: {
     BRANCH: "branch",
   },
   USERS: {
     USERS: "Users",
+    //Create
     CREATE_STAFF: "User/createstaff",
     CREATE_DENTIST: "User/createdentist",
     CREATE_MANAGER: "User/createmanager",
+    //List
     LIST_DENTIST: "User/dentistlist",
+    LIST_MANAGER: "User/managerlist",
+    LIST_STAFF: "User/stafflist",
   },
 
 };

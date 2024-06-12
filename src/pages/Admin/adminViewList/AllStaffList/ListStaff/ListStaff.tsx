@@ -1,10 +1,10 @@
 import { API_ENDPOINTS } from "@/utils/api";
-import ListStaffTable from "./ListStaffTable";
+import AllStaffListTable from "../AllStaffListTable";
 
 function ListStaff() {
-  return (
-    <ListStaffTable url={API_ENDPOINTS.USERS.LIST_DENTIST} />
-  );
+    return (
+        <AllStaffListTable url={API_ENDPOINTS.USERS.LIST_STAFF} />
+    );
 }
 
 export default ListStaff;

@@ -1,8 +1,9 @@
+import { API_ENDPOINTS } from "@/utils/api";
+import AllStaffListTable from "../AllStaffListTable";
+
 function ListManager() {
     return (
-        <div>
-            ListManager
-        </div>
+        <AllStaffListTable url={API_ENDPOINTS.USERS.LIST_MANAGER} />
     );
 }
 

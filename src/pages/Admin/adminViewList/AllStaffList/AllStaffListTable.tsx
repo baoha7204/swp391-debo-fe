@@ -1,7 +1,7 @@
 import { ListColumn } from "@/components/Table/types/core";
 import MyTable from "@/components/Table/MyTable";
 
-export type GeneralStaffTableData = {
+export type TableData = {
     id: number;
     firstName: string;
     lastName: string;
@@ -10,7 +10,7 @@ export type GeneralStaffTableData = {
     phone: string;
 };
 
-const columns: readonly ListColumn<GeneralStaffTableData>[] = [
+const columns: readonly ListColumn<TableData>[] = [
     { id: "firstName", label: "First Name", minWidth: 100 },
     { id: "lastName", label: "Last Name", minWidth: 100 },
     { id: "email", label: "Email", minWidth: 100, isDetail: true, },
@@ -25,10 +25,10 @@ const columns: readonly ListColumn<GeneralStaffTableData>[] = [
     { id: "phone", label: "Phone", minWidth: 100 },
 ];
 
-function ListStaffTable({ url }: { url: string }) {
+function AllStaffListTable({ url }: { url: string }) {
     return (
-        <MyTable<GeneralStaffTableData> url={url} columns={columns} />
+        <MyTable<TableData> url={url} columns={columns} />
     );
 }
 
-export default ListStaffTable;
+export default AllStaffListTable;

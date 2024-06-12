@@ -27,17 +27,18 @@ import AdminLayout from "@/pages/Admin";
 //AdminList
 import BranchList from "@/pages/Admin/adminViewList/BranchList/BranchList";
 import TreatmentList from "@/pages/Admin/adminViewList/TreatmentList/TreatmentList";
-import AdminList from "@/pages/Admin/adminViewList/AllStaffList";
+import AdminAllStaffList from "@/pages/Admin/adminViewList/AllStaffList";
 import PatientList from "@/pages/Admin/adminViewList/PatientList/PatientList";
 //AdminDetail
+import AllStaffsDetail from "@/pages/Admin/adminViewDetail/AllStaffsDetail/AllStaffsDetail";
 import BranchDetail from "@/pages/Admin/adminViewDetail/BranchDetail/BranchDetail";
-import PatientDetail from "@/pages/Admin/adminViewDetail/PatientDetail/PatientDetail";
 import TreatmentDetail from "@/pages/Admin/adminViewDetail/TreatmentDetail/TreatmentDetail";
-import StaffDetail from "@/pages/Admin/adminViewDetail/StaffDetail/StaffDetail";
 //AdminCreate
 import CreateBranch from "@/pages/Admin/adminCreate/Branchs/CreateBranch";
-import CreateStaff from "@/pages/Admin/adminCreate/Staffs/CreateStaff";
 import CreateTreatment from "@/pages/Admin/adminCreate/Treatments/CreateTreatment";
+import CreateStaff from "@/pages/Admin/adminCreate/Staffs/Staff/CreateStaff";
+import CreateManager from "@/pages/Admin/adminCreate/Staffs/Manager/CreateManager";
+import CreateDentist from "@/pages/Admin/adminCreate/Staffs/Dentist/CreateDentist";
 
 
 const RouterComponent = () => {
@@ -141,8 +142,8 @@ const RouterComponent = () => {
           element: <TreatmentList />,
         },
         {
-          path: "adminStaffList",
-          element: <AdminList />,
+          path: "adminAllStaffList",
+          element: <AdminAllStaffList />,
         },
         {
           path: "patientList",
@@ -158,14 +159,18 @@ const RouterComponent = () => {
           element: <CreateTreatment />,
         },
         {
-          path: "adminStaffList/createStaff",
+          path: "adminAllStaffList/createStaff",
           element: <CreateStaff />,
         },
-        //Detail
         {
-          path: "patientDetail",
-          element: <PatientDetail />,
+          path: "adminAllStaffList/createDentist",
+          element: <CreateDentist />,
         },
+        {
+          path: "adminAllStaffList/createManager",
+          element: <CreateManager />,
+        },
+        //Detail
         {
           path: "branchList/:id",
           element: <BranchDetail />,
@@ -175,9 +180,13 @@ const RouterComponent = () => {
           element: <TreatmentDetail />,
         },
         {
-          path: "adminStaffList/:id",
-          element: <StaffDetail />,
+          path: "adminAllStaffList/:id",
+          element: <AllStaffsDetail />,
         },
+        // {
+        //   path: "patientList/:id",
+        //   element: <PatientDetail />,
+        // },
       ],
     },
   ]);

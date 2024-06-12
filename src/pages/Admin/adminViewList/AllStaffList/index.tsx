@@ -1,15 +1,15 @@
 import HeaderList from "../../components/HeaderList";
-import ListStaff from "./ListStaff/ListStaff";
-import ListDentist from "./ListDentist/ListDentist";
+import ListStaff from "./ListDentist/ListDentist";
+import ListDentist from "./ListStaff/ListStaff";
 import ListManager from "./ListManager/ListManager";
 
-function AdminList() {
+function AdminAllStaffList() {
 
     const child = {
         name: ['Dentists', 'Staffs', 'Branch Manager'],
-        body: [<ListStaff />, <ListDentist />, <ListManager />],
+        body: [<ListDentist />, <ListStaff />, <ListManager />],
         buttonName: ['Add New Dentist', 'Add New Staff', 'Add New Manager'],
-        route: ['/adminTest/adminStaffList/createStaff', 'adminTest/createStaff', 'adminTest/createBranchManager']
+        route: ['/adminTest/adminAllStaffList/createDentist', '/adminTest/adminAllStaffList/createStaff', '/adminTest/adminAllStaffList/createManager']
     }
 
     return (
@@ -23,4 +23,4 @@ function AdminList() {
     );
 }
 
-export default AdminList;
+export default AdminAllStaffList;

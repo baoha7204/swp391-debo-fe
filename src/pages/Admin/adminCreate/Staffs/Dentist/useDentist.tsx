@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { branchSchema } from "./branchSchema";
+import { allStaffSchema } from "../lib/staffSchema";
 import { handleSubmitForm } from "@/usecases/handleSubmitForm";
 import { z } from "zod";
 import { post } from "@/utils/apiCaller";
@@ -10,66 +10,66 @@ import { errorToastHandler } from "@/utils/toast/actions";
 import { toastSuccess } from "@/utils/toast";
 import { useNavigate } from "react-router-dom";
 
-export type BranchInputs = z.infer<typeof branchSchema>;
+export type StaffInputs = z.infer<typeof allStaffSchema>;
 
-export default function useBranch() {
+export default function useDentist() {
     const navigate = useNavigate();
 
-    const {
-        handleSubmit,
-        reset,
-        control,
-        formState: { isSubmitSuccessful, isSubmitting },
-    } = useForm<BranchInputs>({
-        resolver: zodResolver(branchSchema),
+    const { handleSubmit, reset, control, formState: { isSubmitSuccessful, isSubmitting },
+    } = useForm<StaffInputs>({
+        resolver: zodResolver(allStaffSchema),
         defaultValues: {
-            id: 0,
-            // branchAvt: [],
-            name: '',
-            address: '',
+            username: '',
+            password: '',
             phone: '',
             email: '',
+            firstName: '',
+            lastName: '',
+            address: '',
+            gender: false,
         },
     });
 
-    console.log('0');
-
-    const onSubmit: SubmitHandler<BranchInputs> = (data) => {
-
-        console.log('1');
-
-        const result = handleSubmitForm(data, branchSchema);
+    const onSubmit: SubmitHandler<StaffInputs> = (data) => {
+        const result = handleSubmitForm(data, allStaffSchema);
 
         if (!result || !result.success || result.error) {
             return;
         }
 
-        const { id, name, address, phone, email } = data;
+        const { address, username, password, phone, email, firstName, lastName, gender } = data;
 
-        console.log(data);
+        console.log(gender);
 
-        post(API_ENDPOINTS.BRANCH.BRANCH, {
-            id,
-            // branchAvt,
-            name,
-            address,
-            phone,
+        post(API_ENDPOINTS.USERS.CREATE_DENTIST, {
+            username,
             email,
+            password,
+            firstName,
+            lastName,
+            gender,
+            phone,
+            address,
         })
             .then((res) => {
                 const { data } = res;
                 if (!data.success) {
+                    console.log('1');
+
                     return errorToastHandler(data);
                 }
                 // successfully
                 toastSuccess("Create successfully!");
-                navigate('/adminTest/branchList');
+                navigate('/adminTest/adminStaffList');
             })
             .catch((err) => {
                 console.log(err.response);
                 errorToastHandler(err.response);
             });
     };
+
+
+
     useEffect(() => {
         if (isSubmitSuccessful) {
             reset();

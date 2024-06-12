@@ -1,9 +1,9 @@
 import Box from '@mui/material/Box';
 import '@/styles/globals.css'
 import Grid from '@mui/material/Grid';
-import useStaff from './lib/useStaff';
+import useStaff from './useStaff';
 import FormInputText from '@/components/Form/FormInputText';
-import FormSelect from '../../components/FormSelect/FormSelect';
+import FormSelect from '../../../components/FormSelect/FormSelect';
 import MyButton from '@/components/MyButton';
 
 function StaffCreateBody() {
@@ -17,9 +17,6 @@ function StaffCreateBody() {
                 noValidate
                 onSubmit={handleSubmit}
             >
-                <Box sx={{ m: 1 }}>
-                    <h1>Create</h1>
-                </Box>
                 <Grid
                     container
                     // component=''
@@ -250,7 +247,7 @@ function StaffCreateBody() {
                                 noValidate
                                 autoComplete="off"
                                 sx={{
-                                    m: 1, p: 0, width: '10ch',
+                                    m: 1, p: 0, width: '20ch',
                                 }}
                             >
                                 <FormSelect

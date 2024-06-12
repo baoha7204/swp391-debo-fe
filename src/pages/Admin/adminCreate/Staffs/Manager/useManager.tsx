@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { staffSchema } from "./staffSchema";
+import { allStaffSchema } from "../lib/staffSchema";
 import { handleSubmitForm } from "@/usecases/handleSubmitForm";
 import { z } from "zod";
 import { post } from "@/utils/apiCaller";
@@ -10,14 +10,14 @@ import { errorToastHandler } from "@/utils/toast/actions";
 import { toastSuccess } from "@/utils/toast";
 import { useNavigate } from "react-router-dom";
 
-export type StaffInputs = z.infer<typeof staffSchema>;
+export type StaffInputs = z.infer<typeof allStaffSchema>;
 
-export default function useStaff() {
+export default function useManager() {
     const navigate = useNavigate();
 
     const { handleSubmit, reset, control, formState: { isSubmitSuccessful, isSubmitting },
     } = useForm<StaffInputs>({
-        resolver: zodResolver(staffSchema),
+        resolver: zodResolver(allStaffSchema),
         defaultValues: {
             username: '',
             password: '',
@@ -31,7 +31,7 @@ export default function useStaff() {
     });
 
     const onSubmit: SubmitHandler<StaffInputs> = (data) => {
-        const result = handleSubmitForm(data, staffSchema);
+        const result = handleSubmitForm(data, allStaffSchema);
 
         if (!result || !result.success || result.error) {
             return;
@@ -41,7 +41,7 @@ export default function useStaff() {
 
         console.log(gender);
 
-        post(API_ENDPOINTS.USERS.CREATE_DENTIST, false, {
+        post(API_ENDPOINTS.USERS.CREATE_MANAGER, {
             username,
             email,
             password,

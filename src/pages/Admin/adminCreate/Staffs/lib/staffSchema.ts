@@ -1,7 +1,7 @@
 import { PhoneSchema } from "@/lib/schema";
 import { z } from "zod";
 
-export const staffSchema = z.object({
+export const allStaffSchema = z.object({
     username: z
         .string()
         .min(1, { message: "Username is required" })
@@ -24,7 +24,7 @@ export const staffSchema = z.object({
     phone: z
         .string()
         .min(1, { message: "Phone number is required" })
-        .max(256, { message: "Phone number must not exceed 256 characters" })
+        .max(10, { message: "Phone number must not exceed 10 characters" })
         .and(PhoneSchema),
     gender: z
         .boolean()
@@ -34,5 +34,4 @@ export const staffSchema = z.object({
         .string()
         .min(1, { message: "Address is required" })
         .max(256, { message: "Address must not exceed 256 characters" }),
-
 });

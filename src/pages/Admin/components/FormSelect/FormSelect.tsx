@@ -14,6 +14,16 @@ interface FormSelectProps<TFieldValues extends FieldValues, TName extends FieldP
     options: { value: string | number | boolean, label: string }[];
 }
 
+// Helper function to parse value
+const parseValue = (value: string | number | boolean) => {
+    if (value === "true") return true;
+    if (value === "false") return false;
+    if (typeof value === 'string' && !isNaN(Number(value))) {
+        return Number(value);
+    }
+    return value;
+};
+
 const FormSelect = <
     TFieldValues extends FieldValues,
     TName extends FieldPath<TFieldValues>
@@ -35,7 +45,7 @@ const FormSelect = <
                         labelId={`${name}-label`}
                         value={value}
                         label={label}
-                        onChange={(event) => onChange(event.target.value === 'true')}
+                        onChange={(event) => onChange(parseValue(event.target.value))}
                         {...rest}
                     >
                         {options.map((option, index) => (
