@@ -7,13 +7,19 @@ import {
   Grid,
   Typography,
 } from "@mui/material";
+import DefaultDentalOffice from "/assets/Dental-Office.jpg";
 
 const BranchCardSummary = (props: BranchCardProps) => {
-  const { name, address, img } = props;
+  const { name, address, avt } = props;
   return (
     <Card>
       <CardActionArea sx={{ display: "flex" }}>
-        <CardMedia component="img" image={img} alt="branch" height={200} />
+        <CardMedia
+          component="img"
+          image={avt || DefaultDentalOffice}
+          alt="branch"
+          height={200}
+        />
         <CardContent>
           <Typography gutterBottom variant="h6" fontWeight={600}>
             {name}
