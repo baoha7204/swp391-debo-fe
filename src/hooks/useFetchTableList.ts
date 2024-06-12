@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { TableControl } from "./useControlTable";
-import { get } from "@/utils/apiCaller";
 import { errorToastHandler } from "@/utils/toast/actions";
+import useAxiosPrivate from "./useAxiosPrivate";
 
 export type ListDataResponse<T> = {
   list: T[];
@@ -18,21 +18,20 @@ const useFetchTableList = <T>({
   const [list, setList] = useState<T[]>([]);
   const [count, setCount] = useState(0);
 
+  const axiosPrivate = useAxiosPrivate();
+
   useEffect(() => {
     const abortController = new AbortController();
 
     const fetchRemote = async () => {
       try {
-        const response = await get<ListDataResponse<T>>(
-          url,
-          {
+        const response = await axiosPrivate.get(url, {
+          params: {
             page: controller.page,
             limit: controller.rowsPerPage,
           },
-          {
-            signal: abortController.signal,
-          }
-        );
+          signal: abortController.signal,
+        });
         const data = response.data;
         if (!data.success) {
           errorToastHandler(data);
@@ -54,7 +53,7 @@ const useFetchTableList = <T>({
       console.log("aborting...");
       abortController.abort();
     };
-  }, [url, controller.page, controller.rowsPerPage]);
+  }, [url, controller.page, controller.rowsPerPage, axiosPrivate]);
 
   return [list, count] as const;
 };

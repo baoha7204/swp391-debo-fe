@@ -3,6 +3,7 @@ import { get } from "@/utils/apiCaller";
 import { errorToastHandler } from "@/utils/toast/actions";
 import { TreatmentCardProps } from "../TreatmentCard";
 import { ProgressContext } from "@/components/Booking/progress.context";
+import { API_ENDPOINTS } from "@/utils/api";
 
 const useFetchTreatments = () => {
   const { data } = useContext(ProgressContext);
@@ -22,11 +23,8 @@ const useFetchTreatments = () => {
     const fetchRemote = async () => {
       try {
         const response = await get<TreatmentCardProps[]>(
-          // TODO: set the correct url
-          "http://localhost:5173/treatments",
-          {
-            branch: data.branch?.id,
-          },
+          `${API_ENDPOINTS.TREATMENT.LIST.BY_BRANCH}/${data.branch?.id}`,
+          undefined,
           {
             signal: abortController.signal,
           }

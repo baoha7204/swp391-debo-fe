@@ -1,8 +1,8 @@
 import { PhoneSchema } from "@/lib/schema";
 import { z } from "zod";
 
-const MAX_FILE_SIZE = 1024 * 1024 * 5;
-const ACCEPTED_IMAGE_TYPES = ["jpeg", "jpg", "png", "webp"];
+// const MAX_FILE_SIZE = 1024 * 1024 * 5;
+// const ACCEPTED_IMAGE_TYPES = ["jpeg", "jpg", "png", "webp"];
 
 export const branchSchema = z.object({
     id: z.coerce

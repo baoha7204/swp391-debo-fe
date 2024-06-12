@@ -10,15 +10,16 @@ import {
   Typography,
 } from "@mui/material";
 import { formatDentistName } from "@/utils/helper";
+import DefaultDentist from "/assets/Dentist.jpg";
 
 export type DentistCardProps = {
   id: number;
-  img: string;
+  avt: string | null;
   name: string;
 };
 
 const DentistCard = (props: DentistCardProps) => {
-  const { img, name } = props;
+  const { avt, name } = props;
   const { handleDoneIncrement, setData } = useContext(ProgressContext);
 
   const handleClick = () => {
@@ -39,7 +40,7 @@ const DentistCard = (props: DentistCardProps) => {
       <CardActionArea onClick={handleClick}>
         <CardMedia
           component="img"
-          image={img}
+          image={avt || DefaultDentist}
           alt="dentist"
           sx={{
             height: {

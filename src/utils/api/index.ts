@@ -9,12 +9,27 @@ export const API_ENDPOINTS = {
   },
   PATIENT: {
     CALENDAR: "patient/calendar",
+    APPOINTMENT: {
+      LIST: "patient/appointments",
+    },
+  },
+  BRANCH: {
+    LIST: "branch",
   },
   TREATMENT: {
     TREATMENT: "treatments",
+    LIST: {
+      BY_BRANCH: "treatments/branch",
+    },
   },
-  BRANCH: {
-    BRANCH: "branch",
+  DENTIST: {
+    LIST: "dentists",
+  },
+  SLOT: {
+    LIST: "slot",
+  },
+  APPOINTMENT: {
+    ONE: "appointment",
   },
   USERS: {
     USERS: "Users",
