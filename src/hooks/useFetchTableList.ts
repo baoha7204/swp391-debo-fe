@@ -40,6 +40,7 @@ const useFetchTableList = <T>({
         setList(data.data.list);
         setCount(data.data.total);
       } catch (error) {
+        console.log(error.response);
         if (error.name !== "CanceledError") {
           errorToastHandler(error.response);
         }

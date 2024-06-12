@@ -17,12 +17,14 @@ export const API_ENDPOINTS = {
     LIST: "branch",
   },
   TREATMENT: {
+    TREATMENT: "treatments",
     LIST: {
       BY_BRANCH: "treatments/branch",
     },
   },
   DENTIST: {
     LIST: "dentists",
+    CALENDAR: "dentist/calendar",
   },
   SLOT: {
     LIST: "slot",
@@ -30,7 +32,15 @@ export const API_ENDPOINTS = {
   APPOINTMENT: {
     ONE: "appointment",
   },
-  DENTIST: {
-    CALENDAR: "dentist/calendar",
+  USERS: {
+    USERS: "Users",
+    //Create
+    CREATE_STAFF: "User/createstaff",
+    CREATE_DENTIST: "User/createdentist",
+    CREATE_MANAGER: "User/createmanager",
+    //List
+    LIST_DENTIST: "User/dentistlist",
+    LIST_MANAGER: "User/managerlist",
+    LIST_STAFF: "User/stafflist",
   },
 };
