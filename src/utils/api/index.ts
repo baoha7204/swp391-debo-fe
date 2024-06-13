@@ -30,6 +30,7 @@ export const API_ENDPOINTS = {
   },
   APPOINTMENT: {
     ONE: "appointment",
+    HISTORY: "viewhistoryappoinment"
   },
   USERS: {
     USERS: "Users",
@@ -41,6 +42,9 @@ export const API_ENDPOINTS = {
     LIST_DENTIST: "User/dentistlist",
     LIST_MANAGER: "User/managerlist",
     LIST_STAFF: "User/stafflist",
+    LIST_CUSTOMER: "User/customerlist",
+    //Detail
+    DETAIL: "User/userdetail",
   },
 
 };

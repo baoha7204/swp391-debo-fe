@@ -19,7 +19,7 @@ import { formatDateSlotString } from "@/utils/helper";
 
 type RowData = {
   id: Key;
-  timeSlot: number;
+  timeSlot?: number;
 };
 
 const MyTable = <T extends RowData>({ url, columns }: TableProps<T>) => {

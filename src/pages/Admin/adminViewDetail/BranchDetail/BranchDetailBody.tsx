@@ -24,7 +24,7 @@ const columns: readonly ListColumn<BranchDetailData>[] = [
 
 function BranchDetailBody() {
     return (
-        <MyDetail<BranchDetailData> url={API_ENDPOINTS.BRANCH.BRANCH} columns={columns} />
+        <MyDetail<BranchDetailData> url={API_ENDPOINTS.BRANCH.LIST} columns={columns} deleteBut={true} updateBut={true} />
     );
 }
 

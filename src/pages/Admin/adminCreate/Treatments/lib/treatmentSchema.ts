@@ -4,7 +4,7 @@ export const treatmentSchema = z.object({
     id: z.coerce
         .number({ required_error: "ID should be integer number" })
         .int({ message: "ID should be integer number" })
-        .gt(1, { message: "ID must be at least 1" })
+        .min(1, { message: "ID must be at least 1" })
         .safe(),
     name: z
         .string()

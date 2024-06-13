@@ -39,7 +39,11 @@ import CreateTreatment from "@/pages/Admin/adminCreate/Treatments/CreateTreatmen
 import CreateStaff from "@/pages/Admin/adminCreate/Staffs/Staff/CreateStaff";
 import CreateManager from "@/pages/Admin/adminCreate/Staffs/Manager/CreateManager";
 import CreateDentist from "@/pages/Admin/adminCreate/Staffs/Dentist/CreateDentist";
-
+import PatientDetail from "@/pages/Admin/adminViewDetail/PatientDetail/PatientDetail";
+//AdminUpdate
+import BranchUpdate from "@/pages/Admin/adminUpdate/BranchUpdate/BranchUpdate";
+import TreatmentUpdate from "@/pages/Admin/adminUpdate/TreatmentUpdate/TreatmentUpdate";
+import EmployeeUpdate from "@/pages/Admin/adminUpdate/EmployeeUpdate/EmployeeUpdate";
 
 const RouterComponent = () => {
   const router = createBrowserRouter([
@@ -130,15 +134,15 @@ const RouterComponent = () => {
       children: [
         {
           index: true,
-          element: <Navigate to="branchList" />,
+          element: <Navigate to="branch" />,
         },
         //List
         {
-          path: "branchList",
+          path: "branch",
           element: <BranchList />,
         },
         {
-          path: "treatmentList",
+          path: "treatments",
           element: <TreatmentList />,
         },
         {
@@ -151,11 +155,11 @@ const RouterComponent = () => {
         },
         //Create
         {
-          path: "branchList/createBranch",
+          path: "branch/createBranch",
           element: <CreateBranch />,
         },
         {
-          path: "treatmentList/createTreatment",
+          path: "treatments/createTreatment",
           element: <CreateTreatment />,
         },
         {
@@ -172,21 +176,34 @@ const RouterComponent = () => {
         },
         //Detail
         {
-          path: "branchList/:id",
+          path: "branch/:id",
           element: <BranchDetail />,
         },
         {
-          path: "treatmentList/:id",
+          path: "treatments/:id",
           element: <TreatmentDetail />,
         },
         {
           path: "adminAllStaffList/:id",
           element: <AllStaffsDetail />,
         },
-        // {
-        //   path: "patientList/:id",
-        //   element: <PatientDetail />,
-        // },
+        {
+          path: "patientList/:id",
+          element: <PatientDetail />,
+        },
+        //Update
+        {
+          path: "branch/:id/update",
+          element: <BranchUpdate />,
+        },
+        {
+          path: "treatments/:id/update",
+          element: <TreatmentUpdate />,
+        },
+        {
+          path: "adminAllStaffList/:id/update",
+          element: <EmployeeUpdate />,
+        },
       ],
     },
   ]);

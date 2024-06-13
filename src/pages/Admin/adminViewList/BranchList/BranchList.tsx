@@ -7,7 +7,7 @@ function BranchList() {
     return (
         <Box sx={{ p: '24px' }}>
             <BranchHeader />
-            <BranchTable url={API_ENDPOINTS.BRANCH.BRANCH} />
+            <BranchTable url={API_ENDPOINTS.BRANCH.LIST} />
         </Box>
     );
 }

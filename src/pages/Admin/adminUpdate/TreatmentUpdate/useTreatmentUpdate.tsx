@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { branchSchema } from "../../adminCreate/Branchs/lib/branchSchema";
 import { handleSubmitForm } from "@/usecases/handleSubmitForm";
 import { z } from "zod";
 import { put } from "@/utils/apiCaller";
@@ -9,10 +8,11 @@ import { API_ENDPOINTS } from "@/utils/api";
 import { errorToastHandler } from "@/utils/toast/actions";
 import { toastSuccess } from "@/utils/toast";
 import { useNavigate } from "react-router-dom";
+import { treatmentSchema } from "../../adminCreate/Treatments/lib/treatmentSchema";
 
-export type BranchInputs = z.infer<typeof branchSchema>;
+export type TreatmentInputs = z.infer<typeof treatmentSchema>;
 
-export default function useBranchUpdate() {
+export default function useTreatmentUpdate() {
     const navigate = useNavigate();
 
     const {
@@ -21,40 +21,38 @@ export default function useBranchUpdate() {
         control,
         setValue,
         formState: { isSubmitSuccessful, isSubmitting },
-    } = useForm<BranchInputs>({
-        resolver: zodResolver(branchSchema),
+    } = useForm<TreatmentInputs>({
+        resolver: zodResolver(treatmentSchema),
         defaultValues: {
             id: 0,
-            // branchAvt: [],
-            name: "",
-            address: "",
-            phone: "",
-            email: "",
+            name: '',
+            description: '',
+            price: 0,
+            category: 1,
         },
     });
 
     console.log("0");
 
-    const onSubmit: SubmitHandler<BranchInputs> = (data) => {
+    const onSubmit: SubmitHandler<TreatmentInputs> = (data) => {
         console.log("1");
 
-        const result = handleSubmitForm(data, branchSchema);
+        const result = handleSubmitForm(data, treatmentSchema);
 
         if (!result || !result.success || result.error) {
             return;
         }
 
-        const { id, name, address, phone, email } = data;
+        const { id, category, name, description, price, } = data;
 
         console.log(data);
 
-        put(`${API_ENDPOINTS.BRANCH.LIST}/${id}`, {
+        put(`${API_ENDPOINTS.TREATMENT.TREATMENT}/${id}`, {
             id,
-            // branchAvt,
+            category,
             name,
-            address,
-            phone,
-            email,
+            description,
+            price,
         })
             .then((res) => {
                 const { data } = res;
@@ -63,7 +61,7 @@ export default function useBranchUpdate() {
                 }
                 // successfully
                 toastSuccess("Create successfully!");
-                navigate("/adminTest/branch");
+                navigate("/adminTest/treatments");
             })
             .catch((err) => {
                 console.log(err.response);
@@ -76,12 +74,12 @@ export default function useBranchUpdate() {
         }
     }, [isSubmitSuccessful, reset]);
 
-    const setValues = (values: BranchInputs) => {
+    const setValues = (values: TreatmentInputs) => {
         setValue("id", values.id);
+        setValue("category", values.category);
         setValue("name", values.name);
-        setValue("address", values.address);
-        setValue("phone", values.phone);
-        setValue("email", values.email);
+        setValue("description", values.description);
+        setValue("price", values.price);
     };
 
     return [handleSubmit(onSubmit), isSubmitting, control, setValues] as const;

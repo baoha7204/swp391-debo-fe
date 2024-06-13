@@ -25,7 +25,7 @@ const columns: readonly ListColumn<TreatmentDetailData>[] = [
 
 function TreatmentDetailBody() {
     return (
-        <MyDetail<TreatmentDetailData> url={API_ENDPOINTS.TREATMENT.TREATMENT} columns={columns} />
+        <MyDetail<TreatmentDetailData> url={API_ENDPOINTS.TREATMENT.TREATMENT} columns={columns} deleteBut={true} updateBut={true} />
     );
 }
 
