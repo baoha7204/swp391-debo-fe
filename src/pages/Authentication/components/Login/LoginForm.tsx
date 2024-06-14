@@ -30,10 +30,17 @@ const LoginForm = () => {
         fullWidth
         id="user"
         label="Email or phone number"
+        data-testid="user"
         autoFocus
       />
-      <FormInputText isPassword control={control} name="password" />
+      <FormInputText
+        data-testid="password"
+        isPassword
+        control={control}
+        name="password"
+      />
       <MyButton
+        data-testid="login"
         type="submit"
         fullWidth
         variant="contained"
