@@ -4,10 +4,38 @@ import Grid from '@mui/material/Grid';
 import FormInputText from '@/components/Form/FormInputText';
 import useBranch from './lib/useBranch';
 import MyButton from '@/components/MyButton';
+import FormSelect from '../../components/FormSelect/FormSelect';
+import { API_ENDPOINTS } from '@/utils/api';
+import axios from '@/config/axios';
+import { useEffect, useState } from 'react';
+
+type ManagerProps = {
+    id: string;
+    firstName: string;
+    lastName: string;
+}
 
 function CreateBranchBody() {
 
     const [handleSubmit, isSubmitting, control] = useBranch();
+
+    const [managers, setManagers] = useState<ManagerProps[]>([]);
+
+    const getListManager = async () => {
+        const res = await axios.get(API_ENDPOINTS.USERS.LIST_MANAGER);
+        setManagers(res.data.data.list);
+    }
+
+    useEffect(() => {
+        getListManager();
+    }, []);
+
+    console.log(managers);
+
+    const managerOptions = managers.map(manager => ({
+        value: manager.id,
+        label: `${manager.firstName} ${manager.lastName}`,
+    }));
 
     return (
         <Box
@@ -67,6 +95,31 @@ function CreateBranchBody() {
                                 label="Name"
                                 autoFocus
                                 sx={{ m: 1, p: 0 }}
+                            />
+                        </Box>
+                    </Box>
+                    <Box
+                        sx={{
+                            display: "flex",
+                            flexDirection: "row",
+                            alignItems: 'center',
+
+                        }}
+                    >
+                        <h3 style={{ marginBottom: '20px', marginRight: '20px' }}>Manager: </h3>
+                        <Box
+                            component="form"
+                            noValidate
+                            autoComplete="off"
+                            sx={{
+                                m: 1, p: 0, width: '20ch',
+                            }}
+                        >
+                            <FormSelect
+                                control={control}
+                                label='Manager'
+                                name="mngId"
+                                options={managerOptions}
                             />
                         </Box>
                     </Box>

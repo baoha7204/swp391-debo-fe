@@ -157,7 +157,7 @@ function CreateTreatmentForm() {
                             alignItems: 'center'
                         }}
                     >
-                        <h3 style={{ marginBottom: '20px', marginRight: '20px' }}>Treatment Category:</h3>
+                        <h3 style={{ marginBottom: '20px', marginRight: '20px' }}>Category:</h3>
                         <Box
                             component="form"
                             noValidate

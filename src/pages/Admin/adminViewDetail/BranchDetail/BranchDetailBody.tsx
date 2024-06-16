@@ -1,9 +1,10 @@
 import { API_ENDPOINTS } from "@/utils/api";
-import MyDetail, { ListColumn } from "../../../../components/MyDetail/MyDetail";
+import MyDetail from "@/components/MyDetail/MyDetail";
+import { ListColumn } from "@/components/Table/types/core";
 
 type BranchDetailData = {
     id: number;
-    manager_id: string;
+    mngId: string;
     admin_id: string;
     name: string;
     address: string;
@@ -15,7 +16,7 @@ type BranchDetailData = {
 const columns: readonly ListColumn<BranchDetailData>[] = [
     { id: "avatar", label: "Avatar", minWidth: 100 },
     { id: "name", label: "Name", isDetail: true, minWidth: 100 },
-    { id: "manager_id", label: "Manager ID", minWidth: 100 },
+    { id: "mngId", label: "Manager ID", minWidth: 100 },
     { id: "admin_id", label: "Admin ID", minWidth: 100 },
     { id: "address", label: "Address", minWidth: 100 },
     { id: "phone", label: "Phone", minWidth: 100 },
