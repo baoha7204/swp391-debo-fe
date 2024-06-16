@@ -13,6 +13,7 @@ import PersistLogin from "@/components/Auth/PersistLogin";
 import UnauthorizedPage from "@/pages/403";
 import AuthenticationPage from "@/pages/Authentication";
 
+////Patient////
 import BookingPage from "@/components/Booking";
 import DashboardPage from "@/pages/Patient/Dashboard";
 import PatientLayout from "@/pages/Patient";

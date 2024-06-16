@@ -47,6 +47,7 @@ function CreateTreatmentForm() {
                                 label="Treatment ID"
                                 autoFocus
                                 sx={{ m: 1, p: 0 }}
+                                inputProps={{ "data-testid": "treatmentId" }}
                             />
                         </Box>
                     </Box>
@@ -73,6 +74,7 @@ function CreateTreatmentForm() {
                                 label="Treatment Name"
                                 autoFocus
                                 sx={{ m: 1, p: 0 }}
+                                inputProps={{ "data-testid": "treatmentName" }}
                             />
                         </Box>
                     </Box>
@@ -105,6 +107,7 @@ function CreateTreatmentForm() {
                                     label="Treatment Description"
                                     autoFocus
                                     sx={{ m: 1, p: 0 }}
+                                    inputProps={{ "data-testid": "treatmentDes" }}
                                 />
                             </Box>
                         </Box>
@@ -143,6 +146,7 @@ function CreateTreatmentForm() {
                                 label="$"
                                 autoFocus
                                 sx={{ m: 1, p: 0 }}
+                                inputProps={{ "data-testid": "treatmentPrice" }}
                             />
                         </Box>
                     </Box>
@@ -186,6 +190,7 @@ function CreateTreatmentForm() {
                     type="submit"
                     variant="contained"
                     disabled={isSubmitting}
+                    data-testid="create"
                 >
                     Create
                 </MyButton>
