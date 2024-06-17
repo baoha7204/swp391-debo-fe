@@ -48,6 +48,7 @@ function DentistCreateBody() {
                                 <FormInputText
                                     control={control}
                                     name="username"
+                                    data-testid="username"
                                     outsideLabel=""
                                     required
                                     fullWidth
@@ -76,6 +77,7 @@ function DentistCreateBody() {
                                 <FormInputText
                                     control={control}
                                     name="password"
+                                    data-testid="password"
                                     outsideLabel=""
                                     required
                                     fullWidth
@@ -105,6 +107,7 @@ function DentistCreateBody() {
                                 <FormInputText
                                     control={control}
                                     name="phone"
+                                    data-testid="phone"
                                     outsideLabel=""
                                     required
                                     fullWidth
@@ -134,6 +137,7 @@ function DentistCreateBody() {
                                 <FormInputText
                                     control={control}
                                     name="email"
+                                    data-testid="email"
                                     outsideLabel=""
                                     required
                                     fullWidth
@@ -169,6 +173,7 @@ function DentistCreateBody() {
                                 <FormInputText
                                     control={control}
                                     name="lastName"
+                                    data-testid="lastName"
                                     outsideLabel=""
                                     required
                                     fullWidth
@@ -197,6 +202,7 @@ function DentistCreateBody() {
                                 <FormInputText
                                     control={control}
                                     name="firstName"
+                                    data-testid="firstName"
                                     outsideLabel=""
                                     required
                                     fullWidth
@@ -225,6 +231,7 @@ function DentistCreateBody() {
                                 <FormInputText
                                     control={control}
                                     name="address"
+                                    data-testid="address"
                                     outsideLabel=""
                                     required
                                     fullWidth
@@ -252,6 +259,7 @@ function DentistCreateBody() {
                             >
                                 <FormSelect
                                     name="gender"
+                                    data-testid="gender"
                                     control={control}
                                     label="Gender"
                                     options={[
@@ -274,6 +282,7 @@ function DentistCreateBody() {
                         type="submit"
                         variant="contained"
                         disabled={isSubmitting}
+                        data-testid="submit"
                     >
                         Create
                     </MyButton>
