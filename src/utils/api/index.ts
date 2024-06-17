@@ -45,6 +45,8 @@ export const API_ENDPOINTS = {
     LIST_CUSTOMER: "User/customerlist",
     //Detail
     DETAIL: "User/userdetail",
+    //Available Manager
+    AVAILABLE_MANAGER: "User/availablemanager",
   },
 
 };

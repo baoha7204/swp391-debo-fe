@@ -22,7 +22,7 @@ function CreateBranchBody() {
     const [managers, setManagers] = useState<ManagerProps[]>([]);
 
     const getListManager = async () => {
-        const res = await axios.get(API_ENDPOINTS.USERS.LIST_MANAGER);
+        const res = await axios.get(API_ENDPOINTS.USERS.AVAILABLE_MANAGER);
         setManagers(res.data.data.list);
     }
 
