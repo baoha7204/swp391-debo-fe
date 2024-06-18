@@ -1,6 +1,6 @@
 import HeaderList from "../../components/HeaderList";
-import ListStaff from "./ListDentist/ListDentist";
-import ListDentist from "./ListStaff/ListStaff";
+import ListDentist from "./ListDentist/ListDentist";
+import ListStaff from "./ListStaff/ListStaff";
 import ListManager from "./ListManager/ListManager";
 
 function AdminAllStaffList() {

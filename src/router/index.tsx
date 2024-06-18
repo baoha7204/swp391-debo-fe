@@ -43,6 +43,7 @@ import CreateTreatment from "@/pages/Admin/adminCreate/Treatments/CreateTreatmen
 import CreateStaff from "@/pages/Admin/adminCreate/Staffs/Staff/CreateStaff";
 import CreateManager from "@/pages/Admin/adminCreate/Staffs/Manager/CreateManager";
 import CreateDentist from "@/pages/Admin/adminCreate/Staffs/Dentist/CreateDentist";
+import UploadImg from "@/pages/Admin/adminCreate/Staffs/Dentist/UploadImg";
 
 const RouterComponent = () => {
   const router = createBrowserRouter([
@@ -224,6 +225,10 @@ const RouterComponent = () => {
         //   path: "patientList/:id",
         //   element: <PatientDetail />,
         // },
+        {
+          path: "testUpload",
+          element: <UploadImg />,
+        },
       ],
     },
   ]);

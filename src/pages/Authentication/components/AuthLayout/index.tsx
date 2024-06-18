@@ -14,6 +14,7 @@ import MyGoogleLogin from "../MyGoogleLogin";
 import AuthModeOffer from "../AuthModeOffer";
 import { useLocation, useNavigate } from "react-router-dom";
 import backgroundUrl from "/assets/Login-Background.jpg";
+import authApi from "@/utils/api/authApi";
 
 const AuthLayout = () => {
   const location = useLocation();
@@ -67,7 +68,11 @@ const AuthLayout = () => {
               </Typography>
             </Grid>
             <Grid item>
-              {authMode === "signin" ? <LoginForm /> : <RegisterForm />}
+              {authMode === "signin" ? (
+                <LoginForm auth={authApi.login} />
+              ) : (
+                <RegisterForm auth={authApi.register} />
+              )}
             </Grid>
           </Grid>
           <Divider />

@@ -7,7 +7,6 @@ import FormSelect from '../../../components/FormSelect/FormSelect';
 import MyButton from '@/components/MyButton';
 
 function DentistCreateBody() {
-
     const [handleSubmit, isSubmitting, control] = useDentist();
 
     return (
@@ -36,27 +35,20 @@ function DentistCreateBody() {
                             }}
                         >
                             <h3 style={{ marginBottom: '20px', marginRight: '20px' }}>Username:</h3>
-                            <Box
-                                component="form"
-                                sx={{
-                                    '& > :not(style)': { m: 0, width: '100%' },
-                                }}
-                                noValidate
-                                autoComplete="off"
-                            >
 
-                                <FormInputText
-                                    control={control}
-                                    name="username"
-                                    data-testid="username"
-                                    outsideLabel=""
-                                    required
-                                    fullWidth
-                                    label="Username"
-                                    autoFocus
-                                    sx={{ m: 1, p: 0 }}
-                                />
-                            </Box>
+
+                            <FormInputText
+                                control={control}
+                                name="username"
+                                inputProps={{ "data-testid": "username" }}
+                                outsideLabel=""
+                                required
+                                fullWidth
+                                label="Username"
+                                autoFocus
+                                sx={{ m: 1, p: 0 }}
+                            />
+
                         </Box>
                         <Box
                             sx={{
@@ -66,26 +58,19 @@ function DentistCreateBody() {
                             }}
                         >
                             <h3 style={{ marginBottom: '20px', marginRight: '20px' }}>Password:</h3>
-                            <Box
-                                component="form"
-                                sx={{
-                                    '& > :not(style)': { m: 0, width: '100%' },
-                                }}
-                                noValidate
-                                autoComplete="off"
-                            >
-                                <FormInputText
-                                    control={control}
-                                    name="password"
-                                    data-testid="password"
-                                    outsideLabel=""
-                                    required
-                                    fullWidth
-                                    label="Password"
-                                    autoFocus
-                                    sx={{ m: 1, p: 0 }}
-                                />
-                            </Box>
+
+                            <FormInputText
+                                control={control}
+                                name="password"
+                                inputProps={{ "data-testid": "password" }}
+                                outsideLabel=""
+                                required
+                                fullWidth
+                                label="Password"
+                                autoFocus
+                                sx={{ m: 1, p: 0 }}
+                            />
+
                         </Box>
                         <Box
                             sx={{
@@ -95,27 +80,19 @@ function DentistCreateBody() {
                             }}
                         >
                             <h3 style={{ marginBottom: '20px', marginRight: '20px' }}>Mobile Phone:</h3>
-                            <Box
-                                component="form"
-                                sx={{
-                                    '& > :not(style)': { m: 0, width: '100%' },
-                                }}
-                                noValidate
-                                autoComplete="off"
-                            >
 
-                                <FormInputText
-                                    control={control}
-                                    name="phone"
-                                    data-testid="phone"
-                                    outsideLabel=""
-                                    required
-                                    fullWidth
-                                    label="Mobile Phone"
-                                    autoFocus
-                                    sx={{ m: 1, p: 0 }}
-                                />
-                            </Box>
+                            <FormInputText
+                                control={control}
+                                name="phone"
+                                inputProps={{ "data-testid": "phone" }}
+                                outsideLabel=""
+                                required
+                                fullWidth
+                                label="Mobile Phone"
+                                autoFocus
+                                sx={{ m: 1, p: 0 }}
+                            />
+
                         </Box>
                         <Box
                             sx={{
@@ -125,27 +102,20 @@ function DentistCreateBody() {
                             }}
                         >
                             <h3 style={{ marginBottom: '20px', marginRight: '20px' }}>Mail:</h3>
-                            <Box
-                                component="form"
-                                sx={{
-                                    '& > :not(style)': { m: 0, width: '100%' },
-                                }}
-                                noValidate
-                                autoComplete="off"
-                            >
 
-                                <FormInputText
-                                    control={control}
-                                    name="email"
-                                    data-testid="email"
-                                    outsideLabel=""
-                                    required
-                                    fullWidth
-                                    label="Mail"
-                                    autoFocus
-                                    sx={{ m: 1, p: 0 }}
-                                />
-                            </Box>
+
+                            <FormInputText
+                                control={control}
+                                name="email"
+                                inputProps={{ "data-testid": "email" }}
+                                outsideLabel=""
+                                required
+                                fullWidth
+                                label="Mail"
+                                autoFocus
+                                sx={{ m: 1, p: 0 }}
+                            />
+
                         </Box>
                     </Grid>
                     <Grid
@@ -162,26 +132,19 @@ function DentistCreateBody() {
                             }}
                         >
                             <h3 style={{ marginBottom: '20px', marginRight: '20px' }}>Last Name:</h3>
-                            <Box
-                                component="form"
-                                sx={{
-                                    '& > :not(style)': { m: 0, width: '100%' },
-                                }}
-                                noValidate
-                                autoComplete="off"
-                            >
-                                <FormInputText
-                                    control={control}
-                                    name="lastName"
-                                    data-testid="lastName"
-                                    outsideLabel=""
-                                    required
-                                    fullWidth
-                                    label="Last Name"
-                                    autoFocus
-                                    sx={{ m: 1, p: 0 }}
-                                />
-                            </Box>
+
+                            <FormInputText
+                                control={control}
+                                name="lastName"
+                                inputProps={{ "data-testid": "lastName" }}
+                                outsideLabel=""
+                                required
+                                fullWidth
+                                label="Last Name"
+                                autoFocus
+                                sx={{ m: 1, p: 0 }}
+                            />
+
                         </Box>
                         <Box
                             sx={{
@@ -191,26 +154,19 @@ function DentistCreateBody() {
                             }}
                         >
                             <h3 style={{ marginBottom: '20px', marginRight: '20px' }}>First Name:</h3>
-                            <Box
-                                component="form"
-                                sx={{
-                                    '& > :not(style)': { m: 0, width: '100%' },
-                                }}
-                                noValidate
-                                autoComplete="off"
-                            >
-                                <FormInputText
-                                    control={control}
-                                    name="firstName"
-                                    data-testid="firstName"
-                                    outsideLabel=""
-                                    required
-                                    fullWidth
-                                    label="First Name"
-                                    autoFocus
-                                    sx={{ m: 1, p: 0 }}
-                                />
-                            </Box>
+
+                            <FormInputText
+                                control={control}
+                                name="firstName"
+                                inputProps={{ "data-testid": "firstName" }}
+                                outsideLabel=""
+                                required
+                                fullWidth
+                                label="First Name"
+                                autoFocus
+                                sx={{ m: 1, p: 0 }}
+                            />
+
                         </Box>
                         <Box
                             sx={{
@@ -220,26 +176,19 @@ function DentistCreateBody() {
                             }}
                         >
                             <h3 style={{ marginBottom: '20px', marginRight: '20px' }}>Address:</h3>
-                            <Box
-                                component="form"
-                                sx={{
-                                    '& > :not(style)': { m: 0, width: '100%' },
-                                }}
-                                noValidate
-                                autoComplete="off"
-                            >
-                                <FormInputText
-                                    control={control}
-                                    name="address"
-                                    data-testid="address"
-                                    outsideLabel=""
-                                    required
-                                    fullWidth
-                                    label="Address"
-                                    autoFocus
-                                    sx={{ m: 1, p: 0 }}
-                                />
-                            </Box>
+
+                            <FormInputText
+                                control={control}
+                                name="address"
+                                inputProps={{ "data-testid": "address" }}
+                                outsideLabel=""
+                                required
+                                fullWidth
+                                label="Address"
+                                autoFocus
+                                sx={{ m: 1, p: 0 }}
+                            />
+
                         </Box>
                         <Box
                             sx={{
@@ -249,25 +198,18 @@ function DentistCreateBody() {
                             }}
                         >
                             <h3 style={{ marginBottom: '20px', marginRight: '20px' }}>Gender:</h3>
-                            <Box
-                                component="form"
-                                noValidate
-                                autoComplete="off"
-                                sx={{
-                                    m: 1, p: 0, width: '20ch',
-                                }}
-                            >
-                                <FormSelect
-                                    name="gender"
-                                    data-testid="gender"
-                                    control={control}
-                                    label="Gender"
-                                    options={[
-                                        { value: true, label: 'Male' },
-                                        { value: false, label: 'Female' },
-                                    ]}
-                                />
-                            </Box>
+
+                            <FormSelect
+                                name="gender"
+                                data-testid="gender"
+                                control={control}
+                                label="Gender"
+                                options={[
+                                    { value: true, label: 'Male' },
+                                    { value: false, label: 'Female' },
+                                ]}
+                            />
+
                         </Box>
                     </Grid>
                 </Grid>

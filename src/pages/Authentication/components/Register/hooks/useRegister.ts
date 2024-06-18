@@ -4,14 +4,13 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 import { RegisterFormSchema } from "../lib/schema";
-import { post } from "@/utils/apiCaller";
 import { RegisterInputs } from "../types/core";
 import { handleSubmitForm } from "@/usecases/handleSubmitForm";
 import { errorToastHandler } from "@/utils/toast/actions";
 import { toastSuccess } from "@/utils/toast";
-import { API_ENDPOINTS } from "@/utils/api";
+import { RegisterFormProps } from "../RegisterForm";
 
-const useRegister = () => {
+const useRegister = (register: RegisterFormProps) => {
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
@@ -30,7 +29,7 @@ const useRegister = () => {
     },
   });
 
-  const onSubmit: SubmitHandler<RegisterInputs> = (data) => {
+  const onSubmit: SubmitHandler<RegisterInputs> = async (data) => {
     const result = handleSubmitForm(data, RegisterFormSchema);
 
     if (!result || result.error) {
@@ -38,23 +37,13 @@ const useRegister = () => {
     }
 
     const { email, password, phoneNumber } = data;
-    post(API_ENDPOINTS.AUTH.REGISTER, {
-      email,
-      password,
-      phoneNumber,
-    })
-      .then((res) => {
-        const { data } = res;
-        if (!data.success) {
-          return errorToastHandler(data);
-        }
-        // successfully registered
-        toastSuccess("Register successfully!");
-        navigate(from, { replace: true });
-      })
-      .catch((err) => {
-        errorToastHandler(err.response);
-      });
+    const res = await register({ email, password, phoneNumber });
+    if (!res.success) {
+      return errorToastHandler(res);
+    }
+    // successfully registered
+    toastSuccess("Register successfully!");
+    navigate(from, { replace: true });
   };
 
   useEffect(() => {

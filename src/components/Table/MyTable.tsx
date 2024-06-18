@@ -15,11 +15,10 @@ import LinkRouter from "@/components/LinkRouter";
 import useTableControl from "@/hooks/useControlTable";
 import useFetchTableList from "@/hooks/useFetchTableList";
 import { TableProps } from "./types/core";
-import { formatDateSlotString } from "@/utils/helper";
 
 type RowData = {
   id: Key;
-  timeSlot: number;
+  timeSlot?: number;
 };
 
 const MyTable = <T extends RowData>({ url, columns }: TableProps<T>) => {
@@ -48,17 +47,12 @@ const MyTable = <T extends RowData>({ url, columns }: TableProps<T>) => {
             {list.map((row) => (
               <TableRow hover tabIndex={-1} key={row.id}>
                 {columns.map((column) => {
-                  let formattedValue = row[column.id];
-                  if (column.isDate) {
-                    formattedValue = formatDateSlotString(
-                      row.timeSlot,
-                      formattedValue as Date
-                    );
-                  } else if (column.format) {
-                    formattedValue = column.format(formattedValue);
-                  }
+                  const value = row[column.id] as string & Date;
+                  const formattedValue = column.format
+                    ? column.format(value)
+                    : value;
                   return (
-                    <TableCell key={column.id} align={column.align}>
+                    <TableCell key={column.id as Key} align={column.align}>
                       {column.isDetail ? (
                         <LinkRouter to={row.id + ""}>
                           {formattedValue as string}

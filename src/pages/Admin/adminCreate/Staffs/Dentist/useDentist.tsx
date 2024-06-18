@@ -26,7 +26,7 @@ export default function useDentist() {
             firstName: '',
             lastName: '',
             address: '',
-            gender: false,
+            gender: true,
         },
     });
 
@@ -38,8 +38,6 @@ export default function useDentist() {
         }
 
         const { address, username, password, phone, email, firstName, lastName, gender } = data;
-
-        console.log(gender);
 
         post(API_ENDPOINTS.USERS.CREATE_DENTIST, {
             username,
@@ -67,8 +65,6 @@ export default function useDentist() {
                 errorToastHandler(err.response);
             });
     };
-
-
 
     useEffect(() => {
         if (isSubmitSuccessful) {

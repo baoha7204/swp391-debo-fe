@@ -43,4 +43,7 @@ export const API_ENDPOINTS = {
     LIST_MANAGER: "User/managerlist",
     LIST_STAFF: "User/stafflist",
   },
-};
+  IMAGE: {
+    UPLOAD: "User/upload",
+  },
+}
