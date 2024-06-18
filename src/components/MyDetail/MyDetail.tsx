@@ -8,19 +8,10 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
+import { ListColumn } from "../Table/types/core";
 
 type RowData = {
     id: Key;
-};
-
-type ListColumn<T> = {
-    id: Extract<keyof T, Key>;
-    label: string;
-    minWidth?: number;
-    align?: "right";
-    isDetail?: boolean;
-    isCategory?: boolean;
-    format?: ((value: Date) => string) | ((value: string) => string) | ((value: number) => string);
 };
 
 type TableProps<T> = {

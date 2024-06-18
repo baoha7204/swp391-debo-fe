@@ -24,8 +24,8 @@ export default function useBranch() {
     resolver: zodResolver(branchSchema),
     defaultValues: {
       id: 0,
-      // branchAvt: [],
-      mngId: 0,
+      avt: null,
+      mngId: "",
       name: "",
       address: "",
       phone: "",
@@ -44,18 +44,18 @@ export default function useBranch() {
       return;
     }
 
-    const { id, mngId, name, address, phone, email } = data;
+    const { id, avt, mngId, name, address, phone, email } = data;
 
     console.log(data);
 
     post(API_ENDPOINTS.BRANCH.LIST, {
       id,
-      // branchAvt,
       mngId,
       name,
       address,
       phone,
       email,
+      avt,
     })
       .then((res) => {
         const { data } = res;

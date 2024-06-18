@@ -11,7 +11,7 @@ import { Outlet } from "react-router-dom";
 import DefaultLayout from "@/components/Layout/DefaultLayout";
 
 const SidebarAdminBody = [
-  { title: "Appointments", path: "", icon: <ChecklistIcon />, },
+  { title: "Appointments", path: "appointments", icon: <ChecklistIcon />, },
   { title: "Branchs", path: "branch", icon: <StoreIcon />, },
   { title: "Treatments", path: "treatments", icon: <HealthAndSafetyIcon />, },
   { title: "Patients", path: "patientList", icon: <AccountCircleIcon />, },
@@ -38,6 +38,11 @@ const AdminRoutes = [
   { path: "treatments/:id", breadcrumb: "Treatment Detail" },
   { path: "adminStaffList/:id", breadcrumb: "Staff Detail" },
   { path: "patientList/:id", breadcrumb: "Patient Detail" },
+  //Appointments
+  { path: "appointments", breadcrumb: "Appointments" },
+  { path: "appointments/:id", breadcrumb: "Appointment Detail" },
+  { path: "appointments/:id/info", breadcrumb: "Info" },
+  { path: "appointments/:id/notes", breadcrumb: "Notes" },
 ];
 
 const AdminInfo = {
@@ -50,7 +55,7 @@ const AdminLayout = () => {
   return (
     <DefaultLayout
       sidebarBody={SidebarAdminBody}
-      header={{ info: AdminInfo, routes: AdminRoutes }}
+      header={{ info: AdminInfo, routes: AdminRoutes, isAllowedBooking: false }}
     >
       <Outlet />
     </DefaultLayout>

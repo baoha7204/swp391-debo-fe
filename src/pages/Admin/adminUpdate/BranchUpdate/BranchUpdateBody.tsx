@@ -6,8 +6,15 @@ import MyButton from '@/components/MyButton';
 import useBranchUpdate from './useBranchUpdate';
 import { useParams } from 'react-router-dom';
 import axios from '@/config/axios';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { API_ENDPOINTS } from '@/utils/api';
+import FormSelect from '../../components/FormSelect/FormSelect';
+
+type ManagerProps = {
+    id: string;
+    firstName: string;
+    lastName: string;
+}
 
 function BranchUpdateBody() {
     const [handleSubmit, isSubmitting, control, setValues] = useBranchUpdate();
@@ -24,6 +31,22 @@ function BranchUpdateBody() {
             console.error("Error fetching branch data:", error);
         }
     };
+
+    const [managers, setManagers] = useState<ManagerProps[]>([]);
+
+    const getListManager = async () => {
+        const res = await axios.get(API_ENDPOINTS.USERS.AVAILABLE_MANAGER);
+        setManagers(res.data.data.list);
+    }
+
+    useEffect(() => {
+        getListManager();
+    }, []);
+
+    const managerOptions = managers.map(manager => ({
+        value: manager.id,
+        label: `${manager.firstName} ${manager.lastName}`,
+    }));
 
     useEffect(() => {
         if (id) getOneCourse(id);
@@ -86,6 +109,31 @@ function BranchUpdateBody() {
                                 label="Name"
                                 autoFocus
                                 sx={{ m: 1, p: 0 }}
+                            />
+                        </Box>
+                    </Box>
+                    <Box
+                        sx={{
+                            display: "flex",
+                            flexDirection: "row",
+                            alignItems: 'center',
+
+                        }}
+                    >
+                        <h3 style={{ marginBottom: '20px', marginRight: '20px' }}>Manager: </h3>
+                        <Box
+                            component="form"
+                            noValidate
+                            autoComplete="off"
+                            sx={{
+                                m: 1, p: 0, width: '20ch',
+                            }}
+                        >
+                            <FormSelect
+                                control={control}
+                                label='Manager'
+                                name="mngId"
+                                options={managerOptions}
                             />
                         </Box>
                     </Box>

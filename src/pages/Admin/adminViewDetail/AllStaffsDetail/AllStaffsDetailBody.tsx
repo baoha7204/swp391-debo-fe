@@ -1,4 +1,5 @@
-import MyDetail, { ListColumn } from "@/components/MyDetail/MyDetail";
+import MyDetail from "@/components/MyDetail/MyDetail";
+import { ListColumn } from "@/components/Table/types/core";
 import { API_ENDPOINTS } from "@/utils/api";
 
 type AllStaffsDetailData = {
@@ -14,7 +15,12 @@ type AllStaffsDetailData = {
 };
 
 const columns: readonly ListColumn<AllStaffsDetailData>[] = [
-    { id: "avt", label: "Avatar", minWidth: 100 },
+    {
+        id: "avt", label: "Avatar", minWidth: 100,
+        format: (value: string) => {
+            return <img src={value} alt="avatar" style={{ maxWidth: "100px", height: "auto", borderRadius: '10px' }} />;
+        }
+    },
     { id: "username", label: "Username", minWidth: 100 },
     { id: "password", label: "Password", minWidth: 100 },
     { id: "firstName", label: "First Name", minWidth: 100 },
@@ -33,7 +39,7 @@ const columns: readonly ListColumn<AllStaffsDetailData>[] = [
 
 function AllStaffsDetailBody() {
     return (
-        <MyDetail<AllStaffsDetailData> url={API_ENDPOINTS.USERS.DETAIL} columns={columns} updateBut={true} />
+        <MyDetail<AllStaffsDetailData> url={API_ENDPOINTS.USERS.USER} columns={columns} updateBut={true} />
     );
 }
 

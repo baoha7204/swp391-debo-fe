@@ -25,7 +25,8 @@ export default function useBranchUpdate() {
         resolver: zodResolver(branchSchema),
         defaultValues: {
             id: 0,
-            // branchAvt: [],
+            avt: null,
+            mngId: "",
             name: "",
             address: "",
             phone: "",
@@ -33,10 +34,7 @@ export default function useBranchUpdate() {
         },
     });
 
-    console.log("0");
-
     const onSubmit: SubmitHandler<BranchInputs> = (data) => {
-        console.log("1");
 
         const result = handleSubmitForm(data, branchSchema);
 
@@ -44,17 +42,18 @@ export default function useBranchUpdate() {
             return;
         }
 
-        const { id, name, address, phone, email } = data;
+        const { id, avt, mngId, name, address, phone, email } = data;
 
         console.log(data);
 
         put(`${API_ENDPOINTS.BRANCH.LIST}/${id}`, {
             id,
-            // branchAvt,
+            mngId,
             name,
             address,
             phone,
             email,
+            avt,
         })
             .then((res) => {
                 const { data } = res;
@@ -62,7 +61,7 @@ export default function useBranchUpdate() {
                     return errorToastHandler(data);
                 }
                 // successfully
-                toastSuccess("Create successfully!");
+                toastSuccess("Update successfully!");
                 navigate("/adminTest/branch");
             })
             .catch((err) => {
@@ -78,10 +77,12 @@ export default function useBranchUpdate() {
 
     const setValues = (values: BranchInputs) => {
         setValue("id", values.id);
+        setValue("mngId", values.mngId);
         setValue("name", values.name);
         setValue("address", values.address);
         setValue("phone", values.phone);
         setValue("email", values.email);
+        setValue("avt", values.avt);
     };
 
     return [handleSubmit(onSubmit), isSubmitting, control, setValues] as const;

@@ -22,6 +22,9 @@ import PatientAppointmentList from "@/pages/Patient/Appointment/AppointmentList"
 import AppointmentDetail from "@/components/Appointment/AppointmentDetail";
 
 ////Manager////
+import ManagerLayout from "@/pages/Manager/ManagerLayout";
+//ManagerList
+import ManagerAllStaffList from "@/pages/Manager/Employees/ManagerAllStaffList";
 
 ////Admin////
 import AdminLayout from "@/pages/Admin";
@@ -175,6 +178,10 @@ const RouterComponent = () => {
           path: "adminAllStaffList/createManager",
           element: <CreateManager />,
         },
+        {
+          path: "appointments",
+          element: <PatientAppointmentList />,
+        },
         //Detail
         {
           path: "branch/:id",
@@ -192,6 +199,10 @@ const RouterComponent = () => {
           path: "patientList/:id",
           element: <PatientDetail />,
         },
+        {
+          path: "appointments/:id",
+          element: <AppointmentDetail />,
+        },
         //Update
         {
           path: "branch/:id/update",
@@ -206,6 +217,36 @@ const RouterComponent = () => {
           element: <EmployeeUpdate />,
         },
       ],
+    },
+    // ManagerTest routes
+    {
+      path: "managerTest",
+      element: <ManagerLayout />,
+      children: [
+        {
+          index: true,
+          element: <Navigate to="calendar" />
+        },
+        //List
+        {
+          path: "managerAllStaffList",
+          element: <ManagerAllStaffList />,
+        },
+        {
+          path: "appointments",
+          element: <PatientAppointmentList />,
+        },
+        //
+        {
+          path: "calendar",
+          element: <Calendar />
+        },
+
+        {
+          path: "appointments/:id",
+          element: <AppointmentDetail />,
+        },
+      ]
     },
   ]);
   return (

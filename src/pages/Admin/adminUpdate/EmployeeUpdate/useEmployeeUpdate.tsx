@@ -1,25 +1,34 @@
 import { useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { allStaffSchema } from "../../adminCreate/Staffs/lib/staffSchema";
+import { employeeUpdateSchema } from "./lib/employeeUpdateSchema";
 import { handleSubmitForm } from "@/usecases/handleSubmitForm";
 import { z } from "zod";
 import { put } from "@/utils/apiCaller";
 import { API_ENDPOINTS } from "@/utils/api";
 import { errorToastHandler } from "@/utils/toast/actions";
 import { toastSuccess } from "@/utils/toast";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
-export type StaffInputs = z.infer<typeof allStaffSchema>;
+export type StaffInputs = z.infer<typeof employeeUpdateSchema>;
 
 export default function useEmployeeUpdate() {
     const navigate = useNavigate();
 
-    const { handleSubmit, reset, control, setValue,
+    const { id } = useParams<{ id: string }>();
+
+    console.log(id);
+
+    const {
+        handleSubmit,
+        reset,
+        control,
+        setValue,
         formState: { isSubmitSuccessful, isSubmitting },
     } = useForm<StaffInputs>({
-        resolver: zodResolver(allStaffSchema),
+        resolver: zodResolver(employeeUpdateSchema),
         defaultValues: {
+            id: id,
             username: '',
             password: '',
             phone: '',
@@ -32,17 +41,20 @@ export default function useEmployeeUpdate() {
     });
 
     const onSubmit: SubmitHandler<StaffInputs> = (data) => {
-        const result = handleSubmitForm(data, allStaffSchema);
+        const result = handleSubmitForm(data, employeeUpdateSchema);
+
+        console.log('3');
 
         if (!result || !result.success || result.error) {
             return;
         }
 
-        const { address, username, password, phone, email, firstName, lastName, gender } = data;
+        const { id, address, username, password, phone, email, firstName, lastName, gender } = data;
 
-        console.log(gender);
+        console.log(`${API_ENDPOINTS.USERS.USER}/${id}`);
 
-        put(`${API_ENDPOINTS.USERS.USERS}`, {
+        put(`${API_ENDPOINTS.USERS.USER}/${id}`, {
+            id,
             username,
             email,
             password,
@@ -55,13 +67,11 @@ export default function useEmployeeUpdate() {
             .then((res) => {
                 const { data } = res;
                 if (!data.success) {
-                    console.log('1');
-
                     return errorToastHandler(data);
                 }
                 // successfully
-                toastSuccess("Create successfully!");
-                navigate('/adminTest/adminStaffList');
+                toastSuccess("Update successfully!");
+                navigate('/adminTest/adminAllStaffList');
             })
             .catch((err) => {
                 console.log(err.response);

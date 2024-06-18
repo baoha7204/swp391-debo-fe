@@ -123,7 +123,7 @@ function CreateBranchBody() {
                             />
                         </Box>
                     </Box>
-                    {/* <Box
+                    <Box
                         sx={{
                             display: "flex",
                             flexDirection: "row",
@@ -136,8 +136,8 @@ function CreateBranchBody() {
                             <FormInputText
                                 control={control}
                                 type='file'
-                                id="branchAvt"
-                                name="branchAvt"
+                                id="avt"
+                                name="avt"
                                 outsideLabel=""
                                 required
                                 fullWidth
@@ -146,7 +146,7 @@ function CreateBranchBody() {
                                 sx={{ m: 1, p: 0, maxWidth: '218px' }}
                             />
                         </Box>
-                    </Box> */}
+                    </Box>
                 </Grid>
                 <Grid
                     item

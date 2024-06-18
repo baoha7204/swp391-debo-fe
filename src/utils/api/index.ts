@@ -33,7 +33,8 @@ export const API_ENDPOINTS = {
     HISTORY: "viewhistoryappoinment"
   },
   USERS: {
-    USERS: "Users",
+    //User
+    USER: "User",
     //Create
     CREATE_STAFF: "User/createstaff",
     CREATE_DENTIST: "User/createdentist",
@@ -43,8 +44,6 @@ export const API_ENDPOINTS = {
     LIST_MANAGER: "User/managerlist",
     LIST_STAFF: "User/stafflist",
     LIST_CUSTOMER: "User/customerlist",
-    //Detail
-    DETAIL: "User/userdetail",
     //Available Manager
     AVAILABLE_MANAGER: "User/availablemanager",
   },

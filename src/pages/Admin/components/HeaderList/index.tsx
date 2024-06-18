@@ -50,9 +50,10 @@ interface IHeaderBodyList {
         buttonName: string[],
         route: string[]
     }
+    showButton?: boolean;
 }
 
-export default function HeaderList({ allowMore3, children }: IHeaderBodyList) {
+export default function HeaderList({ allowMore3, children, showButton }: IHeaderBodyList) {
     const [value, setValue] = React.useState(0);
 
     const handleChange = (_: React.SyntheticEvent, newValue: number) => {
@@ -95,20 +96,23 @@ export default function HeaderList({ allowMore3, children }: IHeaderBodyList) {
                                     {child}
                                 </AdminAppBar>
                             </Box>
-                            <Box sx={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', flexGrow: 1, }}>
-                                <ButtonGroup
-                                    disableElevation
-                                    variant="contained"
-                                    aria-label="Disabled button group"
-                                    sx={{
-                                        '& > :not(style)': {},
-                                    }}
-                                >
-                                    <Link to={children.route[index]} style={{ textDecoration: 'none' }}>
-                                        <Button>{children.buttonName[index]}</Button>
-                                    </Link>
-                                </ButtonGroup>
-                            </Box>
+                            {
+                                showButton &&
+                                <Box sx={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', flexGrow: 1, }}>
+                                    <ButtonGroup
+                                        disableElevation
+                                        variant="contained"
+                                        aria-label="Disabled button group"
+                                        sx={{
+                                            '& > :not(style)': {},
+                                        }}
+                                    >
+                                        <Link to={children.route[index]} style={{ textDecoration: 'none' }}>
+                                            <Button>{children.buttonName[index]}</Button>
+                                        </Link>
+                                    </ButtonGroup>
+                                </Box>
+                            }
 
                         </CustomTabPanel>
                     </Box>

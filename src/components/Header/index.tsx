@@ -67,6 +67,11 @@ const Header = ({
             <div className="center-header">DEBO Clinic</div>
             <div className="right-header">
               <div className="small-info">
+                <AccountMenu {...info} />
+                <ul>
+                  <li>Hi {info.username}</li>
+                  <li>{info.role}</li>
+                </ul>
                 {isAllowedBooking && (
                   <Fab
                     size="small"
@@ -77,11 +82,6 @@ const Header = ({
                     <AddIcon />
                   </Fab>
                 )}
-                <AccountMenu {...info} />
-                <ul>
-                  <li>Hi {info.username}</li>
-                  <li>{info.role}</li>
-                </ul>
               </div>
             </div>
           </div>
