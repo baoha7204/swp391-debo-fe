@@ -1,4 +1,5 @@
-import MyDetail, { ListColumn } from "@/components/MyDetail/MyDetail";
+import MyDetail from "@/components/MyDetail/MyDetail";
+import { ListColumn } from "@/components/Table/types/core";
 import { API_ENDPOINTS } from "@/utils/api";
 
 type TreatmentDetailData = {

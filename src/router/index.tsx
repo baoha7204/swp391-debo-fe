@@ -48,6 +48,7 @@ import PatientDetail from "@/pages/Admin/adminViewDetail/PatientDetail/PatientDe
 import BranchUpdate from "@/pages/Admin/adminUpdate/BranchUpdate/BranchUpdate";
 import TreatmentUpdate from "@/pages/Admin/adminUpdate/TreatmentUpdate/TreatmentUpdate";
 import EmployeeUpdate from "@/pages/Admin/adminUpdate/EmployeeUpdate/EmployeeUpdate";
+import UpdateBranchForEmployee from "@/pages/Admin/adminUpdate/UpdateBranchForEmployee.tsx/UpdateBranchForEmployee";
 
 const RouterComponent = () => {
   const router = createBrowserRouter([
@@ -216,6 +217,10 @@ const RouterComponent = () => {
           path: "adminAllStaffList/:id/update",
           element: <EmployeeUpdate />,
         },
+        {
+          path: "updateBranchForEmployee",
+          element: <UpdateBranchForEmployee />,
+        }
       ],
     },
     // ManagerTest routes

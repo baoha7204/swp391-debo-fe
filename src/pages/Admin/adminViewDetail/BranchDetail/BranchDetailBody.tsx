@@ -5,7 +5,7 @@ import { ListColumn } from "@/components/Table/types/core";
 type BranchDetailData = {
     id: number;
     mngId: string;
-    admin_id: string;
+    mngName: string;
     name: string;
     address: string;
     phone: string;
@@ -21,7 +21,7 @@ const columns: readonly ListColumn<BranchDetailData>[] = [
         }
     },
     { id: "name", label: "Name", isDetail: true, minWidth: 100 },
-    { id: "mngId", label: "Manager ID", minWidth: 100 },
+    { id: "mngName", label: "Manager Name", minWidth: 100 },
     { id: "address", label: "Address", minWidth: 100 },
     { id: "phone", label: "Phone", minWidth: 100 },
     { id: "email", label: "Email", minWidth: 100 },

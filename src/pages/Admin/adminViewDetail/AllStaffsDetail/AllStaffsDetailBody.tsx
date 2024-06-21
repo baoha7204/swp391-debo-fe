@@ -22,7 +22,6 @@ const columns: readonly ListColumn<AllStaffsDetailData>[] = [
         }
     },
     { id: "username", label: "Username", minWidth: 100 },
-    { id: "password", label: "Password", minWidth: 100 },
     { id: "firstName", label: "First Name", minWidth: 100 },
     { id: "lastName", label: "Last Name", minWidth: 100 },
     { id: "email", label: "Email", minWidth: 100 },

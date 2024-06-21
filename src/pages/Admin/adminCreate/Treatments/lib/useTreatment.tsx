@@ -13,7 +13,6 @@ import { post } from "@/utils/apiCaller";
 
 export type TreatmentInputs = z.infer<typeof treatmentSchema>;
 
-
 export default function useTreatment() {
 
     const navigate = useNavigate();

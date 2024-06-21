@@ -20,7 +20,6 @@ type PatientDetailData = {
 const columns: readonly ListColumn<PatientDetailData>[] = [
     { id: "avt", label: "Avatar", minWidth: 100 },
     { id: "username", label: "Username", minWidth: 100 },
-    { id: "password", label: "Password", minWidth: 100 },
     { id: "firstName", label: "First Name", minWidth: 100 },
     { id: "lastName", label: "Last Name", minWidth: 100 },
     { id: "email", label: "Email", minWidth: 100 },
@@ -40,7 +39,7 @@ function PatientDetailBody() {
 
     return (
         <Box>
-            <MyDetail<PatientDetailData> url={API_ENDPOINTS.USERS.DETAIL} columns={columns} />
+            <MyDetail<PatientDetailData> url={API_ENDPOINTS.USERS.USER} columns={columns} />
             <PatientTreatmentHistory />
         </Box>
 

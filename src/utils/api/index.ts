@@ -46,6 +46,10 @@ export const API_ENDPOINTS = {
     LIST_CUSTOMER: "User/customerlist",
     //Available Manager
     AVAILABLE_MANAGER: "User/availablemanager",
+    //Available Employee
+    EMPLOYEE_WITH_BRANCH: "getallempwithbranch",
+    //Update branch for employee
+    UPDATE_BRANCH_FOR_EMPLOYEE: "updateBranchForEmployee"
   },
 
 };

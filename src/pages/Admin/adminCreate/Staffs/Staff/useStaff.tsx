@@ -8,17 +8,22 @@ import { post } from "@/utils/apiCaller";
 import { API_ENDPOINTS } from "@/utils/api";
 import { errorToastHandler } from "@/utils/toast/actions";
 import { toastSuccess } from "@/utils/toast";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 export type StaffInputs = z.infer<typeof allStaffSchema>;
 
 export default function useStaff() {
     const navigate = useNavigate();
 
+    const { id } = useParams();
+
+    console.log('id:', id);
+
     const { handleSubmit, reset, control, formState: { isSubmitSuccessful, isSubmitting },
     } = useForm<StaffInputs>({
         resolver: zodResolver(allStaffSchema),
         defaultValues: {
+            // brId: 0,
             username: '',
             password: '',
             phone: '',
@@ -40,7 +45,9 @@ export default function useStaff() {
         const { address, username, password, phone, email, firstName, lastName, gender } = data;
 
         console.log(gender);
+        console.log(data);
 
+        // Post employee
         post(API_ENDPOINTS.USERS.CREATE_STAFF, {
             username,
             email,
@@ -51,24 +58,26 @@ export default function useStaff() {
             phone,
             address,
         })
+
+            // // Update branch for employee
+            // post(API_ENDPOINTS.USERS., {
+            //     brId,
+            // })
             .then((res) => {
                 const { data } = res;
                 if (!data.success) {
                     console.log('1');
-
                     return errorToastHandler(data);
                 }
                 // successfully
                 toastSuccess("Create successfully!");
-                navigate('/adminTest/adminStaffList');
+                navigate('/adminTest/adminAllStaffList');
             })
             .catch((err) => {
                 console.log(err.response);
                 errorToastHandler(err.response);
             });
     };
-
-
 
     useEffect(() => {
         if (isSubmitSuccessful) {

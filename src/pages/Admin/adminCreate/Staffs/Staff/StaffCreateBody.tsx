@@ -143,6 +143,59 @@ function StaffCreateBody() {
                                 />
                             </Box>
                         </Box>
+                        {/* <Box
+                            sx={{
+                                display: "flex",
+                                flexDirection: "row",
+                                alignItems: 'center'
+                            }}
+                        >
+                            <h3 style={{ marginBottom: '20px', marginRight: '20px' }}>Birthday:</h3>
+                            <Box
+                                component="form"
+                                sx={{
+                                    '& > :not(style)': { m: 0, width: '100%' },
+                                }}
+                                noValidate
+                                autoComplete="off"
+                            >
+
+                                <FormInputText
+                                    control={control}
+                                    name="dateOfBirthday"
+                                    outsideLabel=""
+                                    fullWidth
+                                    label="YYYY-MM-DD"
+                                    autoFocus
+                                    sx={{ m: 1, p: 0 }}
+                                />
+                            </Box>
+                        </Box> */}
+                        {/* <Box
+                            sx={{
+                                display: "flex",
+                                flexDirection: "row",
+                                alignItems: 'center',
+
+                            }}
+                        >
+                            <h3 style={{ marginBottom: '20px', marginRight: '20px' }}>Branch: </h3>
+                            <Box
+                                component="form"
+                                noValidate
+                                autoComplete="off"
+                                sx={{
+                                    m: 1, p: 0, width: '20ch',
+                                }}
+                            >
+                                <FormSelect
+                                    control={control}
+                                    label='Branch'
+                                    name="brId"
+                                    options={branchOptions}
+                                />
+                            </Box>
+                        </Box> */}
                     </Grid>
                     <Grid
                         item
@@ -226,7 +279,6 @@ function StaffCreateBody() {
                                     control={control}
                                     name="address"
                                     outsideLabel=""
-                                    required
                                     fullWidth
                                     label="Address"
                                     autoFocus
@@ -247,7 +299,7 @@ function StaffCreateBody() {
                                 noValidate
                                 autoComplete="off"
                                 sx={{
-                                    m: 1, p: 0, width: '20ch',
+                                    m: 1, p: 0, maxWidth: '230px',
                                 }}
                             >
                                 <FormSelect
@@ -261,6 +313,35 @@ function StaffCreateBody() {
                                 />
                             </Box>
                         </Box>
+                        {/* <Box
+                            sx={{
+                                display: "flex",
+                                flexDirection: "row",
+                                alignItems: 'center'
+                            }}
+                        >
+                            <h3 style={{ marginBottom: '20px', marginRight: '20px' }}>Avatar:</h3>
+                            <Box
+                                component="form"
+                                sx={{
+                                    '& > :not(style)': { m: 0, maxWidth: '230px' },
+                                }}
+                                noValidate
+                                autoComplete="off"
+                            >
+                                <FormInputText
+                                    control={control}
+                                    type='file'
+                                    id='file'
+                                    name="file"
+                                    outsideLabel=""
+                                    required
+                                    fullWidth
+                                    autoFocus
+                                    sx={{ m: 1, p: 0 }}
+                                />
+                            </Box>
+                        </Box> */}
                     </Grid>
                 </Grid>
                 <Box

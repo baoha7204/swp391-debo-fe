@@ -1,53 +1,54 @@
-import { Box } from "@mui/material";
-import MiniHeader from "../../components/MiniHeader/MiniHeader";
-import { HealthAndSafety } from "@mui/icons-material";
-import { API_ENDPOINTS } from "@/utils/api";
 import { ListColumn } from "@/components/Table/types/core";
-import { useParams } from "react-router-dom";
-import {
-    Paper,
-    Table,
-    TableBody,
-    TableCell,
-    TableContainer,
-    TableHead,
-    TableRow,
-} from "@mui/material";
-import { useEffect, useState } from "react";
 import axios from "@/config/axios";
+import { API_ENDPOINTS } from "@/utils/api";
+import { Box, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 
-type TreatmentHistoryData = {
-    treatName: string;
-    createdDate: string;
-    startDate: string;
-    note: string;
+type BranchEmployeeListBodyProps = {
+    id: string;
+    brId: number;
+    name: string;
+    type: number;
+    salary: number;
 };
 
-const columns: readonly ListColumn<TreatmentHistoryData>[] = [
-    { id: "treatName", label: "Treatment Name", minWidth: 100 },
-    { id: "createdDate", label: "Created Date", minWidth: 100, isDate: true },
-    { id: "startDate", label: "Started Date", minWidth: 100, isDate: true },
-    { id: "note", label: "Note", minWidth: 100 },
+const columns: readonly ListColumn<BranchEmployeeListBodyProps>[] = [
+    { id: "name", label: "Name", isDetail: true, minWidth: 100 },
+    {
+        id: "type", label: "Type", minWidth: 100,
+        format: (value: number) => {
+            if (value === 2) {
+                return "Manager";
+            } else if (value === 4) {
+                return "Dentist";
+            } else if (value === 3) {
+                return "Staff";
+            } else {
+                return "Unknown";
+            }
+        }
+    },
+    { id: "salary", label: "Salary", minWidth: 100 },
 ];
 
-function PatientTreatmentHistory() {
-
+function BranchEmployeeListBody() {
     const { id } = useParams<{ id: string }>();
-    const [treatments, setTreatments] = useState<TreatmentHistoryData[]>([]);
+    const [employees, setEmployees] = useState<BranchEmployeeListBodyProps[]>([]);
 
     const getListCourse = async (id: string) => {
         try {
-            const res = await axios.get(`${API_ENDPOINTS.APPOINTMENT.HISTORY}/${id}`);
+            const res = await axios.get(`${API_ENDPOINTS.USERS.EMPLOYEE_WITH_BRANCH}/${id}`);
             if (res.status === 200) {
-                setTreatments(res.data.data);
+                setEmployees(res.data.data);
             }
         } catch (error) {
-            console.error("Error fetching treatment history:", error);
+            console.error("Error fetching employee with branch:", error);
         }
     };
 
     console.log(id);
-    console.log(treatments);
+    console.log(employees);
 
     useEffect(() => {
         if (id) getListCourse(id);
@@ -55,7 +56,6 @@ function PatientTreatmentHistory() {
 
     return (
         <Box>
-            <MiniHeader content="Treatment History" IconComponent={HealthAndSafety} />
             <Paper sx={{ width: "100%", overflow: "hidden" }}>
                 <TableContainer>
                     <Table>
@@ -69,17 +69,17 @@ function PatientTreatmentHistory() {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {treatments.length === 0 ? (
+                            {employees.length === 0 ? (
                                 <TableRow>
                                     <TableCell colSpan={columns.length} align="center">
                                         No treatment history available.
                                     </TableCell>
                                 </TableRow>
                             ) : (
-                                treatments.map((row, index) => (
+                                employees.map((row, index) => (
                                     <TableRow hover tabIndex={-1} key={index}>
                                         {columns.map((column) => {
-                                            let formattedValue = row[column.id as keyof TreatmentHistoryData];
+                                            let formattedValue = row[column.id as keyof BranchEmployeeListBodyProps];
                                             if (column.isDate && formattedValue) {
                                                 formattedValue = new Date(formattedValue).toLocaleDateString();
                                             }
@@ -100,5 +100,4 @@ function PatientTreatmentHistory() {
     );
 }
 
-export default PatientTreatmentHistory;
-
+export default BranchEmployeeListBody;

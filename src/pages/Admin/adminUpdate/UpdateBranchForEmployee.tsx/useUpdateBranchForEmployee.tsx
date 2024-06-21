@@ -1,74 +1,67 @@
 import { useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { allStaffSchema } from "../lib/staffSchema";
 import { handleSubmitForm } from "@/usecases/handleSubmitForm";
+import { updateEmployeeSchema } from "./schema";
 import { z } from "zod";
-import { post } from "@/utils/apiCaller";
 import { API_ENDPOINTS } from "@/utils/api";
-import { errorToastHandler } from "@/utils/toast/actions";
-import { toastSuccess } from "@/utils/toast";
 import { useNavigate } from "react-router-dom";
+import { toastSuccess } from "@/utils/toast";
+import { errorToastHandler } from "@/utils/toast/actions";
+import { put } from "@/utils/apiCaller";
 
-export type StaffInputs = z.infer<typeof allStaffSchema>;
+export type UpdateBranchForEmployeeInputs = z.infer<typeof updateEmployeeSchema>;
 
-export default function useDentist() {
+export default function useUpdateBranchForEmployee() {
+
     const navigate = useNavigate();
 
     const { handleSubmit, reset, control, formState: { isSubmitSuccessful, isSubmitting },
-    } = useForm<StaffInputs>({
-        resolver: zodResolver(allStaffSchema),
+    } = useForm<UpdateBranchForEmployeeInputs>({
+        resolver: zodResolver(updateEmployeeSchema),
         defaultValues: {
-            username: '',
-            password: '',
-            phone: '',
-            email: '',
-            firstName: '',
-            lastName: '',
-            address: '',
-            gender: false,
+            id: '',
+            brId: 0,
+            salary: '',
         },
     });
 
-    const onSubmit: SubmitHandler<StaffInputs> = (data) => {
-        const result = handleSubmitForm(data, allStaffSchema);
+    const onSubmit: SubmitHandler<UpdateBranchForEmployeeInputs> = (data) => {
+
+        const result = handleSubmitForm(data, updateEmployeeSchema);
 
         if (!result || !result.success || result.error) {
             return;
         }
 
-        const { address, username, password, phone, email, firstName, lastName, gender } = data;
+        const { id, brId, salary } = data;
 
-        console.log(gender);
+        console.log(id);
+        console.log(brId);
 
-        post(API_ENDPOINTS.USERS.CREATE_DENTIST, {
-            username,
-            email,
-            password,
-            firstName,
-            lastName,
-            gender,
-            phone,
-            address,
+        console.log(`${API_ENDPOINTS.USERS.UPDATE_BRANCH_FOR_EMPLOYEE}/${id}`);
+
+        put(`${API_ENDPOINTS.USERS.UPDATE_BRANCH_FOR_EMPLOYEE}/${id}`, {
+            id,
+            brId,
+            salary,
         })
             .then((res) => {
                 const { data } = res;
                 if (!data.success) {
                     console.log('1');
-
                     return errorToastHandler(data);
                 }
                 // successfully
-                toastSuccess("Create successfully!");
+                toastSuccess("Add successfully!");
                 navigate('/adminTest/adminAllStaffList');
             })
             .catch((err) => {
+                console.log('2');
                 console.log(err.response);
                 errorToastHandler(err.response);
             });
     };
-
-
 
     useEffect(() => {
         if (isSubmitSuccessful) {
