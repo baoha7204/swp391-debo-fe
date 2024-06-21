@@ -3,18 +3,20 @@ import { BrowserRouter } from "react-router-dom";
 import RegisterForm from "./RegisterForm";
 import authApi from "@/utils/api/authApi";
 import userEvent from "@testing-library/user-event";
+import testData from "@/mocks/RegisterForm.json";
 
 const mockAuthApi = Object.assign({}, authApi);
 describe("Register Form", () => {
   beforeEach(() => {
     mockAuthApi.register = jest.fn(() => Promise.resolve({ success: true }));
+
     render(
       <BrowserRouter>
         <RegisterForm auth={mockAuthApi.register} />
       </BrowserRouter>
     );
   });
-  it("should submit when enter valid credentials (Email)", async () => {
+  it("should submit when enter valid credentials", async () => {
     // Arrange
     const { getByTestId } = screen;
     const emailInput = "abc@gmail.com";
@@ -27,6 +29,7 @@ describe("Register Form", () => {
     await userEvent.type(getByTestId("password"), passInput);
     await userEvent.type(getByTestId("confirmPassword"), passInput);
     fireEvent.click(getByTestId("register"));
+
     // Assert
     await waitFor(() => expect(screen.queryAllByRole("alert")).toHaveLength(0));
     expect(mockAuthApi.register).toHaveBeenCalledWith({
@@ -47,6 +50,7 @@ describe("Register Form", () => {
     const confirmPassErrorMsg = await findByText(
       "Confirm password is required"
     );
+
     // Assert
     expect(emailErrorMsg).toBeInTheDocument();
     expect(phoneErrorMsg).toBeInTheDocument();
@@ -54,21 +58,7 @@ describe("Register Form", () => {
     expect(confirmPassErrorMsg).toBeInTheDocument();
     expect(mockAuthApi.register).not.toHaveBeenCalled();
   });
-  it.each([
-    {
-      input: {
-        email: "test@test.c",
-        phoneNumber: "0762abc",
-        password: "pass",
-        confirmPassword: "pass1",
-      },
-      expected: [
-        "Invalid email address",
-        "Invalid phone number",
-        "Passwords do not match",
-      ],
-    },
-  ])(
+  it.each(testData)(
     "should display matching error when enter invalid input ",
     async ({ input, expected }) => {
       // Arrange
@@ -84,6 +74,7 @@ describe("Register Form", () => {
       );
       fireEvent.click(getByTestId("register"));
       const errorMessages = expected.map((msg) => findByText(msg));
+
       // Assert
       for (const errorMsg of errorMessages) {
         expect(await errorMsg).toBeInTheDocument();

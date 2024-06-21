@@ -1,4 +1,3 @@
-import { AppointmentListData } from "@/components/Appointment/AppointmentList";
 import { ProcessedEvent } from "@aldabil/react-scheduler/types";
 
 const CalendarPatientEvents: ProcessedEvent[] = [
