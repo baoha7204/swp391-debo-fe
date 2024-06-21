@@ -3,6 +3,7 @@ import { BrowserRouter } from "react-router-dom";
 import userEvent from "@testing-library/user-event";
 import LoginForm from "./LoginForm";
 import authApi from "@/utils/api/authApi";
+import testData from "@/mocks/LoginForm.json";
 
 const mockAuthApi = Object.assign({}, authApi);
 describe("Login Form", () => {
@@ -64,31 +65,27 @@ describe("Login Form", () => {
     fireEvent.click(getByTestId("login"));
     const userErrorMsg = await findByText("Email/phone number is required");
     const passErrorMsg = await findByText("Password is required");
+
     // Assert
     expect(userErrorMsg).toBeInTheDocument();
     expect(passErrorMsg).toBeInTheDocument();
     expect(mockAuthApi.login).not.toHaveBeenCalled();
   });
-  it.each([
-    { input: "test@test.c", expected: "Invalid email/phone number" },
-    { input: "0762abc", expected: "Invalid email/phone number" },
-    { input: "07621234111", expected: "Invalid email/phone number" },
-  ])(
+  it.each(testData)(
     "should display matching error when enter $input to email/phone number field",
     async ({ input, expected }) => {
       // Arrange
       const { getByTestId, findByText } = screen;
-      const passInput = "password";
 
       // Act
-      await userEvent.type(getByTestId("user"), input);
-      await userEvent.type(getByTestId("password"), passInput);
+      await userEvent.type(getByTestId("user"), input.user);
+      await userEvent.type(getByTestId("password"), input.password);
       fireEvent.click(getByTestId("login"));
       const userErrorMsg = await findByText(expected);
       // Assert
       expect(userErrorMsg).toBeInTheDocument();
-      expect(getByTestId("user")).toHaveValue(input);
-      expect(getByTestId("password")).toHaveValue(passInput);
+      expect(getByTestId("user")).toHaveValue(input.user);
+      expect(getByTestId("password")).toHaveValue(input.password);
       expect(mockAuthApi.login).not.toHaveBeenCalled();
     }
   );
