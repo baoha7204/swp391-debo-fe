@@ -35,7 +35,7 @@ const MyTable = <T extends RowData>({ url, columns }: TableProps<T>) => {
             <TableRow>
               {columns.map((column) => (
                 <TableCell
-                  key={column.id}
+                  key={column.id as Key}
                   align={column.align}
                   style={{ minWidth: column.minWidth }}
                 >
@@ -48,17 +48,14 @@ const MyTable = <T extends RowData>({ url, columns }: TableProps<T>) => {
             {list.map((row) => (
               <TableRow hover tabIndex={-1} key={row.id}>
                 {columns.map((column) => {
-                  let formattedValue = row[column.id];
-                  if (column.isDate) {
-                    formattedValue = formatDateSlotString(
-                      row.timeSlot,
-                      formattedValue as Date
-                    );
-                  } else if (column.format) {
-                    formattedValue = column.format(formattedValue);
-                  }
+                  const value = row[column.id];
+                  const formattedValue = column.isDate
+                    ? formatDateSlotString(row.timeSlot, value as Date)
+                    : column.format
+                    ? column.format(value as string)
+                    : value;
                   return (
-                    <TableCell key={column.id} align={column.align}>
+                    <TableCell key={column.id as Key} align={column.align}>
                       {column.isDetail ? (
                         <LinkRouter to={row.id + ""}>
                           {formattedValue as string}

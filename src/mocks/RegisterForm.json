@@ -1,0 +1,15 @@
+[
+  {
+    "input": {
+      "email": "test@test.c",
+      "phoneNumber": "0762abc",
+      "password": "pass",
+      "confirmPassword": "pass1"
+    },
+    "expected": [
+      "Invalid email address",
+      "Invalid phone number",
+      "Passwords do not match"
+    ]
+  }
+]
