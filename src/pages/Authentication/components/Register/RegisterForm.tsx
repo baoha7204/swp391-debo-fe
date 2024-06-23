@@ -3,9 +3,12 @@ import { Box } from "@mui/material";
 import MyButton from "@/components/MyButton";
 import useRegister from "./hooks/useRegister";
 import FormInputText from "@/components/Form/FormInputText";
+import authApi from "@/utils/api/authApi";
 
-const RegisterForm = () => {
-  const [handleSubmit, isSubmitting, control] = useRegister();
+export type RegisterFormProps = typeof authApi.register;
+
+const RegisterForm = ({ auth }: { auth: RegisterFormProps }) => {
+  const [handleSubmit, isSubmitting, control] = useRegister(auth);
 
   return (
     <Box
@@ -28,6 +31,7 @@ const RegisterForm = () => {
         fullWidth
         id="email"
         autoFocus
+        inputProps={{ "data-testid": "email" }}
       />
       <FormInputText
         control={control}
@@ -37,12 +41,14 @@ const RegisterForm = () => {
         required
         fullWidth
         id="phoneNumber"
+        inputProps={{ "data-testid": "phoneNumber" }}
       />
       <FormInputText
         isPassword
         control={control}
         name="password"
         label="Must be 8 characters"
+        inputProps={{ "data-testid": "password" }}
       />
       <FormInputText
         isPassword
@@ -51,8 +57,10 @@ const RegisterForm = () => {
         label="Repeat password"
         name="confirmPassword"
         id="confirmPassword"
+        inputProps={{ "data-testid": "confirmPassword" }}
       />
       <MyButton
+        data-testid="register"
         type="submit"
         fullWidth
         variant="contained"

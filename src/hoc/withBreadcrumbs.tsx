@@ -21,7 +21,7 @@ export const getBreadcrumbs = ({
   routes: RouteBreadcrumb[];
   pathname: string;
 }) => {
-  const matches = [];
+  const matches: never[] = [];
   const pathnames = pathname.replace(/\/$/, "").split("/").slice(2);
 
   pathnames.length > 0 &&
@@ -54,13 +54,14 @@ export const getBreadcrumbs = ({
   return matches;
 };
 
-export const withBreadcrumbs = (routes: RouteBreadcrumb[]) => (Component) =>
-  withRouter((props) => (
-    <Component
-      {...props}
-      breadcrumbs={getBreadcrumbs({
-        pathname: props.router.location.pathname,
-        routes,
-      })}
-    />
-  ));
+export const withBreadcrumbs =
+  (routes: RouteBreadcrumb[]) => (Component: any) =>
+    withRouter((props: any) => (
+      <Component
+        {...props}
+        breadcrumbs={getBreadcrumbs({
+          pathname: props.router.location.pathname,
+          routes,
+        })}
+      />
+    ));

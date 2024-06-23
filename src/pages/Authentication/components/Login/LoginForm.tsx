@@ -4,9 +4,12 @@ import MyButton from "@/components/MyButton";
 import useToggle from "@/hooks/useToggle";
 import useLogin from "./hooks/useLogin";
 import FormInputText from "@/components/Form/FormInputText";
+import authApi from "@/utils/api/authApi";
 
-const LoginForm = () => {
-  const [handleSubmit, isSubmitting, control] = useLogin();
+export type LoginFormProps = typeof authApi.login;
+
+const LoginForm = ({ auth }: { auth: LoginFormProps }) => {
+  const [handleSubmit, isSubmitting, control] = useLogin(auth);
 
   const [check, toggleCheck] = useToggle("persist", false);
 
@@ -30,14 +33,14 @@ const LoginForm = () => {
         fullWidth
         id="user"
         label="Email or phone number"
-        data-testid="user"
+        inputProps={{ "data-testid": "user" }}
         autoFocus
       />
       <FormInputText
-        data-testid="password"
         isPassword
         control={control}
         name="password"
+        inputProps={{ "data-testid": "password" }}
       />
       <MyButton
         data-testid="login"
