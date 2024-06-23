@@ -10,6 +10,7 @@ import Tooltip from "@mui/material/Tooltip";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import Settings from "@mui/icons-material/Settings";
 import Logout from "@mui/icons-material/Logout";
+import { useNavigate } from "react-router-dom";
 import useAnchorEl from "@/hooks/useAnchorEl";
 import useLogout from "@/hooks/useLogout";
 
@@ -19,6 +20,7 @@ export type AccountMenuProps = {
 };
 
 export default function AccountMenu({ username, avt }: AccountMenuProps) {
+  const navigate = useNavigate();
   const [anchorEl, handleClick, handleClose] = useAnchorEl();
   const logout = useLogout();
   const open = Boolean(anchorEl);
@@ -83,7 +85,7 @@ export default function AccountMenu({ username, avt }: AccountMenuProps) {
           Profile
         </MenuItem>
         <Divider />
-        <MenuItem onClick={handleClose}>
+        <MenuItem onClick={() => navigate("settings")}>
           <ListItemIcon>
             <Settings fontSize="small" />
           </ListItemIcon>

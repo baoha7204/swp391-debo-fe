@@ -24,6 +24,7 @@ const PatientRoutes = [
   { path: "appointments/:id/info", breadcrumb: "Info" },
   { path: "appointments/:id/notes", breadcrumb: "Notes" },
   { path: "settings", breadcrumb: "Settings" },
+  { path: "settings/profile", breadcrumb: "Profile" },
 ];
 
 const PatientInfo = {
