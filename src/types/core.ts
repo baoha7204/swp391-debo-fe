@@ -15,6 +15,8 @@ type ApiResponse<T = EmptyObj> = {
 
 // TODO: Token types need to be updated
 type Token = {
+  nameid: string;
+  email: string;
   role: string;
 };
 

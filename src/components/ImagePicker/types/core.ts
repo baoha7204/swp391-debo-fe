@@ -1,6 +1,8 @@
+import { RefCallBack } from "react-hook-form";
+
 type ImagePickerProps = {
-  name?: string;
-  file?: string | ArrayBuffer | null;
+  image?: string | ArrayBuffer | null;
+  ref: RefCallBack;
 };
 
 export type { ImagePickerProps };

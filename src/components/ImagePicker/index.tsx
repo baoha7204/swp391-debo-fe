@@ -1,25 +1,11 @@
-import { useForm } from "react-hook-form";
 import { ChangeEvent, useState } from "react";
-import {
-  Avatar,
-  Button,
-  Card,
-  CardActionArea,
-  CardContent,
-  Fab,
-  Grid,
-} from "@mui/material";
-import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
-import ImagePickerStyles from "./style";
+import { Avatar, Box } from "@mui/material";
 import { ImagePickerProps } from "./types/core";
+import EditMenu from "./EditMenu";
 
-const ImagePicker = ({ name, file }: ImagePickerProps) => {
-  const { register, handleSubmit, reset } = useForm();
+const ImagePicker = ({ ref, image }: ImagePickerProps) => {
   const [uploadState, setUploadState] = useState<"initial" | "uploaded">(
     "initial"
-  );
-  const [image, setImage] = useState<string | ArrayBuffer | null>(
-    () => file || null
   );
 
   const handleUploadClick = (event: ChangeEvent<HTMLInputElement>) => {
@@ -47,53 +33,21 @@ const ImagePicker = ({ name, file }: ImagePickerProps) => {
   };
 
   return (
-    <ImagePickerStyles>
-      <div className="root">
-        <Card className="cardContainer">
-          <CardContent
-            className={uploadState !== "uploaded" ? "cardRoot" : "cardRootHide"}
-          >
-            <Grid container justifySelf="center" alignItems="center">
-              {/* <input
-                accept="image/jpeg,image/png,image/gif"
-                className="input"
-                id="contained-button-file"
-                name="logo"
-                ref={register({ required: true })}
-                type="file"
-                onChange={handleUploadClick}
-              /> */}
-              <label
-                htmlFor="contained-button-file"
-                className={uploadState === "uploaded" ? "input" : undefined}
-              >
-                <Fab component="span" className="button">
-                  <AddPhotoAlternateIcon />
-                </Fab>
-              </label>
-            </Grid>
-          </CardContent>
-          {uploadState === "uploaded" && (
-            <CardActionArea onClick={handleResetClick}>
-              {/* <Avatar className="logo" src={image} alt="LOGO">
-                {name}
-              </Avatar> */}
-              <Avatar className="logo" alt="LOGO">
-                Bao
-              </Avatar>
-            </CardActionArea>
-          )}
-        </Card>
-        <Button
-          variant="contained"
-          color="primary"
-          className="submit"
-          onClick={handleSubmit(onUpload)}
-        >
-          Upload
-        </Button>
-      </div>
-    </ImagePickerStyles>
+    <Box>
+      <Avatar
+        alt="dummy"
+        sx={{
+          width: 200,
+          height: 200,
+          position: "relative",
+          overflow: "visible",
+        }}
+      >
+        <Box sx={{ position: "absolute", left: 20, bottom: 0 }}>
+          <EditMenu image={image} />
+        </Box>
+      </Avatar>
+    </Box>
   );
 };
 
