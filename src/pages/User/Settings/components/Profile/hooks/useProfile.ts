@@ -14,12 +14,13 @@ const useProfile = () => {
   const { user, setUser } = useContext(UserContext);
   const {
     handleSubmit,
-    reset,
     control,
-    formState: { isSubmitSuccessful, isSubmitting },
+    formState: { isSubmitting },
   } = useForm<ProfileInputs>({
     resolver: zodResolver(ProfileSchema),
     defaultValues: {
+      email: user?.email || "",
+      phone: user?.phone || "",
       username: user?.username || "",
       firstName: user?.firstName || "",
       lastName: user?.lastName || "",
@@ -49,8 +50,6 @@ const useProfile = () => {
       const { avt, ...rest } = data;
       const response = await userApi.updateOne(user.id, {
         id: user.id,
-        email: user.email,
-        phone: user.phone,
         ...rest,
       });
       const result = response.data;
@@ -65,10 +64,6 @@ const useProfile = () => {
     } catch (error) {
       if (error.name !== "CanceledError") {
         errorToastHandler(error.response);
-      }
-    } finally {
-      if (isSubmitSuccessful) {
-        reset();
       }
     }
   };

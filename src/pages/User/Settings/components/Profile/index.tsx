@@ -31,6 +31,26 @@ const Profile = () => {
         <Grid container item xs={12} sm={8} gap={2}>
           <FormInputText
             control={control}
+            name="email"
+            outsideLabel="Email"
+            label="example@gmail.com"
+            required
+            fullWidth
+            id="email"
+            inputProps={{ "data-testid": "email" }}
+          />
+          <FormInputText
+            control={control}
+            name="phone"
+            outsideLabel="Phone"
+            label="0123456789"
+            fullWidth
+            required
+            id="phone"
+            inputProps={{ "data-testid": "phone" }}
+          />
+          <FormInputText
+            control={control}
             name="username"
             outsideLabel="Username"
             fullWidth
@@ -68,6 +88,15 @@ const Profile = () => {
             sx={{
               width: "fit-content",
             }}
+          />
+          <FormInputText
+            control={control}
+            name="address"
+            outsideLabel="Address"
+            fullWidth
+            id="address"
+            label="Quan 9 TPHCM"
+            inputProps={{ "data-testid": "address" }}
           />
         </Grid>
         <Grid

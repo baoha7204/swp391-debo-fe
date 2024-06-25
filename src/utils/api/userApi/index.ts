@@ -25,6 +25,7 @@ const userApi = {
     return await put<NonNullable<UserType>>(
       `${API_ENDPOINTS.USERS.ONE}/${id}`,
       data,
+      undefined,
       {
         signal,
       }
@@ -63,6 +64,20 @@ const userApi = {
       {
         signal,
         "Content-Type": "multipart/form-data",
+      }
+    );
+  },
+  changePassword: async (
+    id: string,
+    data: { password: string; newPassword: string },
+    signal?: GenericAbortSignal
+  ) => {
+    return await put<NonNullable<UserType>>(
+      `${API_ENDPOINTS.USERS.ONE}/updatePassword/${id}`,
+      { id, ...data },
+      undefined,
+      {
+        signal,
       }
     );
   },

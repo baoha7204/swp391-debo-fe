@@ -1,10 +1,13 @@
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { AccountInputs } from "../types/core";
 import { AccountSchema } from "../lib/schema";
 import { handleSubmitForm } from "@/usecases/handleSubmitForm";
 import { UserContext } from "@/pages/User/user.context";
+import { toastSuccess } from "@/utils/toast";
+import { errorToastHandler } from "@/utils/toast/actions";
+import userApi from "@/utils/api/userApi";
 
 const useAccount = () => {
   const { user } = useContext(UserContext);
@@ -30,21 +33,41 @@ const useAccount = () => {
       return;
     }
 
+    // Update user
+    if (!user || !user?.id) {
+      errorToastHandler({ message: "User not found" });
+      return;
+    }
+
+    try {
+      const response = await userApi.changePassword(user.id, {
+        password: data.oldPassword,
+        newPassword: data.newPassword,
+      });
+      const result = response.data;
+
+      if (!result.success) {
+        errorToastHandler(result);
+        return;
+      }
+      toastSuccess("Change password successfully!");
+    } catch (error) {
+      if (error.name !== "CanceledError") {
+        errorToastHandler(error.response);
+      }
+    } finally {
+      if (isSubmitSuccessful) {
+        reset();
+      }
+    }
+
     // const { email, password, phoneNumber } = data;
     // const res = await register({ email, password, phoneNumber });
     // if (!res.success) {
     //   return errorToastHandler(res);
     // }
-    // // successfully registered
-    // toastSuccess("Register successfully!");
-    // navigate(from, { replace: true });
+    // successfully registered
   };
-
-  useEffect(() => {
-    if (isSubmitSuccessful) {
-      reset();
-    }
-  }, [isSubmitSuccessful, reset]);
 
   return [handleSubmit(onSubmit), isSubmitting, control] as const;
 };
