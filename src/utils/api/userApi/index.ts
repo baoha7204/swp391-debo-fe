@@ -1,6 +1,6 @@
 import { GenericAbortSignal } from "axios";
 import { UserType } from "@/pages/User/user.context";
-import { get, put } from "@/utils/apiCaller";
+import { get, post, put } from "@/utils/apiCaller";
 import { API_ENDPOINTS } from "..";
 import { errorToastHandler } from "@/utils/toast/actions";
 
@@ -32,15 +32,16 @@ const userApi = {
   },
   uploadAvatar: async (
     id: string,
-    data: { avt: string | ArrayBuffer | null },
+    data: File | null,
     signal?: GenericAbortSignal
   ) => {
-    return await put<NonNullable<UserType>>(
-      // TODO: correct api endpoint
-      `${API_ENDPOINTS.USERS.ONE}/${id}/uploadAvatar`,
-      {
-        avt: data,
-      },
+    const formData = new FormData();
+    formData.append("file", data as unknown as Blob);
+    formData.append("id", id);
+    return await post<NonNullable<UserType>>(
+      `${API_ENDPOINTS.USERS.ONE}/${id}/upload-avt`,
+      formData,
+      undefined,
       {
         signal,
         "Content-Type": "multipart/form-data",
@@ -49,15 +50,16 @@ const userApi = {
   },
   uploadMedRec: async (
     id: string,
-    data: { medRec: string | ArrayBuffer | null },
+    data: File | null,
     signal?: GenericAbortSignal
   ) => {
-    return await put<NonNullable<UserType>>(
-      // TODO: correct api endpoint
-      `${API_ENDPOINTS.USERS.ONE}/${id}/uploadMedRec`,
-      {
-        medRec: data,
-      },
+    const formData = new FormData();
+    formData.append("file", data as unknown as Blob);
+    formData.append("id", id);
+    return await post<NonNullable<UserType>>(
+      `${API_ENDPOINTS.USERS.ONE}/${id}/upload-medrec`,
+      formData,
+      undefined,
       {
         signal,
         "Content-Type": "multipart/form-data",

@@ -11,7 +11,7 @@ import { toastSuccess } from "@/utils/toast";
 import userApi from "@/utils/api/userApi";
 
 const useProfile = () => {
-  const { user } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
   const {
     handleSubmit,
     reset,
@@ -59,6 +59,8 @@ const useProfile = () => {
         errorToastHandler(result);
         return;
       }
+
+      setUser((prev) => ({ ...prev, ...result.data }));
       toastSuccess("Update successfully!");
     } catch (error) {
       if (error.name !== "CanceledError") {
@@ -71,36 +73,33 @@ const useProfile = () => {
     }
   };
 
-  const onUpload =
-    (isAvatar: boolean) => async (data: string | ArrayBuffer | null) => {
-      if (!user?.id) {
-        errorToastHandler({ message: "User not found" });
+  const onUpload = (isAvatar: boolean) => async (data: File | null) => {
+    if (!user?.id) {
+      errorToastHandler({ message: "User not found" });
+      return;
+    }
+
+    try {
+      const response = isAvatar
+        ? await userApi.uploadAvatar(user.id, data)
+        : await userApi.uploadMedRec(user.id, data);
+      const result = response.data;
+      if (!result.success) {
+        errorToastHandler(result);
         return;
       }
 
-      try {
-        const response = isAvatar
-          ? await userApi.uploadAvatar(user.id, {
-              avt: data,
-            })
-          : await userApi.uploadMedRec(user.id, {
-              medRec: data,
-            });
-        const result = response.data;
-        if (!result.success) {
-          errorToastHandler(result);
-          return;
-        }
+      const returnData = isAvatar ? result.data.avt : result.data.medRec;
 
-        return isAvatar
-          ? (result.data.avt as string)
-          : (result.data.medRec as string);
-      } catch (error) {
-        if (error.name !== "CanceledError") {
-          errorToastHandler(error.response);
-        }
+      setUser(result.data);
+
+      return returnData;
+    } catch (error) {
+      if (error.name !== "CanceledError") {
+        errorToastHandler(error.response);
       }
-    };
+    }
+  };
 
   return [handleSubmit(onSubmit), isSubmitting, control, onUpload] as const;
 };

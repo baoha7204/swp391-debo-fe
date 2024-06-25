@@ -36,21 +36,16 @@ const ImagePicker = forwardRef<HTMLInputElement, ImagePickerProps>(
       const reader = new FileReader();
       reader.readAsDataURL(file);
       reader.onloadend = async () => {
-        const data = await onUpload(reader.result);
+        setImage(reader.result);
+        const data = await onUpload(file);
         if (!data) {
           errorToastHandler({ message: "Upload failed, please try again" });
+          setImage(null);
           return;
         }
-        setImage(data);
-        onChange({ target: { value: data } } as ChangeEvent<HTMLInputElement>);
         setError(null);
-        // toastSuccess("Upload successfully!");
-        // setImage(reader.result);
-        // onChange({
-        //   target: { value: file.name },
-        // } as ChangeEvent<HTMLInputElement>);
-        // setError(null);
-        // toastSuccess("Upload successfully!");
+        onChange({ target: { value: data } } as ChangeEvent<HTMLInputElement>);
+        toastSuccess("Upload successfully!");
       };
     };
 
@@ -60,7 +55,7 @@ const ImagePicker = forwardRef<HTMLInputElement, ImagePickerProps>(
 
     const handleDelete = async () => {
       const data = await onUpload(null);
-      if (!data) {
+      if (typeof data === "undefined") {
         errorToastHandler({ message: "Delete failed, please try again" });
         return;
       }

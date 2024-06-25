@@ -8,8 +8,6 @@ type ImagePickerProps = {
   onChange: ChangeEventHandler;
 };
 
-type UploadFunction = (
-  data: string | ArrayBuffer | null
-) => Promise<string | null | undefined>;
+type UploadFunction = (data: File | null) => Promise<string | null | undefined>;
 
 export type { ImagePickerProps, UploadFunction };
