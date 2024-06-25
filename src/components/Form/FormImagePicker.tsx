@@ -1,6 +1,7 @@
 import { Controller, FieldPath, FieldValues } from "react-hook-form";
 import { InputProps } from "./types/core";
 import ImagePicker from "../ImagePicker";
+import { UploadFunction } from "../ImagePicker/types/core";
 
 const FormImagePicker = <
   TFieldValues extends FieldValues,
@@ -8,13 +9,23 @@ const FormImagePicker = <
 >({
   name,
   control,
-}: InputProps<TFieldValues, TName>) => {
+  onUpload,
+}: InputProps<TFieldValues, TName> & {
+  onUpload: UploadFunction;
+}) => {
   return (
     <Controller
       name={name || ("imagePicker" as TName)}
       control={control}
-      render={({ field: { ref, value, ...rest } }) => {
-        return <ImagePicker ref={ref} image={value} {...rest} />;
+      render={({ field: { ref, value, onChange } }) => {
+        return (
+          <ImagePicker
+            ref={ref}
+            value={value}
+            onChange={onChange}
+            onUpload={onUpload}
+          />
+        );
       }}
     />
   );

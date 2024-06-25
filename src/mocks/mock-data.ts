@@ -309,7 +309,7 @@ const User = {
   gender: null,
   phone: "0762953411",
   address: null,
-  dateOfBirthday: null,
+  dateOfBirthday: new Date(2004, 1, 7),
   medRec: null,
   avt: null,
 };

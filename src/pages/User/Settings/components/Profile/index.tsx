@@ -1,11 +1,12 @@
-import { Box, Grid } from "@mui/material";
-import MyButton from "@/components/MyButton";
+import { Box, Button, Grid } from "@mui/material";
 import FormImagePicker from "@/components/Form/FormImagePicker";
 import useProfile from "./hooks/useProfile";
 import FormInputText from "@/components/Form/FormInputText";
+import FormDatePicker from "@/components/Form/FormDatePicker";
+import FormSelect from "@/components/Form/FormSelect";
 
 const Profile = () => {
-  const [handleSubmit, isSubmitting, control] = useProfile();
+  const [handleSubmit, isSubmitting, control, onUpload] = useProfile();
 
   return (
     <Box
@@ -27,7 +28,7 @@ const Profile = () => {
         }}
         spacing={5}
       >
-        <Grid container item xs={12} sm={8}>
+        <Grid container item xs={12} sm={8} gap={2}>
           <FormInputText
             control={control}
             name="username"
@@ -36,7 +37,6 @@ const Profile = () => {
             id="username"
             label="john doe"
             inputProps={{ "data-testid": "username" }}
-            autoFocus
           />
           <FormInputText
             control={control}
@@ -56,20 +56,54 @@ const Profile = () => {
             label="Doe"
             inputProps={{ "data-testid": "lastName" }}
           />
+          <FormDatePicker control={control} name="dateOfBirthday" />
+          <FormSelect
+            control={control}
+            name="gender"
+            label="Gender"
+            options={[
+              { value: true, label: "Male" },
+              { value: false, label: "Female" },
+            ]}
+            sx={{
+              width: "fit-content",
+            }}
+          />
         </Grid>
-        <Grid item xs={12} sm={4}>
-          {/* <FormImagePicker name="avt" control={control} /> */}
+        <Grid
+          item
+          xs={12}
+          sm={4}
+          display="flex"
+          justifyContent={{
+            xs: "flex-start",
+            sm: "center",
+          }}
+        >
+          <FormImagePicker
+            name="avt"
+            control={control}
+            onUpload={onUpload(true)}
+          />
         </Grid>
       </Grid>
-      <MyButton
+      <Button
         data-testid="update"
         type="submit"
-        fullWidth
         variant="contained"
         disabled={isSubmitting}
+        sx={{
+          mt: 2,
+          width: "fit-content",
+          alignSelf: "left",
+          textTransform: "none",
+          fontSize: 15,
+          fontWeight: 700,
+          letterSpacing: 1,
+        }}
       >
         Update profile
-      </MyButton>
+      </Button>
     </Box>
   );
 };

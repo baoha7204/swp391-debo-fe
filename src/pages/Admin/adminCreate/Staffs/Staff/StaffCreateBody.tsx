@@ -3,8 +3,8 @@ import '@/styles/globals.css'
 import Grid from '@mui/material/Grid';
 import useStaff from './useStaff';
 import FormInputText from '@/components/Form/FormInputText';
-import FormSelect from '../../../components/FormSelect/FormSelect';
 import MyButton from '@/components/MyButton';
+import FormSelect from '@/components/Form/FormSelect';
 
 function StaffCreateBody() {
 

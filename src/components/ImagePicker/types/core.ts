@@ -1,8 +1,15 @@
+import { ChangeEventHandler } from "react";
 import { RefCallBack } from "react-hook-form";
 
 type ImagePickerProps = {
-  image?: string | ArrayBuffer | null;
+  value: string | ArrayBuffer | null;
   ref: RefCallBack;
+  onUpload: UploadFunction;
+  onChange: ChangeEventHandler;
 };
 
-export type { ImagePickerProps };
+type UploadFunction = (
+  data: string | ArrayBuffer | null
+) => Promise<string | null | undefined>;
+
+export type { ImagePickerProps, UploadFunction };

@@ -5,7 +5,7 @@ import { API_ENDPOINTS } from "..";
 import { errorToastHandler } from "@/utils/toast/actions";
 
 const userApi = {
-  getOne: async (id: string, signal: GenericAbortSignal) => {
+  getOne: async (id: string, signal?: GenericAbortSignal) => {
     return await get<NonNullable<UserType>>(
       `${API_ENDPOINTS.USERS.ONE}/${id}`,
       undefined,
@@ -17,10 +17,47 @@ const userApi = {
         return err;
       });
   },
-  updateOne: async (id: string, data: any, signal: GenericAbortSignal) => {
+  updateOne: async (
+    id: string,
+    data: Omit<UserType, "avt" | "medRec">,
+    signal?: GenericAbortSignal
+  ) => {
     return await put<NonNullable<UserType>>(
       `${API_ENDPOINTS.USERS.ONE}/${id}`,
       data,
+      {
+        signal,
+      }
+    );
+  },
+  uploadAvatar: async (
+    id: string,
+    data: { avt: string | ArrayBuffer | null },
+    signal?: GenericAbortSignal
+  ) => {
+    return await put<NonNullable<UserType>>(
+      // TODO: correct api endpoint
+      `${API_ENDPOINTS.USERS.ONE}/${id}/uploadAvatar`,
+      {
+        avt: data,
+      },
+      {
+        signal,
+        "Content-Type": "multipart/form-data",
+      }
+    );
+  },
+  uploadMedRec: async (
+    id: string,
+    data: { medRec: string | ArrayBuffer | null },
+    signal?: GenericAbortSignal
+  ) => {
+    return await put<NonNullable<UserType>>(
+      // TODO: correct api endpoint
+      `${API_ENDPOINTS.USERS.ONE}/${id}/uploadMedRec`,
+      {
+        medRec: data,
+      },
       {
         signal,
         "Content-Type": "multipart/form-data",

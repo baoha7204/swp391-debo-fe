@@ -11,7 +11,6 @@ import useAuth from "@/hooks/useAuth";
 import { Token } from "@/types/core";
 import userApi from "@/utils/api/userApi";
 import { errorToastHandler } from "@/utils/toast/actions";
-import axios from "axios";
 
 type UserType = {
   id: string;
@@ -23,7 +22,7 @@ type UserType = {
   gender: boolean | null;
   dateOfBirthday: Date | null;
   medRec: string | null;
-  avatar: string | null;
+  avt: string | null;
   address: string | null;
 } | null;
 
@@ -46,11 +45,8 @@ const UserProvider = ({ children }: PropsWithChildren) => {
   const [isLoading, setIsLoading] = useState(true);
   const { auth } = useAuth();
 
-  console.log(user);
-
   useEffect(() => {
     setIsLoading(true);
-    const abortController = new AbortController();
     const decoded = auth?.accessToken
       ? decodeToken<Token>(auth.accessToken)
       : undefined;
@@ -61,16 +57,14 @@ const UserProvider = ({ children }: PropsWithChildren) => {
       return;
     }
 
+    const abortController = new AbortController();
+
     const fetchUser = async () => {
       try {
-        // const res = await userApi.getOne(
-        //   decoded.nameid,
-        //   abortController.signal
-        // );
-        // Replace this line
-        const result = await axios("/user/1");
-        const res = result.data;
-        // Replace this line
+        const res = await userApi.getOne(
+          decoded.nameid,
+          abortController.signal
+        );
         const data = res.data;
         if (!res.success || !data) {
           errorToastHandler(res);

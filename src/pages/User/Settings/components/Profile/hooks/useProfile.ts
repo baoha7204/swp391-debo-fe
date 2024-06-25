@@ -8,6 +8,7 @@ import { UserContext } from "@/pages/User/user.context";
 import { handleSubmitForm } from "@/usecases/handleSubmitForm";
 import { errorToastHandler } from "@/utils/toast/actions";
 import { toastSuccess } from "@/utils/toast";
+import userApi from "@/utils/api/userApi";
 
 const useProfile = () => {
   const { user } = useContext(UserContext);
@@ -22,34 +23,86 @@ const useProfile = () => {
       username: user?.username || "",
       firstName: user?.firstName || "",
       lastName: user?.lastName || "",
-      gender: user?.gender || false,
-      dateOfBirthday: dayjs(user?.dateOfBirthday),
+      gender: user?.gender || true,
+      dateOfBirthday: dayjs(user?.dateOfBirthday) || null,
       address: user?.address || "",
-      avt: user?.avatar || "",
+      avt: user?.avt || null,
     },
   });
 
   const onSubmit: SubmitHandler<ProfileInputs> = async (data) => {
+    // Parse data
     const result = handleSubmitForm(data, ProfileSchema);
 
     if (!result || result.error) {
       return;
     }
 
-    // const res = await register({ email, password, phoneNumber });
+    // Update user
+    if (!user || !user?.id) {
+      errorToastHandler({ message: "User not found" });
+      return;
+    }
 
-    // if (!res.success) {
-    //   return errorToastHandler(res);
-    // }
-    // successfully update
-    toastSuccess("Update successfully!");
+    try {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const { avt, ...rest } = data;
+      const response = await userApi.updateOne(user.id, {
+        id: user.id,
+        email: user.email,
+        phone: user.phone,
+        ...rest,
+      });
+      const result = response.data;
 
-    if (isSubmitSuccessful) {
-      reset();
+      if (!result.success) {
+        errorToastHandler(result);
+        return;
+      }
+      toastSuccess("Update successfully!");
+    } catch (error) {
+      if (error.name !== "CanceledError") {
+        errorToastHandler(error.response);
+      }
+    } finally {
+      if (isSubmitSuccessful) {
+        reset();
+      }
     }
   };
 
-  return [handleSubmit(onSubmit), isSubmitting, control] as const;
+  const onUpload =
+    (isAvatar: boolean) => async (data: string | ArrayBuffer | null) => {
+      if (!user?.id) {
+        errorToastHandler({ message: "User not found" });
+        return;
+      }
+
+      try {
+        const response = isAvatar
+          ? await userApi.uploadAvatar(user.id, {
+              avt: data,
+            })
+          : await userApi.uploadMedRec(user.id, {
+              medRec: data,
+            });
+        const result = response.data;
+        if (!result.success) {
+          errorToastHandler(result);
+          return;
+        }
+
+        return isAvatar
+          ? (result.data.avt as string)
+          : (result.data.medRec as string);
+      } catch (error) {
+        if (error.name !== "CanceledError") {
+          errorToastHandler(error.response);
+        }
+      }
+    };
+
+  return [handleSubmit(onSubmit), isSubmitting, control, onUpload] as const;
 };
 
 export default useProfile;

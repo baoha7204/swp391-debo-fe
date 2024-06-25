@@ -3,7 +3,15 @@ import { Box, IconButton, Menu, MenuItem, Tooltip } from "@mui/material";
 import { Fragment } from "react/jsx-runtime";
 import EditIcon from "@mui/icons-material/Edit";
 
-const EditMenu = ({ image }: { image: string | ArrayBuffer | null }) => {
+const EditMenu = ({
+  image,
+  onUpload,
+  onRemove,
+}: {
+  image: string | ArrayBuffer | null;
+  onUpload: () => void;
+  onRemove: () => void;
+}) => {
   const [anchorEl, handleClick, handleClose] = useAnchorEl();
   const open = Boolean(anchorEl);
 
@@ -68,8 +76,8 @@ const EditMenu = ({ image }: { image: string | ArrayBuffer | null }) => {
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
-        <MenuItem onClick={handleClose}>Upload a photo...</MenuItem>
-        {image && <MenuItem onClick={handleClose}>Remove photo</MenuItem>}
+        <MenuItem onClick={onUpload}>Upload a photo...</MenuItem>
+        {image && <MenuItem onClick={onRemove}>Remove photo</MenuItem>}
       </Menu>
     </Fragment>
   );
