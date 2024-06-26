@@ -60,13 +60,6 @@ const useAccount = () => {
         reset();
       }
     }
-
-    // const { email, password, phoneNumber } = data;
-    // const res = await register({ email, password, phoneNumber });
-    // if (!res.success) {
-    //   return errorToastHandler(res);
-    // }
-    // successfully registered
   };
 
   return [handleSubmit(onSubmit), isSubmitting, control] as const;

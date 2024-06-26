@@ -11,7 +11,7 @@ import EditMenu from "./EditMenu";
 import VisuallyHiddenInput from "../VisuallyHiddenInput";
 import { errorToastHandler } from "@/utils/toast/actions";
 import { toastSuccess } from "@/utils/toast";
-import { validateImage } from "@/utils/imageHelper";
+import { validateImage } from "@/utils/fileHelper";
 
 const ImagePicker = forwardRef<HTMLInputElement, ImagePickerProps>(
   ({ value, onUpload, onChange }: ImagePickerProps, forwardedRef) => {
@@ -27,6 +27,7 @@ const ImagePicker = forwardRef<HTMLInputElement, ImagePickerProps>(
       const file = selectedFiles[0];
       if (!file) {
         errorToastHandler({ message: "No file selected" });
+        return;
       }
       const validationResult = validateImage(file);
       if (!validationResult.success) {
