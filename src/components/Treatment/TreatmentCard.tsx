@@ -67,14 +67,14 @@ const TreatmentCard = (props: TreatmentCardProps) => {
               color="text.secondary"
               sx={{ textAlign: "right" }}
             >
-              {rule_name}
+              Frequency: {rule_name}
             </Typography>
           </Box>
           <Typography variant="body2" color="text.secondary">
             {description}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            {num_of_appointment} appointments required
+            {num_of_appointment > 1 ? "s" : null} required
           </Typography>
         </CardContent>
       </CardActionArea>

@@ -47,7 +47,12 @@ const BookingContent = () => {
             <Button
               color="inherit"
               disabled={firstTime ? done === 2 : done === 0}
-              onClick={handleDoneDecrement}
+              onClick={() => {
+                if (firstTime && done === 2) {
+                  handleDoneDecrement();
+                }
+                handleDoneDecrement();
+              }}
               sx={{ mr: 1 }}
             >
               Previous

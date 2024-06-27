@@ -1,33 +1,28 @@
 import { AxiosInstance, GenericAbortSignal } from "axios";
 import { API_ENDPOINTS } from "..";
-import { errorToastHandler } from "@/utils/toast/actions";
 import { BookingType } from "@/components/Booking/progress.context";
 import { get } from "@/utils/apiCaller";
+import { ApiResponse } from "@/types/core";
+import { AppointmentResponse } from "@/components/Booking/SummaryBooking/hooks/useCreateAppointment";
 
 const appointmentApi = {
-  postSingle: async (
+  createBulk: async (
     data: NonNullable<BookingType>,
     axiosPrivate: AxiosInstance,
     signal?: GenericAbortSignal
   ) => {
-    return await axiosPrivate
-      .post(
-        API_ENDPOINTS.APPOINTMENT.ONE,
-        {
-          treateId: data.treatment?.id,
-          dentId: data.dentist?.id,
-          date: data.date?.toDate().toDateString(),
-          timeSlot: data.slot,
-        },
-        {
-          signal,
-        }
-      )
-      .then((res) => res.data)
-      .catch((err) => {
-        errorToastHandler(err.response);
-        return err;
-      });
+    return await axiosPrivate.post<ApiResponse<AppointmentResponse[]>>(
+      API_ENDPOINTS.APPOINTMENT.ONE,
+      {
+        treateId: data.treatment?.id,
+        dentId: data.dentist?.id,
+        date: data.date?.toDate().toDateString(),
+        timeSlot: data.slot,
+      },
+      {
+        signal,
+      }
+    );
   },
   getSlots: async (
     data: {

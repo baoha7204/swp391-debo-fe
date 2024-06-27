@@ -24,10 +24,12 @@ const useFirstTime = () => {
           return;
         }
         setResult(data.data);
-        toastWarning("This is your first time booking!");
-        toastInfo(
-          "You are determined to choose the General Checkup treatment."
-        );
+        if (data.data.isFirstTime) {
+          toastWarning("This is your first time booking!");
+          toastInfo(
+            "You are determined to choose the General Checkup treatment."
+          );
+        }
       } catch (error) {
         if (error.name !== "CanceledError") {
           errorToastHandler(error.response);

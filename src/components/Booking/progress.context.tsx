@@ -4,7 +4,7 @@ import {
   PropsWithChildren,
   SetStateAction,
   createContext,
-  useLayoutEffect,
+  useEffect,
   useState,
 } from "react";
 import useStep from "./hooks/useStep";
@@ -59,7 +59,7 @@ const ProgressProvider = ({ children }: PropsWithChildren) => {
     useProgressDone();
   const { result } = useFirstTime();
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (!result?.isFirstTime || Array.isArray(result.treatment)) {
       return;
     }
@@ -70,8 +70,13 @@ const ProgressProvider = ({ children }: PropsWithChildren) => {
         rule_name: APPOINTMENT_RULE[0],
       },
     });
-    setDone(2);
-  }, [result, setDone]);
+  }, [result]);
+
+  useEffect(() => {
+    if (result?.isFirstTime && done === 1) {
+      setDone(2);
+    }
+  }, [done, result?.isFirstTime, setDone]);
 
   const value = {
     data,

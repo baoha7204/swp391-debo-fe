@@ -4,10 +4,20 @@ import { errorToastHandler } from "@/utils/toast/actions";
 import useAxiosPrivate from "@/hooks/useAxiosPrivate";
 import appointmentApi from "@/utils/api/appointmentApi";
 
+export type AppointmentResponse = {
+  id: string;
+  status: string;
+  startDate: Date;
+  timeSlot: number;
+  treatId: number;
+};
+
 const useCreateAppointment = () => {
   const { data } = useContext(ProgressContext);
   const [isLoading, setIsLoading] = useState(true);
-  const [appointment, setAppointment] = useState<object | null>(null);
+  const [appointments, setAppointments] = useState<
+    AppointmentResponse[] | null
+  >(null);
   const axiosPrivate = useAxiosPrivate();
 
   useEffect(() => {
@@ -17,27 +27,28 @@ const useCreateAppointment = () => {
     if (!data || !data.dentist || !data.treatment || !data.date || !data.slot) {
       errorToastHandler({ message: "Please choose previous sections first." });
       setIsLoading(false);
-      setAppointment(null);
+      setAppointments(null);
       return;
     }
 
     const fetchRemote = async () => {
       try {
-        const result = await appointmentApi.postSingle(
+        const response = await appointmentApi.createBulk(
           data,
           axiosPrivate,
           abortController.signal
         );
+        const result = response.data;
         if (!result.success) {
           errorToastHandler(result);
           return;
         }
-        setAppointment(result.data);
+        setAppointments(result.data);
       } catch (error) {
         if (error.name !== "CanceledError") {
           errorToastHandler(error.response);
         }
-        setAppointment(null);
+        setAppointments(null);
       } finally {
         setIsLoading(false);
       }
@@ -50,7 +61,7 @@ const useCreateAppointment = () => {
     };
   }, [data, axiosPrivate]);
 
-  return { data, appointment, isLoading };
+  return { data, appointments, isLoading };
 };
 
 export default useCreateAppointment;

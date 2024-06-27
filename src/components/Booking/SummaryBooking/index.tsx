@@ -5,13 +5,14 @@ import DentistCardSummary from "./components/DentistCard";
 import TreatmentCardSummary from "./components/TreatmentCard";
 import DateSlotSummary from "./components/DateSlotCard";
 import CircularIndeterminate from "@/components/CircularIndeterminate";
+import dayjs from "dayjs";
 
 const SummaryBooking = () => {
-  const { data, isLoading, appointment } = useCreateAppointment();
+  const { data, isLoading, appointments } = useCreateAppointment();
 
   return isLoading ? (
     <CircularIndeterminate />
-  ) : !appointment ? (
+  ) : !appointments || appointments.length === 0 ? (
     <h2>Something wrong when creating summary, please try again</h2>
   ) : (
     <>
@@ -38,9 +39,16 @@ const SummaryBooking = () => {
           <Grid item xs={12}>
             <BranchCardSummary {...data!.branch!} />
           </Grid>
-          <Grid item xs={12}>
-            <DateSlotSummary date={data!.date!} slot={data!.slot!} />
-          </Grid>
+          {appointments.map((appointment, index: number) => {
+            return (
+              <Grid key={index} item xs={12}>
+                <DateSlotSummary
+                  date={dayjs(appointment.startDate)}
+                  slot={appointment.timeSlot}
+                />
+              </Grid>
+            );
+          })}
         </Grid>
       </Grid>
     </>
