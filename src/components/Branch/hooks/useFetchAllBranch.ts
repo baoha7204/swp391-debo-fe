@@ -8,6 +8,7 @@ const useFetchAllBranch = () => {
   const [branches, setBranches] = useState<BranchCardProps[]>([]);
 
   useEffect(() => {
+    setIsLoading(true);
     const abortController = new AbortController();
 
     const fetchRemote = async () => {

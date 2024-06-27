@@ -10,6 +10,7 @@ const useFetchDentists = () => {
   const [dentists, setDentists] = useState<DentistCardProps[]>([]);
 
   useEffect(() => {
+    setIsLoading(true);
     const abortController = new AbortController();
 
     if (!data || !data.treatment) {

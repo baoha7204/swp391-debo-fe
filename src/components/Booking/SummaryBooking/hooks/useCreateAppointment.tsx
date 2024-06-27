@@ -11,6 +11,7 @@ const useCreateAppointment = () => {
   const axiosPrivate = useAxiosPrivate();
 
   useEffect(() => {
+    setIsLoading(true);
     const abortController = new AbortController();
 
     if (!data || !data.dentist || !data.treatment || !data.date || !data.slot) {

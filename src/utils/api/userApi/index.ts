@@ -3,6 +3,17 @@ import { UserType } from "@/pages/User/user.context";
 import { get, post, put } from "@/utils/apiCaller";
 import { API_ENDPOINTS } from "..";
 import { errorToastHandler } from "@/utils/toast/actions";
+import { TreatmentCardProps } from "@/components/Treatment/TreatmentCard";
+
+export type FirstTimeType = {
+  isFirstTime: boolean;
+  treatment:
+    | (Omit<TreatmentCardProps, "rule_name" | "num_of_appointment"> & {
+        ruleId: number;
+        numOfApp: number;
+      })
+    | [];
+};
 
 const userApi = {
   getOne: async (id: string, signal?: GenericAbortSignal) => {
@@ -82,18 +93,13 @@ const userApi = {
     );
   },
   isFirstTime: async (signal?: GenericAbortSignal) => {
-    return await get<NonNullable<UserType>>(
+    return await get<FirstTimeType>(
       `${API_ENDPOINTS.USERS.ONE}/patient/isFirstTime`,
       undefined,
       {
         signal,
       }
-    )
-      .then((res) => res.data)
-      .catch((err) => {
-        errorToastHandler(err.response);
-        return err;
-      });
+    );
   },
 };
 

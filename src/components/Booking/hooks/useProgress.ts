@@ -12,7 +12,7 @@ const useProgressDone = () => {
     if (done > 0) setDone(done - 1);
   };
 
-  return { done, handleDoneIncrement, handleDoneDecrement };
+  return { done, handleDoneIncrement, handleDoneDecrement, setDone };
 };
 
 export default useProgressDone;

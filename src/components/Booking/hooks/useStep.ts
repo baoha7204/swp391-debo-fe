@@ -26,7 +26,13 @@ const useStep = () => {
     setActiveStep(0);
   };
 
-  return { activeStep, handleNext, handleBack, handleReset, isStepSkipped };
+  return {
+    activeStep,
+    handleNext,
+    handleBack,
+    handleReset,
+    isStepSkipped,
+  };
 };
 
 export default useStep;

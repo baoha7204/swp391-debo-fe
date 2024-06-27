@@ -10,6 +10,7 @@ const useFetchTreatments = () => {
   const [treatments, setTreatments] = useState<TreatmentCardProps[]>([]);
 
   useEffect(() => {
+    setIsLoading(true);
     const abortController = new AbortController();
 
     if (!data || !data.branch) {

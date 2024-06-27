@@ -4,6 +4,7 @@ import {
   PropsWithChildren,
   SetStateAction,
   createContext,
+  useLayoutEffect,
   useState,
 } from "react";
 import useStep from "./hooks/useStep";
@@ -11,6 +12,8 @@ import useProgressDone from "./hooks/useProgress";
 import { BranchCardProps } from "../Branch/BranchCard";
 import { TreatmentCardProps } from "../Treatment/TreatmentCard";
 import { DentistCardProps } from "../Dentist/DentistCard";
+import useFirstTime from "./hooks/useFirstTime";
+import { APPOINTMENT_RULE } from "@/constant/core";
 
 type BookingType = {
   branch?: BranchCardProps;
@@ -31,6 +34,7 @@ type ProgressContextType = {
   handleBack: () => void;
   handleReset: () => void;
   isStepSkipped: (step: number) => boolean;
+  firstTime: boolean;
 };
 
 const ProgressContext = createContext<ProgressContextType>({
@@ -44,13 +48,30 @@ const ProgressContext = createContext<ProgressContextType>({
   handleBack: () => {},
   handleReset: () => {},
   isStepSkipped: () => false,
+  firstTime: false,
 });
 
 const ProgressProvider = ({ children }: PropsWithChildren) => {
   const [data, setData] = useState<BookingType>(null);
   const { activeStep, handleNext, handleBack, handleReset, isStepSkipped } =
     useStep();
-  const { done, handleDoneIncrement, handleDoneDecrement } = useProgressDone();
+  const { done, handleDoneIncrement, handleDoneDecrement, setDone } =
+    useProgressDone();
+  const { result } = useFirstTime();
+
+  useLayoutEffect(() => {
+    if (!result?.isFirstTime || Array.isArray(result.treatment)) {
+      return;
+    }
+    setData({
+      treatment: {
+        ...result.treatment,
+        num_of_appointment: result.treatment.numOfApp,
+        rule_name: APPOINTMENT_RULE[0],
+      },
+    });
+    setDone(2);
+  }, [result, setDone]);
 
   const value = {
     data,
@@ -63,6 +84,7 @@ const ProgressProvider = ({ children }: PropsWithChildren) => {
     handleNext,
     handleBack,
     handleReset,
+    firstTime: result?.isFirstTime || false,
   };
 
   return (

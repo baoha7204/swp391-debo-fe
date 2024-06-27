@@ -92,6 +92,10 @@ const RouterComponent = () => {
           path: "appointments/:id",
           element: <AppointmentDetail />,
         },
+        {
+          path: "settings",
+          element: <SettingsPage />,
+        },
       ],
     },
     ...["login", "register"].map((path) => ({
@@ -155,6 +159,10 @@ const RouterComponent = () => {
                 {
                   path: "appointments/:id",
                   element: <AppointmentDetail />,
+                },
+                {
+                  path: "settings",
+                  element: <SettingsPage />,
                 },
               ],
             },

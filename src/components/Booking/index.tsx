@@ -15,6 +15,7 @@ const BookingContent = () => {
     handleDoneDecrement,
     handleNext,
     handleBack,
+    firstTime,
   } = useContext(ProgressContext);
 
   const handleSubmitAppointment = () => {
@@ -45,7 +46,7 @@ const BookingContent = () => {
           <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
             <Button
               color="inherit"
-              disabled={done === 0}
+              disabled={firstTime ? done === 2 : done === 0}
               onClick={handleDoneDecrement}
               sx={{ mr: 1 }}
             >
