@@ -1,27 +1,23 @@
-import { Fragment, useRef } from "react";
+import { Fragment } from "react";
 import InsertDriveFileOutlinedIcon from "@mui/icons-material/InsertDriveFileOutlined";
 import ArchiveOutlinedIcon from "@mui/icons-material/ArchiveOutlined";
 import CloseIcon from "@mui/icons-material/Close";
+import DownloadIcon from "@mui/icons-material/Download";
 import { Avatar, Box, IconButton, Typography } from "@mui/material";
 import { FileAttachmentProps } from "./types/core";
+import { calculateFileSize } from "@/utils/fileHelper";
 
 const FileAttachment = ({
-  size,
   file,
-  index,
   disabled,
   handleRemoveFile,
 }: FileAttachmentProps) => {
-  const avatarRef = useRef<HTMLDivElement | null>(null);
-
-  let icon: React.ReactNode = (
+  const icon: React.ReactNode = /\.(g?zip|tar|gz|rar)$/i.test(file.name) ? (
+    // Set icon for compressed files
+    <ArchiveOutlinedIcon color="primary" fontSize="large" />
+  ) : (
     <InsertDriveFileOutlinedIcon color="primary" fontSize="large" />
   );
-
-  // Set icon for compressed files
-  if (/\.(g?zip|tar|gz|rar)$/i.test(file.name)) {
-    icon = <ArchiveOutlinedIcon color="primary" fontSize="large" />;
-  }
 
   return (
     <>
@@ -37,9 +33,8 @@ const FileAttachment = ({
       >
         <Box sx={{ display: "flex", flexGrow: 1, alignItems: "center" }}>
           <Avatar
-            alt=""
+            alt="attachment"
             src={file.path}
-            ref={avatarRef}
             variant="rounded"
             sx={{
               m: 0.5,
@@ -60,7 +55,7 @@ const FileAttachment = ({
             </Typography>
             <Typography variant="caption" noWrap>
               <Fragment>
-                <b>{size}</b> |{" "}
+                <b>{calculateFileSize(file.size)}</b> |{" "}
                 <b>{file?.extension ? file.extension.toLowerCase() : ""}</b>
               </Fragment>
             </Typography>
@@ -70,8 +65,15 @@ const FileAttachment = ({
         <Typography component="div" sx={{ mr: -0.5, textAlign: "right" }}>
           <IconButton
             disabled={disabled}
-            onClick={(event): void => handleRemoveFile(event, index)}
+            href={file.url}
+            download={file.name}
+            target="_blank"
           >
+            <DownloadIcon />
+          </IconButton>
+        </Typography>
+        <Typography component="div" sx={{ mr: -0.5, textAlign: "right" }}>
+          <IconButton disabled={disabled} onClick={() => handleRemoveFile()}>
             <CloseIcon />
           </IconButton>
         </Typography>

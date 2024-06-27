@@ -11,6 +11,7 @@ import useAuth from "@/hooks/useAuth";
 import { Token } from "@/types/core";
 import userApi from "@/utils/api/userApi";
 import { errorToastHandler } from "@/utils/toast/actions";
+import { MetadataFile } from "@/components/FilePicker/types/core";
 
 type UserType = {
   id: string;
@@ -24,6 +25,7 @@ type UserType = {
   medRec: string | null;
   avt: string | null;
   address: string | null;
+  medRecMetaData: MetadataFile | null;
 } | null;
 
 type UserContextType<T> = {

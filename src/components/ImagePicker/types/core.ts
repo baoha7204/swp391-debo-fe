@@ -1,3 +1,4 @@
+import { MetadataFile } from "@/components/FilePicker/types/core";
 import { ChangeEventHandler } from "react";
 import { RefCallBack } from "react-hook-form";
 
@@ -8,6 +9,9 @@ type ImagePickerProps = {
   onChange: ChangeEventHandler;
 };
 
-type UploadFunction = (data: File | null) => Promise<string | null | undefined>;
+type UploadFunction = (
+  data: File | null,
+  config?: MetadataFile
+) => Promise<string | null | undefined>;
 
 export type { ImagePickerProps, UploadFunction };

@@ -1,9 +1,15 @@
 import { UploadFunction } from "@/components/ImagePicker/types/core";
-import { ChangeEventHandler, DragEvent } from "react";
+import { ChangeEventHandler } from "react";
 import { RefCallBack } from "react-hook-form";
 
 export type FilePickerProps = {
-  value: string | null;
+  value: {
+    url: string | null;
+    metadata: Pick<
+      FileProps,
+      "contentType" | "name" | "size" | "lastModified"
+    > | null;
+  };
   ref?: RefCallBack;
   onUpload: UploadFunction;
   onChange?: ChangeEventHandler;
@@ -11,9 +17,8 @@ export type FilePickerProps = {
 };
 
 export interface FileAttachmentProps {
-  size: string;
   file: FileProps;
-  index: number;
+  index?: number;
   disabled?: boolean;
   // eslint-disable-next-line @typescript-eslint/ban-types
   handleRemoveFile: Function;
@@ -24,6 +29,7 @@ export interface FileProps extends Blob {
   size: number;
   path: string;
   type: string;
+  url: string;
   lastModified?: Date;
   lastModifiedDate?: Date;
   extension?: string;
@@ -31,7 +37,9 @@ export interface FileProps extends Blob {
   contentType?: string;
 }
 
-export interface FileActionProps {
-  event: DragEvent<HTMLElement>;
-  files: FileList;
-}
+export type MetadataFile = {
+  nameFile: string;
+  fileSize: number;
+  lastModified: Date;
+  contentType: string;
+};

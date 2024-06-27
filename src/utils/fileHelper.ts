@@ -20,9 +20,13 @@ export const ACCEPTED_FILE_TYPES = [
   "application/zip",
   "application/x-zip-compressed",
   "application/vnd.rar",
+  "application/x-rar-compressed",
   "application/x-tar",
   "application/gzip",
+  "application/x-compressed",
 ];
+
+export const SIZE_UNITS = ["Bytes", "KB", "MB", "GB"];
 
 export const validateImage = (image: File) => {
   if (image.size > MAX_FILE_SIZE) {
@@ -60,4 +64,15 @@ export const validateFile = (file: File) => {
     success: true,
     message: null,
   };
+};
+
+export const calculateFileSize = (size: number) => {
+  let i = 0;
+  let sizeInBytes = size;
+  while (sizeInBytes > 900) {
+    sizeInBytes /= 1024;
+    i++;
+  }
+  const exactSize = Math.round(sizeInBytes * 100) / 100 + " " + SIZE_UNITS[i];
+  return exactSize;
 };
