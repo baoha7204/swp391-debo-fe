@@ -1,8 +1,8 @@
 import { useContext, useEffect, useState } from "react";
 import { ProgressContext } from "../../progress.context";
 import { errorToastHandler } from "@/utils/toast/actions";
-import { API_ENDPOINTS } from "@/utils/api";
 import useAxiosPrivate from "@/hooks/useAxiosPrivate";
+import appointmentApi from "@/utils/api/appointmentApi";
 
 const useCreateAppointment = () => {
   const { data } = useContext(ProgressContext);
@@ -22,19 +22,11 @@ const useCreateAppointment = () => {
 
     const fetchRemote = async () => {
       try {
-        const response = await axiosPrivate.post(
-          API_ENDPOINTS.APPOINTMENT.ONE,
-          {
-            treateId: data.treatment?.id,
-            dentId: data.dentist?.id,
-            date: data.date?.toDate().toDateString(),
-            timeSlot: data.slot,
-          },
-          {
-            signal: abortController.signal,
-          }
+        const result = await appointmentApi.postSingle(
+          data,
+          axiosPrivate,
+          abortController.signal
         );
-        const result = response.data;
         if (!result.success) {
           errorToastHandler(result);
           return;
@@ -53,7 +45,6 @@ const useCreateAppointment = () => {
     fetchRemote();
 
     return () => {
-      console.log("aborting...");
       abortController.abort();
     };
   }, [data, axiosPrivate]);

@@ -17,4 +17,12 @@ const ROLE = {
   STAFF: "clinic staff",
 };
 
-export { STRING_EMPTY, HTTP_STATUS, ROLE };
+const APPOINTMENT_RULE = [
+  "one-time",
+  "weekly",
+  "monthly",
+  "yearly",
+  "half-yearly",
+];
+
+export { STRING_EMPTY, HTTP_STATUS, ROLE, APPOINTMENT_RULE };

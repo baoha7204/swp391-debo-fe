@@ -81,6 +81,20 @@ const userApi = {
       }
     );
   },
+  isFirstTime: async (signal?: GenericAbortSignal) => {
+    return await get<NonNullable<UserType>>(
+      `${API_ENDPOINTS.USERS.ONE}/patient/isFirstTime`,
+      undefined,
+      {
+        signal,
+      }
+    )
+      .then((res) => res.data)
+      .catch((err) => {
+        errorToastHandler(err.response);
+        return err;
+      });
+  },
 };
 
 export default userApi;

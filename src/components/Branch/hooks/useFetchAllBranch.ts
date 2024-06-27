@@ -1,9 +1,7 @@
 import { useEffect, useState } from "react";
 import { BranchCardProps } from "../BranchCard";
-import { get } from "@/utils/apiCaller";
 import { errorToastHandler } from "@/utils/toast/actions";
-import { API_ENDPOINTS } from "@/utils/api";
-import { ListDataResponse } from "@/hooks/useFetchTableList";
+import branchApi from "@/utils/api/branchApi";
 
 const useFetchAllBranch = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -14,17 +12,7 @@ const useFetchAllBranch = () => {
 
     const fetchRemote = async () => {
       try {
-        const response = await get<ListDataResponse<BranchCardProps>>(
-          API_ENDPOINTS.BRANCH.LIST,
-          {
-            page: 0,
-            limit: -1,
-          },
-          {
-            signal: abortController.signal,
-          }
-        );
-        const data = response.data;
+        const data = await branchApi.getAllList(abortController.signal);
         if (!data.success) {
           errorToastHandler(data);
           return;
@@ -43,7 +31,6 @@ const useFetchAllBranch = () => {
     fetchRemote();
 
     return () => {
-      console.log("aborting...");
       abortController.abort();
     };
   }, []);
