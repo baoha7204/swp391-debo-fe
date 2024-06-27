@@ -2,6 +2,7 @@ import { AxiosInstance, GenericAbortSignal } from "axios";
 import { API_ENDPOINTS } from "..";
 import { errorToastHandler } from "@/utils/toast/actions";
 import { BookingType } from "@/components/Booking/progress.context";
+import { get } from "@/utils/apiCaller";
 
 const appointmentApi = {
   postSingle: async (
@@ -27,6 +28,18 @@ const appointmentApi = {
         errorToastHandler(err.response);
         return err;
       });
+  },
+  getSlots: async (
+    data: {
+      dentist?: number;
+      date: string;
+      treatment?: number;
+    },
+    signal?: GenericAbortSignal
+  ) => {
+    return await get<number[][]>(API_ENDPOINTS.SLOT.LIST, data, {
+      signal,
+    });
   },
 };
 

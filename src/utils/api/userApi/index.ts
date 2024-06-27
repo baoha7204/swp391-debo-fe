@@ -1,9 +1,10 @@
-import { GenericAbortSignal } from "axios";
+import { AxiosInstance, GenericAbortSignal } from "axios";
 import { UserType } from "@/pages/User/user.context";
 import { get, post, put } from "@/utils/apiCaller";
 import { API_ENDPOINTS } from "..";
 import { errorToastHandler } from "@/utils/toast/actions";
 import { TreatmentCardProps } from "@/components/Treatment/TreatmentCard";
+import { ApiResponse } from "@/types/core";
 
 export type FirstTimeType = {
   isFirstTime: boolean;
@@ -92,10 +93,12 @@ const userApi = {
       }
     );
   },
-  isFirstTime: async (signal?: GenericAbortSignal) => {
-    return await get<FirstTimeType>(
+  isFirstTime: async (
+    axiosPrivate: AxiosInstance,
+    signal?: GenericAbortSignal
+  ) => {
+    return await axiosPrivate.get<ApiResponse<FirstTimeType>>(
       `${API_ENDPOINTS.USERS.ONE}/patient/isFirstTime`,
-      undefined,
       {
         signal,
       }
