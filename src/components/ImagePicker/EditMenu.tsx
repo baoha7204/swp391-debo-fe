@@ -1,49 +1,47 @@
-import { Fragment } from "react/jsx-runtime";
-import Box from "@mui/material/Box";
-import Avatar from "@mui/material/Avatar";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import Divider from "@mui/material/Divider";
-import IconButton from "@mui/material/IconButton";
-import Tooltip from "@mui/material/Tooltip";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import Settings from "@mui/icons-material/Settings";
-import Logout from "@mui/icons-material/Logout";
-import { useNavigate } from "react-router-dom";
 import useAnchorEl from "@/hooks/useAnchorEl";
-import useLogout from "@/hooks/useLogout";
+import { Box, IconButton, Menu, MenuItem, Tooltip } from "@mui/material";
+import { Fragment } from "react/jsx-runtime";
+import EditIcon from "@mui/icons-material/Edit";
 
-export type AccountMenuProps = {
-  username: string;
-  avt: string;
-};
-
-export default function AccountMenu({ username, avt }: AccountMenuProps) {
-  const navigate = useNavigate();
+const EditMenu = ({
+  image,
+  onUpload,
+  onRemove,
+}: {
+  image: string | ArrayBuffer | null;
+  onUpload: () => void;
+  onRemove: () => void;
+}) => {
   const [anchorEl, handleClick, handleClose] = useAnchorEl();
-  const logout = useLogout();
   const open = Boolean(anchorEl);
 
   return (
     <Fragment>
       <Box sx={{ display: "flex", alignItems: "center", textAlign: "center" }}>
-        <Tooltip title="Account settings">
+        <Tooltip title="Edit image">
           <IconButton
             onClick={handleClick}
             size="small"
-            sx={{ ml: 2 }}
+            sx={{
+              backgroundColor: (theme) => theme.palette.primary.main,
+              color: (theme) => theme.palette.secondary.main,
+              ":hover": {
+                backgroundColor: (theme) => theme.palette.primary.light,
+                color: (theme) => theme.palette.secondary.main,
+              },
+              borderRadius: "50%",
+            }}
             aria-controls={open ? "account-menu" : undefined}
             aria-haspopup="true"
             aria-expanded={open ? "true" : undefined}
           >
-            <Avatar alt={username} src={avt} />
+            <EditIcon />
           </IconButton>
         </Tooltip>
       </Box>
       <Menu
         anchorEl={anchorEl}
-        id="account-menu"
+        id="edit-image-menu"
         open={open}
         onClose={handleClose}
         onClick={handleClose}
@@ -78,26 +76,11 @@ export default function AccountMenu({ username, avt }: AccountMenuProps) {
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
-        <MenuItem onClick={handleClose}>
-          <ListItemIcon>
-            <AccountCircleIcon fontSize="small" />
-          </ListItemIcon>
-          Profile
-        </MenuItem>
-        <Divider />
-        <MenuItem onClick={() => navigate("settings")}>
-          <ListItemIcon>
-            <Settings fontSize="small" />
-          </ListItemIcon>
-          Settings
-        </MenuItem>
-        <MenuItem onClick={logout}>
-          <ListItemIcon>
-            <Logout fontSize="small" />
-          </ListItemIcon>
-          Logout
-        </MenuItem>
+        <MenuItem onClick={onUpload}>Upload a photo...</MenuItem>
+        {image && <MenuItem onClick={onRemove}>Remove photo</MenuItem>}
       </Menu>
     </Fragment>
   );
-}
+};
+
+export default EditMenu;

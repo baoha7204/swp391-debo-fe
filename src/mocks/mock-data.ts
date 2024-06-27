@@ -300,6 +300,20 @@ const PendingAppointment = {
   status: "Pending",
 };
 
+const User = {
+  id: "1",
+  username: "baoha7204",
+  email: "abc@gmail.com",
+  firstName: null,
+  lastName: null,
+  gender: null,
+  phone: "0762953411",
+  address: null,
+  dateOfBirthday: new Date(2004, 1, 7),
+  medRec: null,
+  avt: null,
+};
+
 export {
   CalendarPatientEvents,
   AppointmentPatientLists,
@@ -308,4 +322,5 @@ export {
   Dentists,
   Slots,
   PendingAppointment,
+  User,
 };

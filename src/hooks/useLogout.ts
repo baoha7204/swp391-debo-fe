@@ -9,7 +9,7 @@ const useLogout = () => {
   const logout = async () => {
     setAuth(null);
     try {
-      await post(API_ENDPOINTS.AUTH.LOGOUT, true);
+      await post(API_ENDPOINTS.AUTH.LOGOUT);
     } catch (err) {
       errorToastHandler(err.response);
     }

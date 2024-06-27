@@ -8,6 +8,7 @@ import {
   PendingAppointment,
   Slots,
   Treatments,
+  User,
 } from "./mock-data";
 
 export const handlers = [
@@ -192,6 +193,17 @@ export const handlers = [
         message: "Fetched slots successfully.",
       },
       { status: 201 }
+    );
+  }),
+  http.get("/user/:id", async () => {
+    await delay(2000);
+    return HttpResponse.json(
+      {
+        success: true,
+        data: User,
+        message: "Get user successfully.",
+      },
+      { status: 200 }
     );
   }),
 ];

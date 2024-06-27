@@ -43,6 +43,8 @@ import CreateTreatment from "@/pages/Admin/adminCreate/Treatments/CreateTreatmen
 import CreateStaff from "@/pages/Admin/adminCreate/Staffs/Staff/CreateStaff";
 import CreateManager from "@/pages/Admin/adminCreate/Staffs/Manager/CreateManager";
 import CreateDentist from "@/pages/Admin/adminCreate/Staffs/Dentist/CreateDentist";
+import SettingsPage from "@/pages/User/Settings";
+//User
 
 const RouterComponent = () => {
   const router = createBrowserRouter([
@@ -65,6 +67,10 @@ const RouterComponent = () => {
           path: "appointments/:id",
           element: <AppointmentDetail />,
         },
+        {
+          path: "settings",
+          element: <SettingsPage />,
+        },
       ],
     },
     {
@@ -77,6 +83,10 @@ const RouterComponent = () => {
         {
           path: "appointments",
           element: <DentistAppointmentList />,
+        },
+        {
+          path: "appointments/:id",
+          element: <AppointmentDetail />,
         },
         {
           path: "appointments/:id",
@@ -112,6 +122,10 @@ const RouterComponent = () => {
                 {
                   path: "appointments/:id",
                   element: <AppointmentDetail />,
+                },
+                {
+                  path: "settings",
+                  element: <SettingsPage />,
                 },
               ],
             },

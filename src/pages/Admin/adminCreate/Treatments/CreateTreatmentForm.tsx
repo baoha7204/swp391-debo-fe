@@ -2,7 +2,7 @@ import FormInputText from "@/components/Form/FormInputText";
 import { Box, Grid } from "@mui/material";
 import useTreatment from "./lib/useTreatment";
 import MyButton from "@/components/MyButton";
-import FormSelect from "../../components/FormSelect/FormSelect";
+import FormSelect from "@/components/Form/FormSelect";
 
 function CreateTreatmentForm() {
 

@@ -33,6 +33,7 @@ export const API_ENDPOINTS = {
     ONE: "appointment",
   },
   USERS: {
+    ONE: "User",
     USERS: "Users",
     //Create
     CREATE_STAFF: "User/createstaff",
