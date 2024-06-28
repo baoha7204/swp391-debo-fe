@@ -17,8 +17,8 @@ export const branchSchema = z.object({
     //     .int({ message: "Manager ID should be integer number" })
     //     .gt(1, { message: "Manager ID must be at least 1" })
     //     .safe(),
-    avt: z
-        .any(),
+    // avt: z
+    //     .any(),
     name: z
         .string()
         .min(1, { message: "Name is required" })

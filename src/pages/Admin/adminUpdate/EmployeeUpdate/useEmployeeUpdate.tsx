@@ -30,7 +30,6 @@ export default function useEmployeeUpdate() {
         defaultValues: {
             id: id,
             username: '',
-            password: '',
             phone: '',
             email: '',
             firstName: '',
@@ -49,7 +48,7 @@ export default function useEmployeeUpdate() {
             return;
         }
 
-        const { id, address, username, password, phone, email, firstName, lastName, gender } = data;
+        const { id, address, username, phone, email, firstName, lastName, gender } = data;
 
         console.log(`${API_ENDPOINTS.USERS.USER}/${id}`);
 
@@ -57,7 +56,6 @@ export default function useEmployeeUpdate() {
             id,
             username,
             email,
-            password,
             firstName,
             lastName,
             gender,
@@ -87,7 +85,6 @@ export default function useEmployeeUpdate() {
 
     const setValues = (values: StaffInputs) => {
         setValue("username", values.username);
-        setValue("password", values.password);
         setValue("phone", values.phone);
         setValue("email", values.email);
         setValue("firstName", values.firstName);

@@ -50,10 +50,13 @@ import TreatmentUpdate from "@/pages/Admin/adminUpdate/TreatmentUpdate/Treatment
 import EmployeeUpdate from "@/pages/Admin/adminUpdate/EmployeeUpdate/EmployeeUpdate";
 import UpdateBranchForEmployee from "@/pages/Admin/adminUpdate/UpdateBranchForEmployee.tsx/UpdateBranchForEmployee";
 
+////Landging Page////
+import LandingPage from "@/pages/Landing/Landing";
+
 const RouterComponent = () => {
   const router = createBrowserRouter([
     // Public routes
-    { index: true, element: <Navigate to="login" /> },
+    { index: true, element: <Navigate to="landing" /> },
     { path: "unauthorized", element: <UnauthorizedPage /> },
     {
       path: "patientTest",
@@ -253,6 +256,8 @@ const RouterComponent = () => {
         },
       ]
     },
+    // Guest routes
+    { path: "landing", element: <LandingPage /> },
   ]);
   return (
     <RouterProvider

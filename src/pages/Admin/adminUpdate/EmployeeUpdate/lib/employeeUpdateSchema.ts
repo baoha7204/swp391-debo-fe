@@ -8,10 +8,10 @@ export const employeeUpdateSchema = z.object({
         .string()
         .min(1, { message: "Username is required" })
         .max(256, { message: "Username must not exceed 256 characters" }),
-    password: z
-        .string()
-        .min(1, { message: "Password is required" })
-        .max(256, { message: "Password must not exceed 256 characters" }),
+    // password: z
+    //     .string()
+    //     .min(1, { message: "Password is required" })
+    //     .max(256, { message: "Password must not exceed 256 characters" }),
     email: z
         .string()
         .email({ message: "Invalid email" }),

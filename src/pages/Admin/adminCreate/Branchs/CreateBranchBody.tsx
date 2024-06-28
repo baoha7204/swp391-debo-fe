@@ -123,7 +123,7 @@ function CreateBranchBody() {
                             />
                         </Box>
                     </Box>
-                    <Box
+                    {/* <Box
                         sx={{
                             display: "flex",
                             flexDirection: "row",
@@ -146,7 +146,7 @@ function CreateBranchBody() {
                                 sx={{ m: 1, p: 0, maxWidth: '218px' }}
                             />
                         </Box>
-                    </Box>
+                    </Box> */}
                 </Grid>
                 <Grid
                     item

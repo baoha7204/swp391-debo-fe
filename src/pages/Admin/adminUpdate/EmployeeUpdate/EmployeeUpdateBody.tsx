@@ -78,7 +78,7 @@ function EmployeeUpdateBody() {
                             />
                         </Box>
                     </Box>
-                    <Box
+                    {/* <Box
                         sx={{
                             display: "flex",
                             flexDirection: "row",
@@ -105,7 +105,7 @@ function EmployeeUpdateBody() {
                                 sx={{ m: 1, p: 0 }}
                             />
                         </Box>
-                    </Box>
+                    </Box> */}
                     <Box
                         sx={{
                             display: "flex",

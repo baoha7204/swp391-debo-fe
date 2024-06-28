@@ -43,7 +43,7 @@ export default function useTreatmentUpdate() {
             return;
         }
 
-        const { id, category, name, description, price, } = data;
+        let { id, category, name, description, price, } = data;
 
         console.log(data);
 

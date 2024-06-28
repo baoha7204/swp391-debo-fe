@@ -24,7 +24,6 @@ export default function useBranch() {
     resolver: zodResolver(branchSchema),
     defaultValues: {
       id: 0,
-      avt: null,
       mngId: "",
       name: "",
       address: "",
@@ -44,7 +43,7 @@ export default function useBranch() {
       return;
     }
 
-    const { id, avt, mngId, name, address, phone, email } = data;
+    const { id, mngId, name, address, phone, email } = data;
 
     console.log(data);
 
@@ -55,7 +54,6 @@ export default function useBranch() {
       address,
       phone,
       email,
-      avt,
     })
       .then((res) => {
         const { data } = res;
