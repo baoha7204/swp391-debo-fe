@@ -7,7 +7,6 @@ import HorizontalLinearStepper from "../HorizontalLinearStepper";
 
 const BookingContent = () => {
   const {
-    data,
     done,
     activeStep,
     isStepSkipped,
@@ -21,7 +20,6 @@ const BookingContent = () => {
   const handleSubmitAppointment = () => {
     handleDoneIncrement();
     handleNext();
-    console.log("Submit", data);
   };
 
   const handleBackStep = () => {

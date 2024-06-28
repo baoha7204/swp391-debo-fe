@@ -4,6 +4,7 @@ import TreatmentList from "@/components/Treatment/TreatmentList";
 import SlotPicker from "../SlotPicker";
 import SummaryBooking from "../SummaryBooking";
 import PaymentPage from "../Payment";
+import SuccessBooking from "../Success";
 
 export const BookingStage = [
   { level: 0, header: "Our branches", component: <BranchList /> },
@@ -12,6 +13,7 @@ export const BookingStage = [
   { level: 0, header: "Select your wished date", component: <SlotPicker /> },
   { level: 0, header: "Appointment Summary", component: <SummaryBooking /> },
   { level: 1, header: "Your payment", component: <PaymentPage /> },
+  { level: 2, header: "Booking success", component: <SuccessBooking /> },
 ];
 
 export const FirstStageLength = BookingStage.reduce((acc, stage) => {

@@ -13,7 +13,7 @@ export type AppointmentResponse = {
 };
 
 const useCreateAppointment = () => {
-  const { data } = useContext(ProgressContext);
+  const { data, setData } = useContext(ProgressContext);
   const [isLoading, setIsLoading] = useState(true);
   const [appointments, setAppointments] = useState<
     AppointmentResponse[] | null
@@ -59,9 +59,10 @@ const useCreateAppointment = () => {
     return () => {
       abortController.abort();
     };
-  }, [data, axiosPrivate]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-  return { data, appointments, isLoading };
+  return { data, setData, appointments, isLoading };
 };
 
 export default useCreateAppointment;
