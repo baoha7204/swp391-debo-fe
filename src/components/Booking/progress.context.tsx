@@ -15,6 +15,7 @@ import { DentistCardProps } from "../Dentist/DentistCard";
 import useFirstTime from "./hooks/useFirstTime";
 import { APPOINTMENT_RULE } from "@/constant/core";
 import { AppointmentResponse } from "./SummaryBooking/hooks/useCreateAppointment";
+import { PaymentResponseType } from "@/utils/api/paymentApi";
 
 type BookingType = {
   branch?: BranchCardProps;
@@ -23,6 +24,7 @@ type BookingType = {
   date?: Dayjs | null;
   slot?: number;
   appointments?: AppointmentResponse[] | null;
+  payment?: PaymentResponseType | null;
 } | null;
 
 type ProgressContextType = {

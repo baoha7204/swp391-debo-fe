@@ -4,7 +4,7 @@ import Account from "./components/Account";
 import MedicalRecord from "./components/MedicalRecord";
 import { useContext } from "react";
 import { UserContext } from "../user.context";
-import { sanitizeString } from "@/utils/helper";
+import { formatRole } from "@/utils/jwt";
 
 const tabs = [
   {
@@ -23,7 +23,7 @@ const tabs = [
 
 const SettingsPage = () => {
   const { user } = useContext(UserContext);
-  if (user?.roleName && sanitizeString(user.roleName) === "patient")
+  if (user?.roleName && formatRole(user.roleName) === "patient")
     return <MyTabs tabs={tabs} />;
   return <MyTabs tabs={tabs.slice(0, 2)} />;
 };

@@ -1,13 +1,12 @@
 import { useContext, useEffect, useState } from "react";
-import paymentApi, { PaymentResponseType } from "@/utils/api/paymentApi";
+import paymentApi from "@/utils/api/paymentApi";
 import { errorToastHandler } from "@/utils/toast/actions";
 import { ProgressContext } from "../../progress.context";
 import useAxiosPrivate from "@/hooks/useAxiosPrivate";
 
 const useCreatePayment = () => {
-  const { data } = useContext(ProgressContext);
+  const { data, setData } = useContext(ProgressContext);
   const [isLoading, setIsLoading] = useState(true);
-  const [payment, setPayment] = useState<PaymentResponseType | null>(null);
   const axiosPrivate = useAxiosPrivate();
 
   useEffect(() => {
@@ -19,7 +18,7 @@ const useCreatePayment = () => {
         message: "No appointments to pay right now. Please try again",
       });
       setIsLoading(false);
-      setPayment(null);
+      setData((prev) => ({ ...prev, payment: null }));
       return;
     }
 
@@ -46,23 +45,14 @@ const useCreatePayment = () => {
           errorToastHandler(result);
           return;
         }
-        setPayment(result.data);
+        setData((prev) => ({ ...prev, payment: result.data }));
         // open in new tab
-        const paymentWindow = window.open(result.data?.paymentUrl, "_blank");
-        if (!paymentWindow) {
-          errorToastHandler({
-            message: "Popup blocked, please allow popup for this site",
-          });
-          setPayment(null);
-          return;
-        }
-        // Listen for the payment response message from the VNPay sandbox
-        console.log(paymentWindow);
+        window.open(result.data?.paymentUrl, "_blank");
       } catch (error) {
         if (error.name !== "CanceledError") {
           errorToastHandler(error.response);
         }
-        setPayment(null);
+        setData((prev) => ({ ...prev, payment: null }));
       } finally {
         setIsLoading(false);
       }
@@ -73,9 +63,10 @@ const useCreatePayment = () => {
     return () => {
       abortController.abort();
     };
-  }, [data, axiosPrivate]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-  return { payment, isLoading };
+  return { isLoading };
 };
 
 export default useCreatePayment;

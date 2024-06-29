@@ -1,6 +1,7 @@
 import { AxiosInstance, GenericAbortSignal } from "axios";
 import { API_ENDPOINTS } from "..";
 import { ApiResponse, PaymentStatus } from "@/types/core";
+import { get } from "@/utils/apiCaller";
 
 export type PaymentRequestType = {
   listAppointmentId: string[];
@@ -13,7 +14,7 @@ export type PaymentRequestType = {
 export type PaymentResponseType = {
   paymentId: string;
   paymentStatus?: PaymentStatus;
-  paymentUrl?: string;
+  paymentUrl: string;
 };
 
 const paymentApi = {
@@ -25,6 +26,12 @@ const paymentApi = {
     return await axiosPrivate.post<ApiResponse<PaymentResponseType>>(
       API_ENDPOINTS.PAYMENT.ONE,
       data,
+      { signal }
+    );
+  },
+  getPaymentStatus: async (id: string, signal?: GenericAbortSignal) => {
+    return await get<PaymentResponseType>(
+      `${API_ENDPOINTS.PAYMENT.ONE}/${id}/status`,
       { signal }
     );
   },
