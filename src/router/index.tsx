@@ -57,7 +57,19 @@ const RouterComponent = () => {
       children: [
         { index: true, element: <Navigate to="calendar" /> },
         { path: "calendar", element: <Calendar /> },
-        { path: "booking", element: <BookingPage /> },
+        {
+          path: "booking",
+          children: [
+            {
+              index: true,
+              element: <BookingPage />,
+            },
+            {
+              path: "payment-status",
+              element: <BookingPage />,
+            },
+          ],
+        },
         { path: "dashboard", element: <DashboardPage /> },
         {
           path: "appointments",
@@ -117,7 +129,19 @@ const RouterComponent = () => {
               children: [
                 { index: true, element: <Navigate to="calendar" /> },
                 { path: "calendar", element: <Calendar /> },
-                { path: "booking", element: <BookingPage /> },
+                {
+                  path: "booking",
+                  children: [
+                    {
+                      index: true,
+                      element: <BookingPage />,
+                    },
+                    {
+                      path: "payment-status",
+                      element: <BookingPage />,
+                    },
+                  ],
+                },
                 { path: "dashboard", element: <DashboardPage /> },
                 {
                   path: "appointments",

@@ -13,7 +13,7 @@ export const BookingStage = [
   { level: 0, header: "Select your wished date", component: <SlotPicker /> },
   { level: 0, header: "Appointment Summary", component: <SummaryBooking /> },
   { level: 1, header: "Your payment", component: <PaymentPage /> },
-  { level: 2, header: "Booking success", component: <SuccessBooking /> },
+  { level: 2, header: "Payment status", component: <SuccessBooking /> },
 ];
 
 export const FirstStageLength = BookingStage.reduce((acc, stage) => {

@@ -28,6 +28,7 @@ const useStep = () => {
 
   return {
     activeStep,
+    setActiveStep,
     handleNext,
     handleBack,
     handleReset,

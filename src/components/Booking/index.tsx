@@ -1,14 +1,18 @@
-import { useContext } from "react";
+import { useContext, useLayoutEffect } from "react";
 import { Box, Button, Paper, Typography } from "@mui/material";
 import LinearDeterminate from "../LinearDeterminate";
 import { ProgressContext, ProgressProvider } from "./progress.context";
 import { BookingStage, FirstStageLength, StepLabels } from "./config";
 import HorizontalLinearStepper from "../HorizontalLinearStepper";
+import { useLocation } from "react-router-dom";
 
 const BookingContent = () => {
+  const location = useLocation();
   const {
     done,
+    setDone,
     activeStep,
+    setActiveStep,
     isStepSkipped,
     handleDoneIncrement,
     handleDoneDecrement,
@@ -16,6 +20,15 @@ const BookingContent = () => {
     handleBack,
     firstTime,
   } = useContext(ProgressContext);
+
+  useLayoutEffect(() => {
+    if (location.pathname !== "/patient/booking/payment-status") {
+      return;
+    }
+    setDone(6);
+    setActiveStep(2);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleSubmitAppointment = () => {
     handleDoneIncrement();
