@@ -5,7 +5,7 @@ export type ListColumn<T> = {
   align?: "right";
   isDetail?: boolean;
   isDate?: boolean;
-  format?: (value: string | number) => string;
+  format?: ((value: string | number) => string) | ((value: any) => string | JSX.Element);
 };
 
 export type TableProps<T> = {

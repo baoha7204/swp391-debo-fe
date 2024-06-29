@@ -1,4 +1,5 @@
-import MyDetail, { ListColumn } from "@/components/MyDetail/MyDetail";
+import MyDetail from "@/components/MyDetail/MyDetail";
+import { ListColumn } from "@/components/Table/types/core";
 import { API_ENDPOINTS } from "@/utils/api";
 
 type TreatmentDetailData = {
@@ -25,7 +26,7 @@ const columns: readonly ListColumn<TreatmentDetailData>[] = [
 
 function TreatmentDetailBody() {
     return (
-        <MyDetail<TreatmentDetailData> url={API_ENDPOINTS.TREATMENT.TREATMENT} columns={columns} />
+        <MyDetail<TreatmentDetailData> url={API_ENDPOINTS.TREATMENT.TREATMENT} columns={columns} deleteBut={true} updateBut={true} />
     );
 }
 

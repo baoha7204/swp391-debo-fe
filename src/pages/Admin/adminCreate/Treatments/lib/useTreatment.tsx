@@ -13,7 +13,6 @@ import { post } from "@/utils/apiCaller";
 
 export type TreatmentInputs = z.infer<typeof treatmentSchema>;
 
-
 export default function useTreatment() {
 
     const navigate = useNavigate();
@@ -38,7 +37,7 @@ export default function useTreatment() {
             return;
         }
 
-        const { id, category, name, description, price, } = data;
+        const { id, category, name, description, price } = data;
 
         console.log(category);
         console.log(data);
@@ -58,7 +57,7 @@ export default function useTreatment() {
                 }
                 // successfully
                 toastSuccess("Create successfully!");
-                navigate('/adminTest/treatmentList');
+                navigate('/adminTest/treatments');
             })
             .catch((err) => {
                 console.log('2');

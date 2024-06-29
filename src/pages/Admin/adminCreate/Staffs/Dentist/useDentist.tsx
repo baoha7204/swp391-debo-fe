@@ -60,7 +60,7 @@ export default function useDentist() {
                 }
                 // successfully
                 toastSuccess("Create successfully!");
-                navigate('/adminTest/adminStaffList');
+                navigate('/adminTest/adminAllStaffList');
             })
             .catch((err) => {
                 console.log(err.response);

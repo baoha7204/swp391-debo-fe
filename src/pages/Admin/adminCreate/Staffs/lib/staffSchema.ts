@@ -2,6 +2,10 @@ import { PhoneSchema } from "@/lib/schema";
 import { z } from "zod";
 
 export const allStaffSchema = z.object({
+    // brId: z.coerce
+    //     .number(),
+    // dateOfBirthday: z
+    //     .string(),
     username: z
         .string()
         .min(1, { message: "Username is required" })
@@ -32,6 +36,5 @@ export const allStaffSchema = z.object({
         .default(null),
     address: z
         .string()
-        .min(1, { message: "Address is required" })
         .max(256, { message: "Address must not exceed 256 characters" }),
 });

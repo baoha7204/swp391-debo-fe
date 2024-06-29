@@ -78,6 +78,9 @@ export default function AccountMenu({ username, avt }: AccountMenuProps) {
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
+        <MenuItem onClick={handleClose} sx={{ justifyContent: 'center', fontWeight: 'bold' }}>
+          Hi {username}
+        </MenuItem>
         <MenuItem onClick={handleClose}>
           <ListItemIcon>
             <AccountCircleIcon fontSize="small" />

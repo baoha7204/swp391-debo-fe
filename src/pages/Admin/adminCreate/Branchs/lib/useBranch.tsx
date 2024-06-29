@@ -24,7 +24,7 @@ export default function useBranch() {
     resolver: zodResolver(branchSchema),
     defaultValues: {
       id: 0,
-      // branchAvt: [],
+      mngId: "",
       name: "",
       address: "",
       phone: "",
@@ -43,13 +43,13 @@ export default function useBranch() {
       return;
     }
 
-    const { id, name, address, phone, email } = data;
+    const { id, mngId, name, address, phone, email } = data;
 
     console.log(data);
 
     post(API_ENDPOINTS.BRANCH.LIST, {
       id,
-      // branchAvt,
+      mngId,
       name,
       address,
       phone,
@@ -62,13 +62,14 @@ export default function useBranch() {
         }
         // successfully
         toastSuccess("Create successfully!");
-        navigate("/adminTest/branchList");
+        navigate("/adminTest/branch");
       })
       .catch((err) => {
         console.log(err.response);
         errorToastHandler(err.response);
       });
   };
+
   useEffect(() => {
     if (isSubmitSuccessful) {
       reset();

@@ -3,22 +3,20 @@ import MyTable from "@/components/Table/MyTable";
 
 export type PatientTableData = {
     id: number;
-    avt: string;
-    fName: string;
-    lName: string;
+    firstName: string;
+    lastName: string;
     email: string;
     phone: string;
-    birthday: string;
+    dateOfBirthday: Date;
     gender: string;
 };
 
 const columns: readonly ListColumn<PatientTableData>[] = [
-    { id: "avt", label: "Avatar", isDetail: true, minWidth: 100 },
-    { id: "fName", label: "First Name", minWidth: 100 },
-    { id: "lName", label: "Last Name", minWidth: 100 },
-    { id: "email", label: "Email", minWidth: 170 },
-    { id: "phone", label: "Phone", minWidth: 170 },
-    { id: "birthday", label: "Birthday", minWidth: 170 },
+    { id: "firstName", label: "First Name", minWidth: 100 },
+    { id: "lastName", label: "Last Name", minWidth: 100 },
+    { id: "email", label: "Email", minWidth: 100, isDetail: true },
+    { id: "phone", label: "Phone", minWidth: 100 },
+    { id: "dateOfBirthday", label: "Birthday", minWidth: 100, isDate: true },
 ];
 
 function PatientListTable({ url }: { url: string }) {

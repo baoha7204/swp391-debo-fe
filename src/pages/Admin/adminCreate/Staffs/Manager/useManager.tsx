@@ -54,21 +54,18 @@ export default function useManager() {
             .then((res) => {
                 const { data } = res;
                 if (!data.success) {
-                    console.log('1');
 
                     return errorToastHandler(data);
                 }
                 // successfully
                 toastSuccess("Create successfully!");
-                navigate('/adminTest/adminStaffList');
+                navigate('/adminTest/adminAllStaffList');
             })
             .catch((err) => {
                 console.log(err.response);
                 errorToastHandler(err.response);
             });
     };
-
-
 
     useEffect(() => {
         if (isSubmitSuccessful) {

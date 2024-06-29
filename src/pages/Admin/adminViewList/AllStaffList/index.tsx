@@ -1,6 +1,6 @@
 import HeaderList from "../../components/HeaderList";
-import ListStaff from "./ListDentist/ListDentist";
-import ListDentist from "./ListStaff/ListStaff";
+import ListDentist from "./ListDentist/ListDentist";
+import ListStaff from "./ListStaff/ListStaff";
 import ListManager from "./ListManager/ListManager";
 
 function AdminAllStaffList() {
@@ -17,6 +17,7 @@ function AdminAllStaffList() {
             <HeaderList
                 allowMore3={true}
                 children={child}
+                showButton={true}
             >
             </HeaderList>
         </>

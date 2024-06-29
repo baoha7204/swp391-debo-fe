@@ -13,18 +13,23 @@ import PersistLogin from "@/components/Auth/PersistLogin";
 import UnauthorizedPage from "@/pages/403";
 import AuthenticationPage from "@/pages/Authentication";
 
+////Patient////
 import BookingPage from "@/components/Booking";
 import DashboardPage from "@/pages/Patient/Dashboard";
 import PatientLayout from "@/pages/Patient";
 import Calendar from "@/pages/Patient/Calendar";
 import PatientAppointmentList from "@/pages/Patient/Appointment/AppointmentList";
 import AppointmentDetail from "@/components/Appointment/AppointmentDetail";
+
+////Dentist////
 import DentistLayout from "@/pages/Dentist";
 import DentistAppointmentList from "@/pages/Dentist/Appointment";
 import DentistDashboardPage from "@/pages/Dentist/Dashboard";
 import DentistCalendar from "@/pages/Dentist/Calendar";
 
 ////Manager////
+import ManagerLayout from "@/pages/Manager/ManagerLayout";
+import ManagerAllStaffList from "@/pages/Manager/Employees/ManagerAllStaffList";
 
 ////Admin////
 import AdminLayout from "@/pages/Admin";
@@ -43,13 +48,23 @@ import CreateTreatment from "@/pages/Admin/adminCreate/Treatments/CreateTreatmen
 import CreateStaff from "@/pages/Admin/adminCreate/Staffs/Staff/CreateStaff";
 import CreateManager from "@/pages/Admin/adminCreate/Staffs/Manager/CreateManager";
 import CreateDentist from "@/pages/Admin/adminCreate/Staffs/Dentist/CreateDentist";
+import PatientDetail from "@/pages/Admin/adminViewDetail/PatientDetail/PatientDetail";
+//AdminUpdate
+import BranchUpdate from "@/pages/Admin/adminUpdate/BranchUpdate/BranchUpdate";
+import TreatmentUpdate from "@/pages/Admin/adminUpdate/TreatmentUpdate/TreatmentUpdate";
+import EmployeeUpdate from "@/pages/Admin/adminUpdate/EmployeeUpdate/EmployeeUpdate";
+import UpdateBranchForEmployee from "@/pages/Admin/adminUpdate/UpdateBranchForEmployee.tsx/UpdateBranchForEmployee";
+
+////Landging Page////
+import LandingPage from "@/pages/Landing/Landing";
 import SettingsPage from "@/pages/User/Settings";
 //User
+
 
 const RouterComponent = () => {
   const router = createBrowserRouter([
     // Public routes
-    { index: true, element: <Navigate to="login" /> },
+    { index: true, element: <Navigate to="landing" /> },
     { path: "unauthorized", element: <UnauthorizedPage /> },
     {
       path: "patientTest",
@@ -181,15 +196,15 @@ const RouterComponent = () => {
       children: [
         {
           index: true,
-          element: <Navigate to="branchList" />,
+          element: <Navigate to="branch" />,
         },
         //List
         {
-          path: "branchList",
+          path: "branch",
           element: <BranchList />,
         },
         {
-          path: "treatmentList",
+          path: "treatments",
           element: <TreatmentList />,
         },
         {
@@ -202,11 +217,11 @@ const RouterComponent = () => {
         },
         //Create
         {
-          path: "branchList/createBranch",
+          path: "branch/createBranch",
           element: <CreateBranch />,
         },
         {
-          path: "treatmentList/createTreatment",
+          path: "treatments/createTreatment",
           element: <CreateTreatment />,
         },
         {
@@ -221,25 +236,82 @@ const RouterComponent = () => {
           path: "adminAllStaffList/createManager",
           element: <CreateManager />,
         },
+        {
+          path: "appointments",
+          element: <PatientAppointmentList />,
+        },
         //Detail
         {
-          path: "branchList/:id",
+          path: "branch/:id",
           element: <BranchDetail />,
         },
         {
-          path: "treatmentList/:id",
+          path: "treatments/:id",
           element: <TreatmentDetail />,
         },
         {
           path: "adminAllStaffList/:id",
           element: <AllStaffsDetail />,
         },
-        // {
-        //   path: "patientList/:id",
-        //   element: <PatientDetail />,
-        // },
+        {
+          path: "patientList/:id",
+          element: <PatientDetail />,
+        },
+        {
+          path: "appointments/:id",
+          element: <AppointmentDetail />,
+        },
+        //Update
+        {
+          path: "branch/:id/update",
+          element: <BranchUpdate />,
+        },
+        {
+          path: "treatments/:id/update",
+          element: <TreatmentUpdate />,
+        },
+        {
+          path: "adminAllStaffList/:id/update",
+          element: <EmployeeUpdate />,
+        },
+        {
+          path: "updateBranchForEmployee",
+          element: <UpdateBranchForEmployee />,
+        }
       ],
     },
+    // ManagerTest routes
+    {
+      path: "managerTest",
+      element: <ManagerLayout />,
+      children: [
+        {
+          index: true,
+          element: <Navigate to="calendar" />
+        },
+        //List
+        {
+          path: "managerAllStaffList",
+          element: <ManagerAllStaffList />,
+        },
+        {
+          path: "appointments",
+          element: <PatientAppointmentList />,
+        },
+        //
+        {
+          path: "calendar",
+          element: <Calendar />
+        },
+
+        {
+          path: "appointments/:id",
+          element: <AppointmentDetail />,
+        },
+      ]
+    },
+    // Guest routes
+    { path: "landing", element: <LandingPage /> },
   ]);
   return (
     <RouterProvider

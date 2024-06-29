@@ -31,8 +31,11 @@ export const API_ENDPOINTS = {
   },
   APPOINTMENT: {
     ONE: "appointment",
+    HISTORY: "viewhistoryappoinment"
   },
   USERS: {
+    //User
+    USER: "User",
     ONE: "User",
     USERS: "Users",
     //Create
@@ -43,5 +46,12 @@ export const API_ENDPOINTS = {
     LIST_DENTIST: "User/dentistlist",
     LIST_MANAGER: "User/managerlist",
     LIST_STAFF: "User/stafflist",
+    LIST_CUSTOMER: "User/customerlist",
+    //Available Manager
+    AVAILABLE_MANAGER: "User/availablemanager",
+    //Available Employee
+    EMPLOYEE_WITH_BRANCH: "getempwithbranchid",
+    //Update branch for employee
+    UPDATE_BRANCH_FOR_EMPLOYEE: "updateBranchForEmployee"
   },
 };

@@ -12,7 +12,7 @@ export type TreatmentTableData = {
 const columns: readonly ListColumn<TreatmentTableData>[] = [
     { id: "name", label: "Name", isDetail: true, minWidth: 100 },
     {
-        id: "category", label: "Category", minWidth: 100, isCategory: true,
+        id: "category", label: "Category", minWidth: 100,
         format: (value: any) => {
             if (value === 1) return "Medical";
             if (value === 2) return "Cosmetic";
