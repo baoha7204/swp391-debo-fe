@@ -35,4 +35,5 @@ export const branchSchema = z.object({
     email: z
         .string()
         .email({ message: "Invalid email" }),
+    // avt: z.string().url(),
 });

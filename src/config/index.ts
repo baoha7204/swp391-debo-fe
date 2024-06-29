@@ -4,5 +4,3 @@ const publicRuntimeConfig = {
 };
 
 export const { NODE_ENV, API_URL } = publicRuntimeConfig;
-
-export default publicRuntimeConfig.NODE_ENV;

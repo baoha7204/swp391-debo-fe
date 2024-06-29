@@ -3,7 +3,7 @@ import axios from "@/config/axios";
 import { API_ENDPOINTS } from "@/utils/api";
 import { Box, Grid } from "@mui/material";
 import { useEffect, useState } from "react";
-import FormSelect from "../../components/FormSelect/FormSelect";
+import FormSelect from "@/components/Form/FormSelect";
 import useUpdateBranchForEmployee from "./useUpdateBranchForEmployee";
 import MyButton from "@/components/MyButton";
 

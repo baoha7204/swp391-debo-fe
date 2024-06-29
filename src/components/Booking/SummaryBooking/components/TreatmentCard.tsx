@@ -27,10 +27,12 @@ const TreatmentCardSummary = (props: TreatmentCardProps) => {
             </Grid>
             <Grid item>
               <Typography variant="body1" color="primary.main" fontWeight="700">
-                {price.toLocaleString("it-IT", {
-                  style: "currency",
-                  currency: "VND",
-                })}
+                {price
+                  ? price.toLocaleString("it-IT", {
+                      style: "currency",
+                      currency: "VND",
+                    })
+                  : "Free"}
               </Typography>
             </Grid>
           </Grid>

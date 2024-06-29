@@ -24,6 +24,7 @@ export const API_ENDPOINTS = {
   },
   DENTIST: {
     LIST: "dentists",
+    CALENDAR: "dentist/calendar",
   },
   SLOT: {
     LIST: "slot",
@@ -35,6 +36,8 @@ export const API_ENDPOINTS = {
   USERS: {
     //User
     USER: "User",
+    ONE: "User",
+    USERS: "Users",
     //Create
     CREATE_STAFF: "User/createstaff",
     CREATE_DENTIST: "User/createdentist",
@@ -47,9 +50,8 @@ export const API_ENDPOINTS = {
     //Available Manager
     AVAILABLE_MANAGER: "User/availablemanager",
     //Available Employee
-    EMPLOYEE_WITH_BRANCH: "getallempwithbranch",
+    EMPLOYEE_WITH_BRANCH: "getempwithbranchid",
     //Update branch for employee
     UPDATE_BRANCH_FOR_EMPLOYEE: "updateBranchForEmployee"
   },
-
 };

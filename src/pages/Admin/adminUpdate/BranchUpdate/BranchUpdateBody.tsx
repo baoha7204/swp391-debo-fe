@@ -8,7 +8,8 @@ import { useParams } from 'react-router-dom';
 import axios from '@/config/axios';
 import { useEffect, useState } from 'react';
 import { API_ENDPOINTS } from '@/utils/api';
-import FormSelect from '../../components/FormSelect/FormSelect';
+import FormSelect from '@/components/Form/FormSelect';
+import FormImagePicker from '@/components/Form/FormImagePicker';
 
 type ManagerProps = {
     id: string;
@@ -16,16 +17,26 @@ type ManagerProps = {
     lastName: string;
 }
 
+type BranchProps = {
+    id: number;
+    mngId: string;
+    mngName: string;
+}
+
 function BranchUpdateBody() {
-    const [handleSubmit, isSubmitting, control, setValues] = useBranchUpdate();
+    const [handleSubmit, isSubmitting, control, setValues, onUpload] = useBranchUpdate();
     const { id } = useParams<{ id: string }>();
+
+    const [branchesList, setBranchesList] = useState<BranchProps | any>('');
 
     const getOneCourse = async (id: string) => {
         try {
             const res = await axios.get(`${API_ENDPOINTS.BRANCH.LIST}/${id}`);
             if (res.status === 200) {
                 const branchData = res.data.data;
+                console.log(branchData);
                 setValues(branchData);
+                setBranchesList(branchData);
             }
         } catch (error) {
             console.error("Error fetching branch data:", error);
@@ -42,6 +53,22 @@ function BranchUpdateBody() {
     useEffect(() => {
         getListManager();
     }, []);
+
+    useEffect(() => {
+        if (branchesList || managers.length > 0) {
+            const isCurrentManagerAvailable = managers.some(manager => manager.id === branchesList.mngId);
+            if (!isCurrentManagerAvailable) {
+                setManagers(prevManagers => [
+                    ...prevManagers,
+                    {
+                        id: branchesList.mngId,
+                        firstName: branchesList.mngName.split(' ')[0],
+                        lastName: branchesList.mngName.split(' ')[1],
+                    }
+                ]);
+            }
+        }
+    }, [branchesList, managers]);
 
     const managerOptions = managers.map(manager => ({
         value: manager.id,
@@ -61,6 +88,7 @@ function BranchUpdateBody() {
             <Grid
                 container
                 className='create-screen'
+                spacing={10}
             >
                 <Grid
                     item
@@ -68,75 +96,59 @@ function BranchUpdateBody() {
                     sm={false}
                     md={6}
                 >
-                    <Box
-                        sx={{
-                            display: "flex",
-                            flexDirection: "row",
-                            alignItems: 'center',
-                        }}
-                    >
-                        <h3 style={{ marginBottom: '20px', marginRight: '20px' }}>Branch ID: </h3>
-                        <Box>
-                            <FormInputText
-                                control={control}
-                                id="id"
-                                name="id"
-                                outsideLabel=""
-                                required
-                                fullWidth
-                                label="Must input integer number"
-                                autoFocus
-                                sx={{ m: 1, p: 0 }}
-                            />
-                        </Box>
-                    </Box>
-                    <Box
-                        sx={{
-                            display: "flex",
-                            flexDirection: "row",
-                            alignItems: 'center',
-                        }}
-                    >
-                        <h3 style={{ marginBottom: '20px', marginRight: '20px' }}>Branch Name: </h3>
-                        <Box>
-                            <FormInputText
-                                control={control}
-                                id="name"
-                                name="name"
-                                outsideLabel=""
-                                required
-                                fullWidth
-                                label="Name"
-                                autoFocus
-                                sx={{ m: 1, p: 0 }}
-                            />
-                        </Box>
-                    </Box>
-                    <Box
-                        sx={{
-                            display: "flex",
-                            flexDirection: "row",
-                            alignItems: 'center',
-
-                        }}
-                    >
-                        <h3 style={{ marginBottom: '20px', marginRight: '20px' }}>Manager: </h3>
-                        <Box
-                            component="form"
-                            noValidate
-                            autoComplete="off"
-                            sx={{
-                                m: 1, p: 0, width: '20ch',
-                            }}
-                        >
-                            <FormSelect
-                                control={control}
-                                label='Manager'
-                                name="mngId"
-                                options={managerOptions}
-                            />
-                        </Box>
-                    </Box>
+                    <FormInputText
+                        control={control}
+                        id="id"
+                        name="id"
+                        outsideLabel="Branch ID:"
+                        required
+                        fullWidth
+                        label="Must input integer number"
+                        autoFocus
+                    />
+                    <FormInputText
+                        control={control}
+                        id="name"
+                        name="name"
+                        outsideLabel="Branch Name:"
+                        required
+                        fullWidth
+                        label="Name"
+                    />
+                    <FormInputText
+                        control={control}
+                        id="address"
+                        name="address"
+                        outsideLabel="Address"
+                        required
+                        fullWidth
+                        label="Address"
+                    />
+                    <FormInputText
+                        control={control}
+                        id="phone"
+                        name="phone"
+                        outsideLabel="Phone Number"
+                        required
+                        fullWidth
+                        label="Mobile Phone"
+                    />
+                    <FormInputText
+                        control={control}
+                        id="email"
+                        name="email"
+                        label="example@gmail.com"
+                        outsideLabel="Email:"
+                        required
+                        fullWidth
+                    />
+                    <FormSelect
+                        control={control}
+                        label='Manager'
+                        name="mngId"
+                        outsideLabel='Manager:'
+                        options={managerOptions}
+                    />
                 </Grid>
                 <Grid
                     item
@@ -144,72 +156,11 @@ function BranchUpdateBody() {
                     sm={false}
                     md={6}
                 >
-                    <Box
-                        sx={{
-                            display: "flex",
-                            flexDirection: "row",
-                            alignItems: 'center',
-                        }}
-                    >
-                        <h3 style={{ marginBottom: '20px', marginRight: '20px' }}>Branch Address: </h3>
-                        <Box>
-                            <FormInputText
-                                control={control}
-                                id="address"
-                                name="address"
-                                outsideLabel=""
-                                required
-                                fullWidth
-                                label="Address"
-                                autoFocus
-                                sx={{ m: 1, p: 0 }}
-                            />
-                        </Box>
-                    </Box>
-                    <Box
-                        sx={{
-                            display: 'flex',
-                            flexDirection: 'row',
-                            alignItems: 'center'
-                        }}
-                    >
-                        <h3 style={{ marginBottom: '20px', marginRight: '20px' }}>Branch Mobile:</h3>
-                        <Box>
-                            <FormInputText
-                                control={control}
-                                id="phone"
-                                name="phone"
-                                outsideLabel=""
-                                required
-                                fullWidth
-                                label="Mobile Phone"
-                                autoFocus
-                                sx={{ m: 1, p: 0 }}
-                            />
-                        </Box>
-                    </Box>
-                    <Box
-                        sx={{
-                            display: "flex",
-                            flexDirection: "row",
-                            alignItems: 'center'
-                        }}
-                    >
-                        <h3 style={{ marginBottom: '20px', marginRight: '20px' }}>Branch Mail:</h3>
-                        <Box>
-                            <FormInputText
-                                control={control}
-                                id="email"
-                                name="email"
-                                label="example@gmail.com"
-                                outsideLabel=""
-                                required
-                                fullWidth
-                                autoFocus
-                                sx={{ m: 1, p: 0 }}
-                            />
-                        </Box>
-                    </Box>
+                    <FormImagePicker
+                        name="avt"
+                        control={control}
+                        onUpload={onUpload()}
+                    />
                 </Grid>
             </Grid>
             <MyButton

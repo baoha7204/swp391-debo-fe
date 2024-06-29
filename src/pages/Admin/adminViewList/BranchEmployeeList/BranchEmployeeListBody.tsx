@@ -81,7 +81,7 @@ function BranchEmployeeListBody() {
                                 employees.map((row, index) => (
                                     <TableRow hover tabIndex={-1} key={index}>
                                         {columns.map((column) => {
-                                            let value = row[column.id];
+                                            let value: string | any = row[column.id];
                                             if (column.format) {
                                                 value = column.format(value);
                                             } else if (column.isDate && value) {

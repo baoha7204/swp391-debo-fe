@@ -3,8 +3,10 @@ import HomeIcon from "@mui/icons-material/Home";
 import PaymentsIcon from "@mui/icons-material/Payments";
 import ChecklistIcon from "@mui/icons-material/Checklist";
 import { Outlet, useNavigate } from "react-router-dom";
+import { useContext } from "react";
 
 import DefaultLayout from "@/components/Layout/DefaultLayout";
+import { UserContext } from "../User/user.context";
 
 const SidebarPatientBody = [
   { title: "Home", path: "", icon: <HomeIcon /> },
@@ -24,21 +26,21 @@ const PatientRoutes = [
   { path: "appointments/:id/info", breadcrumb: "Info" },
   { path: "appointments/:id/notes", breadcrumb: "Notes" },
   { path: "settings", breadcrumb: "Settings" },
+  { path: "settings/profile", breadcrumb: "Profile" },
 ];
 
-const PatientInfo = {
-  username: "Bao",
-  role: "Patient",
-  avt: "/static/images/avatar/1.jpg",
-};
-
 const PatientLayout = () => {
+  const { user } = useContext(UserContext);
   const navigate = useNavigate();
   return (
     <DefaultLayout
       sidebarBody={SidebarPatientBody}
       header={{
-        info: PatientInfo,
+        info: {
+          username: user?.username || "user",
+          role: "Patient",
+          avt: user?.avt || "/broken-image.jpg",
+        },
         routes: PatientRoutes,
         onCreateBooking: () => {
           navigate("booking");

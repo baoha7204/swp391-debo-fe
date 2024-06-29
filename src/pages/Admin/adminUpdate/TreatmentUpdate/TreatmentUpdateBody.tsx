@@ -2,7 +2,7 @@ import FormInputText from "@/components/Form/FormInputText";
 import { Box, Grid } from "@mui/material";
 import useTreatmentUpdate from "./useTreatmentUpdate";
 import MyButton from "@/components/MyButton";
-import FormSelect from "../../components/FormSelect/FormSelect";
+import FormSelect from "@/components/Form/FormSelect";
 import { useParams } from "react-router-dom";
 import { API_ENDPOINTS } from "@/utils/api";
 import axios from "@/config/axios";

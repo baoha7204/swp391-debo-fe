@@ -2,11 +2,6 @@ import Logo from "@/components/Logo";
 import { Box, Container, Divider } from "@mui/material";
 import AccountMenuLanding from "./AccountMenu";
 
-const guestInfo = {
-    username: 'Duong',
-    avt: '/static/images/avatar/1.jpg',
-}
-
 function LandingHeader() {
 
     return (
@@ -34,7 +29,7 @@ function LandingHeader() {
                         sx={{
                             color: (theme) => theme.palette.text.secondary,
                         }}>
-                        <AccountMenuLanding info={guestInfo} />
+                        <AccountMenuLanding />
                     </Box>
                 </Box>
                 <Divider />

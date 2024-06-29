@@ -1,7 +1,5 @@
-import { Key } from "react";
-
 export type ListColumn<T> = {
-  id: Extract<keyof T, Key>;
+  id: keyof Omit<T, "id">;
   label: string;
   minWidth?: number;
   align?: "right";

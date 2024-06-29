@@ -63,13 +63,13 @@ function LandingFooter() {
                                         flexDirection: 'column',
                                         gap: '10px',
                                     }}>
-                                        <SmallTextWhite sx={{ fontSize: 13 }}>
+                                        <SmallTextWhite sx={{ fontSize: 13, cursor: 'pointer' }}>
                                             FaceBook
                                         </SmallTextWhite>
-                                        <SmallTextWhite sx={{ fontSize: 13 }}>
+                                        <SmallTextWhite sx={{ fontSize: 13, cursor: 'pointer' }}>
                                             Twitter
                                         </SmallTextWhite>
-                                        <SmallTextWhite sx={{ fontSize: 13 }}>
+                                        <SmallTextWhite sx={{ fontSize: 13, cursor: 'pointer' }}>
                                             Instagram
                                         </SmallTextWhite>
                                     </Box>

@@ -21,7 +21,10 @@ const useFetchCalendar = ({ url }: { url: string }) => {
       errorToastHandler(data);
       return new Promise((res) => res([]));
     }
-    const events = data.data.value.map((event: Partial<ProcessedEvent>) => {
+    const beforeEvents = data.data.value.filter(
+      (event: Partial<ProcessedEvent>) => event.timeSlot != 12
+    );
+    const events = beforeEvents.map((event: Partial<ProcessedEvent>) => {
       const startTimeSlot = formatDateSlot(event.timeSlot, event.start);
       const endTimeSlot = formatDateSlot(event.timeSlot + 1, event.start);
       return {

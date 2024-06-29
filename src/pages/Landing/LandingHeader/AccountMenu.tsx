@@ -1,32 +1,25 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import Avatar from '@mui/material/Avatar';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import Divider from '@mui/material/Divider';
-import PersonAdd from '@mui/icons-material/PersonAdd';
-import Settings from '@mui/icons-material/Settings';
-import Logout from '@mui/icons-material/Logout';
-import AccountMenu from '@/components/AccountMenu';
 import { Button } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import PopupState, { bindTrigger, bindMenu } from 'material-ui-popup-state';
 
-type HeaderProps = {
-    info: {
-        username: string;
-        avt: string;
-    }
-}
+// type HeaderProps = {
+//     info: {
+//         username: string;
+//         avt: string;
+//     }
+// }
 
-export default function AccountMenuLanding({ info }: HeaderProps) {
-    const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-    const open = Boolean(anchorEl);
-    const handleClose = () => {
-        setAnchorEl(null);
-    };
+export default function AccountMenuLanding() {
+    // const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+    // const open = Boolean(anchorEl);
+    // const handleClose = () => {
+    //     setAnchorEl(null);
+    // };
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
@@ -39,9 +32,20 @@ export default function AccountMenuLanding({ info }: HeaderProps) {
                             display: 'flex', gap: 3,
                         }}>
                         <Button sx={{ color: (theme) => theme.palette.primary.light, cursor: 'pointer' }}>Home</Button>
-                        <Button sx={{ color: (theme) => theme.palette.primary.light, cursor: 'pointer' }}>Calendar</Button>
-                        <Button sx={{ color: (theme) => theme.palette.primary.light, cursor: 'pointer' }}>Booking</Button>
-                        <Button sx={{ color: (theme) => theme.palette.primary.light, cursor: 'pointer' }}>Payment</Button>
+                        <Button sx={{ color: (theme) => theme.palette.primary.light, cursor: 'pointer' }}>Branches</Button>
+                        <Button sx={{
+                            color: 'white',
+                            cursor: 'pointer',
+                            border: '1px solid',
+                            backgroundColor: (theme) => theme.palette.primary.main,
+                            width: '100%',
+                            fontWeight: 'bold',
+                            "&:hover": {
+                                color: (theme) => theme.palette.primary.main,
+                            },
+                        }}>
+                            Appointment</Button>
+                        {/* <Button sx={{ color: (theme) => theme.palette.primary.light, cursor: 'pointer' }}>Payment</Button> */}
                     </Box>) :
                     (<Box>
                         <PopupState variant="popover" popupId="demo-popup-menu">
@@ -53,17 +57,17 @@ export default function AccountMenuLanding({ info }: HeaderProps) {
                                     </Button>
                                     <Menu {...bindMenu(popupState)}>
                                         <MenuItem onClick={popupState.close}>Home</MenuItem>
-                                        <MenuItem onClick={popupState.close}>Calendar</MenuItem>
+                                        <MenuItem onClick={popupState.close}>Branches</MenuItem>
                                         <MenuItem onClick={popupState.close}>Booking</MenuItem>
-                                        <MenuItem onClick={popupState.close}>Payment</MenuItem>
+                                        {/* <MenuItem onClick={popupState.close}>Payment</MenuItem> */}
                                     </Menu>
                                 </Box>
                             )}
                         </PopupState>
                     </Box>)}
-                <AccountMenu {...info} />
+                {/* <AccountMenu {...info} /> */}
             </Box>
-            <Menu
+            {/* <Menu
                 anchorEl={anchorEl}
                 id="account-menu"
                 open={open}
@@ -123,7 +127,7 @@ export default function AccountMenuLanding({ info }: HeaderProps) {
                     </ListItemIcon>
                     Logout
                 </MenuItem>
-            </Menu>
+            </Menu> */}
         </React.Fragment>
     );
 }
