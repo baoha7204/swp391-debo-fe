@@ -1,4 +1,3 @@
-import React from "react";
 import ReactDOM from "react-dom/client";
 import { ThemeProvider } from "@emotion/react";
 import themes from "./config/themes/index.ts";
@@ -26,9 +25,7 @@ enableMocking().then(() => {
         <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID!}>
           <SidebarProvider>
             <UserProvider>
-              <React.StrictMode>
-                <App />
-              </React.StrictMode>
+              <App />
             </UserProvider>
           </SidebarProvider>
         </GoogleOAuthProvider>

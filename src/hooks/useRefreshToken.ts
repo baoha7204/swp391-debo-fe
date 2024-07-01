@@ -1,14 +1,13 @@
 import { decodeToken } from "react-jwt";
+import { useCallback } from "react";
 
 import useAuth from "./useAuth";
 import { API_ENDPOINTS } from "@/utils/api";
 import { Token } from "@/types/core";
 import { ROLE } from "@/constant/core";
 import { sanitizeString } from "@/utils/helper";
-import { post } from "@/utils/apiCaller";
-import { AuthResponseType } from "@/pages/Authentication/types/core";
 import { errorToastHandler } from "@/utils/toast/actions";
-import { useCallback } from "react";
+import authApi from "@/utils/api/authApi";
 
 const useRefreshToken = () => {
   const { accessToken, refreshToken, setAccessToken, setRefreshToken } =
@@ -24,11 +23,10 @@ const useRefreshToken = () => {
 
   const refresh = useCallback(async () => {
     try {
-      const response = await post<AuthResponseType>(endpoint, {
+      const data = await authApi.refreshToken(endpoint, {
         accessToken,
         refreshToken,
       });
-      const { data } = response;
 
       if (!data.success || !data.data) {
         return errorToastHandler(data);

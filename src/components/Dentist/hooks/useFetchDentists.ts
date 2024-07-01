@@ -1,9 +1,8 @@
 import { useContext, useEffect, useState } from "react";
-import { get } from "@/utils/apiCaller";
 import { errorToastHandler } from "@/utils/toast/actions";
 import { ProgressContext } from "@/components/Booking/progress.context";
 import { DentistCardProps } from "../DentistCard";
-import { API_ENDPOINTS } from "@/utils/api";
+import dentistApi from "@/utils/api/dentistApi";
 
 const useFetchDentists = () => {
   const { data } = useContext(ProgressContext);
@@ -11,6 +10,7 @@ const useFetchDentists = () => {
   const [dentists, setDentists] = useState<DentistCardProps[]>([]);
 
   useEffect(() => {
+    setIsLoading(true);
     const abortController = new AbortController();
 
     if (!data || !data.treatment) {
@@ -22,16 +22,10 @@ const useFetchDentists = () => {
 
     const fetchRemote = async () => {
       try {
-        const response = await get<DentistCardProps[]>(
-          API_ENDPOINTS.DENTIST.LIST,
-          {
-            treatment: data.treatment?.id,
-          },
-          {
-            signal: abortController.signal,
-          }
+        const result = await dentistApi.getListByTreatmentId(
+          data.treatment?.id,
+          abortController.signal
         );
-        const result = response.data;
         if (!result.success) {
           errorToastHandler(result);
           return;
@@ -50,7 +44,6 @@ const useFetchDentists = () => {
     fetchRemote();
 
     return () => {
-      console.log("aborting...");
       abortController.abort();
     };
   }, [data]);

@@ -72,7 +72,19 @@ const RouterComponent = () => {
       children: [
         { index: true, element: <Navigate to="calendar" /> },
         { path: "calendar", element: <Calendar /> },
-        { path: "booking", element: <BookingPage /> },
+        {
+          path: "booking",
+          children: [
+            {
+              index: true,
+              element: <BookingPage />,
+            },
+            {
+              path: "payment-status/:id",
+              element: <BookingPage />,
+            },
+          ],
+        },
         { path: "dashboard", element: <DashboardPage /> },
         {
           path: "appointments",
@@ -107,6 +119,10 @@ const RouterComponent = () => {
           path: "appointments/:id",
           element: <AppointmentDetail />,
         },
+        {
+          path: "settings",
+          element: <SettingsPage />,
+        },
       ],
     },
     ...["login", "register"].map((path) => ({
@@ -128,7 +144,19 @@ const RouterComponent = () => {
               children: [
                 { index: true, element: <Navigate to="calendar" /> },
                 { path: "calendar", element: <Calendar /> },
-                { path: "booking", element: <BookingPage /> },
+                {
+                  path: "booking",
+                  children: [
+                    {
+                      index: true,
+                      element: <BookingPage />,
+                    },
+                    {
+                      path: "payment-status/:id",
+                      element: <BookingPage />,
+                    },
+                  ],
+                },
                 { path: "dashboard", element: <DashboardPage /> },
                 {
                   path: "appointments",
@@ -170,6 +198,10 @@ const RouterComponent = () => {
                 {
                   path: "appointments/:id",
                   element: <AppointmentDetail />,
+                },
+                {
+                  path: "settings",
+                  element: <SettingsPage />,
                 },
               ],
             },

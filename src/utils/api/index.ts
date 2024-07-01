@@ -25,6 +25,9 @@ export const API_ENDPOINTS = {
   DENTIST: {
     LIST: "dentists",
     CALENDAR: "dentist/calendar",
+    APPOINTMENT: {
+      LIST: "dentist/appointments",
+    },
   },
   SLOT: {
     LIST: "slot",
@@ -53,5 +56,8 @@ export const API_ENDPOINTS = {
     EMPLOYEE_WITH_BRANCH: "getempwithbranchid",
     //Update branch for employee
     UPDATE_BRANCH_FOR_EMPLOYEE: "updateBranchForEmployee"
+  },
+  PAYMENT: {
+    ONE: "payment",
   },
 };
