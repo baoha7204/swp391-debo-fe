@@ -1,10 +1,10 @@
 Mikocay/N3_NJS1804_SWP@main:
-  - source: .github
-    dest: CODING/FE/.github
-  - source: public
-    dest: CODING/FE/public
-  - source: src
-    dest: CODING/FE/src
+  - source: .github/
+    dest: CODING/FE/.github/
+  - source: public/
+    dest: CODING/FE/public/
+  - source: src/
+    dest: CODING/FE/src/
   - source: .eslintrc.cjs
     dest: CODING/FE/.eslintrc.cjs
   - source: .gitignore
@@ -19,7 +19,7 @@ Mikocay/N3_NJS1804_SWP@main:
     dest: CODING/FE/jest.setup.ts
   - source: package.json
     dest: CODING/FE/package.json
-  - sourrce: package-lock.json
+  - source: package-lock.json
     dest: CODING/FE/package-lock.json
   - source: tsconfig.json
     dest: CODING/FE/tsconfig.json
