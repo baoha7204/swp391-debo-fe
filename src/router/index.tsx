@@ -65,7 +65,7 @@ const RouterComponent = () => {
               element: <BookingPage />,
             },
             {
-              path: "payment-status",
+              path: "payment-status/:id",
               element: <BookingPage />,
             },
           ],
@@ -137,7 +137,7 @@ const RouterComponent = () => {
                       element: <BookingPage />,
                     },
                     {
-                      path: "payment-status",
+                      path: "payment-status/:id",
                       element: <BookingPage />,
                     },
                   ],

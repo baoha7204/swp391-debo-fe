@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { UserContext } from "@/pages/User/user.context";
 import { formatRole } from "@/utils/jwt";
 import { Box, Button } from "@mui/material";
@@ -7,9 +7,10 @@ import usePaymentStatus from "./hooks/usePaymentStatus";
 import CircularIndeterminate from "@/components/CircularIndeterminate";
 
 const SuccessBooking = () => {
+  const { id } = useParams();
   const navigate = useNavigate();
   const { user } = useContext(UserContext);
-  const { isLoading, status } = usePaymentStatus();
+  const { isLoading, status } = usePaymentStatus(id);
   return isLoading ? (
     <>
       <CircularIndeterminate />

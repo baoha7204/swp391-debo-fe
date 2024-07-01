@@ -1,6 +1,6 @@
 import { AxiosInstance, GenericAbortSignal } from "axios";
 import { API_ENDPOINTS } from "..";
-import { ApiResponse, PaymentStatus } from "@/types/core";
+import { ApiResponse } from "@/types/core";
 import { get } from "@/utils/apiCaller";
 
 export type PaymentRequestType = {
@@ -13,7 +13,7 @@ export type PaymentRequestType = {
 
 export type PaymentResponseType = {
   paymentId: string;
-  paymentStatus?: PaymentStatus;
+  paymentStatus?: string;
   paymentUrl: string;
   isGeneralCheckup?: boolean;
 };

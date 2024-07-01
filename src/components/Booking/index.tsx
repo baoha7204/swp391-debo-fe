@@ -4,7 +4,7 @@ import LinearDeterminate from "../LinearDeterminate";
 import { ProgressContext, ProgressProvider } from "./progress.context";
 import { BookingStage, FirstStageLength, StepLabels } from "./config";
 import HorizontalLinearStepper from "../HorizontalLinearStepper";
-import { useLocation } from "react-router-dom";
+import { matchPath, useLocation } from "react-router-dom";
 
 const BookingContent = () => {
   const location = useLocation();
@@ -22,7 +22,7 @@ const BookingContent = () => {
   } = useContext(ProgressContext);
 
   useLayoutEffect(() => {
-    if (location.pathname !== "/patient/booking/payment-status") {
+    if (!matchPath("/patient/booking/payment-status/:id", location.pathname)) {
       return;
     }
     setDone(6);

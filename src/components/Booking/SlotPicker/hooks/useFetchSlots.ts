@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
+import dayjs, { Dayjs } from "dayjs";
 import { ProgressContext } from "../../progress.context";
 import { errorToastHandler } from "@/utils/toast/actions";
-import { Dayjs } from "dayjs";
 import appointmentApi from "@/utils/api/appointmentApi";
 import { AllowedSlots } from "../../config";
 
@@ -36,8 +36,19 @@ const useFetchSlots = (date: Dayjs) => {
           return;
         }
 
+        let availableSlots = AllowedSlots;
+
+        // Validate today logic
+        if (date.isSame(dayjs(), "day")) {
+          const now = new Date();
+          const currentHour = now.getHours();
+          availableSlots = availableSlots.filter(
+            (slot) => slot - 2 >= currentHour
+          );
+        }
+
         // Filter union logic
-        const fileteredSlots = AllowedSlots.filter((slot) =>
+        const fileteredSlots = availableSlots.filter((slot) =>
           result.data.every((day) => day.includes(slot))
         );
 

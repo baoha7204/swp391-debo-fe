@@ -3,7 +3,7 @@ import { ProgressContext } from "../../progress.context";
 import paymentApi from "@/utils/api/paymentApi";
 import { errorToastHandler } from "@/utils/toast/actions";
 
-const usePaymentStatus = () => {
+const usePaymentStatus = (id?: string) => {
   const { data } = useContext(ProgressContext);
   const [status, setStatus] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -12,13 +12,7 @@ const usePaymentStatus = () => {
     setIsLoading(true);
     const abortController = new AbortController();
 
-    if (!data) {
-      setStatus(false);
-      setIsLoading(false);
-      return;
-    }
-
-    if (data.payment?.isGeneralCheckup) {
+    if ((data && data.payment?.isGeneralCheckup) || !id) {
       setStatus(true);
       setIsLoading(false);
       return;
@@ -27,7 +21,7 @@ const usePaymentStatus = () => {
     const fetchRemote = async () => {
       try {
         const response = await paymentApi.getPaymentStatus(
-          data!.payment!.paymentId,
+          id,
           abortController.signal
         );
         const result = response.data;
@@ -35,13 +29,8 @@ const usePaymentStatus = () => {
           errorToastHandler(result);
           return;
         }
-        if (data.payment?.isGeneralCheckup) {
-          setStatus(true);
-          return;
-        }
         console.log(result.data);
-        // TODO: check payment status
-        if (result.data?.paymentStatus !== "00") {
+        if (result.data?.paymentStatus !== "Sucess") {
           setStatus(false);
           return;
         }
@@ -61,7 +50,7 @@ const usePaymentStatus = () => {
     return () => {
       abortController.abort();
     };
-  }, [data]);
+  }, [data, id]);
 
   return { status, isLoading };
 };
