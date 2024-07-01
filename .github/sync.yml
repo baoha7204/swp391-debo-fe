@@ -1,3 +1,29 @@
 Mikocay/N3_NJS1804_SWP@main:
-  - source: ./
-    dest: CODING/FE/
+  - source: .github
+    dest: CODING/FE/.github
+  - source: public
+    dest: CODING/FE/public
+  - source: src
+    dest: CODING/FE/src
+  - source: .eslintrc.js
+    dest: CODING/FE/.eslintrc.js
+  - source: .gitignore
+    dest: CODING/FE/.gitignore
+  - source: README.md
+    dest: CODING/FE/README.md
+  - source: index.html
+    dest: CODING/FE/index.html
+  - source: jest.config.ts
+    dest: CODING/FE/jest.config.ts
+  - source: jest.setup.ts
+    dest: CODING/FE/jest.setup.ts
+  - source: package.json
+    dest: CODING/FE/package.json
+  - sourrce: package-lock.json
+    dest: CODING/FE/package-lock.json
+  - source: tsconfig.json
+    dest: CODING/FE/tsconfig.json
+  - source: tsconfig.node.json
+    dest: CODING/FE/tsconfig.node.json
+  - source: vite.config.ts
+    dest: CODING/FE/vite.config.ts
