@@ -5,8 +5,8 @@ Mikocay/N3_NJS1804_SWP@main:
     dest: CODING/FE/public
   - source: src
     dest: CODING/FE/src
-  - source: .eslintrc.js
-    dest: CODING/FE/.eslintrc.js
+  - source: .eslintrc.cjs
+    dest: CODING/FE/.eslintrc.cjs
   - source: .gitignore
     dest: CODING/FE/.gitignore
   - source: README.md
