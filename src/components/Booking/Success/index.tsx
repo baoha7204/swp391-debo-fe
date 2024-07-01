@@ -33,22 +33,6 @@ const SuccessBooking = () => {
           fontWeight: 700,
           letterSpacing: 1,
         }}
-        onClick={() => navigate(`/${formatRole(user!.roleName)}/booking`)}
-      >
-        Book another appointment?
-      </Button>
-      <Button
-        type="button"
-        variant="contained"
-        sx={{
-          mt: 2,
-          width: "fit-content",
-          alignSelf: "left",
-          textTransform: "none",
-          fontSize: 15,
-          fontWeight: 700,
-          letterSpacing: 1,
-        }}
         onClick={() => navigate(`/${formatRole(user!.roleName)}`)}
       >
         Go to homepage

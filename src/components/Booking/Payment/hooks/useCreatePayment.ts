@@ -3,9 +3,11 @@ import paymentApi from "@/utils/api/paymentApi";
 import { errorToastHandler } from "@/utils/toast/actions";
 import { ProgressContext } from "../../progress.context";
 import useAxiosPrivate from "@/hooks/useAxiosPrivate";
+import { STRING_EMPTY } from "@/constant/core";
 
 const useCreatePayment = () => {
-  const { data, setData } = useContext(ProgressContext);
+  const { data, setData, setActiveStep, handleDoneIncrement } =
+    useContext(ProgressContext);
   const [isLoading, setIsLoading] = useState(true);
   const axiosPrivate = useAxiosPrivate();
 
@@ -46,6 +48,14 @@ const useCreatePayment = () => {
           return;
         }
         setData((prev) => ({ ...prev, payment: result.data }));
+        if (
+          result.data?.paymentUrl === STRING_EMPTY ||
+          result.data.isGeneralCheckup
+        ) {
+          setActiveStep(2);
+          handleDoneIncrement();
+          return;
+        }
         // open in new tab
         window.open(result.data?.paymentUrl, "_blank");
       } catch (error) {

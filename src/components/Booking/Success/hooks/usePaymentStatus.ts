@@ -12,8 +12,14 @@ const usePaymentStatus = () => {
     setIsLoading(true);
     const abortController = new AbortController();
 
-    if (!data || !data?.payment?.paymentId) {
+    if (!data) {
       setStatus(false);
+      setIsLoading(false);
+      return;
+    }
+
+    if (data.payment?.isGeneralCheckup) {
+      setStatus(true);
       setIsLoading(false);
       return;
     }
@@ -29,6 +35,11 @@ const usePaymentStatus = () => {
           errorToastHandler(result);
           return;
         }
+        if (data.payment?.isGeneralCheckup) {
+          setStatus(true);
+          return;
+        }
+        console.log(result.data);
         // TODO: check payment status
         if (result.data?.paymentStatus !== "00") {
           setStatus(false);
@@ -50,8 +61,7 @@ const usePaymentStatus = () => {
     return () => {
       abortController.abort();
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [data]);
 
   return { status, isLoading };
 };

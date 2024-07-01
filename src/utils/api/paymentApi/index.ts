@@ -15,6 +15,7 @@ export type PaymentResponseType = {
   paymentId: string;
   paymentStatus?: PaymentStatus;
   paymentUrl: string;
+  isGeneralCheckup?: boolean;
 };
 
 const paymentApi = {
