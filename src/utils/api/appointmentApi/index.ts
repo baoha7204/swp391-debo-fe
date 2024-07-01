@@ -4,6 +4,7 @@ import { BookingType } from "@/components/Booking/progress.context";
 import { get } from "@/utils/apiCaller";
 import { ApiResponse } from "@/types/core";
 import { AppointmentResponse } from "@/components/Booking/SummaryBooking/hooks/useCreateAppointment";
+import { ListDataResponse } from "@/hooks/useFetchTableList";
 
 const appointmentApi = {
   createBulk: async (
@@ -35,6 +36,32 @@ const appointmentApi = {
     return await get<number[][]>(API_ENDPOINTS.SLOT.LIST, data, {
       signal,
     });
+  },
+  getReSlots: async (
+    data: {
+      startDate: string;
+      dentId: string;
+    },
+    signal?: GenericAbortSignal
+  ) => {
+    return await get<
+      ListDataResponse<{
+        dentId: string;
+        date: string;
+        timeSlot: number;
+      }>
+    >(API_ENDPOINTS.APPOINTMENT.SLOTS, data, {
+      signal,
+    });
+  },
+  getDetail: async (id?: string, signal?: GenericAbortSignal) => {
+    return await get<AppointmentResponse>(
+      `${API_ENDPOINTS.APPOINTMENT.DETAIL}/${id}`,
+      undefined,
+      {
+        signal,
+      }
+    );
   },
 };
 
