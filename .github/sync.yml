@@ -1,2 +1,3 @@
 Mikocay/N3_NJS1804_SWP@main:
-  - CODING/FE/
+  - source:
+    dest: CODING/FE/
