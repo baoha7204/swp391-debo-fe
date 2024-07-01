@@ -150,7 +150,98 @@ const RouterComponent = () => {
           // Admin routes
           path: ROLE.ADMIN,
           element: <RequireAuth allowedRoles={[ROLE.ADMIN]} />,
-          children: [],
+          children: [
+            {
+              element: <AdminLayout />,
+              children: [
+                {
+                  index: true,
+                  element: <Navigate to="branch" />,
+                },
+                //List
+                {
+                  path: "branch",
+                  element: <BranchList />,
+                },
+                {
+                  path: "treatments",
+                  element: <TreatmentList />,
+                },
+                {
+                  path: "adminAllStaffList",
+                  element: <AdminAllStaffList />,
+                },
+                {
+                  path: "patientList",
+                  element: <PatientList />,
+                },
+                //Create
+                {
+                  path: "branch/createBranch",
+                  element: <CreateBranch />,
+                },
+                {
+                  path: "treatments/createTreatment",
+                  element: <CreateTreatment />,
+                },
+                {
+                  path: "adminAllStaffList/createStaff",
+                  element: <CreateStaff />,
+                },
+                {
+                  path: "adminAllStaffList/createDentist",
+                  element: <CreateDentist />,
+                },
+                {
+                  path: "adminAllStaffList/createManager",
+                  element: <CreateManager />,
+                },
+                {
+                  path: "appointments",
+                  element: <PatientAppointmentList />,
+                },
+                //Detail
+                {
+                  path: "branch/:id",
+                  element: <BranchDetail />,
+                },
+                {
+                  path: "treatments/:id",
+                  element: <TreatmentDetail />,
+                },
+                {
+                  path: "adminAllStaffList/:id",
+                  element: <AllStaffsDetail />,
+                },
+                {
+                  path: "patientList/:id",
+                  element: <PatientDetail />,
+                },
+                {
+                  path: "appointments/:id",
+                  element: <AppointmentDetail />,
+                },
+                //Update
+                {
+                  path: "branch/:id/update",
+                  element: <BranchUpdate />,
+                },
+                {
+                  path: "treatments/:id/update",
+                  element: <TreatmentUpdate />,
+                },
+                {
+                  path: "adminAllStaffList/:id/update",
+                  element: <EmployeeUpdate />,
+                },
+                {
+                  path: "updateBranchForEmployee",
+                  element: <UpdateBranchForEmployee />,
+                }
+
+              ],
+            },
+          ],
         },
         {
           // Dentist routes

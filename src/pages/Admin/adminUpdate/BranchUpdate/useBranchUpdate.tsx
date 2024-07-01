@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { useContext, useEffect } from "react";
+import { SubmitHandler, set, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { branchUpdateSchema } from "./branchUpdateSchema";
 import { handleSubmitForm } from "@/usecases/handleSubmitForm";
@@ -9,13 +9,13 @@ import { API_ENDPOINTS } from "@/utils/api";
 import { errorToastHandler } from "@/utils/toast/actions";
 import { toastSuccess } from "@/utils/toast";
 import { useNavigate, useParams } from "react-router-dom";
-import axios from "@/config/axios";
 import { GenericAbortSignal } from "axios";
+import { BranchContext } from "./branch.context";
 
 export type BranchInputs = z.infer<typeof branchUpdateSchema>;
 
 type BranchUpdate = {
-    id: string;
+    id: number;
     mngId: string | null;
     name: string;
     address: string | null;
@@ -30,7 +30,6 @@ const upload = {
         data: File | null,
         signal?: GenericAbortSignal
     ) => {
-        console.log(id);
         const formData = new FormData();
         formData.append("file", data as unknown as Blob);
         formData.append("id", id);
@@ -47,31 +46,8 @@ const upload = {
 }
 
 export default function useBranchUpdate() {
-
-    const [branch, setBranch] = useState<BranchInputs | any>('');
-    const { id } = useParams<{ id: string }>();
-
-    const getOneBranch = async () => {
-        try {
-            const res = await axios.get(`${API_ENDPOINTS.BRANCH.LIST}/${id}`);
-            if (res.status === 200) {
-                const branchData = res.data.data;
-                console.log(branchData);
-                setBranch(branchData);
-            }
-        } catch (error) {
-            console.error("Error fetching branch data:", error);
-        }
-    }
-
-    console.log(id);
-
-    useEffect(() => {
-        getOneBranch();
-    }, [id]);
-
-    const navigate = useNavigate();
-
+    const { branch, setBranch } = useContext(BranchContext);
+    console.log('useBranchUpdate:', branch);
     const {
         handleSubmit,
         reset,
@@ -82,14 +58,18 @@ export default function useBranchUpdate() {
         resolver: zodResolver(branchUpdateSchema),
         defaultValues: {
             id: 0,
-            mngId: "",
-            name: "",
-            address: "",
-            phone: "",
-            email: "",
-            avt: "",
+            mngId: '',
+            name: '',
+            address: '',
+            phone: '',
+            email: '',
+            avt: branch?.avt || '',
         },
     });
+
+    const { id } = useParams<{ id: string }>();
+
+    const navigate = useNavigate();
 
     const onSubmit: SubmitHandler<BranchInputs> = (data) => {
 
@@ -99,17 +79,10 @@ export default function useBranchUpdate() {
             return;
         }
 
-        const { id, mngId, name, address, phone, email } = data;
-
-        console.log(data);
+        const { avt, ...rest } = data;
 
         put(`${API_ENDPOINTS.BRANCH.LIST}/${id}`, {
-            id,
-            mngId,
-            name,
-            address,
-            phone,
-            email,
+            ...rest,
         })
             .then((res) => {
                 const { data } = res;
@@ -126,7 +99,7 @@ export default function useBranchUpdate() {
             });
     };
 
-    const onUpload = () => async (data: File | null) => {
+    const onUpload = async (data: File | null) => {
 
         if (!id) {
             errorToastHandler({ message: "Branch not found" });
@@ -134,21 +107,14 @@ export default function useBranchUpdate() {
         }
 
         try {
-            console.log('branch', branch.id);
-            console.log('data', data);
-
-            const response = await upload.uploadAvatar(branch.id, data);
-            console.log('response', response);
-
+            const response = await upload.uploadAvatar(id, data);
             const result = response.data;
             if (!result.success) {
                 errorToastHandler(result);
                 return;
             }
-            console.log('returnData', response.data);
 
             const returnData = result.data.avt;
-
             setBranch(result.data);
 
             return returnData;
@@ -172,10 +138,8 @@ export default function useBranchUpdate() {
         setValue("address", values.address);
         setValue("phone", values.phone);
         setValue("email", values.email);
-        setValue("avt", values.avt);
-        console.log(values);
-
     };
 
     return [handleSubmit(onSubmit), isSubmitting, control, setValues, onUpload] as const;
 }
+

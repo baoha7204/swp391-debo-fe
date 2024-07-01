@@ -13,6 +13,7 @@ const FormImagePicker = <
 }: InputProps<TFieldValues, TName> & {
   onUpload: UploadFunction;
 }) => {
+
   return (
     <Controller
       name={name || ("imagePicker" as TName)}
