@@ -1,5 +1,5 @@
-import MyCKEditor from "@/components/CKEditor/MyCKEditor";
 import { toastError, toastSuccess } from "@/utils/toast";
+import MyCKEditor from "@/components/CKEditor/MyCKEditor";
 
 function AppointmentNotes(url: any) {
   const handleEditorSubmit = (editorData: any) => {
