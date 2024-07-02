@@ -1,11 +1,7 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
 import { Button } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
-import useMediaQuery from '@mui/material/useMediaQuery';
-import PopupState, { bindTrigger, bindMenu } from 'material-ui-popup-state';
 
 // type HeaderProps = {
 //     info: {
@@ -21,33 +17,33 @@ export default function AccountMenuLanding() {
     //     setAnchorEl(null);
     // };
     const theme = useTheme();
-    const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+    // const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
     return (
         <React.Fragment>
             <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
-                {!isMobile ?
-                    (<Box
-                        sx={{
-                            display: 'flex', gap: 3,
-                        }}>
-                        <Button sx={{ color: (theme) => theme.palette.primary.light, cursor: 'pointer' }}>Home</Button>
-                        <Button sx={{ color: (theme) => theme.palette.primary.light, cursor: 'pointer' }}>Branches</Button>
-                        <Button sx={{
-                            color: 'white',
-                            cursor: 'pointer',
-                            border: '1px solid',
-                            backgroundColor: (theme) => theme.palette.primary.main,
-                            width: '100%',
-                            fontWeight: 'bold',
-                            "&:hover": {
-                                color: (theme) => theme.palette.primary.main,
-                            },
-                        }}>
-                            Appointment</Button>
-                        {/* <Button sx={{ color: (theme) => theme.palette.primary.light, cursor: 'pointer' }}>Payment</Button> */}
-                    </Box>) :
-                    (<Box>
+                <Box
+                    sx={{
+                        display: 'flex', gap: 3,
+                    }}>
+                    {/* <Button sx={{ color: (theme) => theme.palette.primary.light, cursor: 'pointer' }}>Home</Button>
+                        <Button sx={{ color: (theme) => theme.palette.primary.light, cursor: 'pointer' }}>Branches</Button> */}
+                    <Button sx={{
+                        color: 'white',
+                        cursor: 'pointer',
+                        border: '1px solid',
+                        backgroundColor: (theme) => theme.palette.primary.main,
+                        width: '100%',
+                        fontWeight: 'bold',
+                        "&:hover": {
+                            color: (theme) => theme.palette.primary.main,
+                        },
+                        px: 3
+                    }}>
+                        Appointment</Button>
+                    {/* <Button sx={{ color: (theme) => theme.palette.primary.light, cursor: 'pointer' }}>Payment</Button> */}
+                </Box>
+                {/* (<Box>
                         <PopupState variant="popover" popupId="demo-popup-menu">
                             {(popupState) => (
                                 <Box>
@@ -59,12 +55,12 @@ export default function AccountMenuLanding() {
                                         <MenuItem onClick={popupState.close}>Home</MenuItem>
                                         <MenuItem onClick={popupState.close}>Branches</MenuItem>
                                         <MenuItem onClick={popupState.close}>Booking</MenuItem>
-                                        {/* <MenuItem onClick={popupState.close}>Payment</MenuItem> */}
+                                        <MenuItem onClick={popupState.close}>Payment</MenuItem>
                                     </Menu>
                                 </Box>
                             )}
                         </PopupState>
-                    </Box>)}
+                    </Box>) */}
                 {/* <AccountMenu {...info} /> */}
             </Box>
             {/* <Menu

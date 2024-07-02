@@ -19,11 +19,11 @@ import AppointmentNotes from "./AppointmentNotes";
 // };
 // export default AppointmentDetail;
 
-function AppointmentDetail() {
+function AppointmentDetail(url: any) {
   return (
     <Box sx={{ p: '24px' }}>
       <MiniHeader content="Appointment Notes" IconComponent={ChecklistIcon} />
-      <AppointmentNotes />
+      <AppointmentNotes url={url} />
     </Box>
   );
 }

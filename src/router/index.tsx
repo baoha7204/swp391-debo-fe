@@ -26,6 +26,7 @@ import DentistLayout from "@/pages/Dentist";
 import DentistAppointmentList from "@/pages/Dentist/Appointment";
 import DentistDashboardPage from "@/pages/Dentist/Dashboard";
 import DentistCalendar from "@/pages/Dentist/Calendar";
+import DentistAppointmentNotes from "@/pages/Dentist/Appointment/DentistAppointmentNotes";
 
 ////Manager////
 import ManagerLayout from "@/pages/Manager/ManagerLayout";
@@ -260,7 +261,7 @@ const RouterComponent = () => {
                 },
                 {
                   path: "appointments/:id",
-                  element: <AppointmentDetail />,
+                  element: <DentistAppointmentNotes />,
                 },
               ],
             },
