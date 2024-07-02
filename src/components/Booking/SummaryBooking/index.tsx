@@ -1,14 +1,16 @@
 import { Grid, Typography } from "@mui/material";
+import { useContext, useEffect } from "react";
+import dayjs from "dayjs";
+import CircularIndeterminate from "@/components/CircularIndeterminate";
 import useCreateAppointment from "./hooks/useCreateAppointment";
 import BranchCardSummary from "./components/BranchCard";
 import DentistCardSummary from "./components/DentistCard";
 import TreatmentCardSummary from "./components/TreatmentCard";
 import DateSlotSummary from "./components/DateSlotCard";
-import CircularIndeterminate from "@/components/CircularIndeterminate";
-import dayjs from "dayjs";
-import { useEffect } from "react";
+import { ProgressContext } from "../progress.context";
 
 const SummaryBooking = () => {
+  const { handleDoneDecrement } = useContext(ProgressContext);
   const { data, setData, isLoading, appointments } = useCreateAppointment();
 
   useEffect(() => {
@@ -52,6 +54,7 @@ const SummaryBooking = () => {
                 <DateSlotSummary
                   date={dayjs(appointment.startDate)}
                   slot={appointment.timeSlot}
+                  onBack={handleDoneDecrement}
                 />
               </Grid>
             );

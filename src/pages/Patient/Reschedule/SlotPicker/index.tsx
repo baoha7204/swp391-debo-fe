@@ -1,11 +1,13 @@
-import { Dayjs } from "dayjs";
+import dayjs, { Dayjs } from "dayjs";
 import { useContext } from "react";
 import SlotPicker from "@/components/SlotPicker";
 import useFetchReSlot from "../hooks/useFetchReSlot";
 import { RescheduleContext } from "../reschedule.context";
+import DefaultError from "@/pages/500";
 
 const RescheduleSlotPicker = () => {
-  const { handleNext, setData } = useContext(RescheduleContext);
+  const { data, isAllowed, handleNext, setData } =
+    useContext(RescheduleContext);
   const handleSlot = (slot: number, date: Dayjs) => {
     setData((prev) => ({
       ...prev,
@@ -15,7 +17,15 @@ const RescheduleSlotPicker = () => {
     handleNext();
   };
 
-  return <SlotPicker handleSubmit={handleSlot} fetchSlots={useFetchReSlot} />;
+  return isAllowed ? (
+    <SlotPicker
+      handleSubmit={handleSlot}
+      fetchSlots={useFetchReSlot}
+      minDate={dayjs(data?.appointment?.startDate)}
+    />
+  ) : (
+    <DefaultError />
+  );
 };
 
 export default RescheduleSlotPicker;

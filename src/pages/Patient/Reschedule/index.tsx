@@ -5,12 +5,8 @@ import HorizontalLinearStepper from "@/components/HorizontalLinearStepper";
 import { RescheduleStage, StepLabels } from "./config";
 
 const RescheduleContent = () => {
-  const { activeStep, isStepSkipped, handleBack } =
+  const { activeStep, isStepSkipped, handleBack, handleNext } =
     useContext(RescheduleContext);
-
-  const handleReschedule = () => {
-    console.log("Reschedule");
-  };
 
   return (
     <Paper
@@ -33,9 +29,7 @@ const RescheduleContent = () => {
           Previous
         </Button>
         <Box sx={{ flex: "1 1 auto" }} />
-        {activeStep === 1 && (
-          <Button onClick={handleReschedule}>Reschedule</Button>
-        )}
+        {activeStep === 1 && <Button onClick={handleNext}>Reschedule</Button>}
       </Box>
       <Typography variant="h5">{RescheduleStage[activeStep].header}</Typography>
       {RescheduleStage[activeStep].component}

@@ -14,6 +14,10 @@ const useFetchCalendar = ({ url }: { url: string }) => {
         start: params.start.toDateString(),
         end: params.end.toDateString(),
         view: params.view,
+        t: new Date().getTime(),
+      },
+      headers: {
+        "Cache-Control": "no-cache",
       },
     });
     const data = response.data;

@@ -10,9 +10,16 @@ export type SlotPickerProps = {
     isLoading: boolean;
   };
   handleSubmit: (slot: number, date: Dayjs) => void;
+  disablePast?: boolean;
+  minDate?: Dayjs;
 };
 
-const SlotPicker = ({ fetchSlots, handleSubmit }: SlotPickerProps) => {
+const SlotPicker = ({
+  fetchSlots,
+  handleSubmit,
+  disablePast,
+  minDate,
+}: SlotPickerProps) => {
   const [chosenDate, setChosenDate] = useState<Dayjs | null>(null);
 
   const handleDateChange = (newValue: Dayjs | null) => {
@@ -32,6 +39,8 @@ const SlotPicker = ({ fetchSlots, handleSubmit }: SlotPickerProps) => {
           value={chosenDate}
           onChange={handleDateChange}
           label="Choose a date"
+          disablePast={disablePast}
+          minDate={minDate}
         />
       </Box>
       <Divider flexItem />
