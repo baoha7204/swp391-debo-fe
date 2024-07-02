@@ -3,9 +3,11 @@ import { Dayjs } from "dayjs";
 import appointmentApi from "@/utils/api/appointmentApi";
 import { errorToastHandler } from "@/utils/toast/actions";
 import { RescheduleContext } from "../reschedule.context";
+import { toastInfo } from "@/utils/toast";
+import { MAX_RESCHEDULE } from "@/constant/core";
 
 const useFetchReSlot = (date: Dayjs) => {
-  const { data } = useContext(RescheduleContext);
+  const { data, setData } = useContext(RescheduleContext);
   const [isLoading, setIsLoading] = useState(true);
   const [slots, setSlots] = useState<number[]>([]);
 
@@ -24,6 +26,7 @@ const useFetchReSlot = (date: Dayjs) => {
 
     const fetchRemote = async () => {
       try {
+        // Fetch appointment detail
         const responseDetail = await appointmentApi.getDetail(
           data.id,
           abortController.signal
@@ -35,6 +38,7 @@ const useFetchReSlot = (date: Dayjs) => {
           return;
         }
 
+        // Fetch available slots
         const responseSlots = await appointmentApi.getReSlots(
           {
             startDate: date.toDate().toDateString(),
@@ -56,7 +60,26 @@ const useFetchReSlot = (date: Dayjs) => {
 
         if (availableSlots.length === 0) {
           errorToastHandler({ message: "No slots available." });
+        } else {
+          const remainAttempts = MAX_RESCHEDULE - result.data.rescheduleCount;
+          // check if how many the appointment is rescheduled
+          if (remainAttempts <= 0) {
+            errorToastHandler({
+              message: "You can only reschedule an appointment twice.",
+            });
+            setSlots([]);
+            setIsLoading(false);
+            return;
+          } else {
+            toastInfo(
+              `You can only reschedule this appointment ${remainAttempts} more time(s).`
+            );
+          }
         }
+        setData((prev) => ({
+          ...prev,
+          appointment: result.data,
+        }));
         setSlots(availableSlots);
       } catch (error) {
         if (error.name !== "CanceledError") {
@@ -73,7 +96,7 @@ const useFetchReSlot = (date: Dayjs) => {
     return () => {
       abortController.abort();
     };
-  }, [data?.id, date]);
+  }, [data?.id, date, setData]);
 
   return { isLoading, slots };
 };

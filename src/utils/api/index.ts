@@ -37,6 +37,7 @@ export const API_ENDPOINTS = {
     HISTORY: "viewhistoryappoinment",
     DETAIL: "viewappointmentdetails",
     SLOTS: "availableslot",
+    RESCHEDULE: "reschedule",
   },
   USERS: {
     //User

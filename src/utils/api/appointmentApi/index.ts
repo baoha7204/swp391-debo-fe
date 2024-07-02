@@ -1,7 +1,7 @@
 import { AxiosInstance, GenericAbortSignal } from "axios";
 import { API_ENDPOINTS } from "..";
 import { BookingType } from "@/components/Booking/progress.context";
-import { get } from "@/utils/apiCaller";
+import { get, put } from "@/utils/apiCaller";
 import { ApiResponse } from "@/types/core";
 import { AppointmentResponse } from "@/components/Booking/SummaryBooking/hooks/useCreateAppointment";
 import { ListDataResponse } from "@/hooks/useFetchTableList";
@@ -57,6 +57,24 @@ const appointmentApi = {
   getDetail: async (id?: string, signal?: GenericAbortSignal) => {
     return await get<AppointmentResponse>(
       `${API_ENDPOINTS.APPOINTMENT.DETAIL}/${id}`,
+      undefined,
+      {
+        signal,
+      }
+    );
+  },
+  reschedulePatient: async (
+    id: string,
+    data: {
+      id: string;
+      startDate: string;
+      timeSlot: number;
+    },
+    signal?: GenericAbortSignal
+  ) => {
+    return await put(
+      `${API_ENDPOINTS.APPOINTMENT.RESCHEDULE}/${id}`,
+      data,
       undefined,
       {
         signal,

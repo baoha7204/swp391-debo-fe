@@ -11,6 +11,7 @@ export type AppointmentResponse = {
   startDate: Date;
   timeSlot: number;
   treatId: number;
+  rescheduleCount: number;
 };
 
 const useCreateAppointment = () => {

@@ -7,7 +7,6 @@ import {
   useEffect,
   useState,
 } from "react";
-import useStep from "./hooks/useStep";
 import useProgressDone from "./hooks/useProgress";
 import { BranchCardProps } from "../Branch/BranchCard";
 import { TreatmentCardProps } from "../Treatment/TreatmentCard";
@@ -16,6 +15,7 @@ import useFirstTime from "./hooks/useFirstTime";
 import { APPOINTMENT_RULE } from "@/constant/core";
 import { AppointmentResponse } from "./SummaryBooking/hooks/useCreateAppointment";
 import { PaymentResponseType } from "@/utils/api/paymentApi";
+import useStep from "@/hooks/useStep";
 
 type BookingType = {
   branch?: BranchCardProps;
