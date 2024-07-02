@@ -6,10 +6,12 @@ import appointmentApi from "@/utils/api/appointmentApi";
 
 export type AppointmentResponse = {
   id: string;
+  dent_Id: string;
   status: string;
   startDate: Date;
   timeSlot: number;
   treatId: number;
+  rescheduleCount: number;
 };
 
 const useCreateAppointment = () => {

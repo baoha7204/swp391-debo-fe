@@ -34,7 +34,10 @@ export const API_ENDPOINTS = {
   },
   APPOINTMENT: {
     ONE: "appointment",
-    HISTORY: "viewhistoryappoinment"
+    HISTORY: "viewhistoryappoinment",
+    DETAIL: "viewappointmentdetails",
+    SLOTS: "availableslot",
+    RESCHEDULE: "reschedule",
   },
   USERS: {
     //User
@@ -55,7 +58,7 @@ export const API_ENDPOINTS = {
     //Available Employee
     EMPLOYEE_WITH_BRANCH: "getempwithbranchid",
     //Update branch for employee
-    UPDATE_BRANCH_FOR_EMPLOYEE: "updateBranchForEmployee"
+    UPDATE_BRANCH_FOR_EMPLOYEE: "updateBranchForEmployee",
   },
   PAYMENT: {
     ONE: "payment",

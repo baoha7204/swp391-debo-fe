@@ -1,14 +1,18 @@
-import { useContext } from "react";
 import { Box, Button, Paper, Typography } from "@mui/material";
 import { Dayjs } from "dayjs";
 import EventIcon from "@mui/icons-material/Event";
 import ScheduleIcon from "@mui/icons-material/Schedule";
 import { formatTime } from "@/utils/helper";
-import { ProgressContext } from "../../progress.context";
 
-const DateSlotSummary = ({ date, slot }: { date: Dayjs; slot: number }) => {
-  const { handleDoneDecrement } = useContext(ProgressContext);
-
+const DateSlotSummary = ({
+  date,
+  slot,
+  onBack,
+}: {
+  date: Dayjs;
+  slot: number;
+  onBack: () => void;
+}) => {
   return (
     <Paper sx={{ padding: 2 }}>
       <Box display="flex" alignItems="center" gap={1}>
@@ -27,7 +31,7 @@ const DateSlotSummary = ({ date, slot }: { date: Dayjs; slot: number }) => {
             fontWeight: 800,
             backgroundColor: "secondary.main",
           }}
-          onClick={handleDoneDecrement}
+          onClick={onBack}
         >
           Change date?
         </Button>

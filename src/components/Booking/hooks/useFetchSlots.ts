@@ -1,9 +1,9 @@
 import { useContext, useEffect, useState } from "react";
 import dayjs, { Dayjs } from "dayjs";
-import { ProgressContext } from "../../progress.context";
+import { ProgressContext } from "../progress.context";
 import { errorToastHandler } from "@/utils/toast/actions";
 import appointmentApi from "@/utils/api/appointmentApi";
-import { AllowedSlots } from "../../config";
+import { AllowedSlots } from "../config";
 
 const useFetchSlots = (date: Dayjs) => {
   const { data } = useContext(ProgressContext);
@@ -51,6 +51,10 @@ const useFetchSlots = (date: Dayjs) => {
         const fileteredSlots = availableSlots.filter((slot) =>
           result.data.every((day) => day.includes(slot))
         );
+
+        if (fileteredSlots.length === 0) {
+          errorToastHandler({ message: "No slots available." });
+        }
 
         setSlots(fileteredSlots);
       } catch (error) {
