@@ -1,231 +1,151 @@
-import { Box, IconButton, Typography, useTheme } from "@mui/material";
-import { tokens } from "./supComponent/theme";
-import { mockTransactions } from "./data/mockData";
-import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
-import EmailIcon from "@mui/icons-material/Email";
-import PointOfSaleIcon from "@mui/icons-material/PointOfSale";
+import { Box, Grid } from '@mui/material';
+import { PieChart } from '@mui/x-charts/PieChart';
+import { BarChart } from '@mui/x-charts/BarChart';
+import { axisClasses } from '@mui/x-charts/ChartsAxis';
+import { dataset } from './data/weather';
+import MiniHeader from '../components/MiniHeader/MiniHeader';
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import StatBox from './supComponent/StatBox';
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
-import TrafficIcon from "@mui/icons-material/Traffic";
-import Header from "./supComponent/Header";
-import StatBox from "./supComponent/StatBox";
-import ProgressCircle from "./supComponent/ProgressCircle";
+import { styled } from '@mui/system';
 
-const Dashboard = () => {
-    const theme = useTheme();
-    const colors = tokens(theme.palette.primary.main);
+const PieData = [
+    { id: 0, value: 10, label: 'Medical' },
+    { id: 1, value: 50, label: 'Cosmetic' },
+];
 
-    const mockData = [
-        { title: "12,361", subtitle: "Emails Sent", progress: "0.75", increase: "+14%", icon: <EmailIcon /> },
-        { title: "431,225", subtitle: "Sales Obtained", progress: "0.50", increase: "+21%", icon: <PointOfSaleIcon /> },
-        { title: "32,441", subtitle: "New Clients", progress: "0.30", increase: "+5%", icon: <PersonAddIcon /> },
-        { title: "1,325,134", subtitle: "Received", progress: "0.80", increase: "+43%", icon: <TrafficIcon /> },
-    ];
+const valueFormatter = (value: number | null) => `${value}mm`;
 
-    return (
-        <Box m="20px">
-            {/* HEADER */}
-            <Box display="flex" justifyContent="space-between" alignItems="center">
-                <Header title="DASHBOARD" subtitle="Welcome to your dashboard" />
-            </Box>
-
-            {/* GRID & CHARTS */}
-            <Box
-                display="grid"
-                gridTemplateColumns="repeat(12, 1fr)"
-                gap="20px"
-            >
-                {/* ROW 1 */}
-                {mockData.map((data, i) => (
-                    <Box
-                        gridColumn="span 3"
-                        sx={{
-                            backgroundColor: colors.primary[400],
-                            whiteSpace: "nowrap",
-                            p: "20px",
-                        }}
-                        display="flex"
-                        alignItems="center"
-                        justifyContent="center"
-                    >
-                        <StatBox
-                            key={i}
-                            title={data.title}
-                            subtitle={data.subtitle}
-                            progress={data.progress}
-                            increase={data.increase}
-                            icon={data.icon}
-                        />
-                    </Box>
-                ))}
-                <Box />
-                {/* ROW 2 */}
-                <Box
-                    gridColumn="span 8"
-                    gridRow="span 2"
-                    sx={{
-                        backgroundColor: colors.primary[400],
-                    }}                >
-                    <Box
-                        mt="25px"
-                        p="0 30px"
-                        display="flex "
-                        justifyContent="space-between"
-                        alignItems="center"
-                    >
-                        <Box>
-                            <Typography
-                                variant="h5"
-                                fontWeight="600"
-                                color={colors.grey[100]}
-                            >
-                                Revenue Generated
-                            </Typography>
-                            <Typography
-                                variant="h3"
-                                fontWeight="bold"
-                                color={colors.greenAccent[500]}
-                            >
-                                $59,342.32
-                            </Typography>
-                        </Box>
-                        <Box>
-                            <IconButton>
-                                <DownloadOutlinedIcon
-                                    sx={{ fontSize: "26px", color: colors.greenAccent[500] }}
-                                />
-                            </IconButton>
-                        </Box>
-                    </Box>
-                    <Box height="250px" m="-20px 0 0 0">
-                        {/* <LineChart isDashboard={true} /> */}
-                        <Box>LineChart</Box>
-                    </Box>
-                </Box>
-                <Box
-                    gridColumn="span 4"
-                    gridRow="span 2"
-                    sx={{
-                        backgroundColor: colors.primary[400],
-                    }} overflow="auto"
-                >
-                    <Box
-                        sx={{
-                            display: "flex",
-                            justifyContent: "space-between",
-                            alignItems: "center",
-                            borderBottom: `4px solid ${colors.primary[500]}`,
-                            colors: `${colors.grey[100]}`,
-                            p: "15px",
-                        }}
-                    >
-                        <Typography color={colors.grey[100]} variant="h5" fontWeight="600">
-                            Recent Transactions
-                        </Typography>
-                    </Box>
-                    {mockTransactions.map((transaction, i) => (
-                        <Box
-                            key={`${transaction.txId}-${i}`}
-                            display="flex"
-                            justifyContent="space-between"
-                            alignItems="center"
-                            borderBottom={`4px solid ${colors.primary[500]}`}
-                            p="15px"
-                        >
-                            <Box>
-                                <Typography
-                                    color={colors.greenAccent[500]}
-                                    variant="h5"
-                                    fontWeight="600"
-                                >
-                                    {transaction.txId}
-                                </Typography>
-                                <Typography color={colors.grey[100]}>
-                                    {transaction.user}
-                                </Typography>
-                            </Box>
-                            <Box color={colors.grey[100]}>{transaction.date}</Box>
-                            <Box
-                                p="5px 10px"
-                                borderRadius="4px"
-                                sx={{
-                                    backgroundColor: colors.greenAccent[500]
-                                }}
-                            >
-                                ${transaction.cost}
-                            </Box>
-                        </Box>
-                    ))}
-                </Box>
-
-                {/* ROW 3 */}
-                <Box
-                    gridColumn="span 4"
-                    gridRow="span 2"
-                    sx={{
-                        backgroundColor: colors.primary[400]
-                    }}
-                    p="30px"
-                >
-                    <Typography variant="h5" fontWeight="600">
-                        Campaign
-                    </Typography>
-                    <Box
-                        display="flex"
-                        flexDirection="column"
-                        alignItems="center"
-                        mt="25px"
-                    >
-                        <ProgressCircle size="125" />
-                        <Typography
-                            variant="h5"
-                            color={colors.greenAccent[500]}
-                            sx={{ mt: "15px" }}
-                        >
-                            $48,352 revenue generated
-                        </Typography>
-                        <Typography>Includes extra misc expenditures and costs</Typography>
-                    </Box>
-                </Box>
-                <Box
-                    gridColumn="span 4"
-                    gridRow="span 2"
-                    sx={{
-                        backgroundColor: colors.primary[400]
-                    }}                >
-                    <Typography
-                        variant="h5"
-                        fontWeight="600"
-                        sx={{ padding: "30px 30px 0 30px" }}
-                    >
-                        Sales Quantity
-                    </Typography>
-                    <Box height="250px" mt="-20px">
-                        {/* <BarChart isDashboard={true} /> */}
-                        <Box>BarChart</Box>
-                    </Box>
-                </Box>
-                <Box
-                    gridColumn="span 4"
-                    gridRow="span 2"
-                    sx={{
-                        backgroundColor: colors.primary[400]
-                    }} padding="30px"
-                >
-                    <Typography
-                        variant="h5"
-                        fontWeight="600"
-                        sx={{ marginBottom: "15px" }}
-                    >
-                        Geography Based Traffic
-                    </Typography>
-                    <Box height="200px">
-                        {/* <GeographyChart isDashboard={true} /> */}
-                        <Box>GeographyChart</Box>
-                    </Box>
-                </Box>
-            </Box>
-        </Box >
-    );
+const chartSetting = {
+    yAxis: [
+        {
+            label: 'rainfall (mm)',
+        },
+    ],
+    series: [{ dataKey: 'seoul', label: 'Seoul rainfall', valueFormatter }],
+    height: 300,
+    sx: {
+        [`& .${axisClasses.directionY} .${axisClasses.label}`]: {
+            transform: 'translateX(-10px)',
+        },
+    },
 };
 
-export default Dashboard;
+const mockData = [
+    { title: "12,361", subtitle: "Customer", progress: "0.75", increase: "+14%", icon: <PersonAddIcon /> },
+    { title: "431,225", subtitle: "Employee", progress: "0.50", increase: "+21%", icon: <PersonAddIcon /> },
+];
+
+const DashBox = styled('div')(() => ({
+    borderRadius: "10px",
+    backgroundColor: 'lightblack',
+    p: 300,
+}));
+function AdminDashboard() {
+    return (
+        <Box sx={{ p: 3 }}>
+            <MiniHeader content="Dashboard" IconComponent={DashboardIcon} />
+            <Grid container spacing={4}>
+                <Grid container item xs={4} sx={{ gap: 3, }}>
+                    {mockData.map((data, i) => (
+                        <Grid item xs={12}
+                            sx={{
+                                whiteSpace: "nowrap",
+                                p: "20px",
+                                border: "1px solid black",
+                            }}
+                            display="flex"
+                            alignItems="center"
+                            justifyContent="center"
+                        >
+                            <StatBox
+                                key={i}
+                                title={data.title}
+                                subtitle={data.subtitle}
+                                progress={data.progress}
+                                increase={data.increase}
+                                icon={data.icon}
+                            />
+                        </Grid>
+                    ))}
+                </Grid>
+                <Grid item xs={6}
+                    sx={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                    }}>
+                    <DashBox sx={{
+                        p: 3,
+                    }}>
+                        <h1>Treatment category distribution</h1>
+                        <PieChart
+                            series={
+                                [
+                                    {
+                                        data: PieData,
+                                        innerRadius: 30,
+                                        outerRadius: 100,
+                                        paddingAngle: 5,
+                                        cornerRadius: 5,
+                                        startAngle: -90,
+                                        endAngle: 180,
+                                    }
+                                ]}
+                            height={300}
+                        />
+                    </DashBox>
+                </Grid>
+                <Grid item xs={2}>
+                    <DashBox sx={{
+                        height: '100%',
+                    }}>
+                        Fit content
+                    </DashBox>
+                </Grid>
+                <Grid item xs={6}>
+                    <DashBox sx={{
+                        p: 3,
+                        border: '1px solid black',
+                    }}>
+                        <h1>Appointments used per month</h1>
+                        <BarChart
+                            dataset={dataset}
+                            xAxis={[{ scaleType: 'band', dataKey: 'month' }]}
+                            {...chartSetting}
+                        />
+                    </DashBox>
+                </Grid>
+                <Grid item xs={6}>
+                    <DashBox sx={{
+                        p: 3,
+                        border: '1px solid black',
+                    }}>
+                        <h1>Appointments used per month</h1>
+                        <BarChart
+                            dataset={dataset}
+                            xAxis={[{ scaleType: 'band', dataKey: 'month' }]}
+                            {...chartSetting}
+                        />
+                    </DashBox>
+                </Grid>
+                <Grid item xs={12}>
+                    <DashBox sx={{
+                        p: 3,
+                        border: '1px solid black',
+                    }}>
+                        <h1>Employee Salary Table</h1>
+                        <BarChart
+                            dataset={dataset}
+                            xAxis={[{ scaleType: 'band', dataKey: 'month' }]}
+                            {...chartSetting}
+                        />
+                    </DashBox>
+                </Grid>
+            </Grid>
+        </Box>
+    );
+}
+
+export default AdminDashboard

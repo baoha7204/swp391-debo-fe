@@ -38,7 +38,7 @@ import BranchList from "@/pages/Admin/adminViewList/BranchList/BranchList";
 import TreatmentList from "@/pages/Admin/adminViewList/TreatmentList/TreatmentList";
 import AdminAllStaffList from "@/pages/Admin/adminViewList/AllStaffList";
 import PatientList from "@/pages/Admin/adminViewList/PatientList/PatientList";
-import Dashboard from "@/pages/Admin/adminDashboard/AdminDashboard";
+import AdminDashboard from "@/pages/Admin/adminDashboard/AdminDashboard";
 //AdminDetail
 import AllStaffsDetail from "@/pages/Admin/adminViewDetail/AllStaffsDetail/AllStaffsDetail";
 import BranchDetail from "@/pages/Admin/adminViewDetail/BranchDetail/BranchDetail";
@@ -309,7 +309,7 @@ const RouterComponent = () => {
         },
         {
           path: "dashboard",
-          element: <Dashboard />,
+          element: <AdminDashboard />,
         },
         //Create
         {

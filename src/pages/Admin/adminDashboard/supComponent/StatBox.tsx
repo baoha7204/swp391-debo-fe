@@ -7,8 +7,8 @@ const StatBox = ({ title, subtitle, icon, progress, increase }: any) => {
     const colors = tokens(theme.palette.mode);
 
     return (
-        <Box width="100%" m="0 30px">
-            <Box display="flex" justifyContent="space-between">
+        <Box width="100%">
+            <Box display="flex" justifyContent="space-around">
                 <Box>
                     {icon}
                     <Typography
@@ -23,7 +23,7 @@ const StatBox = ({ title, subtitle, icon, progress, increase }: any) => {
                     <ProgressCircle progress={progress} />
                 </Box>
             </Box>
-            <Box display="flex" justifyContent="space-between" mt="2px">
+            <Box display="flex" justifyContent="space-around" mt="2px">
                 <Typography variant="h5" sx={{ color: colors.greenAccent[500] }}>
                     {subtitle}
                 </Typography>

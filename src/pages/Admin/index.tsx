@@ -9,6 +9,7 @@ import { Outlet } from "react-router-dom";
 import DashboardIcon from '@mui/icons-material/Dashboard';
 
 import DefaultLayout from "@/components/Layout/DefaultLayout";
+import { Box } from "@mui/material";
 
 const SidebarAdminBody = [
   { title: "Dashboard", path: "dashboard", icon: <DashboardIcon />, },
@@ -54,6 +55,7 @@ const AdminInfo = {
 
 const AdminLayout = () => {
   return (
+
     <DefaultLayout
       sidebarBody={SidebarAdminBody}
       header={{ info: AdminInfo, routes: AdminRoutes, isAllowedBooking: false }}
