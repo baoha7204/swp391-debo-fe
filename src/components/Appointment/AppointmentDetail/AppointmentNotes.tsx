@@ -1,7 +1,11 @@
 import { toastError, toastSuccess } from "@/utils/toast";
 import MyCKEditor from "@/components/CKEditor/MyCKEditor";
+import { useParams } from "react-router-dom";
 
 function AppointmentNotes(url: any) {
+  const { id } = useParams();
+  console.log(id);
+
   const handleEditorSubmit = (editorData: any) => {
 
     fetch(url, {

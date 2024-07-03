@@ -15,6 +15,7 @@ import { MetadataFile } from "@/components/FilePicker/types/core";
 
 type UserType = {
   id: string;
+  roleName: string;
   email: string;
   phone: string | null;
   username: string | null;

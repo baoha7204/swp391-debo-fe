@@ -5,15 +5,20 @@ import EventNoteRoundedIcon from "@mui/icons-material/EventNoteRounded";
 
 import { PopperInner } from "./style";
 import { formatDate } from "@/utils/helper";
-import EventActions from "./EventActions";
-import { toastInfo } from "@/utils/toast";
+import EventActions, { EventActionsProps } from "./EventActions";
 
 export type MyCustomViewerProps = {
   event: ProcessedEvent;
   close: () => void;
-};
+} & EventActionsProps;
 
-const MyCustomViewer = ({ event, close }: MyCustomViewerProps) => {
+const MyCustomViewer = ({
+  event,
+  close,
+  onDelete,
+  onEdit,
+  role,
+}: MyCustomViewerProps) => {
   return (
     <PopperInner>
       <Box
@@ -34,13 +39,10 @@ const MyCustomViewer = ({ event, close }: MyCustomViewerProps) => {
             </IconButton>
           </div>
           <EventActions
-            onDelete={() => {
-              toastInfo("Cancel event");
-            }}
-            onEdit={() => {
-              close();
-              toastInfo("Reschedule event");
-            }}
+            event={event}
+            onDelete={onDelete}
+            onEdit={onEdit}
+            role={role}
           />
         </div>
         <Typography style={{ padding: "5px 0" }} noWrap>

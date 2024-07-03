@@ -1,9 +1,8 @@
 import { useContext, useEffect, useState } from "react";
-import { get } from "@/utils/apiCaller";
 import { errorToastHandler } from "@/utils/toast/actions";
 import { TreatmentCardProps } from "../TreatmentCard";
 import { ProgressContext } from "@/components/Booking/progress.context";
-import { API_ENDPOINTS } from "@/utils/api";
+import treatmentApi from "@/utils/api/treatmentApi";
 
 const useFetchTreatments = () => {
   const { data } = useContext(ProgressContext);
@@ -11,6 +10,7 @@ const useFetchTreatments = () => {
   const [treatments, setTreatments] = useState<TreatmentCardProps[]>([]);
 
   useEffect(() => {
+    setIsLoading(true);
     const abortController = new AbortController();
 
     if (!data || !data.branch) {
@@ -22,14 +22,10 @@ const useFetchTreatments = () => {
 
     const fetchRemote = async () => {
       try {
-        const response = await get<TreatmentCardProps[]>(
-          `${API_ENDPOINTS.TREATMENT.LIST.BY_BRANCH}/${data.branch?.id}`,
-          undefined,
-          {
-            signal: abortController.signal,
-          }
+        const result = await treatmentApi.getListByBranchId(
+          data.branch?.id,
+          abortController.signal
         );
-        const result = response.data;
         if (!result.success) {
           errorToastHandler(result);
           return;
@@ -48,7 +44,6 @@ const useFetchTreatments = () => {
     fetchRemote();
 
     return () => {
-      console.log("aborting...");
       abortController.abort();
     };
   }, [data]);

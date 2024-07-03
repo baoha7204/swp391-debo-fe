@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { ProgressContext } from "../Booking/progress.context";
 import {
+  Box,
   Button,
   Card,
   CardActionArea,
@@ -17,10 +18,13 @@ export type TreatmentCardProps = {
   name: string;
   description: string;
   price: number | null;
+  num_of_appointment: number;
+  rule_name: string;
 };
 
 const TreatmentCard = (props: TreatmentCardProps) => {
-  const { category, description, price, name } = props;
+  const { category, description, price, name, num_of_appointment, rule_name } =
+    props;
   const { handleDoneIncrement, setData } = useContext(ProgressContext);
 
   const handleClick = () => {
@@ -50,11 +54,27 @@ const TreatmentCard = (props: TreatmentCardProps) => {
               </Typography>
             </Grid>
           </Grid>
-          <Typography variant="body1" color="text.secondary">
-            {category === 1 ? "Medical" : "Cosmetic"}
-          </Typography>
+          <Box
+            display="flex"
+            justifyContent="space-between"
+            alignItems="center"
+          >
+            <Typography variant="body1" color="text.secondary">
+              {category === 1 ? "Medical" : "Cosmetic"}
+            </Typography>
+            <Typography
+              variant="body1"
+              color="text.secondary"
+              sx={{ textAlign: "right" }}
+            >
+              Frequency: {rule_name}
+            </Typography>
+          </Box>
           <Typography variant="body2" color="text.secondary">
             {description}
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            {num_of_appointment > 1 ? "s" : null} required
           </Typography>
         </CardContent>
       </CardActionArea>

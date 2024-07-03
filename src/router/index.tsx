@@ -59,8 +59,8 @@ import UpdateBranchForEmployee from "@/pages/Admin/adminUpdate/UpdateBranchForEm
 ////Landging Page////
 import LandingPage from "@/pages/Landing/Landing";
 import SettingsPage from "@/pages/User/Settings";
+import ReschedulePage from "@/pages/Patient/Reschedule";
 //User
-
 
 const RouterComponent = () => {
   const router = createBrowserRouter([
@@ -73,7 +73,19 @@ const RouterComponent = () => {
       children: [
         { index: true, element: <Navigate to="calendar" /> },
         { path: "calendar", element: <Calendar /> },
-        { path: "booking", element: <BookingPage /> },
+        {
+          path: "booking",
+          children: [
+            {
+              index: true,
+              element: <BookingPage />,
+            },
+            {
+              path: "payment-status/:id",
+              element: <BookingPage />,
+            },
+          ],
+        },
         { path: "dashboard", element: <DashboardPage /> },
         {
           path: "appointments",
@@ -108,6 +120,10 @@ const RouterComponent = () => {
           path: "appointments/:id",
           element: <AppointmentDetail />,
         },
+        {
+          path: "settings",
+          element: <SettingsPage />,
+        },
       ],
     },
     ...["login", "register"].map((path) => ({
@@ -129,7 +145,23 @@ const RouterComponent = () => {
               children: [
                 { index: true, element: <Navigate to="calendar" /> },
                 { path: "calendar", element: <Calendar /> },
-                { path: "booking", element: <BookingPage /> },
+                {
+                  path: "booking",
+                  children: [
+                    {
+                      index: true,
+                      element: <BookingPage />,
+                    },
+                    {
+                      path: "payment-status/:id",
+                      element: <BookingPage />,
+                    },
+                    {
+                      path: "reschedule/:id",
+                      element: <ReschedulePage />,
+                    },
+                  ],
+                },
                 { path: "dashboard", element: <DashboardPage /> },
                 {
                   path: "appointments",
@@ -263,6 +295,10 @@ const RouterComponent = () => {
                   path: "appointments/:id",
                   element: <DentistAppointmentNotes />,
                 },
+                {
+                  path: "settings",
+                  element: <SettingsPage />,
+                },
               ],
             },
           ],
@@ -369,7 +405,7 @@ const RouterComponent = () => {
         {
           path: "updateBranchForEmployee",
           element: <UpdateBranchForEmployee />,
-        }
+        },
       ],
     },
     // ManagerTest routes
@@ -379,7 +415,7 @@ const RouterComponent = () => {
       children: [
         {
           index: true,
-          element: <Navigate to="calendar" />
+          element: <Navigate to="calendar" />,
         },
         //List
         {
@@ -393,14 +429,14 @@ const RouterComponent = () => {
         //
         {
           path: "calendar",
-          element: <Calendar />
+          element: <Calendar />,
         },
 
         {
           path: "appointments/:id",
           element: <AppointmentDetail />,
         },
-      ]
+      ],
     },
     // Guest routes
     { path: "landing", element: <LandingPage /> },
