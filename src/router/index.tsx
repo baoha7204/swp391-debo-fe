@@ -20,6 +20,7 @@ import PatientLayout from "@/pages/Patient";
 import Calendar from "@/pages/Patient/Calendar";
 import PatientAppointmentList from "@/pages/Patient/Appointment/AppointmentList";
 import AppointmentDetail from "@/components/Appointment/AppointmentDetail";
+import PatientReschedulePage from "@/pages/Patient/Reschedule";
 
 ////Dentist////
 import DentistLayout from "@/pages/Dentist";
@@ -28,6 +29,7 @@ import DentistDashboardPage from "@/pages/Dentist/Dashboard";
 import DentistCalendar from "@/pages/Dentist/Calendar";
 import DentistPatientList from "@/pages/Dentist/Patient/PatientList";
 import DentistPatientDetail from "@/pages/Dentist/Patient/PatientDetail";
+import DentistReschedulePage from "@/pages/Dentist/Reschedule";
 
 ////Manager////
 import ManagerLayout from "@/pages/Manager/ManagerLayout";
@@ -60,7 +62,6 @@ import UpdateBranchForEmployee from "@/pages/Admin/adminUpdate/UpdateBranchForEm
 ////Landging Page////
 import LandingPage from "@/pages/Landing/Landing";
 import SettingsPage from "@/pages/User/Settings";
-import ReschedulePage from "@/pages/Patient/Reschedule";
 //User
 
 const RouterComponent = () => {
@@ -100,7 +101,7 @@ const RouterComponent = () => {
                     },
                     {
                       path: "reschedule/:id",
-                      element: <ReschedulePage />,
+                      element: <PatientReschedulePage />,
                     },
                   ],
                 },
@@ -157,6 +158,10 @@ const RouterComponent = () => {
                 {
                   path: "patients/:id",
                   element: <DentistPatientDetail />,
+                },
+                {
+                  path: "reschedule/:id",
+                  element: <DentistReschedulePage />,
                 },
               ],
             },

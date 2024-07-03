@@ -1,5 +1,4 @@
 import { useContext } from "react";
-import { ProgressContext } from "../Booking/progress.context";
 import {
   Button,
   Card,
@@ -11,20 +10,16 @@ import {
 } from "@mui/material";
 import { formatDentistName } from "@/utils/helper";
 import DefaultDentist from "/assets/Dentist.jpg";
-
-export type DentistCardProps = {
-  id: string;
-  avt: string | null;
-  name: string;
-};
+import { DentistCardProps } from "@/components/Dentist/DentistCard";
+import { RescheduleContext } from "../reschedule.context";
 
 const DentistCard = (props: DentistCardProps) => {
   const { avt, name } = props;
-  const { handleDoneIncrement, setData } = useContext(ProgressContext);
+  const { handleNext, setData } = useContext(RescheduleContext);
 
   const handleClick = () => {
     setData((prev) => ({ ...prev, dentist: props }));
-    handleDoneIncrement();
+    handleNext();
   };
 
   return (
