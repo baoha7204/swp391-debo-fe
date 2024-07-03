@@ -14,7 +14,6 @@ import Doctor04 from "/assets/Doctor04.png";
 import History from "/assets/History.png";
 import { TextBox, YellowText, IllustrationEle, BigTextBlack, BigTextWhite, SmallTextBlack, SmallTextWhite, TextBox2, BoxText, PopUp, PopUpContent, Close, SpecialText, WhiteTextSpan, HistoryEle } from "./Style";
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
-import EventIcon from '@mui/icons-material/Event';
 import GroupIcon from '@mui/icons-material/Group';
 import React, { useEffect, useState } from "react";
 import axios from "@/config/axios";
@@ -23,14 +22,13 @@ import Logo from "@/components/Logo";
 import { ImageEle } from "./Style";
 import { Demo } from "./Style";
 import GppGoodIcon from '@mui/icons-material/GppGood';
-import themes from "@/config/themes";
 
 export type BranchProps = {
     avt: string;
     name: string;
     phone: string;
     email: string;
-    mngName: string;
+    address: string;
 }
 
 export type DentistsProp = {
@@ -297,6 +295,15 @@ function LandingContent() {
                                                         color="text.primary"
                                                     >
                                                         Email:  <span style={{ fontWeight: 700 }}>{branch.email}</span>
+                                                    </Typography>
+                                                    <br />
+                                                    <Typography
+                                                        sx={{ display: 'inline' }}
+                                                        component="span"
+                                                        variant="body2"
+                                                        color="text.primary"
+                                                    >
+                                                        Address:  <span style={{ fontWeight: 700 }}>{branch.address}</span>
                                                     </Typography>
                                                 </React.Fragment>
                                             }
