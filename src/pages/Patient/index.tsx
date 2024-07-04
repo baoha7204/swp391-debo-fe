@@ -27,6 +27,8 @@ const PatientRoutes = [
   { path: "appointments/:id/notes", breadcrumb: "Notes" },
   { path: "settings", breadcrumb: "Settings" },
   { path: "settings/profile", breadcrumb: "Profile" },
+  { path: "booking/reschedule", breadcrumb: "Reschedule" },
+  { path: "reschedule", breadcrumb: "Reschedule Approve" },
 ];
 
 const PatientLayout = () => {
