@@ -12,7 +12,7 @@ export const errorToastHandler = (res: any) => {
   }
 
   let message = DEFAULT_ERROR;
-  switch (res.status) {
+  switch (res?.status) {
     case HTTP_STATUS.BAD_REQUEST:
       message = "No input received";
       break;

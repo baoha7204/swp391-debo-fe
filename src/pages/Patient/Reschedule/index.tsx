@@ -37,7 +37,7 @@ const RescheduleContent = () => {
   );
 };
 
-const ReschedulePage = () => {
+const PatientReschedulePage = () => {
   return (
     <RescheduleProvider>
       <RescheduleContent />
@@ -45,4 +45,4 @@ const ReschedulePage = () => {
   );
 };
 
-export default ReschedulePage;
+export default PatientReschedulePage;

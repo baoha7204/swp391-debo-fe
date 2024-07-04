@@ -1,7 +1,7 @@
 import { AxiosInstance, GenericAbortSignal } from "axios";
 import { API_ENDPOINTS } from "..";
 import { BookingType } from "@/components/Booking/progress.context";
-import { get, put } from "@/utils/apiCaller";
+import { get, post, put } from "@/utils/apiCaller";
 import { ApiResponse } from "@/types/core";
 import { AppointmentResponse } from "@/components/Booking/SummaryBooking/hooks/useCreateAppointment";
 import { ListDataResponse } from "@/hooks/useFetchTableList";
@@ -74,6 +74,59 @@ const appointmentApi = {
   ) => {
     return await put(
       `${API_ENDPOINTS.APPOINTMENT.RESCHEDULE}/${id}`,
+      data,
+      undefined,
+      {
+        signal,
+      }
+    );
+  },
+  rescheduleByDentist: async (
+    data: {
+      id: string;
+      cus_Id: string;
+      dent_Id: string;
+      temp_Dent_Id: string;
+      rescheduleToken: string;
+    },
+    signal?: GenericAbortSignal
+  ) => {
+    return await put(
+      `${API_ENDPOINTS.APPOINTMENT.RESCHEDULE_BY_DENTIST}/${data.id}`,
+      data,
+      undefined,
+      { signal }
+    );
+  },
+  getRescheduleDentists: async (
+    data: {
+      startDate: string;
+      timeSlot: number;
+      treatId: number;
+    },
+    signal?: GenericAbortSignal
+  ) => {
+    return await get<
+      ListDataResponse<{
+        dent_Id: string;
+        dentistName: string;
+        dent_Avt: string | null;
+      }>
+    >(API_ENDPOINTS.APPOINTMENT.RESCHEDULE_TEMP_DENT, data, {
+      signal,
+    });
+  },
+  generateRescheduleToken: async (
+    data: {
+      id: string;
+      cus_Id: string;
+      dent_Id: string;
+      temp_Dent_Id: string;
+    },
+    signal?: GenericAbortSignal
+  ) => {
+    return await post(
+      API_ENDPOINTS.APPOINTMENT.RESCHEDULE_TOKEN,
       data,
       undefined,
       {

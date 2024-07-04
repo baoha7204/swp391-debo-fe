@@ -27,6 +27,7 @@ const DentistRoutes = [
   { path: "patients", breadcrumb: "Patients" },
   { path: "patients/:id", breadcrumb: "Patient Detail" },
   { path: "settings", breadcrumb: "Settings" },
+  { path: "reschedule", breadcrumb: "Reschedule" },
 ];
 
 const DentistInfo = {
@@ -42,6 +43,7 @@ const DentistLayout = () => {
       header={{
         info: DentistInfo,
         routes: DentistRoutes,
+        isAllowedBooking: false,
       }}
     >
       <Outlet />
