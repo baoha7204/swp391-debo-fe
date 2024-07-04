@@ -1,4 +1,3 @@
-// Loading.tsx
 
 const Loading = () => {
     return (
