@@ -1,15 +1,16 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useContext } from "react";
-import useRescheduleToken from "../hooks/useRescheduleToken";
+import useDentReschedule from "../hooks/useDentReschedule";
 import { UserContext } from "@/pages/User/user.context";
 import CircularIndeterminate from "@/components/CircularIndeterminate";
 import { Box, Button } from "@mui/material";
 import { formatRole } from "@/utils/jwt";
 
-const RescheduleSuccess = () => {
+const DentistRescheduleRequest = () => {
+  const { token } = useParams();
   const navigate = useNavigate();
   const { user } = useContext(UserContext);
-  const { isLoading, success } = useRescheduleToken();
+  const { isLoading, success } = useDentReschedule(token);
   return isLoading ? (
     <>
       <CircularIndeterminate />
@@ -19,8 +20,8 @@ const RescheduleSuccess = () => {
     <Box justifyContent="center">
       <h1>Thank you</h1>
       <p>
-        Your request has been confirmed. Please wait for the patient to confirm
-        the reschedule. You will be notified once the reschedule is completed.
+        You have confirmed dentist's reschedule request. We look forward to
+        seeing you soon!
       </p>
       <Button
         type="button"
@@ -42,9 +43,9 @@ const RescheduleSuccess = () => {
   ) : (
     <Box justifyContent="center">
       <h1>Oopsie...</h1>
-      <p>Your request has been failed for some reason. Please try again!</p>
+      <p>Your response has been failed for some reason. Please try again!</p>
     </Box>
   );
 };
 
-export default RescheduleSuccess;
+export default DentistRescheduleRequest;

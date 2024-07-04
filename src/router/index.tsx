@@ -21,6 +21,7 @@ import Calendar from "@/pages/Patient/Calendar";
 import PatientAppointmentList from "@/pages/Patient/Appointment/AppointmentList";
 import AppointmentDetail from "@/components/Appointment/AppointmentDetail";
 import PatientReschedulePage from "@/pages/Patient/Reschedule";
+import DentistRescheduleRequest from "@/pages/Patient/Reschedule/DentistRequest";
 
 ////Dentist////
 import DentistLayout from "@/pages/Dentist";
@@ -104,6 +105,10 @@ const RouterComponent = () => {
                       element: <PatientReschedulePage />,
                     },
                   ],
+                },
+                {
+                  path: "reschedule/:token",
+                  element: <DentistRescheduleRequest />,
                 },
                 { path: "dashboard", element: <DashboardPage /> },
                 {

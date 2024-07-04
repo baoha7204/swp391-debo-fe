@@ -12,7 +12,7 @@ const RescheduleTempDent = () => {
   ) : !data ? (
     <DefaultError />
   ) : (
-    <CardList Card={DentistCard} cards={data.dentList} />
+    <CardList Card={DentistCard} cards={data.dentList!} />
   );
 };
 

@@ -15,10 +15,10 @@ import {
 import { useParams } from "react-router-dom";
 
 type RescheduleDataType = {
-  id: string;
-  appointment: Omit<AppointmentResponse, "id">;
-  dentList: DentistCardProps[];
-  newDentist?: string;
+  id?: string;
+  appointment?: Omit<AppointmentResponse, "id">;
+  dentList?: DentistCardProps[];
+  newDentist?: DentistCardProps;
 } | null;
 
 type RescheduleContextType = {
@@ -113,6 +113,15 @@ const RescheduleProvider = ({ children }: PropsWithChildren) => {
           return;
         }
 
+        // check temp dentist is exist yet
+        if (detailData.temp_Dent_Id) {
+          errorToastHandler({
+            message: "This appointment has been rescheduled already",
+          });
+          setIsAllowed(false);
+          return;
+        }
+
         // Fetch temp dentists
         const responseTempDents = await appointmentApi.getRescheduleDentists(
           {
@@ -130,11 +139,13 @@ const RescheduleProvider = ({ children }: PropsWithChildren) => {
           return;
         }
 
-        const dentistList = resultTempDents.data.list.map((dentist) => ({
-          id: dentist.dent_Id,
-          name: dentist.dentistName,
-          avt: dentist.dent_Avt,
-        }));
+        const dentistList = resultTempDents.data.list
+          .map((dentist) => ({
+            id: dentist.dent_Id,
+            name: dentist.dentistName,
+            avt: dentist.dent_Avt,
+          }))
+          .filter((dentist) => dentist.id !== detailData.dent_Id);
 
         setData((prev) => ({
           ...prev,

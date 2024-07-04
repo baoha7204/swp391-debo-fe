@@ -12,6 +12,9 @@ export type AppointmentResponse = {
   timeSlot: number;
   treatId: number;
   rescheduleCount: number;
+  rescheduleToken: string | null;
+  cus_Id: string;
+  temp_Dent_Id: string | null;
 };
 
 const useCreateAppointment = () => {

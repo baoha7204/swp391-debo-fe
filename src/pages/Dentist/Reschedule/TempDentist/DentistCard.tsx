@@ -18,7 +18,7 @@ const DentistCard = (props: DentistCardProps) => {
   const { handleNext, setData } = useContext(RescheduleContext);
 
   const handleClick = () => {
-    setData((prev) => ({ ...prev, dentist: props }));
+    setData((prev) => ({ ...prev, newDentist: props }));
     handleNext();
   };
 
