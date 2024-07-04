@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@aldabil/react-scheduler": "^2.9.3",
+    "@ckeditor/ckeditor5-react": "^8.0.0",
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
     "@hookform/resolvers": "^3.4.2",
@@ -24,6 +25,8 @@
     "@mui/x-date-pickers": "^7.6.2",
     "@react-oauth/google": "^0.12.1",
     "axios": "^1.6.8",
+    "ckeditor5": "^42.0.0",
+    "ckeditor5-premium-features": "^42.0.0",
     "dayjs": "^1.11.11",
     "gh-pages": "^6.1.1",
     "material-ui-popup-state": "^5.1.2",

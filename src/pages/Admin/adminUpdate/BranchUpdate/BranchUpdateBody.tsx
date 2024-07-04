@@ -34,9 +34,8 @@ function BranchUpdateBody() {
             const res = await axios.get(`${API_ENDPOINTS.BRANCH.LIST}/${id}`);
             if (res.status === 200) {
                 const branchData = res.data.data;
-                console.log(branchData);
-                setValues(branchData);
                 setBranchesList(branchData);
+                setValues(branchData);
             }
         } catch (error) {
             console.error("Error fetching branch data:", error);
@@ -159,7 +158,7 @@ function BranchUpdateBody() {
                     <FormImagePicker
                         name="avt"
                         control={control}
-                        onUpload={onUpload()}
+                        onUpload={onUpload}
                     />
                 </Grid>
             </Grid>

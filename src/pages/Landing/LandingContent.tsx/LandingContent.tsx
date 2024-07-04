@@ -14,7 +14,6 @@ import Doctor04 from "/assets/Doctor04.png";
 import History from "/assets/History.png";
 import { TextBox, YellowText, IllustrationEle, BigTextBlack, BigTextWhite, SmallTextBlack, SmallTextWhite, TextBox2, BoxText, PopUp, PopUpContent, Close, SpecialText, WhiteTextSpan, HistoryEle } from "./Style";
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
-import EventIcon from '@mui/icons-material/Event';
 import GroupIcon from '@mui/icons-material/Group';
 import React, { useEffect, useState } from "react";
 import axios from "@/config/axios";
@@ -29,9 +28,19 @@ export type BranchProps = {
     name: string;
     phone: string;
     email: string;
+    address: string;
 }
 
 export type DentistsProp = {
+    avt: string;
+    firstName: string;
+    lastName: string;
+    phone: string;
+    email: string;
+    gender: boolean;
+}
+
+export type StaffProp = {
     avt: string;
     firstName: string;
     lastName: string;
@@ -98,11 +107,11 @@ function LandingContent() {
 
     const [showBranchPhones, setShowBranchPhones] = useState(false);
     const [showDentistList, setShowDentistList] = useState(false);
+    const [showStaffList, setShowStaffList] = useState(false);
 
     const [branchs, setBranchs] = useState<BranchProps[]>([]);
     const [dentists, setDentist] = useState<DentistsProp[]>([]);
-
-    console.log(dentists);
+    const [staffs, setStaff] = useState<StaffProp[]>([]);
 
     const getListBranch = async () => {
         const res = await axios.get(API_ENDPOINTS.BRANCH.LIST);
@@ -120,12 +129,21 @@ function LandingContent() {
         getListDentist();
     }, []);
 
+    const getListStaff = async () => {
+        const res = await axios.get(API_ENDPOINTS.USERS.LIST_STAFF);
+        return setStaff(res.data.data.list);
+    }
+
+    useEffect(() => {
+        getListStaff();
+    }, []);
+
     const handleShowBranchPhone = () => {
         setShowBranchPhones(true);
     }
 
-    const handleMoveToBooking = () => {
-        console.log('Move to booking screen');
+    const handleShowStaffList = () => {
+        setShowStaffList(true);
     }
 
     const handleShowDentistList = () => {
@@ -135,6 +153,7 @@ function LandingContent() {
     const handleClosePopup = () => {
         setShowBranchPhones(false);
         setShowDentistList(false);
+        setShowStaffList(false);
     }
 
     return (
@@ -189,6 +208,9 @@ function LandingContent() {
                         }}>
                         {/* Click to show list branch phone number */}
                         <TextBox2
+                            sx={{
+                                maxWidth: '50px',
+                            }}
                             onClick={handleShowBranchPhone}>
                             <LocalPhoneIcon sx={{
                                 fontSize: '2.5rem',
@@ -200,19 +222,19 @@ function LandingContent() {
                                     fontSize: '0.8rem',
                                 }}>
                                 Call for <br />
-                                appointment
+                                <span style={{ fontWeight: 'bold' }}>APPOINTMENT</span>
                             </BoxText>
                         </TextBox2>
                         {/* Click to move to booking screen */}
                         <TextBox2
-                            onClick={handleMoveToBooking}>
-                            <EventIcon sx={{
+                            onClick={handleShowStaffList}>
+                            <GroupIcon sx={{
                                 fontSize: '2.5rem',
                                 color: (theme) => theme.palette.primary.light,
                             }} />
                             <BoxText>
-                                Booking <br />
-                                appointment
+                                Meet our <br />
+                                <span style={{ fontWeight: 'bold' }}>STAFF</span>
                             </BoxText>
                         </TextBox2>
                         {/* Click to show list dentist */}
@@ -225,7 +247,7 @@ function LandingContent() {
                             />
                             <BoxText>
                                 Meet our <br />
-                                dentist
+                                <span style={{ fontWeight: 'bold' }}>DENTIST</span>
                             </BoxText>
                         </TextBox2>
                     </Box>
@@ -273,6 +295,79 @@ function LandingContent() {
                                                         color="text.primary"
                                                     >
                                                         Email:  <span style={{ fontWeight: 700 }}>{branch.email}</span>
+                                                    </Typography>
+                                                    <br />
+                                                    <Typography
+                                                        sx={{ display: 'inline' }}
+                                                        component="span"
+                                                        variant="body2"
+                                                        color="text.primary"
+                                                    >
+                                                        Address:  <span style={{ fontWeight: 700 }}>{branch.address}</span>
+                                                    </Typography>
+                                                </React.Fragment>
+                                            }
+                                        />
+                                    </ListItem>
+                                    <Divider variant="inset" component="li" />
+                                </List>
+                            ))}
+                        </Box>
+                    </PopUpContent>
+                </PopUp>}
+            {showStaffList &&
+                <PopUp>
+                    <PopUpContent>
+                        <Box sx={{
+                            display: 'flex',
+                            flexDirection: 'row',
+                            justifyContent: 'space-between',
+                        }}>
+                            <Logo />
+                            <Close onClick={handleClosePopup} >
+                                &times;
+                            </Close>
+                        </Box>
+                        <Box sx={{
+                            overflow: 'auto',
+                        }}>
+                            {staffs.map((staff, index) => (
+                                <List sx={{ width: '100%', maxWidth: 360 }}>
+                                    <ListItem alignItems="flex-start" key={index}>
+                                        <ListItemAvatar>
+                                            <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+                                        </ListItemAvatar>
+                                        <ListItemText
+                                            primary={`${staff.firstName} ${staff.lastName}`}
+                                            secondary={
+                                                <React.Fragment>
+                                                    <Typography
+                                                        sx={{ display: 'inline' }}
+                                                        component="span"
+                                                        variant="body2"
+                                                        color="text.primary"
+                                                    >
+                                                        Phone Number: <span style={{ fontWeight: 700 }}>{staff.phone}</span>
+                                                    </Typography>
+                                                    <br />
+                                                    <Typography
+                                                        sx={{ display: 'inline' }}
+                                                        component="span"
+                                                        variant="body2"
+                                                        color="text.primary"
+                                                    >
+                                                        Email:  <span style={{ fontWeight: 700 }}>{staff.email}</span>
+                                                    </Typography>
+                                                    <br />
+                                                    <Typography
+                                                        sx={{ display: 'inline' }}
+                                                        component="span"
+                                                        variant="body2"
+                                                        color="text.primary"
+                                                    >
+                                                        Gender: <span style={{ fontWeight: 700 }}>
+                                                            {staff.gender ? 'Male' : 'Female'}
+                                                        </span>
                                                     </Typography>
                                                 </React.Fragment>
                                             }

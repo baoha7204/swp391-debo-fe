@@ -38,6 +38,7 @@ export const API_ENDPOINTS = {
     DETAIL: "viewappointmentdetails",
     SLOTS: "availableslot",
     RESCHEDULE: "reschedule",
+    UPDATEAPPOINTMENTNOTES: "updateappointmentnote",
     RESCHEDULE_BY_DENTIST: "reschedulebydentist",
     RESCHEDULE_TEMP_DENT: "rescheduletempdent",
     RESCHEDULE_TOKEN: "generateconfirmtoken",

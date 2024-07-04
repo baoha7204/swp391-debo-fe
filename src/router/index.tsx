@@ -19,7 +19,7 @@ import DashboardPage from "@/pages/Patient/Dashboard";
 import PatientLayout from "@/pages/Patient";
 import Calendar from "@/pages/Patient/Calendar";
 import PatientAppointmentList from "@/pages/Patient/Appointment/AppointmentList";
-import AppointmentDetail from "@/components/Appointment/AppointmentDetail";
+import PatientAppointmentDetail from "@/pages/Patient/Appointment/AppointmentDetail";
 import PatientReschedulePage from "@/pages/Patient/Reschedule";
 import DentistRescheduleRequest from "@/pages/Patient/Reschedule/DentistRequest";
 
@@ -28,6 +28,7 @@ import DentistLayout from "@/pages/Dentist";
 import DentistAppointmentList from "@/pages/Dentist/Appointment";
 import DentistDashboardPage from "@/pages/Dentist/Dashboard";
 import DentistCalendar from "@/pages/Dentist/Calendar";
+import DentistAppointmentNotes from "@/pages/Dentist/Appointment/DentistAppointmentNotes";
 import DentistPatientList from "@/pages/Dentist/Patient/PatientList";
 import DentistPatientDetail from "@/pages/Dentist/Patient/PatientDetail";
 import DentistReschedulePage from "@/pages/Dentist/Reschedule";
@@ -117,7 +118,7 @@ const RouterComponent = () => {
                 },
                 {
                   path: "appointments/:id",
-                  element: <AppointmentDetail />,
+                  element: <PatientAppointmentDetail />,
                 },
                 {
                   path: "settings",
@@ -131,7 +132,98 @@ const RouterComponent = () => {
           // Admin routes
           path: ROLE.ADMIN,
           element: <RequireAuth allowedRoles={[ROLE.ADMIN]} />,
-          children: [],
+          children: [
+            {
+              element: <AdminLayout />,
+              children: [
+                {
+                  index: true,
+                  element: <Navigate to="branch" />,
+                },
+                //List
+                {
+                  path: "branch",
+                  element: <BranchList />,
+                },
+                {
+                  path: "treatments",
+                  element: <TreatmentList />,
+                },
+                {
+                  path: "adminAllStaffList",
+                  element: <AdminAllStaffList />,
+                },
+                {
+                  path: "patientList",
+                  element: <PatientList />,
+                },
+                //Create
+                {
+                  path: "branch/createBranch",
+                  element: <CreateBranch />,
+                },
+                {
+                  path: "treatments/createTreatment",
+                  element: <CreateTreatment />,
+                },
+                {
+                  path: "adminAllStaffList/createStaff",
+                  element: <CreateStaff />,
+                },
+                {
+                  path: "adminAllStaffList/createDentist",
+                  element: <CreateDentist />,
+                },
+                {
+                  path: "adminAllStaffList/createManager",
+                  element: <CreateManager />,
+                },
+                {
+                  path: "appointments",
+                  element: <PatientAppointmentList />,
+                },
+                //Detail
+                {
+                  path: "branch/:id",
+                  element: <BranchDetail />,
+                },
+                {
+                  path: "treatments/:id",
+                  element: <TreatmentDetail />,
+                },
+                {
+                  path: "adminAllStaffList/:id",
+                  element: <AllStaffsDetail />,
+                },
+                {
+                  path: "patientList/:id",
+                  element: <PatientDetail />,
+                },
+                {
+                  path: "appointments/:id",
+                  element: <PatientAppointmentDetail />,
+                },
+                //Update
+                {
+                  path: "branch/:id/update",
+                  element: <BranchUpdate />,
+                },
+                {
+                  path: "treatments/:id/update",
+                  element: <TreatmentUpdate />,
+                },
+                {
+                  path: "adminAllStaffList/:id/update",
+                  element: <EmployeeUpdate />,
+                },
+                {
+                  path: "updateBranchForEmployee",
+                  element: <UpdateBranchForEmployee />,
+                }
+
+              ],
+            },
+          ],
         },
         {
           // Dentist routes
@@ -150,7 +242,7 @@ const RouterComponent = () => {
                 },
                 {
                   path: "appointments/:id",
-                  element: <AppointmentDetail />,
+                  element: <DentistAppointmentNotes />,
                 },
                 {
                   path: "settings",
@@ -256,7 +348,7 @@ const RouterComponent = () => {
         },
         {
           path: "appointments/:id",
-          element: <AppointmentDetail />,
+          element: <PatientAppointmentDetail />,
         },
         //Update
         {
@@ -303,7 +395,7 @@ const RouterComponent = () => {
 
         {
           path: "appointments/:id",
-          element: <AppointmentDetail />,
+          element: <PatientAppointmentDetail />,
         },
       ],
     },

@@ -27,7 +27,6 @@ const columns: readonly ListColumn<TreatmentHistoryData>[] = [
     { id: "treatName", label: "Treatment Name", minWidth: 100 },
     { id: "createdDate", label: "Created Date", minWidth: 100, isDate: true },
     { id: "startDate", label: "Started Date", minWidth: 100, isDate: true },
-    { id: "note", label: "Note", minWidth: 100 },
 ];
 
 function PatientTreatmentHistory() {

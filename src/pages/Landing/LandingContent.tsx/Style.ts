@@ -93,7 +93,7 @@ export const PopUpContent = styled(Box)(() => ({
     backgroundColor: 'white',
     borderRadius: '10px',
     padding: '20px',
-    width: '40%',
+    width: '35%',
     height: '50%',
     display: 'flex',
     flexDirection: 'column',
