@@ -147,6 +147,12 @@ const RescheduleProvider = ({ children }: PropsWithChildren) => {
           }))
           .filter((dentist) => dentist.id !== detailData.dent_Id);
 
+        if (dentistList.length === 0) {
+          errorToastHandler({
+            message: "There is no available dentist for this appointment.",
+          });
+        }
+
         setData((prev) => ({
           ...prev,
           id,
