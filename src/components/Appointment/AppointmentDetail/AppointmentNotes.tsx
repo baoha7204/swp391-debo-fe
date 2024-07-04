@@ -6,7 +6,7 @@ import { API_ENDPOINTS } from "@/utils/api";
 
 export type AppointmentProp = {
   id: string | undefined;
-  note: string;
+  note: string | null;
 };
 
 function AppointmentNotes() {

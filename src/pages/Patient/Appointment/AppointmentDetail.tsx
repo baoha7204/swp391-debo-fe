@@ -7,7 +7,7 @@ function PatientAppointmentDetail() {
     return (
         <Box sx={{ p: '24px' }}>
             <MiniHeader content="Appointment Notes" IconComponent={ChecklistIcon} />
-            <AppointmentDetail url={''} />
+            <AppointmentDetail />
         </Box>);
 }
 

@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useContext } from 'react';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import { DecoupledEditor, AccessibilityHelp, Autosave, Bold, Essentials, Italic, Paragraph, SelectAll, Undo } from 'ckeditor5';
 import 'ckeditor5/ckeditor5.css';
@@ -8,6 +8,7 @@ import { AppointmentProp } from '../Appointment/AppointmentDetail/AppointmentNot
 import { useParams } from 'react-router-dom';
 import { API_ENDPOINTS } from '@/utils/api';
 import axios from '@/config/axios';
+import { UserContext } from '@/pages/User/user.context';
 
 interface MyCKEditorProps {
     onSubmit: (data: AppointmentProp) => void;
@@ -18,15 +19,30 @@ export default function MyCKEditor({ onSubmit }: MyCKEditorProps) {
     const editorToolbarRef = useRef<HTMLDivElement | null>(null);
     const editorRef = useRef<HTMLDivElement | null>(null);
     const [isLayoutReady, setIsLayoutReady] = useState(false);
-    const [editorData, setEditorData] = useState('');
+    const [editorData, setEditorData] = useState<string | null>('');
+
+    if (!isLayoutReady) {
+        <div>...Loading</div>
+    }
 
     const { id } = useParams<{ id: string }>();
-    console.log("MyCKEditor", id);
+
+    const { user } = useContext(UserContext);
+
+    console.log("User", user);
 
     const getNote = async () => {
-        const res = await axios.get(`${API_ENDPOINTS.APPOINTMENT.DETAIL}/${id}`);
-        setEditorData(res.data.data.note);
-        console.log("getNote", res.data.data.note);
+        try {
+            const res = await axios.get(`${API_ENDPOINTS.APPOINTMENT.DETAIL}/${id}`);
+            const data = res.data.data.note;
+            if (data == null) {
+                return;
+            }
+            setEditorData(res.data.data.note);
+            console.log("getNote", res.data.data.note);
+        } catch (error) {
+            console.error("Failed to fetch note:", error);
+        }
     }
 
     useEffect(() => {
@@ -44,7 +60,7 @@ export default function MyCKEditor({ onSubmit }: MyCKEditorProps) {
             shouldNotGroupWhenFull: false,
         },
         plugins: [AccessibilityHelp, Autosave, Bold, Essentials, Italic, Paragraph, SelectAll, Undo],
-        initialData: editorData,
+        initialData: editorData || '',
         placeholder: 'Type or paste your content here!',
     };
 
@@ -69,12 +85,21 @@ export default function MyCKEditor({ onSubmit }: MyCKEditorProps) {
                                             if (editorToolbarRef.current) {
                                                 editorToolbarRef.current.appendChild(editor.ui.view.toolbar.element as Node);
                                             }
+                                            // Set read-only mode based on user role
+                                            if (user?.role === 5) {
+                                                editor.isReadOnly = true;
+                                            }
                                         }}
                                         editor={DecoupledEditor}
                                         config={editorConfig}
                                         onChange={(event, editor) => {
-                                            const data = editor.getData();
-                                            setEditorData(data);
+                                            // Ensure the editor remains in read-only mode if the user is a Customer
+                                            if (user?.role !== 5) {
+                                                const data = editor.getData();
+                                                setEditorData(data);
+                                            }
+                                            console.log("Role", user?.role);
+
                                         }}
                                         data={editorData}
                                     />
