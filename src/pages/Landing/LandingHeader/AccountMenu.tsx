@@ -6,20 +6,10 @@ import { Button } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import PopupState, { bindTrigger, bindMenu } from 'material-ui-popup-state';
-
-// type HeaderProps = {
-//     info: {
-//         username: string;
-//         avt: string;
-//     }
-// }
+import { Link } from 'react-router-dom';
 
 export default function AccountMenuLanding() {
-    // const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-    // const open = Boolean(anchorEl);
-    // const handleClose = () => {
-    //     setAnchorEl(null);
-    // };
+
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
@@ -31,19 +21,23 @@ export default function AccountMenuLanding() {
                         sx={{
                             display: 'flex', gap: 3,
                         }}>
-                        <Button sx={{ color: (theme) => theme.palette.primary.light, cursor: 'pointer' }}>Home</Button>
-                        <Button sx={{ color: (theme) => theme.palette.primary.light, cursor: 'pointer' }}>Branches</Button>
-                        <Button sx={{
-                            color: 'white',
-                            cursor: 'pointer',
-                            border: '1px solid',
-                            backgroundColor: (theme) => theme.palette.primary.main,
-                            width: '100%',
-                            fontWeight: 'bold',
-                            "&:hover": {
-                                color: (theme) => theme.palette.primary.main,
-                            },
-                        }}>
+                        {/* <Button sx={{ color: (theme) => theme.palette.primary.light, cursor: 'pointer' }}>Home</Button>
+                        <Button sx={{ color: (theme) => theme.palette.primary.light, cursor: 'pointer' }}>Branches</Button> */}
+                        <Button
+                            component={Link}
+                            to="/login"
+                            sx={{
+                                color: 'white',
+                                cursor: 'pointer',
+                                border: '1px solid',
+                                backgroundColor: (theme) => theme.palette.primary.main,
+                                width: '100%',
+                                fontWeight: 'bold',
+                                "&:hover": {
+                                    color: (theme) => theme.palette.primary.main,
+                                },
+                                px: 3
+                            }}>
                             Appointment</Button>
                         {/* <Button sx={{ color: (theme) => theme.palette.primary.light, cursor: 'pointer' }}>Payment</Button> */}
                     </Box>) :
