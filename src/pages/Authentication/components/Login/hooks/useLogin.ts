@@ -9,6 +9,7 @@ import { handleSubmitForm } from "@/usecases/handleSubmitForm";
 import useAuth from "@/hooks/useAuth";
 import { getRoles } from "@/utils/jwt";
 import { LoginFormProps } from "../LoginForm";
+import { errorToastHandler } from "@/utils/toast/actions";
 
 export default function useLogin(login: LoginFormProps) {
   const { setAccessToken, setRefreshToken } = useAuth();
@@ -44,6 +45,7 @@ export default function useLogin(login: LoginFormProps) {
     const accessToken = res.data?.accessToken;
     const refreshToken = res.data?.refreshToken;
     if (!res.success || !accessToken || !refreshToken) {
+      errorToastHandler(res);
       return;
     }
 

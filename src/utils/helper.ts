@@ -12,7 +12,8 @@ export const formatUserName = (firstName: string, lastName: string) => {
   return [firstName, lastName].join(" ");
 };
 
-export const formatDentistName = (name: string) => {
+export const formatDentistName = (name: string | null) => {
+  if (!name) return "None";
   return ["Dr.", name].join(" ");
 };
 

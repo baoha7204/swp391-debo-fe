@@ -3,13 +3,12 @@ import { Box } from "@mui/material";
 import ChecklistIcon from "@mui/icons-material/Checklist";
 import AppointmentDetail from "@/components/Appointment/AppointmentDetail/AppointmentDetail";
 
-function DentistAppointmentNotes() {
+function PatientAppointmentDetail() {
     return (
         <Box sx={{ p: '24px' }}>
             <MiniHeader content="Appointment Notes" IconComponent={ChecklistIcon} />
-            <AppointmentDetail />
-        </Box>
-    )
+            <AppointmentDetail url={''} />
+        </Box>);
 }
 
-export default DentistAppointmentNotes;
+export default PatientAppointmentDetail;

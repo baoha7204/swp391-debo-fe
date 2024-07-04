@@ -1,28 +1,35 @@
-import { toastError, toastSuccess } from "@/utils/toast";
+import { toastSuccess } from "@/utils/toast";
+import { put } from "@/utils/apiCaller";
 import MyCKEditor from "@/components/CKEditor/MyCKEditor";
-import { useParams } from "react-router-dom";
+import { errorToastHandler } from "@/utils/toast/actions";
+import { API_ENDPOINTS } from "@/utils/api";
 
-function AppointmentNotes(url: any) {
-  const { id } = useParams();
-  console.log(id);
+export type AppointmentProp = {
+  id: string | undefined;
+  note: string;
+};
 
-  const handleEditorSubmit = (editorData: any) => {
+function AppointmentNotes() {
 
-    fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ content: editorData }),
+  const handleEditorSubmit = (editorData: AppointmentProp) => {
+
+    const { id, note } = editorData;
+
+    put(`${API_ENDPOINTS.APPOINTMENT.UPDATEAPPOINTMENTNOTES}/${id}`, {
+      id,
+      note
     })
-      .then(response => response.json())
-      .then(data => {
-        console.log('Success:', data);
-        toastSuccess('Note saved successfully');
+      .then((res) => {
+        const { data } = res;
+        if (!data.success) {
+          return errorToastHandler(data);
+        }
+        // successfully
+        toastSuccess("Update successfully!");
       })
-      .catch((error) => {
-        toastError('Failed to save note');
-        console.error('Error:', error);
+      .catch((err) => {
+        console.log(err.response);
+        errorToastHandler(err.response);
       });
   };
   return (

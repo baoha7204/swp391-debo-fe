@@ -6,7 +6,7 @@
     }
 }
 
-.main-container {
+.main-container-CKEditor {
     font-family: 'Lato';
     width: fit-content;
     margin-left: auto;
@@ -61,7 +61,7 @@
     box-sizing: border-box;
     min-width: calc(210mm + 2px);
     max-width: calc(210mm + 2px);
-    min-height: 297mm;
+    min-height: 100mm;
     height: fit-content;
     padding: 20mm 12mm;
     border: 1px hsl(0, 0%, 82.7%) solid;

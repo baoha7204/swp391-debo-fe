@@ -19,7 +19,7 @@ import DashboardPage from "@/pages/Patient/Dashboard";
 import PatientLayout from "@/pages/Patient";
 import Calendar from "@/pages/Patient/Calendar";
 import PatientAppointmentList from "@/pages/Patient/Appointment/AppointmentList";
-import AppointmentDetail from "@/components/Appointment/AppointmentDetail";
+import PatientAppointmentDetail from "@/pages/Patient/Appointment/AppointmentDetail";
 
 ////Dentist////
 import DentistLayout from "@/pages/Dentist";
@@ -27,6 +27,8 @@ import DentistAppointmentList from "@/pages/Dentist/Appointment";
 import DentistDashboardPage from "@/pages/Dentist/Dashboard";
 import DentistCalendar from "@/pages/Dentist/Calendar";
 import DentistAppointmentNotes from "@/pages/Dentist/Appointment/DentistAppointmentNotes";
+import DentistPatientList from "@/pages/Dentist/Patient/PatientList";
+import DentistPatientDetail from "@/pages/Dentist/Patient/PatientDetail";
 
 ////Manager////
 import ManagerLayout from "@/pages/Manager/ManagerLayout";
@@ -67,65 +69,6 @@ const RouterComponent = () => {
     // Public routes
     { index: true, element: <Navigate to="landing" /> },
     { path: "unauthorized", element: <UnauthorizedPage /> },
-    {
-      path: "patientTest",
-      element: <PatientLayout />,
-      children: [
-        { index: true, element: <Navigate to="calendar" /> },
-        { path: "calendar", element: <Calendar /> },
-        {
-          path: "booking",
-          children: [
-            {
-              index: true,
-              element: <BookingPage />,
-            },
-            {
-              path: "payment-status/:id",
-              element: <BookingPage />,
-            },
-          ],
-        },
-        { path: "dashboard", element: <DashboardPage /> },
-        {
-          path: "appointments",
-          element: <PatientAppointmentList />,
-        },
-        {
-          path: "appointments/:id",
-          element: <AppointmentDetail />,
-        },
-        {
-          path: "settings",
-          element: <SettingsPage />,
-        },
-      ],
-    },
-    {
-      path: "dentistTest",
-      element: <DentistLayout />,
-      children: [
-        { index: true, element: <Navigate to="calendar" /> },
-        { path: "calendar", element: <DentistCalendar /> },
-        { path: "dashboard", element: <DentistDashboardPage /> },
-        {
-          path: "appointments",
-          element: <DentistAppointmentList />,
-        },
-        {
-          path: "appointments/:id",
-          element: <AppointmentDetail />,
-        },
-        {
-          path: "appointments/:id",
-          element: <AppointmentDetail />,
-        },
-        {
-          path: "settings",
-          element: <SettingsPage />,
-        },
-      ],
-    },
     ...["login", "register"].map((path) => ({
       path,
       element: <AuthenticationPage />,
@@ -169,7 +112,7 @@ const RouterComponent = () => {
                 },
                 {
                   path: "appointments/:id",
-                  element: <AppointmentDetail />,
+                  element: <PatientAppointmentDetail />,
                 },
                 {
                   path: "settings",
@@ -252,7 +195,7 @@ const RouterComponent = () => {
                 },
                 {
                   path: "appointments/:id",
-                  element: <AppointmentDetail />,
+                  element: <PatientAppointmentDetail />,
                 },
                 //Update
                 {
@@ -298,6 +241,14 @@ const RouterComponent = () => {
                 {
                   path: "settings",
                   element: <SettingsPage />,
+                },
+                {
+                  path: "patients/",
+                  element: <DentistPatientList />,
+                },
+                {
+                  path: "patients/:id",
+                  element: <DentistPatientDetail />,
                 },
               ],
             },
@@ -387,7 +338,7 @@ const RouterComponent = () => {
         },
         {
           path: "appointments/:id",
-          element: <AppointmentDetail />,
+          element: <PatientAppointmentDetail />,
         },
         //Update
         {
@@ -434,7 +385,7 @@ const RouterComponent = () => {
 
         {
           path: "appointments/:id",
-          element: <AppointmentDetail />,
+          element: <PatientAppointmentDetail />,
         },
       ],
     },

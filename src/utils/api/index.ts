@@ -38,6 +38,7 @@ export const API_ENDPOINTS = {
     DETAIL: "viewappointmentdetails",
     SLOTS: "availableslot",
     RESCHEDULE: "reschedule",
+    UPDATEAPPOINTMENTNOTES: "updateappointmentnote",
   },
   USERS: {
     //User
