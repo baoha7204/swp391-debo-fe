@@ -69,6 +69,8 @@ export const API_ENDPOINTS = {
   },
   DASHBOARD: {
     APPOINTMENT_STATE: "dashboard/appointmentstate",
+    DENTIST_APPOINTMENT_STATE: "dashboard/dentist/appointmentstate",
     TOTAL_PAID: "dashboard/totalpaid",
+    DENTIST_TOTAL_PATIENT: "dashboard/dentist/totalPatient",
   },
 };
