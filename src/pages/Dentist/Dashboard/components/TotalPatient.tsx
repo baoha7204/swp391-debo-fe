@@ -1,12 +1,11 @@
 import { Box, Typography } from "@mui/material";
 import { BarChart } from "@mui/x-charts";
-import useTotalPaid from "../hooks/useTotalPaid";
 import CircularIndeterminate from "@/components/CircularIndeterminate";
-import { formatVnMoney } from "@/utils/helper";
 import { barChartSettings } from "@/config/dashboard";
+import useTotalPatient from "../hooks/useTotalPatient";
 
-const TotalPaid = () => {
-  const { isLoading, data } = useTotalPaid();
+const TotalPatient = () => {
+  const { isLoading, data } = useTotalPatient();
   return (
     <Box display="flex" flexDirection="column" gap={2}>
       {isLoading ? (
@@ -19,10 +18,10 @@ const TotalPaid = () => {
                 fontWeight: "bold",
               }}
             >
-              Total spending
+              Total patient
             </Typography>
             <Typography color="primary.main" fontWeight="700" fontSize={28}>
-              {formatVnMoney(data.total)}
+              {data.total}
             </Typography>
           </Box>
           <Box display="flex" flexDirection="column">
@@ -31,7 +30,7 @@ const TotalPaid = () => {
                 fontWeight: "bold",
               }}
             >
-              Your usage in {data.currentYear}
+              Your patients in {data.currentYear}
             </Typography>
             <Box display="flex" justifyContent="center">
               {data.dataset.length === 0 ? (
@@ -39,14 +38,12 @@ const TotalPaid = () => {
               ) : (
                 <BarChart
                   dataset={data.dataset}
-                  series={Object.keys(data.dataset[0])
-                    .filter((key) => key !== "month")
-                    .map((key: string) => ({
-                      dataKey: key,
-                      label: data.treatment[Number(key)],
-                      valueFormatter: formatVnMoney,
-                      stack: "total",
-                    }))}
+                  series={[
+                    {
+                      dataKey: "total",
+                      label: "Total patients",
+                    },
+                  ]}
                   xAxis={[
                     {
                       scaleType: "band" as const,
@@ -64,4 +61,4 @@ const TotalPaid = () => {
   );
 };
 
-export default TotalPaid;
+export default TotalPatient;
