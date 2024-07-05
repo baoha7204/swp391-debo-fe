@@ -23,11 +23,19 @@ const patientDashboardApi = {
     );
   },
   getTotalPaid: async (patientId: string, signal?: GenericAbortSignal) => {
-    return await get<DashboardPatientResponse>(
-      `${API_ENDPOINTS.DASHBOARD.TOTAL_PAID}/${patientId}`,
-      undefined,
-      { signal }
-    );
+    return await get<
+      ListDataResponse<
+        DashboardPatientResponse & {
+          year: number;
+          month: number;
+          treatId: number;
+          treatmentName: string;
+          runningTotal: number;
+        }
+      >
+    >(`${API_ENDPOINTS.DASHBOARD.TOTAL_PAID}/${patientId}`, undefined, {
+      signal,
+    });
   },
 };
 

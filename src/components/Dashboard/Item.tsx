@@ -3,13 +3,14 @@ import { Box, Paper, Typography } from "@mui/material";
 export type DashboardItemProps = {
   label: string;
   component: React.ReactNode;
+  flex?: number;
 };
 
-const DashboardItem = ({ label, component }: DashboardItemProps) => {
+const DashboardItem = ({ label, component, flex = 1 }: DashboardItemProps) => {
   return (
     <Paper
       elevation={4}
-      sx={{ flex: 1, display: "flex", flexDirection: "column" }}
+      sx={{ flex: flex, display: "flex", flexDirection: "column" }}
     >
       <Typography
         variant="h6"

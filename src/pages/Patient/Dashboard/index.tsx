@@ -6,10 +6,12 @@ const data = [
   {
     label: "Appointment State",
     component: <AppointmentState />,
+    flex: 1,
   },
   {
     label: "Cost and usage",
     component: <TotalPaid />,
+    flex: 2,
   },
 ];
 

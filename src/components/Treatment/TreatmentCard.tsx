@@ -11,6 +11,7 @@ import {
   Typography,
 } from "@mui/material";
 import ToothIcon from "@/assets/ToothIcon";
+import { formatVnMoney } from "@/utils/helper";
 
 export type TreatmentCardProps = {
   id: number;
@@ -100,12 +101,7 @@ const TreatmentCard = (props: TreatmentCardProps) => {
           </Grid>
           <Grid item>
             <Typography variant="body1" color="primary.main" fontWeight="700">
-              {price
-                ? price.toLocaleString("it-IT", {
-                    style: "currency",
-                    currency: "VND",
-                  })
-                : "Free"}
+              {price ? formatVnMoney(price) : "Free"}
             </Typography>
           </Grid>
         </Grid>
