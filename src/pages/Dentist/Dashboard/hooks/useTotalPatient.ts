@@ -53,6 +53,12 @@ const useTotalPatient = () => {
           return;
         }
 
+        // Calculate total
+        const total = result.data.list.reduce(
+          (acc, cur) => acc + cur.totalPatients,
+          0
+        );
+
         // Filter this year
         const currentYearData = result.data.list.filter(
           (item) => item.year === dayjs().get("year")
@@ -69,12 +75,6 @@ const useTotalPatient = () => {
             total: totalMonth.length > 0 ? totalMonth[0].totalPatients : 0,
           };
         });
-
-        // Calculate total
-        const total = currentYearData.reduce(
-          (acc, cur) => acc + cur.totalPatients,
-          0
-        );
 
         setData((prev) => ({
           ...prev,
