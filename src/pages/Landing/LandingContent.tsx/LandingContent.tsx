@@ -14,7 +14,6 @@ import Doctor04 from "/assets/Doctor04.png";
 import History from "/assets/History.png";
 import { TextBox, YellowText, IllustrationEle, BigTextBlack, BigTextWhite, SmallTextBlack, SmallTextWhite, TextBox2, BoxText, PopUp, PopUpContent, Close, SpecialText, WhiteTextSpan, HistoryEle } from "./Style";
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
-import EventIcon from '@mui/icons-material/Event';
 import GroupIcon from '@mui/icons-material/Group';
 import React, { useEffect, useState } from "react";
 import axios from "@/config/axios";

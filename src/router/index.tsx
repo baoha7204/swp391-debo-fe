@@ -54,7 +54,7 @@ import PatientDetail from "@/pages/Admin/adminViewDetail/PatientDetail/PatientDe
 import BranchUpdate from "@/pages/Admin/adminUpdate/BranchUpdate/BranchUpdate";
 import TreatmentUpdate from "@/pages/Admin/adminUpdate/TreatmentUpdate/TreatmentUpdate";
 import EmployeeUpdate from "@/pages/Admin/adminUpdate/EmployeeUpdate/EmployeeUpdate";
-import UpdateBranchForEmployee from "@/pages/Admin/adminUpdate/UpdateBranchForEmployee.tsx/UpdateBranchForEmployee";
+import UpdateEmployeeBranch from "@/pages/Admin/adminUpdate/UpdateBranchForEmployee.tsx";
 
 ////Landging Page////
 import LandingPage from "@/pages/Landing/Landing";
@@ -236,10 +236,9 @@ const RouterComponent = () => {
                   element: <EmployeeUpdate />,
                 },
                 {
-                  path: "updateBranchForEmployee",
-                  element: <UpdateBranchForEmployee />,
+                  path: "adminAllStaffList/:id/assign",
+                  element: <UpdateEmployeeBranch />,
                 }
-
               ],
             },
           ],
@@ -371,8 +370,8 @@ const RouterComponent = () => {
           element: <EmployeeUpdate />,
         },
         {
-          path: "updateBranchForEmployee",
-          element: <UpdateBranchForEmployee />,
+          path: "adminAllStaffList/:id/assign",
+          element: <UpdateEmployeeBranch />,
         }
       ],
     },

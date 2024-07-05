@@ -19,9 +19,10 @@ type TableProps<T> = {
     columns: readonly ListColumn<T>[];
     deleteBut?: boolean;
     updateBut?: boolean;
+    assignBut?: boolean;
 };
 
-const MyDetail = <T extends RowData>({ url, columns, deleteBut, updateBut }: TableProps<T>) => {
+const MyDetail = <T extends RowData>({ url, columns, deleteBut, updateBut, assignBut }: TableProps<T>) => {
 
     const { id } = useParams<{ id: string }>();
     const [state, setState] = useState();
@@ -120,6 +121,22 @@ const MyDetail = <T extends RowData>({ url, columns, deleteBut, updateBut }: Tab
                     >
                         Delete
                     </Button>
+                )}
+                {assignBut && (
+                    <Link to={`assign`}>
+                        <Button
+                            onClick={() => handleClickOpen(id as string)}
+                            sx={{
+                                backgroundColor: '#49CC90',
+                                color: (theme) => theme.palette.error.contrastText,
+                                ":hover": {
+                                    backgroundColor: '#2F9E6E',
+                                }
+                            }}
+                        >
+                            ASSIGN
+                        </Button>
+                    </Link>
                 )}
             </Box>
             <Dialog
