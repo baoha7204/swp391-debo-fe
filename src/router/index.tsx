@@ -88,7 +88,7 @@ const RouterComponent = () => {
             {
               element: <PatientLayout />,
               children: [
-                { index: true, element: <Navigate to="calendar" /> },
+                { index: true, element: <DashboardPage /> },
                 { path: "calendar", element: <Calendar /> },
                 {
                   path: "booking",
@@ -111,7 +111,6 @@ const RouterComponent = () => {
                   path: "reschedule/:token",
                   element: <DentistRescheduleRequest />,
                 },
-                { path: "dashboard", element: <DashboardPage /> },
                 {
                   path: "appointments",
                   element: <PatientAppointmentList />,

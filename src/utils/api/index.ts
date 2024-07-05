@@ -67,4 +67,8 @@ export const API_ENDPOINTS = {
   PAYMENT: {
     ONE: "payment",
   },
+  DASHBOARD: {
+    APPOINTMENT_STATE: "dashboard/appointmentstate",
+    TOTAL_PAID: "dashboard/totalpaid",
+  },
 };

@@ -29,8 +29,7 @@ const usePaymentStatus = (id?: string) => {
           errorToastHandler(result);
           return;
         }
-        console.log(result.data);
-        if (result.data?.paymentStatus !== "Sucess") {
+        if (result.data?.paymentStatus !== "Success") {
           setStatus(false);
           return;
         }
