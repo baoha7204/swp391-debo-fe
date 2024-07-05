@@ -7,9 +7,7 @@ import ChecklistIcon from "@mui/icons-material/Checklist";
 import StoreIcon from "@mui/icons-material/Store";
 import { Outlet } from "react-router-dom";
 import DashboardIcon from '@mui/icons-material/Dashboard';
-
 import DefaultLayout from "@/components/Layout/DefaultLayout";
-import { Box } from "@mui/material";
 
 const SidebarAdminBody = [
   { title: "Dashboard", path: "dashboard", icon: <DashboardIcon />, },
@@ -38,7 +36,7 @@ const AdminRoutes = [
   //Detail
   { path: "branch/:id", breadcrumb: "Branch Detail" },
   { path: "treatments/:id", breadcrumb: "Treatment Detail" },
-  { path: "adminStaffList/:id", breadcrumb: "Staff Detail" },
+  { path: "adminAllStaffList/:id", breadcrumb: "Staff Detail" },
   { path: "patientList/:id", breadcrumb: "Patient Detail" },
   //Appointments
   { path: "appointments", breadcrumb: "Appointments" },
