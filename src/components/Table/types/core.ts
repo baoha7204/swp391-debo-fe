@@ -6,6 +6,7 @@ export type ListColumn<T> = {
   isDetail?: boolean;
   isPatientDetail?: boolean;
   isDate?: boolean;
+  isDateOnly?: boolean;
   // eslint-disable-next-line @typescript-eslint/ban-types
   format?: Function;
 };

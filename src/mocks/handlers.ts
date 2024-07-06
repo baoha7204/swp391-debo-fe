@@ -4,6 +4,7 @@ import {
   AppointmentPatientLists,
   Branches,
   CalendarPatientEvents,
+  DentistPatientList,
   Dentists,
   PendingAppointment,
   Slots,
@@ -202,6 +203,28 @@ export const handlers = [
         success: true,
         data: User,
         message: "Get user successfully.",
+      },
+      { status: 200 }
+    );
+  }),
+  http.get("/dentist/patients", async ({ request }) => {
+    await delay(2000);
+    const url = new URL(request.url);
+    const searchParams = url.searchParams;
+    const total = DentistPatientList.length;
+    const page = Number(searchParams.get("page")) || 0;
+    const limit = Number(searchParams.get("limit")) || 10;
+    const start = page * limit;
+    const end = start + limit > total ? total : start + limit;
+    const paginatedData = DentistPatientList.slice(start, end);
+    return HttpResponse.json(
+      {
+        success: true,
+        data: {
+          list: paginatedData,
+          total,
+        },
+        message: "Patients fetched successfully.",
       },
       { status: 200 }
     );

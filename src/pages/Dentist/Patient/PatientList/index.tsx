@@ -1,5 +1,7 @@
+import MyDentistPatientList from "@/components/Patient/DentistPatientList";
+
 const DentistPatientList = () => {
-  return <h1>Patient List</h1>;
+  return <MyDentistPatientList url="http://localhost:5173/dentist/patients" />;
 };
 
 export default DentistPatientList;

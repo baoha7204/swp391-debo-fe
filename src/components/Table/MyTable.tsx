@@ -15,7 +15,7 @@ import LinkRouter from "@/components/LinkRouter";
 import useTableControl from "@/hooks/useControlTable";
 import useFetchTableList from "@/hooks/useFetchTableList";
 import { TableProps } from "./types/core";
-import { formatDateSlotString } from "@/utils/helper";
+import { formatDateOnlyString, formatDateSlotString } from "@/utils/helper";
 import { UserContext } from "@/pages/User/user.context";
 import { formatRole } from "@/utils/jwt";
 
@@ -55,6 +55,8 @@ const MyTable = <T extends RowData>({ url, columns }: TableProps<T>) => {
                   const value = row[column.id];
                   const formattedValue = column.isDate
                     ? formatDateSlotString(row.timeSlot!, value as Date)
+                    : column.isDateOnly
+                    ? formatDateOnlyString(value as Date)
                     : column.format
                     ? column.format(value as string)
                     : value;
