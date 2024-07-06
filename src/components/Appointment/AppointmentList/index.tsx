@@ -30,6 +30,7 @@ const columns: readonly ListColumn<AppointmentListData>[] = [
 ];
 
 const AppointmentList = ({ url }: { url: string }) => {
+
   return (
     <MyTable<AppointmentListData & { timeSlot: number }>
       url={url}

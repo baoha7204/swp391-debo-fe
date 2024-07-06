@@ -1,35 +1,18 @@
-import { Box, Divider } from "@mui/material";
-import { useState } from "react";
+import { useContext } from "react";
+import { ProgressContext } from "../progress.context";
 import { Dayjs } from "dayjs";
-import Slots from "./Slots";
-import MyDatePicker from "@/components/MyDatePicker";
+import SlotPicker from "@/components/SlotPicker";
+import useFetchSlots from "../hooks/useFetchSlots";
 
-const SlotPicker = () => {
-  const [chosenDate, setChosenDate] = useState<Dayjs | null>(null);
+const BookingSlotPicker = () => {
+  const { setData, handleDoneIncrement } = useContext(ProgressContext);
 
-  const handleDateChange = (newValue: Dayjs | null) => {
-    setChosenDate(newValue);
+  const handleSlot = (slot: number, date: Dayjs) => {
+    setData((prev) => ({ ...prev, date, slot }));
+    handleDoneIncrement();
   };
 
-  return (
-    <Box
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-        gap: 4,
-      }}
-    >
-      <Box>
-        <MyDatePicker
-          value={chosenDate}
-          onChange={handleDateChange}
-          label="Choose a date"
-        />
-      </Box>
-      <Divider flexItem />
-      <Box>{chosenDate && <Slots date={chosenDate} />}</Box>
-    </Box>
-  );
+  return <SlotPicker handleSubmit={handleSlot} fetchSlots={useFetchSlots} />;
 };
 
-export default SlotPicker;
+export default BookingSlotPicker;

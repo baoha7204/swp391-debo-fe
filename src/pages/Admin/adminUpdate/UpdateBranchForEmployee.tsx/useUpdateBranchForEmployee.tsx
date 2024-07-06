@@ -9,6 +9,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { toastSuccess } from "@/utils/toast";
 import { errorToastHandler } from "@/utils/toast/actions";
 import { put } from "@/utils/apiCaller";
+import { formatVnMoney } from "@/utils/helper";
 
 export type UpdateBranchForEmployeeInputs = z.infer<typeof updateEmployeeSchema>;
 
@@ -75,7 +76,7 @@ export default function useUpdateBranchForEmployee() {
 
     const setValues = (value: UpdateBranchForEmployeeInputs) => {
         setValue("brId", value.brId);
-        setValue("salary", value.salary);
+        setValue("salary", formatVnMoney(value.salary) as any);
     }
 
     return [handleSubmit(onSubmit), isSubmitting, control, setValues] as const;

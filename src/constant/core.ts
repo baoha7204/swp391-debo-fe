@@ -17,4 +17,29 @@ const ROLE = {
   STAFF: "clinic staff",
 };
 
-export { STRING_EMPTY, HTTP_STATUS, ROLE };
+const APPOINTMENT_RULE = [
+  "one-time",
+  "weekly",
+  "monthly",
+  "yearly",
+  "half-yearly",
+];
+
+const WEB_SOCKET_STATE = {
+  CONNECTING: 0,
+  OPEN: 1,
+  CLOSING: 2,
+  CLOSED: 3,
+  NOTCONNECTED: 4,
+};
+
+const MAX_RESCHEDULE = 2;
+
+export {
+  STRING_EMPTY,
+  HTTP_STATUS,
+  ROLE,
+  APPOINTMENT_RULE,
+  WEB_SOCKET_STATE,
+  MAX_RESCHEDULE,
+};

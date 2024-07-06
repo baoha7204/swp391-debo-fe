@@ -3,7 +3,7 @@ import { WeekProps } from "@aldabil/react-scheduler/views/Week";
 import { Button } from "@mui/material";
 
 export const schedulerDayConfig: DayProps = {
-  startHour: 8,
+  startHour: 7,
   endHour: 20,
   step: 60,
   cellRenderer: ({ start, ...props }) => {

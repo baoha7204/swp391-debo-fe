@@ -12,7 +12,8 @@ export const formatUserName = (firstName: string, lastName: string) => {
   return [firstName, lastName].join(" ");
 };
 
-export const formatDentistName = (name: string) => {
+export const formatDentistName = (name: string | null) => {
+  if (!name) return "None";
   return ["Dr.", name].join(" ");
 };
 
@@ -76,3 +77,14 @@ export const formatDateSlotString = (
   const dateRes = dayjs(date).format("YYYY-MM-DD");
   return dayjs(`${dateRes}T${slot}`, format).format("YYYY-MM-DD HH:mm A");
 };
+
+export const formatVnMoney = (value: number | null) =>
+  value
+    ? value.toLocaleString("it-IT", {
+        style: "currency",
+        currency: "VND",
+      })
+    : "0 VND";
+
+export const formatNumericMonthToAbbreviated = (value: number) =>
+  dayjs(value + "", "M").format("MMM");

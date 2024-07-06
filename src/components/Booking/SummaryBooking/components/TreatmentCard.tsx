@@ -1,6 +1,8 @@
 import ToothIcon from "@/assets/ToothIcon";
 import { TreatmentCardProps } from "@/components/Treatment/TreatmentCard";
+import { formatVnMoney } from "@/utils/helper";
 import {
+  Box,
   Card,
   CardActionArea,
   CardContent,
@@ -9,7 +11,8 @@ import {
 } from "@mui/material";
 
 const TreatmentCardSummary = (props: TreatmentCardProps) => {
-  const { name, category, description, price } = props;
+  const { name, category, description, price, rule_name, num_of_appointment } =
+    props;
   return (
     <Card>
       <CardActionArea>
@@ -27,21 +30,33 @@ const TreatmentCardSummary = (props: TreatmentCardProps) => {
             </Grid>
             <Grid item>
               <Typography variant="body1" color="primary.main" fontWeight="700">
-                {price
-                  ? price.toLocaleString("it-IT", {
-                      style: "currency",
-                      currency: "VND",
-                    })
-                  : "Free"}
+                {price ? formatVnMoney(price) : "Free"}
               </Typography>
             </Grid>
           </Grid>
-          <Typography variant="body1" color="text.secondary">
-            {category === 1 ? "Medical" : "Cosmetic"}
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            {description}
-          </Typography>
+          <Box
+            display="flex"
+            justifyContent="space-between"
+            alignItems="center"
+          >
+            <Box>
+              <Typography variant="body1" color="text.secondary">
+                {category === 1 ? "Medical" : "Cosmetic"}
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                {description}
+              </Typography>
+            </Box>
+            <Box>
+              <Typography variant="body1" color="text.secondary">
+                Frequency: {rule_name}
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                {num_of_appointment} appointment
+                {num_of_appointment > 1 ? "s" : null} required
+              </Typography>
+            </Box>
+          </Box>
         </CardContent>
       </CardActionArea>
     </Card>

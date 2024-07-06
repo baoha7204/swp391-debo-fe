@@ -12,9 +12,11 @@ import { Token } from "@/types/core";
 import userApi from "@/utils/api/userApi";
 import { errorToastHandler } from "@/utils/toast/actions";
 import { MetadataFile } from "@/components/FilePicker/types/core";
+// import Loading from "@/components/LoadingPage/Loading";
 
 type UserType = {
   id: string;
+  roleName: string;
   email: string;
   phone: string | null;
   username: string | null;
@@ -26,6 +28,7 @@ type UserType = {
   avt: string | null;
   address: string | null;
   medRecMetaData: MetadataFile | null;
+  role: number | null;
 } | null;
 
 type UserContextType<T> = {
@@ -87,6 +90,10 @@ const UserProvider = ({ children }: PropsWithChildren) => {
 
     return () => abortController.abort();
   }, [auth?.accessToken]);
+
+  // if (isLoading) {
+  //   return <Loading />;
+  // }
 
   return (
     <UserContext.Provider

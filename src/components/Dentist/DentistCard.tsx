@@ -13,7 +13,7 @@ import { formatDentistName } from "@/utils/helper";
 import DefaultDentist from "/assets/Dentist.jpg";
 
 export type DentistCardProps = {
-  id: number;
+  id: string;
   avt: string | null;
   name: string;
 };

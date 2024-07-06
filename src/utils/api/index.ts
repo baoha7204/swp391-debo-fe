@@ -25,13 +25,24 @@ export const API_ENDPOINTS = {
   DENTIST: {
     LIST: "dentists",
     CALENDAR: "dentist/calendar",
+    APPOINTMENT: {
+      LIST: "dentist/appointments",
+    },
   },
   SLOT: {
     LIST: "slot",
   },
   APPOINTMENT: {
+    ALL: "viewallappointment",
     ONE: "appointment",
-    HISTORY: "viewhistoryappoinment"
+    HISTORY: "viewhistoryappoinment",
+    DETAIL: "viewappointmentdetails",
+    SLOTS: "availableslot",
+    RESCHEDULE: "reschedule",
+    UPDATEAPPOINTMENTNOTES: "updateappointmentnote",
+    RESCHEDULE_BY_DENTIST: "reschedulebydentist",
+    RESCHEDULE_TEMP_DENT: "rescheduletempdent",
+    RESCHEDULE_TOKEN: "generateconfirmtoken",
   },
   USERS: {
     //User
@@ -55,5 +66,15 @@ export const API_ENDPOINTS = {
     UPDATE_BRANCH_FOR_EMPLOYEE: "updateBranchForEmployee",
     //GetEmployeeWithID
     EMPLOYEE_WITH_ID: "getempbyid"
+  },
+  PAYMENT: {
+    ONE: "payment",
+  },
+  DASHBOARD: {
+    APPOINTMENT_STATE: "dashboard/appointmentstate",
+    TOTAL_PAID: "dashboard/totalpaid",
+    CATEGORIES: "dashboard/distribution/categories",
+    TREATMENT: "dashboard/distribution/treatment",
+    TOTAL_REVENEUE: "dashboard/totalrevenue",
   },
 };

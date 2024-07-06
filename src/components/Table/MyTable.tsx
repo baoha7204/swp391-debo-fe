@@ -9,20 +9,24 @@ import {
   TablePagination,
   TableRow,
 } from "@mui/material";
-import { Key } from "react";
+import { Key, useContext } from "react";
 import TablePaginationActions from "@/components/Table/TablePaginationActions";
 import LinkRouter from "@/components/LinkRouter";
 import useTableControl from "@/hooks/useControlTable";
 import useFetchTableList from "@/hooks/useFetchTableList";
 import { TableProps } from "./types/core";
 import { formatDateSlotString } from "@/utils/helper";
+import { UserContext } from "@/pages/User/user.context";
+import { formatRole } from "@/utils/jwt";
 
 type RowData = {
   id: Key;
   timeSlot?: number;
+  cusId?: string;
 };
 
 const MyTable = <T extends RowData>({ url, columns }: TableProps<T>) => {
+  const { user } = useContext(UserContext);
   const [controller, handlePageChange, handleChangeRowsPerPage] =
     useTableControl({ page: 0, rowsPerPage: 5 });
   const [list, count] = useFetchTableList<T>({ url, controller });
@@ -50,7 +54,7 @@ const MyTable = <T extends RowData>({ url, columns }: TableProps<T>) => {
                 {columns.map((column) => {
                   const value = row[column.id];
                   const formattedValue = column.isDate
-                    ? formatDateSlotString(row.timeSlot, value as Date)
+                    ? formatDateSlotString(row.timeSlot!, value as Date)
                     : column.format
                     ? column.format(value as string)
                     : value;
@@ -58,6 +62,15 @@ const MyTable = <T extends RowData>({ url, columns }: TableProps<T>) => {
                     <TableCell key={column.id as Key} align={column.align}>
                       {column.isDetail ? (
                         <LinkRouter to={row.id + ""}>
+                          {formattedValue as string}
+                        </LinkRouter>
+                      ) : column.isPatientDetail ? (
+                        <LinkRouter
+                          to={
+                            `/${formatRole(user!.roleName)}/patients/` +
+                            row.cusId
+                          }
+                        >
                           {formattedValue as string}
                         </LinkRouter>
                       ) : (

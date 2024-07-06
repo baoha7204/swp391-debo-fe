@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { LoginFormSchema } from "../lib/schema";
 import { LoginInputs } from "../types/core";
@@ -9,11 +9,11 @@ import { handleSubmitForm } from "@/usecases/handleSubmitForm";
 import useAuth from "@/hooks/useAuth";
 import { getRoles } from "@/utils/jwt";
 import { LoginFormProps } from "../LoginForm";
+import { errorToastHandler } from "@/utils/toast/actions";
 
 export default function useLogin(login: LoginFormProps) {
   const { setAccessToken, setRefreshToken } = useAuth();
   const navigate = useNavigate();
-  const location = useLocation();
 
   const {
     handleSubmit,
@@ -45,15 +45,12 @@ export default function useLogin(login: LoginFormProps) {
     const accessToken = res.data?.accessToken;
     const refreshToken = res.data?.refreshToken;
     if (!res.success || !accessToken || !refreshToken) {
+      errorToastHandler(res);
       return;
     }
 
     setAccessToken(accessToken);
     setRefreshToken(refreshToken);
-    const from = location.state?.from?.pathname;
-    if (from) {
-      return navigate(from, { replace: true });
-    }
 
     const resultRoles = getRoles(accessToken);
     if (!resultRoles.success) {

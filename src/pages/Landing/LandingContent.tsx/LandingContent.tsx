@@ -28,6 +28,7 @@ export type BranchProps = {
     name: string;
     phone: string;
     email: string;
+    address: string;
 }
 
 export type DentistsProp = {
@@ -111,8 +112,6 @@ function LandingContent() {
     const [branchs, setBranchs] = useState<BranchProps[]>([]);
     const [dentists, setDentist] = useState<DentistsProp[]>([]);
     const [staffs, setStaff] = useState<StaffProp[]>([]);
-
-    console.log(dentists);
 
     const getListBranch = async () => {
         const res = await axios.get(API_ENDPOINTS.BRANCH.LIST);
@@ -209,6 +208,9 @@ function LandingContent() {
                         }}>
                         {/* Click to show list branch phone number */}
                         <TextBox2
+                            sx={{
+                                maxWidth: '50px',
+                            }}
                             onClick={handleShowBranchPhone}>
                             <LocalPhoneIcon sx={{
                                 fontSize: '2.5rem',
@@ -220,7 +222,7 @@ function LandingContent() {
                                     fontSize: '0.8rem',
                                 }}>
                                 Call for <br />
-                                appointment
+                                <span style={{ fontWeight: 'bold' }}>APPOINTMENT</span>
                             </BoxText>
                         </TextBox2>
                         {/* Click to show list staff */}
@@ -245,7 +247,7 @@ function LandingContent() {
                             />
                             <BoxText>
                                 Meet our <br />
-                                dentist
+                                <span style={{ fontWeight: 'bold' }}>DENTIST</span>
                             </BoxText>
                         </TextBox2>
                     </Box>
@@ -293,6 +295,79 @@ function LandingContent() {
                                                         color="text.primary"
                                                     >
                                                         Email:  <span style={{ fontWeight: 700 }}>{branch.email}</span>
+                                                    </Typography>
+                                                    <br />
+                                                    <Typography
+                                                        sx={{ display: 'inline' }}
+                                                        component="span"
+                                                        variant="body2"
+                                                        color="text.primary"
+                                                    >
+                                                        Address:  <span style={{ fontWeight: 700 }}>{branch.address}</span>
+                                                    </Typography>
+                                                </React.Fragment>
+                                            }
+                                        />
+                                    </ListItem>
+                                    <Divider variant="inset" component="li" />
+                                </List>
+                            ))}
+                        </Box>
+                    </PopUpContent>
+                </PopUp>}
+            {showStaffList &&
+                <PopUp>
+                    <PopUpContent>
+                        <Box sx={{
+                            display: 'flex',
+                            flexDirection: 'row',
+                            justifyContent: 'space-between',
+                        }}>
+                            <Logo />
+                            <Close onClick={handleClosePopup} >
+                                &times;
+                            </Close>
+                        </Box>
+                        <Box sx={{
+                            overflow: 'auto',
+                        }}>
+                            {staffs.map((staff, index) => (
+                                <List sx={{ width: '100%', maxWidth: 360 }}>
+                                    <ListItem alignItems="flex-start" key={index}>
+                                        <ListItemAvatar>
+                                            <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+                                        </ListItemAvatar>
+                                        <ListItemText
+                                            primary={`${staff.firstName} ${staff.lastName}`}
+                                            secondary={
+                                                <React.Fragment>
+                                                    <Typography
+                                                        sx={{ display: 'inline' }}
+                                                        component="span"
+                                                        variant="body2"
+                                                        color="text.primary"
+                                                    >
+                                                        Phone Number: <span style={{ fontWeight: 700 }}>{staff.phone}</span>
+                                                    </Typography>
+                                                    <br />
+                                                    <Typography
+                                                        sx={{ display: 'inline' }}
+                                                        component="span"
+                                                        variant="body2"
+                                                        color="text.primary"
+                                                    >
+                                                        Email:  <span style={{ fontWeight: 700 }}>{staff.email}</span>
+                                                    </Typography>
+                                                    <br />
+                                                    <Typography
+                                                        sx={{ display: 'inline' }}
+                                                        component="span"
+                                                        variant="body2"
+                                                        color="text.primary"
+                                                    >
+                                                        Gender: <span style={{ fontWeight: 700 }}>
+                                                            {staff.gender ? 'Male' : 'Female'}
+                                                        </span>
                                                     </Typography>
                                                 </React.Fragment>
                                             }
