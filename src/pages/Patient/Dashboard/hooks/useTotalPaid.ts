@@ -15,7 +15,7 @@ export type CostUsageType = {
 };
 
 const useTotalPaid = () => {
-  const { user } = useContext(UserContext);
+  const { user, isLoading: isUserLoading } = useContext(UserContext);
   const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState<CostUsageType>(() => {
     const dataset: UsageData[] = [];
@@ -36,7 +36,7 @@ const useTotalPaid = () => {
     setIsLoading(true);
     const abortController = new AbortController();
 
-    if (!user?.id) {
+    if (!user?.id || isUserLoading) {
       setIsLoading(false);
       return;
     }
@@ -85,7 +85,7 @@ const useTotalPaid = () => {
 
         setData((prev) => ({
           ...prev,
-          total: result.data.list.slice(-1)[0].runningTotal || 0,
+          total: result.data.list.slice(-1)[0]?.runningTotal || 0,
           dataset,
           treatment: treatmentRef,
         }));
@@ -102,7 +102,7 @@ const useTotalPaid = () => {
 
     return () => abortController.abort();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [isUserLoading]);
 
   return { data, isLoading };
 };

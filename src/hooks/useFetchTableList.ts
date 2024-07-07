@@ -50,7 +50,6 @@ const useFetchTableList = <T>({
     fetchRemote();
 
     return () => {
-      console.log("aborting...");
       abortController.abort();
     };
   }, [url, controller.page, controller.rowsPerPage, axiosPrivate]);

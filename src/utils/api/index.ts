@@ -28,6 +28,7 @@ export const API_ENDPOINTS = {
     APPOINTMENT: {
       LIST: "dentist/appointments",
     },
+    PATIENT_LIST: "dentist/patients",
   },
   SLOT: {
     LIST: "slot",
