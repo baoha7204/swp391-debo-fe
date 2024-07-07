@@ -1,5 +1,4 @@
 import { AppointmentResponse } from "@/components/Booking/SummaryBooking/hooks/useCreateAppointment";
-import { DentistCardProps } from "@/components/Dentist/DentistCard";
 import useStep from "@/hooks/useStep";
 import appointmentApi from "@/utils/api/appointmentApi";
 import { errorToastHandler } from "@/utils/toast/actions";
@@ -13,12 +12,13 @@ import {
   useState,
 } from "react";
 import { useParams } from "react-router-dom";
+import { RescheduleDentistCardProps } from "./TempDentist/DentistCard";
 
 type RescheduleDataType = {
   id?: string;
   appointment?: Omit<AppointmentResponse, "id">;
-  dentList?: DentistCardProps[];
-  newDentist?: DentistCardProps;
+  dentList?: RescheduleDentistCardProps[];
+  newDentist?: RescheduleDentistCardProps;
 } | null;
 
 type RescheduleContextType = {
