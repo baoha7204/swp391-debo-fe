@@ -17,6 +17,14 @@ export const formatDentistName = (name: string | null) => {
   return ["Dr.", name].join(" ");
 };
 
+export const formatDentistFullName = (
+  firstName: string | null,
+  lastName: string | null
+) => {
+  if (!firstName || !lastName) return "Dr. Unknown";
+  return ["Dr.", firstName, lastName].join(" ");
+};
+
 export const VietnamesePhoneNumberRegex =
   /(03|05|07|08|09|01[2|6|8|9])+([0-9]{8})\b/;
 

@@ -116,6 +116,26 @@ const appointmentApi = {
       signal,
     });
   },
+  getRescheduleDentists02: async (
+    data: {
+      appointmentId: string;
+      currentDentistId: string;
+      startDate: string;
+      timeSlot: number;
+      treatId: number;
+    },
+    signal?: GenericAbortSignal
+  ) => {
+    return await get<
+      ListDataResponse<{
+        dent_Id: string;
+        dentistName: string;
+        dent_Avt: string | null;
+      }>
+    >(API_ENDPOINTS.APPOINTMENT.RESCHEDULE_TEMP_DENT, data, {
+      signal,
+    });
+  },
   generateRescheduleToken: async (
     data: {
       id: string;

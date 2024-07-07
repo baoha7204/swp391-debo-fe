@@ -9,17 +9,18 @@ import {
   CardMedia,
   Typography,
 } from "@mui/material";
-import { formatDentistName } from "@/utils/helper";
+import { formatDentistFullName } from "@/utils/helper";
 import DefaultDentist from "/assets/Dentist.jpg";
 
 export type DentistCardProps = {
   id: string;
   avt: string | null;
-  name: string;
+  firstName: string | null;
+  lastName: string | null;
 };
 
 const DentistCard = (props: DentistCardProps) => {
-  const { avt, name } = props;
+  const { avt, firstName, lastName } = props;
   const { handleDoneIncrement, setData } = useContext(ProgressContext);
 
   const handleClick = () => {
@@ -53,7 +54,7 @@ const DentistCard = (props: DentistCardProps) => {
         />
         <CardContent>
           <Typography gutterBottom variant="h5" fontWeight={700}>
-            {formatDentistName(name)}
+            {formatDentistFullName(firstName, lastName)}
           </Typography>
         </CardContent>
       </CardActionArea>

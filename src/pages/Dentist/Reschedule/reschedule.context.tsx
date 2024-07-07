@@ -123,8 +123,10 @@ const RescheduleProvider = ({ children }: PropsWithChildren) => {
         }
 
         // Fetch temp dentists
-        const responseTempDents = await appointmentApi.getRescheduleDentists(
+        const responseTempDents = await appointmentApi.getRescheduleDentists02(
           {
+            appointmentId: id,
+            currentDentistId: detailData.dent_Id,
             startDate: dayjs(detailData.startDate).toDate().toDateString(),
             timeSlot: detailData.timeSlot,
             treatId: detailData.treatId,

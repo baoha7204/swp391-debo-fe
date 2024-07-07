@@ -13,7 +13,7 @@ import DefaultDentist from "/assets/Dentist.jpg";
 import { DentistCardProps } from "@/components/Dentist/DentistCard";
 import { RescheduleContext } from "../reschedule.context";
 
-const DentistCard = (props: DentistCardProps) => {
+const DentistCard = (props: DentistCardProps & { name: string | null }) => {
   const { avt, name } = props;
   const { handleNext, setData } = useContext(RescheduleContext);
 
