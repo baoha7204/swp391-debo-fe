@@ -33,6 +33,7 @@ export const API_ENDPOINTS = {
     LIST: "slot",
   },
   APPOINTMENT: {
+    ALL: "viewallappointment",
     ONE: "appointment",
     HISTORY: "viewhistoryappoinment",
     DETAIL: "viewappointmentdetails",
@@ -60,9 +61,11 @@ export const API_ENDPOINTS = {
     //Available Manager
     AVAILABLE_MANAGER: "User/availablemanager",
     //Available Employee
-    EMPLOYEE_WITH_BRANCH: "getempwithbranchid",
+    EMPLOYEE_WITH_BRANCH: "getallempwithbranch",
     //Update branch for employee
     UPDATE_BRANCH_FOR_EMPLOYEE: "updateBranchForEmployee",
+    //GetEmployeeWithID
+    EMPLOYEE_WITH_ID: "getempbyid"
   },
   PAYMENT: {
     ONE: "payment",
@@ -71,6 +74,10 @@ export const API_ENDPOINTS = {
     APPOINTMENT_STATE: "dashboard/appointmentstate",
     DENTIST_APPOINTMENT_STATE: "dashboard/dentist/appointmentstate",
     TOTAL_PAID: "dashboard/totalpaid",
+    CATEGORIES: "dashboard/distribution/categories",
+    TREATMENT: "dashboard/distribution/treatment",
+    TOTAL_REVENEUE: "dashboard/totalrevenue",
+    EMPLOYEE: "dashboard/employeesalarydistribution",
     DENTIST_TOTAL_PATIENT: "dashboard/dentist/totalPatient",
   },
 };

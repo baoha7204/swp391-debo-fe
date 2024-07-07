@@ -6,53 +6,79 @@ import { useEffect, useState } from "react";
 import FormSelect from "@/components/Form/FormSelect";
 import useUpdateBranchForEmployee from "./useUpdateBranchForEmployee";
 import MyButton from "@/components/MyButton";
+import { useParams } from "react-router-dom";
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Typography from '@mui/material/Typography';
+
 
 type BranchProps = {
     id: string;
     name: string;
 }
 
-type EmployeeWithBranchProps = {
+type EmployeeProps = {
     id: string;
-    name: string;
+    avt: string;
+    firstName: string;
+    lastName: string;
+    phone: string;
+    gender: number;
 }
 
 function UpdateBranchForEmployee() {
 
-    const [handleSubmit, isSubmitting, control] = useUpdateBranchForEmployee();
+    const [handleSubmit, isSubmitting, control, setValues] = useUpdateBranchForEmployee();
 
     // Branches
     const [branches, setBranches] = useState<BranchProps[]>([]);
+    const { id } = useParams<{ id: string }>();
 
     const getListBranch = async () => {
         const res = await axios.get(API_ENDPOINTS.BRANCH.LIST);
         setBranches(res.data.data.list);
     }
 
-    console.log(branches);
-
     const branchOptions = branches.map(branch => ({
         value: branch.id,
         label: branch.name,
     }));
 
-    // Employees
-    const [employees, setEmployees] = useState<EmployeeWithBranchProps[]>([]);
-
-    const getListEmployee = async () => {
-        const res = await axios.get(API_ENDPOINTS.USERS.EMPLOYEE_WITH_BRANCH);
-        setEmployees(res.data.data.list);
+    const getEmployeeWithBr = async () => {
+        try {
+            const res = await axios.get(`${API_ENDPOINTS.USERS.EMPLOYEE_WITH_ID}/${id}`);
+            console.log("Employee with branch: ", res.data.data);
+            setValues(res.data.data);
+        } catch (error) {
+            console.error("Failed to fetch employee with branch:", error);
+        }
     }
 
-    console.log(employees);
+    // Employees
+    const [employees, setEmployees] = useState<EmployeeProps>('' as unknown as EmployeeProps);
 
-    const emplOptions = employees.map(employee => ({
-        value: employee.id,
-        label: employee.name,
-    }));
+    const getEmployee = async () => {
+        try {
+            const res = await axios.get(`${API_ENDPOINTS.USERS.ONE}/${id}`);
+            const employee = res.data.data;
+            setEmployees(employee);
+            console.log("Employee: ", employee);
+        } catch (error) {
+            console.error("Failed to fetch employee:", error);
+        }
+    }
+
+    // console.log("Employee: ", employees);
+
+    // const emplOptions = employees.map(employee => ({
+    //     value: employee.id,
+    //     label: employee.name,
+    // }));
 
     useEffect(() => {
-        getListEmployee();
+        getEmployee();
+        getEmployeeWithBr();
         getListBranch();
     }, []);
 
@@ -71,26 +97,40 @@ function UpdateBranchForEmployee() {
                     item
                     xs={false}
                     sm={false}
-                    md={6}
+                    md={4}
                 >
-                    <FormSelect
-                        name="id"
-                        label="Employee"
-                        outsideLabel="Employee:"
-                        control={control}
-                        options={emplOptions}
-                    />
-                </Grid>
+                    <Card >
+                        <CardMedia
+                            component="img"
+                            alt="Avatar"
+                            height="auto"
+                            image={employees.avt}
+                            sx={{
+                                mt: 2,
+                            }}
+                        />
+                        <CardContent>
+                            <Typography gutterBottom variant="h5" component="div">
+                                Name: {employees.firstName} {employees.lastName}
+                            </Typography>
+                            <Typography variant="body2" color="text.secondary">
+                                Phone: {employees.phone} <br />
+                                Gender: {employees.gender === 1 ? 'Male' : 'Female'}
+                            </Typography>
+                        </CardContent>
+                    </Card>
+                </Grid >
+
                 <Grid
                     item
                     xs={false}
                     sm={false}
-                    md={6}
+                    md={8}
                 >
                     <FormSelect
                         name="brId"
-                        outsideLabel="Branch: "
-                        label="Branch"
+                        label="Branchs"
+                        outsideLabel="Branchs:"
                         control={control}
                         options={branchOptions}
                     />
@@ -98,19 +138,19 @@ function UpdateBranchForEmployee() {
                         control={control}
                         id="salary"
                         name="salary"
-                        outsideLabel="Employee Salary: "
-                        required
+                        outsideLabel="Employee Salary:"
                         fullWidth
                         label="Salary"
+                        autoFocus
                         inputProps={{ "data-testid": "treatmentPrice" }}
                     />
-                </Grid>
-            </Grid>
+                </Grid >
+            </Grid >
             <Box
                 sx={{
                     display: 'flex',
                     justifyContent: 'left',
-                    m: 1,
+                    mt: 3,
                 }}
             >
                 <MyButton
@@ -122,7 +162,7 @@ function UpdateBranchForEmployee() {
                     Add
                 </MyButton>
             </Box>
-        </Box>
+        </Box >
     );
 }
 

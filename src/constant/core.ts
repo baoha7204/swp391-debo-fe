@@ -13,7 +13,7 @@ const ROLE = {
   ADMIN: "admin",
   PATIENT: "customer",
   DENTIST: "dentist",
-  MANAGER: "clinic manager",
+  MANAGER: "manager",
   STAFF: "clinic staff",
 };
 

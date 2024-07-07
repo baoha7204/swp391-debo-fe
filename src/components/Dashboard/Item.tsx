@@ -24,7 +24,7 @@ const DashboardItem = ({ label, component, flex = 1 }: DashboardItemProps) => {
       >
         {label}
       </Typography>
-      <Box sx={{ p: 2 }}>{component}</Box>
+      <Box >{component}</Box>
     </Paper>
   );
 };

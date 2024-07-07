@@ -38,7 +38,7 @@ const columns: readonly ListColumn<AllStaffsDetailData>[] = [
 
 function AllStaffsDetailBody() {
     return (
-        <MyDetail<AllStaffsDetailData> url={API_ENDPOINTS.USERS.USER} columns={columns} updateBut={true} />
+        <MyDetail<AllStaffsDetailData> url={API_ENDPOINTS.USERS.USER} columns={columns} updateBut={true} assignBut={true} />
     );
 }
 

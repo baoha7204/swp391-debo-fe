@@ -44,6 +44,7 @@ import BranchList from "@/pages/Admin/adminViewList/BranchList/BranchList";
 import TreatmentList from "@/pages/Admin/adminViewList/TreatmentList/TreatmentList";
 import AdminAllStaffList from "@/pages/Admin/adminViewList/AllStaffList";
 import PatientList from "@/pages/Admin/adminViewList/PatientList/PatientList";
+import AdminDashboard from "@/pages/Admin/adminDashboard/AdminDashboard";
 //AdminDetail
 import AllStaffsDetail from "@/pages/Admin/adminViewDetail/AllStaffsDetail/AllStaffsDetail";
 import BranchDetail from "@/pages/Admin/adminViewDetail/BranchDetail/BranchDetail";
@@ -59,11 +60,13 @@ import PatientDetail from "@/pages/Admin/adminViewDetail/PatientDetail/PatientDe
 import BranchUpdate from "@/pages/Admin/adminUpdate/BranchUpdate/BranchUpdate";
 import TreatmentUpdate from "@/pages/Admin/adminUpdate/TreatmentUpdate/TreatmentUpdate";
 import EmployeeUpdate from "@/pages/Admin/adminUpdate/EmployeeUpdate/EmployeeUpdate";
-import UpdateBranchForEmployee from "@/pages/Admin/adminUpdate/UpdateBranchForEmployee.tsx/UpdateBranchForEmployee";
+import UpdateEmployeeBranch from "@/pages/Admin/adminUpdate/UpdateBranchForEmployee.tsx";
 
 ////Landging Page////
 import LandingPage from "@/pages/Landing/Landing";
 import SettingsPage from "@/pages/User/Settings";
+import AdminAppointmentList from "@/pages/Admin/adminAppointment/AppointmentList";
+import AdminAppointmentDetail from "@/pages/Admin/adminAppointment/AppointmentDetail";
 //User
 
 const RouterComponent = () => {
@@ -156,6 +159,14 @@ const RouterComponent = () => {
                   path: "patientList",
                   element: <PatientList />,
                 },
+                {
+                  path: "dashboard",
+                  element: <AdminDashboard />,
+                },
+                {
+                  path: "appointments",
+                  element: <AdminAppointmentList />,
+                },
                 //Create
                 {
                   path: "branch/createBranch",
@@ -177,10 +188,6 @@ const RouterComponent = () => {
                   path: "adminAllStaffList/createManager",
                   element: <CreateManager />,
                 },
-                {
-                  path: "appointments",
-                  element: <PatientAppointmentList />,
-                },
                 //Detail
                 {
                   path: "branch/:id",
@@ -200,7 +207,7 @@ const RouterComponent = () => {
                 },
                 {
                   path: "appointments/:id",
-                  element: <PatientAppointmentDetail />,
+                  element: <AdminAppointmentDetail />,
                 },
                 //Update
                 {
@@ -216,9 +223,9 @@ const RouterComponent = () => {
                   element: <EmployeeUpdate />,
                 },
                 {
-                  path: "updateBranchForEmployee",
-                  element: <UpdateBranchForEmployee />,
-                },
+                  path: "adminAllStaffList/:id/assign",
+                  element: <UpdateEmployeeBranch />,
+                }
               ],
             },
           ],
@@ -263,9 +270,38 @@ const RouterComponent = () => {
         },
         {
           // Manager routes
-          path: "manager",
+          path: ROLE.MANAGER,
           element: <RequireAuth allowedRoles={[ROLE.MANAGER]} />,
-          children: [],
+          children: [
+            {
+              element: <ManagerLayout />,
+              children: [
+                {
+                  index: true,
+                  element: <Navigate to="calendar" />,
+                },
+                //List
+                {
+                  path: "managerAllStaffList",
+                  element: <ManagerAllStaffList />,
+                },
+                {
+                  path: "appointments",
+                  element: <PatientAppointmentList />,
+                },
+                //
+                {
+                  path: "calendar",
+                  element: <Calendar />,
+                },
+
+                {
+                  path: "appointments/:id",
+                  element: <PatientAppointmentDetail />,
+                },
+              ],
+            }
+          ],
         },
         {
           // Staff routes
@@ -284,7 +320,7 @@ const RouterComponent = () => {
           index: true,
           element: <Navigate to="branch" />,
         },
-        //List
+        //View
         {
           path: "branch",
           element: <BranchList />,
@@ -300,6 +336,14 @@ const RouterComponent = () => {
         {
           path: "patientList",
           element: <PatientList />,
+        },
+        {
+          path: "dashboard",
+          element: <AdminDashboard />,
+        },
+        {
+          path: "appointments",
+          element: <AdminAppointmentList />,
         },
         //Create
         {
@@ -321,10 +365,6 @@ const RouterComponent = () => {
         {
           path: "adminAllStaffList/createManager",
           element: <CreateManager />,
-        },
-        {
-          path: "appointments",
-          element: <PatientAppointmentList />,
         },
         //Detail
         {
@@ -361,9 +401,10 @@ const RouterComponent = () => {
           element: <EmployeeUpdate />,
         },
         {
-          path: "updateBranchForEmployee",
-          element: <UpdateBranchForEmployee />,
-        },
+          path: "adminAllStaffList/:id/assign",
+          element: <UpdateEmployeeBranch />,
+        }
+
       ],
     },
     // ManagerTest routes

@@ -3,6 +3,8 @@ import ChecklistIcon from "@mui/icons-material/Checklist";
 import GroupIcon from "@mui/icons-material/Group";
 import EventIcon from "@mui/icons-material/Event";
 import { Outlet } from "react-router-dom";
+import { useContext } from "react";
+import { UserContext } from "../User/user.context";
 
 const SidebarManagerBody = [
     { title: "Calendar", path: "calendar", icon: <EventIcon /> },
@@ -19,17 +21,19 @@ const ManagerRoutes = [
     { path: "managerAllStaffList", breadcrumb: "Employees" },
 ]
 
-const ManagerInfo = {
-    username: "Duong",
-    role: "Manager",
-    avt: "/static/images/avatar/1.jpg",
-};
-
 function ManagerLayout() {
+    const { user } = useContext(UserContext);
+
     return (
         <DefaultLayout
             sidebarBody={SidebarManagerBody}
-            header={{ info: ManagerInfo, routes: ManagerRoutes, isAllowedBooking: false }}
+            header={{
+                info: {
+                    username: user?.username || "user",
+                    role: user?.roleName as string,
+                    avt: user?.avt || "/broken-image.jpg",
+                }, routes: ManagerRoutes, isAllowedBooking: false
+            }}
         >
             <Outlet />
         </DefaultLayout>

@@ -1,32 +1,34 @@
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import HealthAndSafetyIcon from "@mui/icons-material/HealthAndSafety";
 import GroupIcon from "@mui/icons-material/Group";
-import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import SettingsIcon from "@mui/icons-material/Settings";
 import ReportIcon from "@mui/icons-material/Report";
 import ChecklistIcon from "@mui/icons-material/Checklist";
 import StoreIcon from "@mui/icons-material/Store";
 import { Outlet } from "react-router-dom";
-
+import DashboardIcon from '@mui/icons-material/Dashboard';
 import DefaultLayout from "@/components/Layout/DefaultLayout";
+import { useContext } from "react";
+import { UserContext } from "../User/user.context";
 
 const SidebarAdminBody = [
+  { title: "Dashboard", path: "dashboard", icon: <DashboardIcon />, },
   { title: "Appointments", path: "appointments", icon: <ChecklistIcon />, },
   { title: "Branchs", path: "branch", icon: <StoreIcon />, },
   { title: "Treatments", path: "treatments", icon: <HealthAndSafetyIcon />, },
   { title: "Patients", path: "patientList", icon: <AccountCircleIcon />, },
-  { title: "Account", path: "", icon: <AccountBoxIcon />, },
   { title: "Employees", path: "adminAllStaffList", icon: <GroupIcon />, },
   { title: "Reports", path: "", icon: <ReportIcon />, },
   { title: "Setting", path: "", icon: <SettingsIcon />, },
 ];
 
 const AdminRoutes = [
-  //List
+  //View
   { path: "branch", breadcrumb: "Branch List" },
   { path: "treatments", breadcrumb: "Treatment List" },
   { path: "adminAllStaffList", breadcrumb: "List All Staff" },
   { path: "patientList", breadcrumb: "Patient List" },
+  { path: "dashboard", breadcrumb: "Dashboard" },
   //Create
   { path: "branch/createBranch", breadcrumb: "Create Branch" },
   { path: "treatments/createTreatment", breadcrumb: "Create Treatment" },
@@ -36,7 +38,7 @@ const AdminRoutes = [
   //Detail
   { path: "branch/:id", breadcrumb: "Branch Detail" },
   { path: "treatments/:id", breadcrumb: "Treatment Detail" },
-  { path: "adminStaffList/:id", breadcrumb: "Staff Detail" },
+  { path: "adminAllStaffList/:id", breadcrumb: "Staff Detail" },
   { path: "patientList/:id", breadcrumb: "Patient Detail" },
   //Appointments
   { path: "appointments", breadcrumb: "Appointments" },
@@ -45,17 +47,20 @@ const AdminRoutes = [
   { path: "appointments/:id/notes", breadcrumb: "Notes" },
 ];
 
-const AdminInfo = {
-  username: "Duong",
-  role: "Admin",
-  avt: "/static/images/avatar/1.jpg",
-};
-
 const AdminLayout = () => {
+  const { user } = useContext(UserContext);
+
   return (
+
     <DefaultLayout
       sidebarBody={SidebarAdminBody}
-      header={{ info: AdminInfo, routes: AdminRoutes, isAllowedBooking: false }}
+      header={{
+        info: {
+          username: user?.username || "user",
+          role: user?.roleName as string,
+          avt: user?.avt || "/broken-image.jpg",
+        }, routes: AdminRoutes, isAllowedBooking: false
+      }}
     >
       <Outlet />
     </DefaultLayout>
