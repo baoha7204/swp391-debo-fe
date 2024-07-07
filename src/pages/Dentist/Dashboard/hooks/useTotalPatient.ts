@@ -1,20 +1,19 @@
 import { useContext, useEffect, useState } from "react";
 import dayjs from "dayjs";
-import { UserContext } from "@/pages/User/user.context";
-import patientDashboardApi from "@/utils/api/dashboardApi/patient";
-import { errorToastHandler } from "@/utils/toast/actions";
 import { formatNumericMonthToAbbreviated } from "@/utils/helper";
+import { errorToastHandler } from "@/utils/toast/actions";
+import dentistDashboardApi from "@/utils/api/dashboardApi/dentist";
+import { UserContext } from "@/pages/User/user.context";
 
-export type UsageData = { month: string } & Record<number, number>;
+export type UsageData = { month: string; total: number };
 
 export type CostUsageType = {
   total: number;
   currentYear: number;
   dataset: UsageData[];
-  treatment: Record<number, string>;
 };
 
-const useTotalPaid = () => {
+const useTotalPatient = () => {
   const { user } = useContext(UserContext);
   const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState<CostUsageType>(() => {
@@ -22,13 +21,13 @@ const useTotalPaid = () => {
     for (let i = 1; i <= 12; i++) {
       dataset.push({
         month: formatNumericMonthToAbbreviated(i),
+        total: 0,
       });
     }
     return {
       total: 0,
       currentYear: dayjs().get("year"),
       dataset,
-      treatment: {},
     };
   });
 
@@ -43,7 +42,7 @@ const useTotalPaid = () => {
 
     const fetchRemote = async () => {
       try {
-        const response = await patientDashboardApi.getTotalPaid(
+        const response = await dentistDashboardApi.getTotalPatient(
           user.id,
           abortController.signal
         );
@@ -54,6 +53,12 @@ const useTotalPaid = () => {
           return;
         }
 
+        // Calculate total
+        const total = result.data.list.reduce(
+          (acc, cur) => acc + cur.totalPatients,
+          0
+        );
+
         // Filter this year
         const currentYearData = result.data.list.filter(
           (item) => item.year === dayjs().get("year")
@@ -61,33 +66,20 @@ const useTotalPaid = () => {
 
         // Filter dataset
         const dataset = data.dataset.map((og_item) => {
-          let temp = { ...og_item };
-          currentYearData.forEach((item) => {
-            temp = {
-              ...temp,
-              [item.treatId]:
-                formatNumericMonthToAbbreviated(item.month) === og_item.month
-                  ? item.totalPaidAmount!
-                  : 0,
-            };
-          });
-          return temp;
-        });
-
-        // Filter treatment
-        let treatmentRef = {};
-        currentYearData.forEach((item) => {
-          treatmentRef = {
-            ...treatmentRef,
-            [item.treatId]: item.treatmentName,
+          const totalMonth = currentYearData.filter(
+            (item) =>
+              formatNumericMonthToAbbreviated(item.month) === og_item.month
+          );
+          return {
+            ...og_item,
+            total: totalMonth.length > 0 ? totalMonth[0].totalPatients : 0,
           };
         });
 
         setData((prev) => ({
           ...prev,
-          total: result.data.list.slice(-1)[0].runningTotal || 0,
+          total,
           dataset,
-          treatment: treatmentRef,
         }));
       } catch (error) {
         if (error.name !== "CanceledError") {
@@ -107,4 +99,4 @@ const useTotalPaid = () => {
   return { data, isLoading };
 };
 
-export default useTotalPaid;
+export default useTotalPatient;

@@ -5,10 +5,13 @@ import { ProgressContext, ProgressProvider } from "./progress.context";
 import { BookingStage, FirstStageLength, StepLabels } from "./config";
 import HorizontalLinearStepper from "../HorizontalLinearStepper";
 import { matchPath, useLocation } from "react-router-dom";
+import useCancelBulk from "./hooks/useCancel";
+import { errorToastHandler } from "@/utils/toast/actions";
 
 const BookingContent = () => {
   const location = useLocation();
   const {
+    data,
     done,
     setDone,
     activeStep,
@@ -20,6 +23,7 @@ const BookingContent = () => {
     handleBack,
     firstTime,
   } = useContext(ProgressContext);
+  const { cancelBulk } = useCancelBulk();
 
   useLayoutEffect(() => {
     if (!matchPath("/patient/booking/payment-status/:id", location.pathname)) {
@@ -58,9 +62,23 @@ const BookingContent = () => {
             <Button
               color="inherit"
               disabled={firstTime ? done === 2 : done === 0}
-              onClick={() => {
+              onClick={async () => {
                 if (firstTime && done === 2) {
                   handleDoneDecrement();
+                }
+                if (
+                  data?.appointments &&
+                  data.appointments.length > 0 &&
+                  done === 4
+                ) {
+                  try {
+                    await cancelBulk(data.appointments.map((a) => a.id));
+                  } catch (error) {
+                    errorToastHandler({
+                      message:
+                        "Something went wrong when cancelling appointment",
+                    });
+                  }
                 }
                 handleDoneDecrement();
               }}

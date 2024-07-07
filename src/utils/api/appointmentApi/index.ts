@@ -1,7 +1,7 @@
 import { AxiosInstance, GenericAbortSignal } from "axios";
 import { API_ENDPOINTS } from "..";
 import { BookingType } from "@/components/Booking/progress.context";
-import { get, post, put } from "@/utils/apiCaller";
+import { get, post, put, remove } from "@/utils/apiCaller";
 import { ApiResponse } from "@/types/core";
 import { AppointmentResponse } from "@/components/Booking/SummaryBooking/hooks/useCreateAppointment";
 import { ListDataResponse } from "@/hooks/useFetchTableList";
@@ -27,7 +27,7 @@ const appointmentApi = {
   },
   getSlots: async (
     data: {
-      dentist?: number;
+      dentist?: string;
       date: string;
       treatment?: number;
     },
@@ -133,6 +133,11 @@ const appointmentApi = {
         signal,
       }
     );
+  },
+  cancelOne: async (id: string, signal?: GenericAbortSignal) => {
+    return await remove(`${API_ENDPOINTS.APPOINTMENT.ONE}/${id}`, undefined, {
+      signal,
+    });
   },
 };
 
