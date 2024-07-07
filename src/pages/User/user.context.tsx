@@ -12,7 +12,6 @@ import { Token } from "@/types/core";
 import userApi from "@/utils/api/userApi";
 import { errorToastHandler } from "@/utils/toast/actions";
 import { MetadataFile } from "@/components/FilePicker/types/core";
-// import Loading from "@/components/LoadingPage/Loading";
 
 type UserType = {
   id: string;
@@ -90,10 +89,6 @@ const UserProvider = ({ children }: PropsWithChildren) => {
 
     return () => abortController.abort();
   }, [auth?.accessToken]);
-
-  // if (isLoading) {
-  //   return <Loading />;
-  // }
 
   return (
     <UserContext.Provider
