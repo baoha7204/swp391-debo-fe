@@ -14,7 +14,7 @@ export type CostUsageType = {
 };
 
 const useTotalPatient = () => {
-  const { user } = useContext(UserContext);
+  const { user, isLoading: isUserLoading } = useContext(UserContext);
   const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState<CostUsageType>(() => {
     const dataset: UsageData[] = [];
@@ -35,7 +35,7 @@ const useTotalPatient = () => {
     setIsLoading(true);
     const abortController = new AbortController();
 
-    if (!user?.id) {
+    if (!user?.id || isUserLoading) {
       setIsLoading(false);
       return;
     }
@@ -94,7 +94,7 @@ const useTotalPatient = () => {
 
     return () => abortController.abort();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [isUserLoading]);
 
   return { data, isLoading };
 };

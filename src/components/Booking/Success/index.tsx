@@ -9,9 +9,12 @@ import CircularIndeterminate from "@/components/CircularIndeterminate";
 const SuccessBooking = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { user } = useContext(UserContext);
-  const { isLoading, status } = usePaymentStatus(id);
-  return isLoading ? (
+  const { user, isLoading } = useContext(UserContext);
+  const { isLoading: isPaymentLoading, status } = usePaymentStatus(
+    isLoading,
+    id
+  );
+  return isPaymentLoading ? (
     <>
       <CircularIndeterminate />
       <h2>We are retrieving payment status, please wait...</h2>
