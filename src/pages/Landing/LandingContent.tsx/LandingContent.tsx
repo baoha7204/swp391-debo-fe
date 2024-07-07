@@ -272,8 +272,8 @@ function LandingContent() {
                             {branchs.map((branch, index) => (
                                 <List sx={{ width: '100%', maxWidth: 360 }}>
                                     <ListItem alignItems="flex-start" key={index}>
-                                        <ListItemAvatar>
-                                            <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+                                        <ListItemAvatar sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', mt: 2, pr: 3 }}>
+                                            <Avatar alt="Remy Sharp" src={branch.avt} sx={{ width: 70, height: 70 }} />
                                         </ListItemAvatar>
                                         <ListItemText
                                             primary={`${branch.name}`}
@@ -334,72 +334,8 @@ function LandingContent() {
                             {staffs.map((staff, index) => (
                                 <List sx={{ width: '100%', maxWidth: 360 }}>
                                     <ListItem alignItems="flex-start" key={index}>
-                                        <ListItemAvatar>
-                                            <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
-                                        </ListItemAvatar>
-                                        <ListItemText
-                                            primary={`${staff.firstName} ${staff.lastName}`}
-                                            secondary={
-                                                <React.Fragment>
-                                                    <Typography
-                                                        sx={{ display: 'inline' }}
-                                                        component="span"
-                                                        variant="body2"
-                                                        color="text.primary"
-                                                    >
-                                                        Phone Number: <span style={{ fontWeight: 700 }}>{staff.phone}</span>
-                                                    </Typography>
-                                                    <br />
-                                                    <Typography
-                                                        sx={{ display: 'inline' }}
-                                                        component="span"
-                                                        variant="body2"
-                                                        color="text.primary"
-                                                    >
-                                                        Email:  <span style={{ fontWeight: 700 }}>{staff.email}</span>
-                                                    </Typography>
-                                                    <br />
-                                                    <Typography
-                                                        sx={{ display: 'inline' }}
-                                                        component="span"
-                                                        variant="body2"
-                                                        color="text.primary"
-                                                    >
-                                                        Gender: <span style={{ fontWeight: 700 }}>
-                                                            {staff.gender ? 'Male' : 'Female'}
-                                                        </span>
-                                                    </Typography>
-                                                </React.Fragment>
-                                            }
-                                        />
-                                    </ListItem>
-                                    <Divider variant="inset" component="li" />
-                                </List>
-                            ))}
-                        </Box>
-                    </PopUpContent>
-                </PopUp>}
-            {showStaffList &&
-                <PopUp>
-                    <PopUpContent>
-                        <Box sx={{
-                            display: 'flex',
-                            flexDirection: 'row',
-                            justifyContent: 'space-between',
-                        }}>
-                            <Logo />
-                            <Close onClick={handleClosePopup} >
-                                &times;
-                            </Close>
-                        </Box>
-                        <Box sx={{
-                            overflow: 'auto',
-                        }}>
-                            {staffs.map((staff, index) => (
-                                <List sx={{ width: '100%', maxWidth: 360 }}>
-                                    <ListItem alignItems="flex-start" key={index}>
-                                        <ListItemAvatar>
-                                            <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+                                        <ListItemAvatar sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', mt: 2, pr: 3 }}>
+                                            <Avatar alt="Remy Sharp" src={staff.avt} sx={{ width: 70, height: 70 }} />
                                         </ListItemAvatar>
                                         <ListItemText
                                             primary={`${staff.firstName} ${staff.lastName}`}
@@ -462,8 +398,8 @@ function LandingContent() {
                             {dentists.map((dentist, index) => (
                                 <List sx={{ width: '100%', maxWidth: 360 }}>
                                     <ListItem alignItems="flex-start" key={index}>
-                                        <ListItemAvatar>
-                                            <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+                                        <ListItemAvatar sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', mt: 2, pr: 3 }}>
+                                            <Avatar alt="Remy Sharp" src={dentist.avt} sx={{ width: 70, height: 70 }} />
                                         </ListItemAvatar>
                                         <ListItemText
                                             primary={`${dentist.firstName} ${dentist.lastName}`}

@@ -271,9 +271,38 @@ const RouterComponent = () => {
         },
         {
           // Manager routes
-          path: "manager",
+          path: ROLE.MANAGER,
           element: <RequireAuth allowedRoles={[ROLE.MANAGER]} />,
-          children: [],
+          children: [
+            {
+              element: <ManagerLayout />,
+              children: [
+                {
+                  index: true,
+                  element: <Navigate to="calendar" />,
+                },
+                //List
+                {
+                  path: "managerAllStaffList",
+                  element: <ManagerAllStaffList />,
+                },
+                {
+                  path: "appointments",
+                  element: <PatientAppointmentList />,
+                },
+                //
+                {
+                  path: "calendar",
+                  element: <Calendar />,
+                },
+
+                {
+                  path: "appointments/:id",
+                  element: <PatientAppointmentDetail />,
+                },
+              ],
+            }
+          ],
         },
         {
           // Staff routes

@@ -82,14 +82,17 @@ export default function MyCKEditor({ onSubmit }: MyCKEditorProps) {
                                     onSubmit={handleSubmit}>
                                     <CKEditor
                                         onReady={(editor) => {
+                                            const toolbarElement = editor.ui.view.toolbar.element as HTMLElement;
                                             if (editorToolbarRef.current) {
                                                 editorToolbarRef.current.appendChild(editor.ui.view.toolbar.element as Node);
                                             }
                                             // Set read-only mode based on user role
                                             if (user?.role === 5) {
                                                 editor.isReadOnly = true;
+                                                toolbarElement.style.display = 'none';
                                             }
                                         }}
+
                                         editor={DecoupledEditor}
                                         config={editorConfig}
                                         onChange={(event, editor) => {
@@ -103,17 +106,19 @@ export default function MyCKEditor({ onSubmit }: MyCKEditorProps) {
                                         }}
                                         data={editorData}
                                     />
-                                    <Button type="submit"
-                                        sx={{
-                                            display: 'flex',
-                                            position: 'absolute',
-                                            mt: 7,
-                                            backgroundColor: (theme) => theme.palette.primary.main,
-                                            color: (theme) => theme.palette.primary.contrastText,
-                                            '&:hover': {
-                                                backgroundColor: (theme) => theme.palette.primary.dark,
-                                            },
-                                        }}>Submit</Button>
+                                    {user?.role !== 5 &&
+                                        <Button type="submit"
+                                            sx={{
+                                                display: 'flex',
+                                                position: 'absolute',
+                                                mt: 7,
+                                                backgroundColor: (theme) => theme.palette.primary.main,
+                                                color: (theme) => theme.palette.primary.contrastText,
+                                                '&:hover': {
+                                                    backgroundColor: (theme) => theme.palette.primary.dark,
+                                                },
+                                            }}>Submit</Button>
+                                    }
                                 </Box>
                             )}
                         </div>

@@ -8,6 +8,8 @@ import StoreIcon from "@mui/icons-material/Store";
 import { Outlet } from "react-router-dom";
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import DefaultLayout from "@/components/Layout/DefaultLayout";
+import { useContext } from "react";
+import { UserContext } from "../User/user.context";
 
 const SidebarAdminBody = [
   { title: "Dashboard", path: "dashboard", icon: <DashboardIcon />, },
@@ -45,18 +47,20 @@ const AdminRoutes = [
   { path: "appointments/:id/notes", breadcrumb: "Notes" },
 ];
 
-const AdminInfo = {
-  username: "Duong",
-  role: "Admin",
-  avt: "/static/images/avatar/1.jpg",
-};
-
 const AdminLayout = () => {
+  const { user } = useContext(UserContext);
+
   return (
 
     <DefaultLayout
       sidebarBody={SidebarAdminBody}
-      header={{ info: AdminInfo, routes: AdminRoutes, isAllowedBooking: false }}
+      header={{
+        info: {
+          username: user?.username || "user",
+          role: user?.roleName as string,
+          avt: user?.avt || "/broken-image.jpg",
+        }, routes: AdminRoutes, isAllowedBooking: false
+      }}
     >
       <Outlet />
     </DefaultLayout>

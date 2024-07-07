@@ -76,5 +76,6 @@ export const API_ENDPOINTS = {
     CATEGORIES: "dashboard/distribution/categories",
     TREATMENT: "dashboard/distribution/treatment",
     TOTAL_REVENEUE: "dashboard/totalrevenue",
+    EMPLOYEE: "dashboard/employeesalarydistribution",
   },
 };

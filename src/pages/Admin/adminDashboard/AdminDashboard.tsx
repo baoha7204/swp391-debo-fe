@@ -8,10 +8,12 @@ import TreatmentPieChart from './components/TreatmentPieChart';
 import { useEffect, useState } from 'react';
 import axios from '@/config/axios';
 import { API_ENDPOINTS } from '@/utils/api';
+import EmployeePieChart from './components/EmployeePieChart';
 
 const AdminDashboard = () => {
     const [treatmentCategories, setTreatmentCategories] = useState([]);
     const [categories, setCategories] = useState([]);
+    const [employees, setEmployees] = useState([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -19,8 +21,10 @@ const AdminDashboard = () => {
             try {
                 const treatmentRes = await axios.get(API_ENDPOINTS.DASHBOARD.TREATMENT);
                 const categoryRes = await axios.get(API_ENDPOINTS.DASHBOARD.CATEGORIES);
+                const employeeRes = await axios.get(API_ENDPOINTS.DASHBOARD.EMPLOYEE);
                 setTreatmentCategories(treatmentRes.data.data.list);
                 setCategories(categoryRes.data.data.list);
+                setEmployees(employeeRes.data.data.list);
             } catch (error) {
                 console.error("Failed to fetch data:", error);
             } finally {
@@ -56,11 +60,19 @@ const AdminDashboard = () => {
         },
     ];
 
+    const data2 = [
+        {
+            label: "Employee Role State",
+            component: <EmployeePieChart Employees={employees} />,
+        }
+    ];
+
     return (
         <Box sx={{ p: 3 }}>
             <MiniHeader content="Dashboard" IconComponent={DashboardIcon} />
             <DashboardList data={data} />
             <DashboardList data={data1} />
+            <DashboardList data={data2} />
         </Box>
     );
 }

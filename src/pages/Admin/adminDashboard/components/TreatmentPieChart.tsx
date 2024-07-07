@@ -3,6 +3,7 @@ import { PieChart } from '@mui/x-charts/PieChart';
 type TreatmentCategoriesProp = {
     treatId: number;
     totalAppointments: number;
+    treatmentName: string;
 }
 
 type TreatmentPieChartProps = {
@@ -10,16 +11,10 @@ type TreatmentPieChartProps = {
 }
 
 function TreatmentPieChart({ treatmentCategories }: TreatmentPieChartProps) {
-    const treatIdToLabel: { [key: number]: string } = {
-        1: 'Nieng Rang Cao Cap',
-        2: 'test',
-        3: 'Nho Rang',
-        4: 'Rang su luxury'
-    };
 
     const PieData = treatmentCategories.map((treatment) => ({
         value: treatment.totalAppointments,
-        label: treatIdToLabel[treatment.treatId] || 'Unknown'
+        label: treatment.treatmentName,
     }));
 
     return (
