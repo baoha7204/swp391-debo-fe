@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Box,
   CssBaseline,
@@ -27,6 +27,15 @@ const AuthLayout = () => {
     setAuthMode(authMode === "signin" ? "signup" : "signin");
     navigate(authMode === "signin" ? "/register" : "/login");
   };
+
+  useEffect(() => {
+    if (authMode === "signin" && location.pathname === "/register") {
+      setAuthMode("signup");
+    }
+    if (authMode === "signup" && location.pathname === "/login") {
+      setAuthMode("signin");
+    }
+  }, [authMode, location.pathname]);
 
   return (
     <Grid container component="main" sx={{ height: "100vh" }}>

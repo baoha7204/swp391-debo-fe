@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitHandler, useForm } from "react-hook-form";
 
@@ -12,8 +12,6 @@ import { RegisterFormProps } from "../RegisterForm";
 
 const useRegister = (register: RegisterFormProps) => {
   const navigate = useNavigate();
-  const location = useLocation();
-  const from = location.state?.from?.pathname || "/";
   const {
     handleSubmit,
     reset,
@@ -43,7 +41,7 @@ const useRegister = (register: RegisterFormProps) => {
     }
     // successfully registered
     toastSuccess("Register successfully!");
-    navigate(from, { replace: true });
+    navigate("/login");
   };
 
   useEffect(() => {

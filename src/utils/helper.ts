@@ -87,8 +87,8 @@ export const formatDateSlotString = (
   return dayjs(`${dateRes}T${slot}`, format).format("YYYY-MM-DD HH:mm A");
 };
 
-export const formatDateOnlyString = (date: Date, format = "YYYY-MM-DD") => {
-  return dayjs(date).format(format);
+export const formatDateOnlyString = (date?: Date, format = "YYYY-MM-DD") => {
+  return !date ? "None" : dayjs(date).format(format);
 };
 
 export const formatVnMoney = (value: number | null) =>

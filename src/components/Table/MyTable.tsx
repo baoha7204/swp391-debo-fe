@@ -76,7 +76,7 @@ const MyTable = <T extends RowData>({ url, columns }: TableProps<T>) => {
                     <TableCell key={column.id as Key} align={column.align}>
                       {column.isDetail ? (
                         <LinkRouter to={row.id + ""}>
-                          {formattedValue as string}
+                          {(formattedValue as string) || "User"}
                         </LinkRouter>
                       ) : column.isPatientDetail ? (
                         <LinkRouter
@@ -85,7 +85,7 @@ const MyTable = <T extends RowData>({ url, columns }: TableProps<T>) => {
                             row.cusId
                           }
                         >
-                          {formattedValue as string}
+                          {(formattedValue as string) || "User"}
                         </LinkRouter>
                       ) : (
                         (formattedValue as string)
