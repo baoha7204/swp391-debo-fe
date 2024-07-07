@@ -38,6 +38,7 @@ const Profile = () => {
             fullWidth
             id="email"
             inputProps={{ "data-testid": "email" }}
+            disabled
           />
           <FormInputText
             control={control}
