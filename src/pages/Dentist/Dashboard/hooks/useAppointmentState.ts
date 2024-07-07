@@ -5,13 +5,13 @@ import { errorToastHandler } from "@/utils/toast/actions";
 import dentistDashboardApi from "@/utils/api/dashboardApi/dentist";
 
 const useAppointmentState = () => {
-  const { user, isLoading: isUserLoading } = useContext(UserContext);
+  const { user, isLoading } = useContext(UserContext);
   const [data, setData] = useState<PieValueType[] | null>(null);
 
   useEffect(() => {
     const abortController = new AbortController();
 
-    if (!user?.id || isUserLoading) {
+    if (!user?.id || isLoading) {
       return;
     }
 
@@ -46,7 +46,7 @@ const useAppointmentState = () => {
     fetchRemote();
 
     return () => abortController.abort();
-  }, [user?.id, isUserLoading]);
+  }, [user?.id, isLoading]);
 
   return { data };
 };

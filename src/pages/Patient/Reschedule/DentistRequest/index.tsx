@@ -9,8 +9,8 @@ import { formatRole } from "@/utils/jwt";
 const DentistRescheduleRequest = () => {
   const { token } = useParams();
   const navigate = useNavigate();
-  const { user } = useContext(UserContext);
-  const { isLoading, success } = useDentReschedule(token);
+  const { user, isLoading: isUserLoading } = useContext(UserContext);
+  const { isLoading, success } = useDentReschedule(isUserLoading, token);
   return isLoading ? (
     <>
       <CircularIndeterminate />

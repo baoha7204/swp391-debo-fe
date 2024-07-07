@@ -12,7 +12,9 @@ const usePaymentStatus = (userLoading: boolean, id?: string) => {
     setIsLoading(true);
     const abortController = new AbortController();
 
-    if ((data && data.payment?.isGeneralCheckup) || !id || userLoading) {
+    if (userLoading) return;
+
+    if ((data && data.payment?.isGeneralCheckup) || !id) {
       setStatus(true);
       setIsLoading(false);
       return;
