@@ -15,7 +15,11 @@ import LinkRouter from "@/components/LinkRouter";
 import useTableControl from "@/hooks/useControlTable";
 import useFetchTableList from "@/hooks/useFetchTableList";
 import { TableProps } from "./types/core";
-import { formatDateOnlyString, formatDateSlotString } from "@/utils/helper";
+import {
+  formatDateOnlyString,
+  formatDateSlotString,
+  formatStatus,
+} from "@/utils/helper";
 import { UserContext } from "@/pages/User/user.context";
 import { formatRole } from "@/utils/jwt";
 
@@ -23,6 +27,8 @@ type RowData = {
   id: Key;
   timeSlot?: number;
   cusId?: string;
+  startDate?: Date;
+  start?: Date;
 };
 
 const MyTable = <T extends RowData>({ url, columns }: TableProps<T>) => {
@@ -57,6 +63,12 @@ const MyTable = <T extends RowData>({ url, columns }: TableProps<T>) => {
                     ? formatDateSlotString(row.timeSlot!, value as Date)
                     : column.isDateOnly
                     ? formatDateOnlyString(value as Date)
+                    : column.isStatus
+                    ? formatStatus(
+                        row.startDate || row.start!,
+                        row.timeSlot!,
+                        value as string
+                      )
                     : column.format
                     ? column.format(value as string)
                     : value;

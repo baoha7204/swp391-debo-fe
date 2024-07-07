@@ -93,3 +93,12 @@ export const formatVnMoney = (value: number | null) =>
 
 export const formatNumericMonthToAbbreviated = (value: number) =>
   dayjs(value + "", "M").format("MMM");
+
+export const formatStatus = (date: Date, timeSlot: number, value: string) => {
+  if (value !== "future") return value;
+  const begin = formatDateSlot(timeSlot, date);
+  if (dayjs().isBefore(begin)) return value;
+  const end = formatDateSlot(timeSlot + 1, date);
+  if (dayjs().isAfter(begin) && dayjs().isBefore(end)) return "on-going";
+  return "done";
+};
