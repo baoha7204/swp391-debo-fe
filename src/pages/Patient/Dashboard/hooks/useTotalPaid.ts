@@ -85,7 +85,7 @@ const useTotalPaid = () => {
 
         setData((prev) => ({
           ...prev,
-          total: result.data.list.slice(-1)[0].runningTotal || 0,
+          total: result.data.list.slice(-1)[0]?.runningTotal || 0,
           dataset,
           treatment: treatmentRef,
         }));
