@@ -15,6 +15,7 @@ export const API_ENDPOINTS = {
   },
   BRANCH: {
     LIST: "branch",
+    GET_BRANCH_MANAGER: "branch/branchmanager",
   },
   TREATMENT: {
     TREATMENT: "treatments",
@@ -65,7 +66,9 @@ export const API_ENDPOINTS = {
     //Update branch for employee
     UPDATE_BRANCH_FOR_EMPLOYEE: "updateBranchForEmployee",
     //GetEmployeeWithID
-    EMPLOYEE_WITH_ID: "getempbyid"
+    EMPLOYEE_WITH_ID: "getempbyid",
+    //Get Employee with Branch ID
+    EMPLOYEE_WITH_BRANCH_ID: "getempwithbranchid",
   },
   PAYMENT: {
     ONE: "payment",

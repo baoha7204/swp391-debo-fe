@@ -1,8 +1,11 @@
 import MyDetail from "@/components/MyDetail/MyDetail";
 import { ListColumn } from "@/components/Table/types/core";
+import MiniHeader from "@/pages/Admin/components/MiniHeader/MiniHeader";
 import { API_ENDPOINTS } from "@/utils/api";
+import { Box } from "@mui/material";
+import GroupIcon from "@mui/icons-material/Group";
 
-type AllStaffsDetailData = {
+type ManagerStaffsDetailData = {
     id: number;
     avt: string;
     username: string;
@@ -14,7 +17,7 @@ type AllStaffsDetailData = {
     gender: boolean;
 };
 
-const columns: readonly ListColumn<AllStaffsDetailData>[] = [
+const columns: readonly ListColumn<ManagerStaffsDetailData>[] = [
     {
         id: "avt", label: "Avatar", minWidth: 100,
         format: (value: string) => {
@@ -36,11 +39,13 @@ const columns: readonly ListColumn<AllStaffsDetailData>[] = [
     },
 ];
 
-function AllStaffsDetailBody() {
-
+function ManagerStaffsDetailBody() {
     return (
-        <MyDetail<AllStaffsDetailData> url={API_ENDPOINTS.USERS.USER} columns={columns} updateBut={true} assignBut={true} />
+        <Box sx={{ p: '24px' }}>
+            <MiniHeader content="Employee Detail" IconComponent={GroupIcon} />
+            <MyDetail<ManagerStaffsDetailData> url={API_ENDPOINTS.USERS.USER} columns={columns} updateBut={true} assignBut={false} />
+        </Box>
     );
 }
 
-export default AllStaffsDetailBody;
+export default ManagerStaffsDetailBody;

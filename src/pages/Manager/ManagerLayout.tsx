@@ -6,7 +6,7 @@ import { useContext } from "react";
 import { UserContext } from "../User/user.context";
 
 const SidebarManagerBody = [
-    { title: "Appointment List", path: "appointments", icon: <ChecklistIcon /> },
+    { title: "Appointments", path: "appointments", icon: <ChecklistIcon /> },
     { title: "Employees", path: "managerAllStaffList", icon: <GroupIcon />, },
 ];
 
@@ -16,6 +16,7 @@ const ManagerRoutes = [
     { path: "appointments/:id/info", breadcrumb: "Info" },
     { path: "appointments/:id/notes", breadcrumb: "Notes" },
     { path: "managerAllStaffList", breadcrumb: "Employees" },
+    { path: "managerAllStaffList/:id", breadcrumb: "Employee Detail" },
 ]
 
 function ManagerLayout() {
