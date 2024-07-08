@@ -13,7 +13,7 @@ const useFetchDentists = () => {
     setIsLoading(true);
     const abortController = new AbortController();
 
-    if (!data || !data.treatment) {
+    if (!data || !data.treatment || !data.branch) {
       errorToastHandler({ message: "Please select a treatment first." });
       setDentists([]);
       setIsLoading(false);
@@ -24,6 +24,7 @@ const useFetchDentists = () => {
       try {
         const result = await dentistApi.getListByTreatmentId(
           data.treatment?.id,
+          data.branch?.id,
           abortController.signal
         );
         if (!result.success) {
