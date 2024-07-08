@@ -1,19 +1,16 @@
 import DefaultLayout from "@/components/Layout/DefaultLayout";
 import ChecklistIcon from "@mui/icons-material/Checklist";
 import GroupIcon from "@mui/icons-material/Group";
-import EventIcon from "@mui/icons-material/Event";
 import { Outlet } from "react-router-dom";
 import { useContext } from "react";
 import { UserContext } from "../User/user.context";
 
 const SidebarManagerBody = [
-    { title: "Calendar", path: "calendar", icon: <EventIcon /> },
     { title: "Appointment List", path: "appointments", icon: <ChecklistIcon /> },
     { title: "Employees", path: "managerAllStaffList", icon: <GroupIcon />, },
 ];
 
 const ManagerRoutes = [
-    { path: "calendar", breadcrumb: "Calendar" },
     { path: "appointments", breadcrumb: "Appointments" },
     { path: "appointments/:id", breadcrumb: "Appointment Detail" },
     { path: "appointments/:id/info", breadcrumb: "Info" },
