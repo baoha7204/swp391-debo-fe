@@ -11,6 +11,7 @@ const FileAttachment = ({
   file,
   disabled,
   handleRemoveFile,
+  readonly,
 }: FileAttachmentProps) => {
   const icon: React.ReactNode = /\.(g?zip|tar|gz|rar)$/i.test(file.name) ? (
     // Set icon for compressed files
@@ -72,11 +73,13 @@ const FileAttachment = ({
             <DownloadIcon />
           </IconButton>
         </Typography>
-        <Typography component="div" sx={{ mr: -0.5, textAlign: "right" }}>
-          <IconButton disabled={disabled} onClick={() => handleRemoveFile()}>
-            <CloseIcon />
-          </IconButton>
-        </Typography>
+        {!readonly && (
+          <Typography component="div" sx={{ mr: -0.5, textAlign: "right" }}>
+            <IconButton disabled={disabled} onClick={() => handleRemoveFile()}>
+              <CloseIcon />
+            </IconButton>
+          </Typography>
+        )}
       </Box>
     </>
   );

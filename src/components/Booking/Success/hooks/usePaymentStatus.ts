@@ -3,7 +3,7 @@ import { ProgressContext } from "../../progress.context";
 import paymentApi from "@/utils/api/paymentApi";
 import { errorToastHandler } from "@/utils/toast/actions";
 
-const usePaymentStatus = (id?: string) => {
+const usePaymentStatus = (userLoading: boolean, id?: string) => {
   const { data } = useContext(ProgressContext);
   const [status, setStatus] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -11,6 +11,8 @@ const usePaymentStatus = (id?: string) => {
   useLayoutEffect(() => {
     setIsLoading(true);
     const abortController = new AbortController();
+
+    if (userLoading) return;
 
     if ((data && data.payment?.isGeneralCheckup) || !id) {
       setStatus(true);
@@ -49,7 +51,7 @@ const usePaymentStatus = (id?: string) => {
     return () => {
       abortController.abort();
     };
-  }, [data, id]);
+  }, [data, id, userLoading]);
 
   return { status, isLoading };
 };

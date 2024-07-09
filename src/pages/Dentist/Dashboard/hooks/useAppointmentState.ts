@@ -1,8 +1,8 @@
-import { UserContext } from "@/pages/User/user.context";
-import patientDashboardApi from "@/utils/api/dashboardApi/patient";
-import { errorToastHandler } from "@/utils/toast/actions";
-import { PieValueType } from "@mui/x-charts";
 import { useContext, useEffect, useState } from "react";
+import { PieValueType } from "@mui/x-charts";
+import { UserContext } from "@/pages/User/user.context";
+import { errorToastHandler } from "@/utils/toast/actions";
+import dentistDashboardApi from "@/utils/api/dashboardApi/dentist";
 
 const useAppointmentState = () => {
   const { user, isLoading } = useContext(UserContext);
@@ -17,7 +17,7 @@ const useAppointmentState = () => {
 
     const fetchRemote = async () => {
       try {
-        const response = await patientDashboardApi.getAppointmentState(
+        const response = await dentistDashboardApi.getAppointmentState(
           user.id,
           abortController.signal
         );
@@ -30,7 +30,7 @@ const useAppointmentState = () => {
 
         const data = result.data.list.map((item) => ({
           id: item.status,
-          value: item.appointmentCount,
+          value: item.totalAppointments,
           label: item.status,
         }));
 

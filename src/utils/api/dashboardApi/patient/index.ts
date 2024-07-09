@@ -9,6 +9,7 @@ export type DashboardPatientResponse = {
   totalPaidAmount: number | null;
   appointmentCount: number;
 };
+
 const patientDashboardApi = {
   getAppointmentState: async (
     patientId: string,

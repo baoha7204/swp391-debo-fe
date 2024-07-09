@@ -76,7 +76,7 @@ export default function useUpdateBranchForEmployee() {
 
     const setValues = (value: UpdateBranchForEmployeeInputs) => {
         setValue("brId", value.brId);
-        setValue("salary", formatVnMoney(value.salary) as any);
+        setValue("salary", value.salary);
     }
 
     return [handleSubmit(onSubmit), isSubmitting, control, setValues] as const;

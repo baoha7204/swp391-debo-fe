@@ -11,15 +11,17 @@ export type FilePickerProps = {
     > | null;
   };
   ref?: RefCallBack;
-  onUpload: UploadFunction;
+  onUpload?: UploadFunction;
   onChange?: ChangeEventHandler;
   disabled: boolean;
+  readonly?: boolean;
 };
 
 export interface FileAttachmentProps {
   file: FileProps;
   index?: number;
   disabled?: boolean;
+  readonly: boolean;
   // eslint-disable-next-line @typescript-eslint/ban-types
   handleRemoveFile: Function;
 }

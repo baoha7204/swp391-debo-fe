@@ -10,13 +10,15 @@ export type RescheduleToken = {
   CusId: string;
 };
 
-const useDentReschedule = (token?: string) => {
+const useDentReschedule = (userLoading: boolean, token?: string) => {
   const [isLoading, setIsLoading] = useState(true);
   const [success, setSuccess] = useState(true);
 
   useEffect(() => {
     setIsLoading(true);
     setSuccess(true);
+
+    if (userLoading) return;
 
     const decoded = token ? decodeToken<RescheduleToken>(token) : undefined;
 
@@ -63,7 +65,7 @@ const useDentReschedule = (token?: string) => {
     return () => {
       abortController.abort();
     };
-  }, [token]);
+  }, [token, userLoading]);
 
   return { isLoading, success };
 };

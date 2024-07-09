@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 
 const TreatmentCardSummary = (props: TreatmentCardProps) => {
-  const { name, category, description, price, rule_name, num_of_appointment } =
+  const { name, categoryName, description, price, ruleName, numOfAppointment } =
     props;
   return (
     <Card>
@@ -41,7 +41,7 @@ const TreatmentCardSummary = (props: TreatmentCardProps) => {
           >
             <Box>
               <Typography variant="body1" color="text.secondary">
-                {category === 1 ? "Medical" : "Cosmetic"}
+                {categoryName}
               </Typography>
               <Typography variant="body2" color="text.secondary">
                 {description}
@@ -49,11 +49,11 @@ const TreatmentCardSummary = (props: TreatmentCardProps) => {
             </Box>
             <Box>
               <Typography variant="body1" color="text.secondary">
-                Frequency: {rule_name}
+                Frequency: {ruleName}
               </Typography>
               <Typography variant="body2" color="text.secondary">
-                {num_of_appointment} appointment
-                {num_of_appointment > 1 ? "s" : null} required
+                {numOfAppointment} appointment
+                {numOfAppointment > 1 ? "s" : null} required
               </Typography>
             </Box>
           </Box>

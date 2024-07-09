@@ -30,6 +30,7 @@ export const API_ENDPOINTS = {
     APPOINTMENT: {
       LIST: "dentist/appointments",
     },
+    PATIENT_LIST: "dentist/patients",
   },
   SLOT: {
     LIST: "slot",
@@ -77,6 +78,7 @@ export const API_ENDPOINTS = {
   },
   DASHBOARD: {
     APPOINTMENT_STATE: "dashboard/appointmentstate",
+    DENTIST_APPOINTMENT_STATE: "dashboard/dentist/appointmentstate",
     TOTAL_PAID: "dashboard/totalpaid",
     CATEGORIES: "dashboard/distribution/categories",
     TREATMENT: "dashboard/distribution/treatment",
@@ -86,5 +88,6 @@ export const API_ENDPOINTS = {
     BRANCH_TOTAL: "dashboard/branchtotalrevenue",
     BRANCH_TREATMENT: "dashboard/branch/distribution/treatment",
     BRANCH_CATEGORY: "dashboard/branch/distribution/category",
+    DENTIST_TOTAL_PATIENT: "dashboard/dentist/totalPatient",
   },
 };

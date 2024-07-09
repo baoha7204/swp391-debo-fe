@@ -140,7 +140,7 @@ function UpdateBranchForEmployee() {
                         name="salary"
                         outsideLabel="Employee Salary:"
                         fullWidth
-                        label="Salary"
+                        label="Salary (VNĐ)"
                         autoFocus
                         inputProps={{ "data-testid": "treatmentPrice" }}
                     />

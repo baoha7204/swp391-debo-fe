@@ -20,14 +20,11 @@ export default function MyCKEditor({ onSubmit }: MyCKEditorProps) {
     const editorRef = useRef<HTMLDivElement | null>(null);
     const [isLayoutReady, setIsLayoutReady] = useState(false);
     const [editorData, setEditorData] = useState<string | null>('');
-
-    if (!isLayoutReady) {
-        <div>...Loading</div>
-    }
+    const [isDataReady, setIsDataReady] = useState(false);
 
     const { id } = useParams<{ id: string }>();
 
-    const { user } = useContext(UserContext);
+    const { user, isLoading: isUserLoading } = useContext(UserContext);
 
     console.log("User", user);
 
@@ -42,17 +39,25 @@ export default function MyCKEditor({ onSubmit }: MyCKEditorProps) {
             console.log("getNote", res.data.data.note);
         } catch (error) {
             console.error("Failed to fetch note:", error);
+        } finally {
+            setIsDataReady(true);
         }
     }
 
     useEffect(() => {
-        getNote();
-    }, [id]);
+        if (user?.id && !isUserLoading) {
+            getNote();
+        }
+    }, [user, isUserLoading, id]);
 
     useEffect(() => {
         setIsLayoutReady(true);
         return () => setIsLayoutReady(false);
     }, []);
+
+    if (!user?.id || isUserLoading || !isLayoutReady || !isDataReady) {
+        return <div>...Loading</div>;
+    }
 
     const editorConfig = {
         toolbar: {
@@ -83,13 +88,19 @@ export default function MyCKEditor({ onSubmit }: MyCKEditorProps) {
                                     <CKEditor
                                         onReady={(editor) => {
                                             const toolbarElement = editor.ui.view.toolbar.element as HTMLElement;
-                                            if (editorToolbarRef.current) {
-                                                editorToolbarRef.current.appendChild(editor.ui.view.toolbar.element as Node);
-                                            }
+                                            console.log('Toolbar: ', toolbarElement);
+
                                             // Set read-only mode based on user role
                                             if (user?.role === 5) {
-                                                editor.isReadOnly = true;
+                                                console.log("User is a Customer");
+                                                editor.enableReadOnlyMode('readonlyMode');
                                                 toolbarElement.style.display = 'none';
+                                            } else {
+                                                editor.disableReadOnlyMode('readonlyMode');
+                                                toolbarElement.style.display = 'flex';
+                                            }
+                                            if (editorToolbarRef.current) {
+                                                editorToolbarRef.current.appendChild(toolbarElement);
                                             }
                                         }}
 

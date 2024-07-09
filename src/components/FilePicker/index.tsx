@@ -19,7 +19,10 @@ import { StyledContainer } from "./style";
 import FileAttachment from "./FileAttachment";
 
 const FilePicker = forwardRef<HTMLInputElement, FilePickerProps>(
-  ({ value, onUpload, disabled }: FilePickerProps, forwardedRef) => {
+  (
+    { value, onUpload, disabled, readonly = false }: FilePickerProps,
+    forwardedRef
+  ) => {
     const inputRef = useRef<HTMLInputElement>(null);
     useImperativeHandle(
       forwardedRef,
@@ -28,7 +31,6 @@ const FilePicker = forwardRef<HTMLInputElement, FilePickerProps>(
     // eslint-disable-next-line
     // @ts-ignore
     const [file, setFile] = useState<FileProps | null>(() => {
-      console.log(value.url, value.metadata);
       if (!value.url || !value.metadata) return null;
       return {
         name: value.metadata.name,
@@ -51,6 +53,8 @@ const FilePicker = forwardRef<HTMLInputElement, FilePickerProps>(
       ) => {
         setAnimate(false);
         setError(null);
+
+        if (!onUpload) return;
 
         // Get file from input
         let file;
@@ -113,6 +117,8 @@ const FilePicker = forwardRef<HTMLInputElement, FilePickerProps>(
     const handleDelete = async () => {
       setError(null);
 
+      if (!onUpload) return;
+
       if (inputRef.current) {
         inputRef.current.value = "";
       }
@@ -173,66 +179,72 @@ const FilePicker = forwardRef<HTMLInputElement, FilePickerProps>(
             <Typography>1 file joined</Typography>
           </Box>
         )}
-        <Paper
-          elevation={0}
-          sx={{
-            p: 1,
-            transition: 500,
-            background: (theme) =>
-              animate
-                ? theme.palette.secondary.main
-                : theme.palette.primary.main,
-          }}
-        >
-          <Grid
-            container
-            spacing={2}
-            alignItems="center"
-            justifyContent="center"
-          >
-            <Grid
-              item
-              xs={12}
-              sm
-              md
+        {!readonly && (
+          <>
+            <Paper
+              elevation={0}
               sx={{
-                color: (theme) => theme.palette.secondary.main,
-                textAlign: "center",
-                mt: { xs: 0, sm: 2 },
+                p: 1,
+                transition: 500,
+                background: (theme) =>
+                  animate
+                    ? theme.palette.secondary.main
+                    : theme.palette.primary.main,
               }}
             >
-              <Hidden smDown>
-                <Typography variant="h5">
-                  <b>Drag to drop</b>
-                </Typography>
-              </Hidden>
-              <Hidden smUp>
-                <Typography variant="h6">
-                  <b>Drag to drop</b>
-                </Typography>
-              </Hidden>
-              <Typography variant="caption">
-                or
-                <Button
-                  component="label"
-                  variant="contained"
-                  role={undefined}
-                  tabIndex={-1}
-                  startIcon={<CloudUploadIcon />}
-                  sx={{ ml: 1, mt: 1, borderRadius: 0 }}
+              <Grid
+                container
+                spacing={2}
+                alignItems="center"
+                justifyContent="center"
+              >
+                <Grid
+                  item
+                  xs={12}
+                  sm
+                  md
+                  sx={{
+                    color: (theme) => theme.palette.secondary.main,
+                    textAlign: "center",
+                    mt: { xs: 0, sm: 2 },
+                  }}
                 >
-                  Upload file
-                  <VisuallyHiddenInput
-                    type="file"
-                    ref={inputRef}
-                    onChange={addFile}
-                  />
-                </Button>
-              </Typography>
-            </Grid>
-          </Grid>
-        </Paper>
-        {error && <Typography sx={{ color: "error.main" }}>{error}</Typography>}
+                  <Hidden smDown>
+                    <Typography variant="h5">
+                      <b>Drag to drop</b>
+                    </Typography>
+                  </Hidden>
+                  <Hidden smUp>
+                    <Typography variant="h6">
+                      <b>Drag to drop</b>
+                    </Typography>
+                  </Hidden>
+                  <Typography variant="caption">
+                    or
+                    <Button
+                      component="label"
+                      variant="contained"
+                      role={undefined}
+                      tabIndex={-1}
+                      startIcon={<CloudUploadIcon />}
+                      sx={{ ml: 1, mt: 1, borderRadius: 0 }}
+                    >
+                      Upload file
+                      <VisuallyHiddenInput
+                        type="file"
+                        ref={inputRef}
+                        onChange={addFile}
+                      />
+                    </Button>
+                  </Typography>
+                </Grid>
+              </Grid>
+            </Paper>
+            {error && (
+              <Typography sx={{ color: "error.main" }}>{error}</Typography>
+            )}
+          </>
+        )}
         <StyledContainer
           component="div"
           sx={{
@@ -244,12 +256,15 @@ const FilePicker = forwardRef<HTMLInputElement, FilePickerProps>(
             maxHeight: 357,
           }}
         >
-          {file && (
+          {file ? (
             <FileAttachment
               file={file}
               disabled={disabled}
               handleRemoveFile={handleDelete}
+              readonly={readonly}
             />
+          ) : (
+            "No medical record yet"
           )}
         </StyledContainer>
       </Paper>

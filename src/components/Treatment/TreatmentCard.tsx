@@ -15,16 +15,16 @@ import { formatVnMoney } from "@/utils/helper";
 
 export type TreatmentCardProps = {
   id: number;
-  category: number;
+  categoryName: string;
   name: string;
   description: string;
-  price: number | null;
-  num_of_appointment: number;
-  rule_name: string;
+  price: number;
+  numOfAppointment: number;
+  ruleName: string;
 };
 
 const TreatmentCard = (props: TreatmentCardProps) => {
-  const { category, description, price, name, num_of_appointment, rule_name } =
+  const { categoryName, description, price, name, numOfAppointment, ruleName } =
     props;
   const { handleDoneIncrement, setData } = useContext(ProgressContext);
 
@@ -61,21 +61,21 @@ const TreatmentCard = (props: TreatmentCardProps) => {
             alignItems="center"
           >
             <Typography variant="body1" color="text.secondary">
-              {category === 1 ? "Medical" : "Cosmetic"}
+              {categoryName}
             </Typography>
             <Typography
               variant="body1"
               color="text.secondary"
               sx={{ textAlign: "right" }}
             >
-              Frequency: {rule_name}
+              Frequency: {ruleName}
             </Typography>
           </Box>
           <Typography variant="body2" color="text.secondary">
             {description}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            {num_of_appointment > 1 ? "s" : null} required
+            {numOfAppointment > 1 ? "s" : null} required
           </Typography>
         </CardContent>
       </CardActionArea>
