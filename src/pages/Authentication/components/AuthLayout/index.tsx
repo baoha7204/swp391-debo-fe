@@ -10,7 +10,6 @@ import {
 import Logo from "@/components/Logo";
 import LoginForm from "../Login/LoginForm";
 import RegisterForm from "../Register/RegisterForm";
-import MyGoogleLogin from "../MyGoogleLogin";
 import AuthModeOffer from "../AuthModeOffer";
 import { useLocation, useNavigate } from "react-router-dom";
 import backgroundUrl from "/assets/Login-Background.jpg";
@@ -86,7 +85,7 @@ const AuthLayout = () => {
           </Grid>
           <Divider />
           <Grid container flexDirection={"column"} sx={{ gap: 1 }}>
-            {authMode === "signin" && (
+            {/* {authMode === "signin" && (
               <>
                 <Grid item>
                   <Typography
@@ -102,7 +101,7 @@ const AuthLayout = () => {
                   <MyGoogleLogin />
                 </Grid>
               </>
-            )}
+            )} */}
             <AuthModeOffer
               authMode={authMode}
               onAuthModeChange={handleAuthModeChange}

@@ -2,6 +2,7 @@ export const API_ENDPOINTS = {
   AUTH: {
     LOGIN_CREDENTIALS: "auth/credentials/login",
     LOGIN_GOOGLE: "auth/google/login",
+    GET_USER_GOOGLE: "https://www.googleapis.com/oauth2/v3/userinfo",
     REGISTER: "auth/register",
     LOGOUT: "auth/logout",
     REFRESH_TOKEN_CREDENTIALS: "auth/credentials/refreshToken",
