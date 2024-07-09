@@ -1,8 +1,8 @@
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import HealthAndSafetyIcon from "@mui/icons-material/HealthAndSafety";
 import GroupIcon from "@mui/icons-material/Group";
-import SettingsIcon from "@mui/icons-material/Settings";
-import ReportIcon from "@mui/icons-material/Report";
+// import SettingsIcon from "@mui/icons-material/Settings";
+// import ReportIcon from "@mui/icons-material/Report";
 import ChecklistIcon from "@mui/icons-material/Checklist";
 import StoreIcon from "@mui/icons-material/Store";
 import { Outlet } from "react-router-dom";
@@ -18,8 +18,8 @@ const SidebarAdminBody = [
   { title: "Treatments", path: "treatments", icon: <HealthAndSafetyIcon />, },
   { title: "Patients", path: "patientList", icon: <AccountCircleIcon />, },
   { title: "Employees", path: "adminAllStaffList", icon: <GroupIcon />, },
-  { title: "Reports", path: "", icon: <ReportIcon />, },
-  { title: "Setting", path: "", icon: <SettingsIcon />, },
+  // { title: "Reports", path: "", icon: <ReportIcon />, },
+  // { title: "Setting", path: "", icon: <SettingsIcon />, },
 ];
 
 const AdminRoutes = [

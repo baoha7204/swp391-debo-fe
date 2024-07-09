@@ -366,7 +366,7 @@ function LandingContent() {
                                                         color="text.primary"
                                                     >
                                                         Gender: <span style={{ fontWeight: 700 }}>
-                                                            {staff.gender ? 'Male' : 'Female'}
+                                                            {staff.gender === true ? 'Male' : 'Female'}
                                                         </span>
                                                     </Typography>
                                                 </React.Fragment>
