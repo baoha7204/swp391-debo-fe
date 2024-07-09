@@ -3,7 +3,6 @@ import DashboardIcon from '@mui/icons-material/Dashboard';
 import CategoriesPieChart from './components/components/CategoriesPieChart';
 import DashboardList from '@/components/Dashboard/List';
 import { Box } from '@mui/material';
-import AppointmentBarChart from './components/components/AppointmentBarChart';
 import TreatmentPieChart from './components/components/TreatmentPieChart';
 import { useContext, useEffect, useState } from 'react';
 import axios from '@/config/axios';
@@ -80,13 +79,6 @@ const ManagerDashboard = () => {
         },
     ];
 
-    // const data1 = [
-    //     {
-    //         label: "Appointment State",
-    //         component: <AppointmentBarChart />,
-    //         flex: 1,
-    //     },
-    // ];
 
     const data2 = [
         {
@@ -99,7 +91,6 @@ const ManagerDashboard = () => {
         <Box sx={{ p: 3 }}>
             <MiniHeader content="Dashboard" IconComponent={DashboardIcon} />
             <DashboardList data={data} />
-            {/* <DashboardList data={data1} /> */}
             <DashboardList data={data2} />
         </Box>
     );
