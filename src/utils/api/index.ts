@@ -16,6 +16,7 @@ export const API_ENDPOINTS = {
   BRANCH: {
     LIST: "branch",
     GET_BRANCH_MANAGER: "branch/branchmanager",
+    BRANCH_APPOINTMENT: "branch/branchappointment",
   },
   TREATMENT: {
     TREATMENT: "treatments",
@@ -45,6 +46,7 @@ export const API_ENDPOINTS = {
     RESCHEDULE_BY_DENTIST: "reschedulebydentist",
     RESCHEDULE_TEMP_DENT: "rescheduletempdent",
     RESCHEDULE_TOKEN: "generateconfirmtoken",
+
   },
   USERS: {
     //User
@@ -82,6 +84,10 @@ export const API_ENDPOINTS = {
     TREATMENT: "dashboard/distribution/treatment",
     TOTAL_REVENEUE: "dashboard/totalrevenue",
     EMPLOYEE: "dashboard/employeesalarydistribution",
+    //Manager Dashboard 
+    BRANCH_TOTAL: "dashboard/branchtotalrevenue",
+    BRANCH_TREATMENT: "dashboard/branch/distribution/treatment",
+    BRANCH_CATEGORY: "dashboard/branch/distribution/category",
     DENTIST_TOTAL_PATIENT: "dashboard/dentist/totalPatient",
   },
 };
