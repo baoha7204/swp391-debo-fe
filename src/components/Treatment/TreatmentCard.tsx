@@ -59,6 +59,8 @@ const TreatmentCard = (props: TreatmentCardProps) => {
             display="flex"
             justifyContent="space-between"
             alignItems="center"
+            gap={2}
+            marginBottom={1}
           >
             <Typography variant="body1" color="text.secondary">
               {categoryName}
@@ -71,10 +73,11 @@ const TreatmentCard = (props: TreatmentCardProps) => {
               Frequency: {ruleName}
             </Typography>
           </Box>
-          <Typography variant="body2" color="text.secondary">
+          <Typography variant="body2" color="text.secondary" marginBottom={2}>
             {description}
           </Typography>
           <Typography variant="body2" color="text.secondary">
+            {numOfAppointment} appointment
             {numOfAppointment > 1 ? "s" : null} required
           </Typography>
         </CardContent>

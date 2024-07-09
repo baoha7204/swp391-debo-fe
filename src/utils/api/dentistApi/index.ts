@@ -5,11 +5,16 @@ import { errorToastHandler } from "@/utils/toast/actions";
 import { DentistCardProps } from "@/components/Dentist/DentistCard";
 
 const dentistApi = {
-  getListByTreatmentId: async (id?: number, signal?: GenericAbortSignal) => {
+  getListByTreatmentId: async (
+    treateId?: number,
+    branchId?: number,
+    signal?: GenericAbortSignal
+  ) => {
     return await get<DentistCardProps[]>(
       API_ENDPOINTS.DENTIST.LIST,
       {
-        treatment: id,
+        treatment: treateId,
+        branch: branchId,
       },
       {
         signal,

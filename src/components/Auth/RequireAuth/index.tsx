@@ -11,7 +11,6 @@ export type RequireAuthProps = {
 const RequireAuth = ({ allowedRoles }: RequireAuthProps) => {
   const { auth } = useAuth();
   const location = useLocation();
-
   const decoded = auth?.accessToken
     ? decodeToken<Token>(auth.accessToken)
     : undefined;

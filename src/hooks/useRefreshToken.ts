@@ -6,7 +6,6 @@ import { API_ENDPOINTS } from "@/utils/api";
 import { Token } from "@/types/core";
 import { ROLE } from "@/constant/core";
 import { sanitizeString } from "@/utils/helper";
-import { errorToastHandler } from "@/utils/toast/actions";
 import authApi from "@/utils/api/authApi";
 
 const useRefreshToken = () => {
@@ -29,7 +28,7 @@ const useRefreshToken = () => {
       });
 
       if (!data.success || !data.data) {
-        return errorToastHandler(data);
+        return;
       }
       const result = data.data;
 
@@ -38,7 +37,7 @@ const useRefreshToken = () => {
 
       return result.accessToken;
     } catch (error) {
-      errorToastHandler(error.response);
+      console.error(error);
       setRefreshToken("");
     }
   }, [endpoint, accessToken, refreshToken, setAccessToken, setRefreshToken]);

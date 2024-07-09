@@ -1,5 +1,5 @@
 import { AuthResponseType } from "@/pages/Authentication/types/core";
-import { post } from "@/utils/apiCaller";
+import { get, post } from "@/utils/apiCaller";
 import { API_ENDPOINTS } from "..";
 import { errorToastHandler } from "@/utils/toast/actions";
 
@@ -46,17 +46,23 @@ const authApi = {
     return await post<AuthResponseType>(endpoint, data)
       .then((res) => res.data)
       .catch((err) => {
-        errorToastHandler(err.response);
         return err;
       });
   },
-  logout: async () => {
-    return await post(API_ENDPOINTS.AUTH.LOGOUT)
+  logout: async (accessToken: string) => {
+    return await post(API_ENDPOINTS.AUTH.LOGOUT, undefined, {
+      token: accessToken,
+    })
       .then((res) => res.data)
       .catch((err) => {
         errorToastHandler(err.response);
         return err;
       });
+  },
+  googleGetInfo: async (token: string) => {
+    return await get(API_ENDPOINTS.AUTH.GET_USER_GOOGLE, undefined, {
+      Authorization: `Bearer ${token}`,
+    });
   },
 };
 

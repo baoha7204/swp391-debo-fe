@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Box,
   CssBaseline,
@@ -10,7 +10,6 @@ import {
 import Logo from "@/components/Logo";
 import LoginForm from "../Login/LoginForm";
 import RegisterForm from "../Register/RegisterForm";
-import MyGoogleLogin from "../MyGoogleLogin";
 import AuthModeOffer from "../AuthModeOffer";
 import { useLocation, useNavigate } from "react-router-dom";
 import backgroundUrl from "/assets/Login-Background.jpg";
@@ -27,6 +26,15 @@ const AuthLayout = () => {
     setAuthMode(authMode === "signin" ? "signup" : "signin");
     navigate(authMode === "signin" ? "/register" : "/login");
   };
+
+  useEffect(() => {
+    if (authMode === "signin" && location.pathname === "/register") {
+      setAuthMode("signup");
+    }
+    if (authMode === "signup" && location.pathname === "/login") {
+      setAuthMode("signin");
+    }
+  }, [authMode, location.pathname]);
 
   return (
     <Grid container component="main" sx={{ height: "100vh" }}>
@@ -77,7 +85,7 @@ const AuthLayout = () => {
           </Grid>
           <Divider />
           <Grid container flexDirection={"column"} sx={{ gap: 1 }}>
-            {authMode === "signin" && (
+            {/* {authMode === "signin" && (
               <>
                 <Grid item>
                   <Typography
@@ -93,7 +101,7 @@ const AuthLayout = () => {
                   <MyGoogleLogin />
                 </Grid>
               </>
-            )}
+            )} */}
             <AuthModeOffer
               authMode={authMode}
               onAuthModeChange={handleAuthModeChange}

@@ -83,7 +83,7 @@ const SummaryBooking = () => {
             <Box
               sx={{
                 ...ExitWarningModalStyle,
-                width: 400,
+                width: 500,
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
@@ -91,7 +91,7 @@ const SummaryBooking = () => {
               }}
             >
               <Typography variant="h6">Do you really want to leave?</Typography>
-              <Typography variant="h6">
+              <Typography variant="h6" justifyContent="center">
                 Your current appointments will be canceled!
               </Typography>
               <Box display="flex" justifyContent="center">

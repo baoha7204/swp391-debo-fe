@@ -1,5 +1,4 @@
-import { DentistCardProps } from "@/components/Dentist/DentistCard";
-import { formatDentistFullName } from "@/utils/helper";
+import { formatDentistName } from "@/utils/helper";
 import {
   Avatar,
   Card,
@@ -8,9 +7,10 @@ import {
   Typography,
 } from "@mui/material";
 import DefaultDentist from "/assets/Dentist.jpg";
+import { RescheduleDentistCardProps } from "./DentistCard";
 
-const DentistCardSummary = (props: DentistCardProps) => {
-  const { firstName, lastName, avt } = props;
+const DentistCardSummary = (props: RescheduleDentistCardProps) => {
+  const { name, avt } = props;
   return (
     <Card>
       <CardActionArea sx={{ display: "flex", justifyContent: "flex-start" }}>
@@ -26,7 +26,7 @@ const DentistCardSummary = (props: DentistCardProps) => {
             fontWeight={700}
             component="div"
           >
-            {formatDentistFullName(firstName, lastName)}
+            {formatDentistName(name)}
           </Typography>
         </CardContent>
       </CardActionArea>

@@ -22,6 +22,7 @@ import {
 } from "@/utils/helper";
 import { UserContext } from "@/pages/User/user.context";
 import { formatRole } from "@/utils/jwt";
+import CircularIndeterminate from "../CircularIndeterminate";
 
 type RowData = {
   id: Key;
@@ -32,12 +33,14 @@ type RowData = {
 };
 
 const MyTable = <T extends RowData>({ url, columns }: TableProps<T>) => {
-  const { user } = useContext(UserContext);
+  const { user, isLoading } = useContext(UserContext);
   const [controller, handlePageChange, handleChangeRowsPerPage] =
     useTableControl({ page: 0, rowsPerPage: 5 });
   const [list, count] = useFetchTableList<T>({ url, controller });
 
-  return (
+  return isLoading ? (
+    <CircularIndeterminate />
+  ) : (
     <Paper sx={{ width: "100%", overflow: "hidden" }}>
       <TableContainer>
         <Table>
@@ -76,7 +79,7 @@ const MyTable = <T extends RowData>({ url, columns }: TableProps<T>) => {
                     <TableCell key={column.id as Key} align={column.align}>
                       {column.isDetail ? (
                         <LinkRouter to={row.id + ""}>
-                          {formattedValue as string}
+                          {(formattedValue as string) || "User"}
                         </LinkRouter>
                       ) : column.isPatientDetail ? (
                         <LinkRouter
@@ -85,7 +88,7 @@ const MyTable = <T extends RowData>({ url, columns }: TableProps<T>) => {
                             row.cusId
                           }
                         >
-                          {formattedValue as string}
+                          {(formattedValue as string) || "User"}
                         </LinkRouter>
                       ) : (
                         (formattedValue as string)
