@@ -18,7 +18,12 @@ type PatientDetailData = {
 };
 
 const columns: readonly ListColumn<PatientDetailData>[] = [
-    { id: "avt", label: "Avatar", minWidth: 100 },
+    {
+        id: "avt", label: "Avatar", minWidth: 100,
+        format: (value: string) => {
+            return <img src={value} alt="avatar" style={{ width: "50px", height: "50px" }} />;
+        }
+    },
     { id: "username", label: "Username", minWidth: 100 },
     { id: "firstName", label: "First Name", minWidth: 100 },
     { id: "lastName", label: "Last Name", minWidth: 100 },
@@ -26,7 +31,7 @@ const columns: readonly ListColumn<PatientDetailData>[] = [
     { id: "phone", label: "Phone", minWidth: 100 },
     {
         id: "gender", label: "Gender", minWidth: 100,
-        format: (value: any) => {
+        format: (value: boolean) => {
             if (value === true) return "Male";
             if (value === false) return "Female";
             return "";
