@@ -3,6 +3,7 @@ import { ListColumn } from "@/components/Table/types/core";
 import axios from "@/config/axios";
 import useTableControl from "@/hooks/useControlTable";
 import { API_ENDPOINTS } from "@/utils/api";
+import { formatVnMoney } from "@/utils/helper";
 import { Box, Paper, Table, TableBody, TableCell, TableContainer, TableFooter, TableHead, TablePagination, TableRow } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
@@ -23,10 +24,17 @@ const columns: readonly ListColumn<BranchEmployeeListBodyProps>[] = [
         format: (value: any) => {
             if (value === 4) return "Dentist";
             if (value === 3) return "Staff";
+            if (value === 2) return "Manager";
             return "";
         }
     },
-    { id: "salary", label: "Salary", minWidth: 100 },
+    {
+        id: "salary", label: "Salary", minWidth: 100,
+        format: (value: number) => {
+            if (value) return formatVnMoney(value);
+            return "N/A";
+        }
+    },
 ];
 
 function BranchEmployeeListBody() {
@@ -40,7 +48,7 @@ function BranchEmployeeListBody() {
 
     const getListCourse = async (id: string) => {
         try {
-            const res = await axios.get(`${API_ENDPOINTS.USERS.EMPLOYEE_WITH_BRANCH}/${id}`);
+            const res = await axios.get(`${API_ENDPOINTS.USERS.EMPLOYEE_WITH_BRANCH_ID}/${id}`);
             if (res.status === 200) {
                 setEmployees(res.data.data.list);
                 setCounts(res.data.data.count);
@@ -50,7 +58,7 @@ function BranchEmployeeListBody() {
         }
     };
 
-    console.log(employees);
+    console.log('Employee: ', employees);
 
     useEffect(() => {
         if (id) getListCourse(id);

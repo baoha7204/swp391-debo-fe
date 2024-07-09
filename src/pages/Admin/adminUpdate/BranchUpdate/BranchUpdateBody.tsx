@@ -56,7 +56,7 @@ function BranchUpdateBody() {
     useEffect(() => {
         if (branchesList || managers.length > 0) {
             const isCurrentManagerAvailable = managers.some(manager => manager.id === branchesList.mngId);
-            if (!isCurrentManagerAvailable) {
+            if (!isCurrentManagerAvailable && branchesList.mngId) {
                 setManagers(prevManagers => [
                     ...prevManagers,
                     {

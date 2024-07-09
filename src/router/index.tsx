@@ -36,6 +36,7 @@ import DentistReschedulePage from "@/pages/Dentist/Reschedule";
 ////Manager////
 import ManagerLayout from "@/pages/Manager/ManagerLayout";
 import ManagerAllStaffList from "@/pages/Manager/Employees/ManagerAllStaffList";
+import ManagerStaffsDetailBody from "@/pages/Manager/components/EmployeesDetail";
 
 ////Admin////
 import AdminLayout from "@/pages/Admin";
@@ -45,10 +46,12 @@ import TreatmentList from "@/pages/Admin/adminViewList/TreatmentList/TreatmentLi
 import AdminAllStaffList from "@/pages/Admin/adminViewList/AllStaffList";
 import PatientList from "@/pages/Admin/adminViewList/PatientList/PatientList";
 import AdminDashboard from "@/pages/Admin/adminDashboard/AdminDashboard";
+import AdminAppointmentList from "@/pages/Admin/adminAppointment/AppointmentList";
 //AdminDetail
 import AllStaffsDetail from "@/pages/Admin/adminViewDetail/AllStaffsDetail/AllStaffsDetail";
 import BranchDetail from "@/pages/Admin/adminViewDetail/BranchDetail/BranchDetail";
 import TreatmentDetail from "@/pages/Admin/adminViewDetail/TreatmentDetail/TreatmentDetail";
+import AdminAppointmentDetail from "@/pages/Admin/adminAppointment/AppointmentDetail";
 //AdminCreate
 import CreateBranch from "@/pages/Admin/adminCreate/Branchs/CreateBranch";
 import CreateTreatment from "@/pages/Admin/adminCreate/Treatments/CreateTreatment";
@@ -65,8 +68,6 @@ import UpdateEmployeeBranch from "@/pages/Admin/adminUpdate/UpdateBranchForEmplo
 ////Landging Page////
 import LandingPage from "@/pages/Landing/Landing";
 import SettingsPage from "@/pages/User/Settings";
-import AdminAppointmentList from "@/pages/Admin/adminAppointment/AppointmentList";
-import AdminAppointmentDetail from "@/pages/Admin/adminAppointment/AppointmentDetail";
 //User
 
 const RouterComponent = () => {
@@ -289,15 +290,14 @@ const RouterComponent = () => {
                   path: "appointments",
                   element: <PatientAppointmentList />,
                 },
-                //
-                {
-                  path: "calendar",
-                  element: <Calendar />,
-                },
-
+                // Detail
                 {
                   path: "appointments/:id",
                   element: <PatientAppointmentDetail />,
+                },
+                {
+                  path: "managerAllStaffList/:id",
+                  element: <ManagerStaffsDetailBody />,
                 },
               ],
             }

@@ -57,7 +57,7 @@ const MyDetail = <T extends RowData>({ url, columns, deleteBut, updateBut, assig
         const res = await axios.delete(`${url}/${id}`);
         if (res.status === 200) {
             toast.success("Deleted Successfully");
-            navigate(`/adminTest/${url}`);
+            navigate(`/admin/${url}`);
         } else {
             toast.error("Delete: Error!");
         }
@@ -146,11 +146,11 @@ const MyDetail = <T extends RowData>({ url, columns, deleteBut, updateBut, assig
                 aria-describedby="alert-dialog-description"
             >
                 <DialogTitle id="alert-dialog-title">
-                    {"Do you want to delete Course?"}
+                    {"Do you want to delete?"}
                 </DialogTitle>
                 <DialogContent>
                     <DialogContentText id="alert-dialog-description">
-                        Are you sure that you want to delete a Course
+                        Are you sure that you want to delete?
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
