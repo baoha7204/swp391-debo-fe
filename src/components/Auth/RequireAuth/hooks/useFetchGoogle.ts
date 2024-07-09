@@ -2,7 +2,7 @@ import authApi from "@/utils/api/authApi";
 import { useLayoutEffect, useState } from "react";
 
 const useFetchGoogle = (accessToken: string) => {
-  const [success, setSuccess] = useState(true);
+  const [success, setSuccess] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
   useLayoutEffect(() => {
@@ -24,7 +24,7 @@ const useFetchGoogle = (accessToken: string) => {
     };
 
     fetchRemote();
-  }, []);
+  }, [accessToken]);
 
   return { success, isLoading };
 };

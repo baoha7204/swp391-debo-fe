@@ -46,12 +46,13 @@ const authApi = {
     return await post<AuthResponseType>(endpoint, data)
       .then((res) => res.data)
       .catch((err) => {
-        errorToastHandler(err.response);
         return err;
       });
   },
-  logout: async () => {
-    return await post(API_ENDPOINTS.AUTH.LOGOUT)
+  logout: async (accessToken: string) => {
+    return await post(API_ENDPOINTS.AUTH.LOGOUT, undefined, {
+      token: accessToken,
+    })
       .then((res) => res.data)
       .catch((err) => {
         errorToastHandler(err.response);

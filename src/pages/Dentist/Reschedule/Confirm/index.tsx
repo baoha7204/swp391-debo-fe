@@ -1,7 +1,7 @@
-import DentistCardSummary from "@/components/Booking/SummaryBooking/components/DentistCard";
 import { useContext } from "react";
 import { RescheduleContext } from "../reschedule.context";
 import { Box, Typography } from "@mui/material";
+import DentistCardSummary from "../TempDentist/DentistCardSummary";
 
 const RescheduleConfirmation = () => {
   const { data } = useContext(RescheduleContext);

@@ -5,7 +5,6 @@ import useRefreshToken from "@/hooks/useRefreshToken";
 import useAuth from "@/hooks/useAuth";
 import useLocalStorage from "@/hooks/useLocalStorage";
 import CircularIndeterminate from "@/components/CircularIndeterminate";
-import { toastError } from "@/utils/toast";
 
 const PersistLogin = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -20,7 +19,7 @@ const PersistLogin = () => {
       try {
         await refresh();
       } catch (err) {
-        toastError(err.message);
+        console.error(err.message);
       } finally {
         isMounted && setIsLoading(false);
       }

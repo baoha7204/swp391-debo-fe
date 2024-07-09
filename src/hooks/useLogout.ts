@@ -1,14 +1,19 @@
 import useAuth from "./useAuth";
 import authApi from "@/utils/api/authApi";
+import { toastSuccess } from "@/utils/toast";
 import { errorToastHandler } from "@/utils/toast/actions";
 
 const useLogout = () => {
-  const { setAuth } = useAuth();
+  const { accessToken, setAccessToken, setRefreshToken } = useAuth();
 
   const logout = async () => {
-    setAuth(null);
+    setAccessToken("");
+    setRefreshToken("");
     try {
-      await authApi.logout();
+      const res = await authApi.logout(accessToken);
+      if (res.success) {
+        toastSuccess("Logout successful!");
+      }
     } catch (err) {
       errorToastHandler(err.response);
     }
