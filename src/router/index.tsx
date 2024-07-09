@@ -68,6 +68,8 @@ import UpdateEmployeeBranch from "@/pages/Admin/adminUpdate/UpdateBranchForEmplo
 ////Landging Page////
 import LandingPage from "@/pages/Landing/Landing";
 import SettingsPage from "@/pages/User/Settings";
+import ManagerAppointmentList from "@/pages/Manager/Appointments/ManagerAppointmentList";
+import ManagerDashboard from "@/pages/Manager/Dashboard/ManagerDashboard";
 //User
 
 const RouterComponent = () => {
@@ -280,7 +282,7 @@ const RouterComponent = () => {
               children: [
                 {
                   index: true,
-                  element: <Navigate to="calendar" />,
+                  element: <Navigate to="appointments" />,
                 },
                 //List
                 {
@@ -289,7 +291,11 @@ const RouterComponent = () => {
                 },
                 {
                   path: "appointments",
-                  element: <PatientAppointmentList />,
+                  element: <ManagerAppointmentList />,
+                },
+                {
+                  path: "dashboard",
+                  element: <ManagerDashboard />
                 },
                 // Detail
                 {

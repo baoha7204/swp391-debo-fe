@@ -4,13 +4,16 @@ import GroupIcon from "@mui/icons-material/Group";
 import { Outlet } from "react-router-dom";
 import { useContext } from "react";
 import { UserContext } from "../User/user.context";
+import DashboardIcon from '@mui/icons-material/Dashboard';
 
 const SidebarManagerBody = [
+    { title: "Dashboard", path: "dashboard", icon: <DashboardIcon /> },
     { title: "Appointments", path: "appointments", icon: <ChecklistIcon /> },
     { title: "Employees", path: "managerAllStaffList", icon: <GroupIcon />, },
 ];
 
 const ManagerRoutes = [
+    { path: "dashboard", breadcrumb: "Dashboard" },
     { path: "appointments", breadcrumb: "Appointments" },
     { path: "appointments/:id", breadcrumb: "Appointment Detail" },
     { path: "appointments/:id/info", breadcrumb: "Info" },

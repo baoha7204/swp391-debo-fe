@@ -11,8 +11,8 @@ export type AppointmentListData = {
     treatName: string;
     status: string;
     description: string;
-    dentist: string;
-    start: Date;
+    dentName: string;
+    startDate: Date;
 };
 
 const columns: readonly ListColumn<AppointmentListData>[] = [
@@ -20,13 +20,13 @@ const columns: readonly ListColumn<AppointmentListData>[] = [
     { id: "status", label: "Status", minWidth: 100 },
     { id: "description", label: "Description", minWidth: 170 },
     {
-        id: "dentist",
+        id: "dentName",
         label: "Dentist",
         minWidth: 170,
         format: formatDentistName,
     },
     {
-        id: "start",
+        id: "startDate",
         label: "Date",
         minWidth: 200,
         isDate: true,
