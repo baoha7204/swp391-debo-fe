@@ -306,6 +306,11 @@ const RouterComponent = () => {
                   path: "managerAllStaffList/:id",
                   element: <ManagerStaffsDetailBody />,
                 },
+                // Update
+                {
+                  path: 'managerAllStaffList/:id/update',
+                  element: <EmployeeUpdate />,
+                }
               ],
             }
           ],

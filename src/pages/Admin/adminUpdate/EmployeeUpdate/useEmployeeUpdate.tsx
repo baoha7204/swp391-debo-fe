@@ -8,12 +8,11 @@ import { put } from "@/utils/apiCaller";
 import { API_ENDPOINTS } from "@/utils/api";
 import { errorToastHandler } from "@/utils/toast/actions";
 import { toastSuccess } from "@/utils/toast";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 export type StaffInputs = z.infer<typeof employeeUpdateSchema>;
 
 export default function useEmployeeUpdate() {
-    const navigate = useNavigate();
 
     const { id } = useParams<{ id: string }>();
 
@@ -69,7 +68,6 @@ export default function useEmployeeUpdate() {
                 }
                 // successfully
                 toastSuccess("Update successfully!");
-                navigate('/adminTest/adminAllStaffList');
             })
             .catch((err) => {
                 console.log(err.response);
