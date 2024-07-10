@@ -65,7 +65,7 @@ const useCreateAppointment = () => {
       abortController.abort();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [axiosPrivate]);
 
   return { data, setData, appointments, isLoading };
 };

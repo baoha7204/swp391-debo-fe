@@ -80,8 +80,8 @@ const ProgressProvider = ({ children }: PropsWithChildren) => {
     setData({
       treatment: {
         ...result.treatment,
-        num_of_appointment: result.treatment.numOfApp,
-        rule_name: APPOINTMENT_RULE[0],
+        numOfAppointment: result.treatment.numOfApp,
+        ruleName: APPOINTMENT_RULE[0],
       },
     });
   }, [result]);
