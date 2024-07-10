@@ -20,7 +20,7 @@ function BranchHeader() {
                     '& > :not(style)': { m: 0, p: 0, width: '20ch', height: '43px' },
                 }}
             >
-                <Button component={Link} to={"/adminTest/branch/createBranch"} >Add new Branch</Button>
+                <Button component={Link} to={"/admin/branch/createBranch"} >Add new Branch</Button>
             </ButtonGroup>
         </Box>
     );

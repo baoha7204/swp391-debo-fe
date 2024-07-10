@@ -212,6 +212,10 @@ const RouterComponent = () => {
                   path: "appointments/:id",
                   element: <AdminAppointmentDetail />,
                 },
+                {
+                  path: "settings",
+                  element: <SettingsPage />,
+                },
                 //Update
                 {
                   path: "branch/:id/update",
@@ -228,7 +232,7 @@ const RouterComponent = () => {
                 {
                   path: "adminAllStaffList/:id/assign",
                   element: <UpdateEmployeeBranch />,
-                }
+                },
               ],
             },
           ],
@@ -293,8 +297,12 @@ const RouterComponent = () => {
                   element: <ManagerAppointmentList />,
                 },
                 {
+                  path: "settings",
+                  element: <SettingsPage />,
+                },
+                {
                   path: "dashboard",
-                  element: <ManagerDashboard />
+                  element: <ManagerDashboard />,
                 },
                 // Detail
                 {
@@ -307,11 +315,11 @@ const RouterComponent = () => {
                 },
                 // Update
                 {
-                  path: 'managerAllStaffList/:id/update',
+                  path: "managerAllStaffList/:id/update",
                   element: <EmployeeUpdate />,
-                }
+                },
               ],
-            }
+            },
           ],
         },
         {
@@ -322,102 +330,7 @@ const RouterComponent = () => {
         },
       ],
     },
-    // Admin test routes
-    {
-      path: "adminTest",
-      element: <AdminLayout />,
-      children: [
-        {
-          index: true,
-          element: <Navigate to="branch" />,
-        },
-        //View
-        {
-          path: "branch",
-          element: <BranchList />,
-        },
-        {
-          path: "treatments",
-          element: <TreatmentList />,
-        },
-        {
-          path: "adminAllStaffList",
-          element: <AdminAllStaffList />,
-        },
-        {
-          path: "patientList",
-          element: <PatientList />,
-        },
-        {
-          path: "dashboard",
-          element: <AdminDashboard />,
-        },
-        {
-          path: "appointments",
-          element: <AdminAppointmentList />,
-        },
-        //Create
-        {
-          path: "branch/createBranch",
-          element: <CreateBranch />,
-        },
-        {
-          path: "treatments/createTreatment",
-          element: <CreateTreatment />,
-        },
-        {
-          path: "adminAllStaffList/createStaff",
-          element: <CreateStaff />,
-        },
-        {
-          path: "adminAllStaffList/createDentist",
-          element: <CreateDentist />,
-        },
-        {
-          path: "adminAllStaffList/createManager",
-          element: <CreateManager />,
-        },
-        //Detail
-        {
-          path: "branch/:id",
-          element: <BranchDetail />,
-        },
-        {
-          path: "treatments/:id",
-          element: <TreatmentDetail />,
-        },
-        {
-          path: "adminAllStaffList/:id",
-          element: <AllStaffsDetail />,
-        },
-        {
-          path: "patientList/:id",
-          element: <PatientDetail />,
-        },
-        {
-          path: "appointments/:id",
-          element: <PatientAppointmentDetail />,
-        },
-        //Update
-        {
-          path: "branch/:id/update",
-          element: <BranchUpdate />,
-        },
-        {
-          path: "treatments/:id/update",
-          element: <TreatmentUpdate />,
-        },
-        {
-          path: "adminAllStaffList/:id/update",
-          element: <EmployeeUpdate />,
-        },
-        {
-          path: "adminAllStaffList/:id/assign",
-          element: <UpdateEmployeeBranch />,
-        }
 
-      ],
-    },
     // ManagerTest routes
     {
       path: "managerTest",

@@ -91,7 +91,7 @@ export default function useBranchUpdate() {
                 }
                 // successfully
                 toastSuccess("Update successfully!");
-                navigate("/adminTest/branch");
+                navigate("/admin/branch");
             })
             .catch((err) => {
                 console.log(err.response);

@@ -59,7 +59,7 @@ export default function useManager() {
                 }
                 // successfully
                 toastSuccess("Create successfully!");
-                navigate('/adminTest/adminAllStaffList');
+                navigate('/admin/adminAllStaffList');
             })
             .catch((err) => {
                 console.log(err.response);

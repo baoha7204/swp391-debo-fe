@@ -57,7 +57,7 @@ export default function useTreatment() {
                 }
                 // successfully
                 toastSuccess("Create successfully!");
-                navigate('/adminTest/treatments');
+                navigate('/admin/treatments');
             })
             .catch((err) => {
                 console.log('2');

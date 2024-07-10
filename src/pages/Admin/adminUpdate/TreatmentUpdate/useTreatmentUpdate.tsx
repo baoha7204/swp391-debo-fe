@@ -13,74 +13,74 @@ import { treatmentSchema } from "../../adminCreate/Treatments/lib/treatmentSchem
 export type TreatmentInputs = z.infer<typeof treatmentSchema>;
 
 export default function useTreatmentUpdate() {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
-    const {
-        handleSubmit,
-        reset,
-        control,
-        setValue,
-        formState: { isSubmitSuccessful, isSubmitting },
-    } = useForm<TreatmentInputs>({
-        resolver: zodResolver(treatmentSchema),
-        defaultValues: {
-            id: 0,
-            name: '',
-            description: '',
-            price: 0,
-            category: 1,
-        },
-    });
+  const {
+    handleSubmit,
+    reset,
+    control,
+    setValue,
+    formState: { isSubmitSuccessful, isSubmitting },
+  } = useForm<TreatmentInputs>({
+    resolver: zodResolver(treatmentSchema),
+    defaultValues: {
+      id: 0,
+      name: "",
+      description: "",
+      price: 0,
+      category: 1,
+    },
+  });
 
-    console.log("0");
+  console.log("0");
 
-    const onSubmit: SubmitHandler<TreatmentInputs> = (data) => {
-        console.log("1");
+  const onSubmit: SubmitHandler<TreatmentInputs> = (data) => {
+    console.log("1");
 
-        const result = handleSubmitForm(data, treatmentSchema);
+    const result = handleSubmitForm(data, treatmentSchema);
 
-        if (!result || !result.success || result.error) {
-            return;
+    if (!result || !result.success || result.error) {
+      return;
+    }
+
+    const { id, category, name, description, price } = data;
+
+    console.log(data);
+
+    put(`${API_ENDPOINTS.TREATMENT.TREATMENT}/${id}`, {
+      id,
+      category,
+      name,
+      description,
+      price,
+    })
+      .then((res) => {
+        const { data } = res;
+        if (!data.success) {
+          return errorToastHandler(data);
         }
+        // successfully
+        toastSuccess("Create successfully!");
+        navigate("/admin/treatments");
+      })
+      .catch((err) => {
+        console.log(err.response);
+        errorToastHandler(err.response);
+      });
+  };
+  useEffect(() => {
+    if (isSubmitSuccessful) {
+      reset();
+    }
+  }, [isSubmitSuccessful, reset]);
 
-        let { id, category, name, description, price, } = data;
+  const setValues = (values: TreatmentInputs) => {
+    setValue("id", values.id);
+    setValue("category", values.category);
+    setValue("name", values.name);
+    setValue("description", values.description);
+    setValue("price", values.price);
+  };
 
-        console.log(data);
-
-        put(`${API_ENDPOINTS.TREATMENT.TREATMENT}/${id}`, {
-            id,
-            category,
-            name,
-            description,
-            price,
-        })
-            .then((res) => {
-                const { data } = res;
-                if (!data.success) {
-                    return errorToastHandler(data);
-                }
-                // successfully
-                toastSuccess("Create successfully!");
-                navigate("/adminTest/treatments");
-            })
-            .catch((err) => {
-                console.log(err.response);
-                errorToastHandler(err.response);
-            });
-    };
-    useEffect(() => {
-        if (isSubmitSuccessful) {
-            reset();
-        }
-    }, [isSubmitSuccessful, reset]);
-
-    const setValues = (values: TreatmentInputs) => {
-        setValue("id", values.id);
-        setValue("category", values.category);
-        setValue("name", values.name);
-        setValue("description", values.description);
-        setValue("price", values.price);
-    };
-
-    return [handleSubmit(onSubmit), isSubmitting, control, setValues] as const;
+  return [handleSubmit(onSubmit), isSubmitting, control, setValues] as const;
 }

@@ -62,7 +62,7 @@ export default function useBranch() {
         }
         // successfully
         toastSuccess("Create successfully!");
-        navigate("/adminTest/branch");
+        navigate("/admin/branch");
       })
       .catch((err) => {
         console.log(err.response);
