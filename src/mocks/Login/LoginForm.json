@@ -1,0 +1,14 @@
+[
+  {
+    "input": { "user": "test@test.c", "password": "password" },
+    "expected": "Invalid email/phone number"
+  },
+  {
+    "input": { "user": "0762abc", "password": "password" },
+    "expected": "Invalid email/phone number"
+  },
+  {
+    "input": { "user": "test@07621234111.c", "password": "password" },
+    "expected": "Invalid email/phone number"
+  }
+]

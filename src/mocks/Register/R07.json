@@ -1,0 +1,11 @@
+[
+  {
+    "input": {
+      "email": "baoha3604@gmail.com",
+      "phoneNumber": "0762953411",
+      "password": "baoha123!",
+      "confirmPassword": "baoha123!"
+    },
+    "expected": ["Email is already exist"]
+  }
+]
