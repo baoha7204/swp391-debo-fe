@@ -3,6 +3,7 @@ import { ProgressContext } from "../../progress.context";
 import { errorToastHandler } from "@/utils/toast/actions";
 import useAxiosPrivate from "@/hooks/useAxiosPrivate";
 import appointmentApi from "@/utils/api/appointmentApi";
+import useCancelBulk from "../../hooks/useCancel";
 
 export type AppointmentResponse = {
   id: string;
@@ -24,6 +25,7 @@ const useCreateAppointment = () => {
     AppointmentResponse[] | null
   >(null);
   const axiosPrivate = useAxiosPrivate();
+  const { cancelBulk } = useCancelBulk();
 
   useEffect(() => {
     setIsLoading(true);
@@ -50,10 +52,19 @@ const useCreateAppointment = () => {
         }
         setAppointments(result.data);
       } catch (error) {
+        console.log(error);
         if (error.name !== "CanceledError") {
           errorToastHandler(error.response);
         }
         setAppointments(null);
+        try {
+          if (!appointments) return;
+          await cancelBulk(appointments.map((a) => a.id));
+        } catch (error) {
+          errorToastHandler({
+            message: "Something went wrong when cancelling appointment",
+          });
+        }
       } finally {
         setIsLoading(false);
       }
@@ -67,7 +78,7 @@ const useCreateAppointment = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [axiosPrivate]);
 
-  return { data, setData, appointments, isLoading };
+  return { data, setData, appointments, isLoading, cancelBulk };
 };
 
 export default useCreateAppointment;
