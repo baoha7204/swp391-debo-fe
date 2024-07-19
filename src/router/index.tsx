@@ -245,7 +245,11 @@ const RouterComponent = () => {
             {
               element: <DentistLayout />,
               children: [
-                { index: true, element: <DentistDashboardPage /> },
+                {
+                  index: true,
+                  path: "dashboard",
+                  element: <DentistDashboardPage />,
+                },
                 { path: "calendar", element: <DentistCalendar /> },
                 {
                   path: "appointments",

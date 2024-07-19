@@ -1,19 +1,20 @@
 import EventIcon from "@mui/icons-material/Event";
-import HomeIcon from "@mui/icons-material/Home";
 import ChecklistIcon from "@mui/icons-material/Checklist";
 import PersonIcon from "@mui/icons-material/Person";
 import { Outlet } from "react-router-dom";
+import DashboardIcon from "@mui/icons-material/Dashboard";
 
 import DefaultLayout from "@/components/Layout/DefaultLayout";
 
 const SidebarDentistBody = [
-  { title: "Home", path: "", icon: <HomeIcon /> },
+  { title: "Dashboard", path: "dashboard", icon: <DashboardIcon /> },
   { title: "Calendar", path: "calendar", icon: <EventIcon /> },
   { title: "Appointment List", path: "appointments", icon: <ChecklistIcon /> },
   { title: "Patient List", path: "patients", icon: <PersonIcon /> },
 ];
 
 const DentistRoutes = [
+  { path: "dashboard", breadcrumb: "Dashboard" },
   { path: "calendar", breadcrumb: "Calendar" },
   { path: "payment", breadcrumb: "Payment" },
   { path: "appointments", breadcrumb: "Appointments" },
