@@ -8,7 +8,7 @@ import { barChartSettings } from "@/config/dashboard";
 const TotalPaid = () => {
   const { isLoading, data } = useTotalPaid();
   return (
-    <Box display="flex" flexDirection="column" gap={2} p={2}>
+    <Box display="flex" flexDirection="row" gap={2} p={2}>
       {isLoading ? (
         <CircularIndeterminate />
       ) : (

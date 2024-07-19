@@ -94,7 +94,7 @@ const RouterComponent = () => {
             {
               element: <PatientLayout />,
               children: [
-                { index: true, element: <DashboardPage /> },
+                { index: true, path: "dashboard", element: <DashboardPage /> },
                 { path: "calendar", element: <Calendar /> },
                 {
                   path: "booking",

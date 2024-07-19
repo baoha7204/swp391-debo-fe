@@ -1,6 +1,6 @@
 import EventIcon from "@mui/icons-material/Event";
-import HomeIcon from "@mui/icons-material/Home";
 import ChecklistIcon from "@mui/icons-material/Checklist";
+import DashboardIcon from "@mui/icons-material/Dashboard";
 import { Outlet, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 
@@ -8,12 +8,13 @@ import DefaultLayout from "@/components/Layout/DefaultLayout";
 import { UserContext } from "../User/user.context";
 
 const SidebarPatientBody = [
-  { title: "Home", path: "", icon: <HomeIcon /> },
+  { title: "Dashboard", path: "dashboard", icon: <DashboardIcon /> },
   { title: "Calendar", path: "calendar", icon: <EventIcon /> },
   { title: "Appointment List", path: "appointments", icon: <ChecklistIcon /> },
 ];
 
 const PatientRoutes = [
+  { path: "dashboard", breadcrumb: "Dashboard" },
   { path: "calendar", breadcrumb: "Calendar" },
   { path: "booking", breadcrumb: "Booking" },
   { path: "payment", breadcrumb: "Payment" },
