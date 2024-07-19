@@ -7,14 +7,13 @@ import DashboardIcon from "@mui/icons-material/Dashboard";
 import DefaultLayout from "@/components/Layout/DefaultLayout";
 
 const SidebarDentistBody = [
-  { title: "Dashboard", path: "dashboard", icon: <DashboardIcon /> },
+  { title: "Dashboard", path: "", icon: <DashboardIcon /> },
   { title: "Calendar", path: "calendar", icon: <EventIcon /> },
   { title: "Appointment List", path: "appointments", icon: <ChecklistIcon /> },
   { title: "Patient List", path: "patients", icon: <PersonIcon /> },
 ];
 
 const DentistRoutes = [
-  { path: "dashboard", breadcrumb: "Dashboard" },
   { path: "calendar", breadcrumb: "Calendar" },
   { path: "payment", breadcrumb: "Payment" },
   { path: "appointments", breadcrumb: "Appointments" },

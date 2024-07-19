@@ -8,13 +8,12 @@ import DefaultLayout from "@/components/Layout/DefaultLayout";
 import { UserContext } from "../User/user.context";
 
 const SidebarPatientBody = [
-  { title: "Dashboard", path: "dashboard", icon: <DashboardIcon /> },
+  { title: "Dashboard", path: "", icon: <DashboardIcon /> },
   { title: "Calendar", path: "calendar", icon: <EventIcon /> },
   { title: "Appointment List", path: "appointments", icon: <ChecklistIcon /> },
 ];
 
 const PatientRoutes = [
-  { path: "dashboard", breadcrumb: "Dashboard" },
   { path: "calendar", breadcrumb: "Calendar" },
   { path: "booking", breadcrumb: "Booking" },
   { path: "payment", breadcrumb: "Payment" },
