@@ -46,7 +46,8 @@ export const API_ENDPOINTS = {
     UPDATEAPPOINTMENTNOTES: "updateappointmentnote",
     RESCHEDULE_BY_DENTIST: "reschedulebydentist",
     RESCHEDULE_TEMP_DENT: "rescheduletempdent",
-    RESCHEDULE_TOKEN: "generateconfirmtoken",
+    RESCHEDULE_TOKEN: "dentist/generateconfirmtoken",
+    RESCHEDULE_CONFIRM: "manager/confirmreschedulerequest",
     MANAGER_RESCHEDULE_REQUEST: "manager/reschedule-request",
   },
   USERS: {

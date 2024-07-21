@@ -3,6 +3,8 @@ import { AppRescheduleRequest } from "..";
 import { UserContext } from "@/pages/User/user.context";
 import branchApi from "@/utils/api/branchApi";
 import appointmentApi from "@/utils/api/appointmentApi";
+import dayjs from "dayjs";
+import { formatDateSlot } from "@/utils/helper";
 
 const useFetchRescheduleReq = () => {
   const { user, isLoading: isUserLoading } = useContext(UserContext);
@@ -27,7 +29,7 @@ const useFetchRescheduleReq = () => {
         );
         const dataBranch = resBranch.data;
         if (!dataBranch.success) {
-          console.log(dataBranch);
+          console.error("Failed to fetch branch manager:", dataBranch);
           return;
         }
 
@@ -40,11 +42,27 @@ const useFetchRescheduleReq = () => {
         const dataRescheduleReqs = resRescheduleReqs.data;
 
         if (!dataRescheduleReqs.success) {
-          console.log(dataBranch);
+          console.error(
+            "Failed to fetch reschedule request:",
+            dataRescheduleReqs
+          );
           return;
         }
 
-        setData(dataRescheduleReqs.data.list);
+        // Filter data past date
+        const filteredList = dataRescheduleReqs.data.list.filter((item) => {
+          const slot = item.timeSlot;
+          const date = formatDateSlot(slot, item.startDate);
+          if (dayjs().isAfter(date)) return false;
+          if (dayjs().isSame(date, "day")) {
+            const now = new Date();
+            const currentHour = now.getHours();
+            if (slot - 2 < currentHour) return false;
+          }
+          return true;
+        });
+
+        setData(filteredList);
       } catch (error) {
         console.error("Failed to fetch reschedule request:", error);
       } finally {
@@ -59,7 +77,7 @@ const useFetchRescheduleReq = () => {
     };
   }, [isUserLoading, user?.id]);
 
-  return { data, isLoading };
+  return { data, setData, isLoading };
 };
 
 export default useFetchRescheduleReq;

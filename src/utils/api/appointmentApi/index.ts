@@ -155,6 +155,26 @@ const appointmentApi = {
       }
     );
   },
+  confirmRescheduleRequest: async (
+    data: {
+      id: string;
+      cus_Id: string;
+      dent_Id: string;
+      temp_Dent_Id: string | null;
+      rescheduleToken: string;
+      isRequestedDentReschedule: boolean;
+    },
+    signal?: GenericAbortSignal
+  ) => {
+    return await post(
+      API_ENDPOINTS.APPOINTMENT.RESCHEDULE_CONFIRM,
+      data,
+      undefined,
+      {
+        signal,
+      }
+    );
+  },
   cancelOne: async (id: string, signal?: GenericAbortSignal) => {
     return await remove(`${API_ENDPOINTS.APPOINTMENT.ONE}/${id}`, undefined, {
       signal,

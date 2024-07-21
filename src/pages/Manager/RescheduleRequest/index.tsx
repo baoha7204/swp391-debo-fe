@@ -1,15 +1,19 @@
 import { useMemo } from "react";
 import {
-  MRT_Table, //import alternative sub-component if we do not want toolbars
+  MRT_Table,
   type MRT_ColumnDef,
   useMaterialReactTable,
 } from "material-react-table";
-import { formatDateSlotString } from "@/utils/helper";
-import useFetchRescheduleReq from "./hooks/useFetchRescheduleReq";
-import { ListItemIcon, MenuItem } from "@mui/material";
+import { Box, ListItemIcon, MenuItem } from "@mui/material";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import CancelIcon from "@mui/icons-material/Cancel";
+import NotificationImportantIcon from "@mui/icons-material/NotificationImportant";
+
 import LinkRouter from "@/components/LinkRouter";
+import MiniHeader from "@/pages/Admin/components/MiniHeader/MiniHeader";
+import useFetchRescheduleReq from "./hooks/useFetchRescheduleReq";
+import useRowAction from "./hooks/useRowAction";
+import { formatDateSlotString } from "@/utils/helper";
 
 export type AppRescheduleRequest = {
   appointmentId: string;
@@ -22,7 +26,8 @@ export type AppRescheduleRequest = {
 };
 
 const RescheduleRequest = () => {
-  const { data } = useFetchRescheduleReq();
+  const { data, setData } = useFetchRescheduleReq();
+  const handleAction = useRowAction();
   const columns = useMemo<MRT_ColumnDef<AppRescheduleRequest>[]>(
     () => [
       {
@@ -53,6 +58,14 @@ const RescheduleRequest = () => {
         accessorKey: "customerFullName",
         header: "Patient",
         size: 250,
+        Cell: ({ row }) => {
+          const value = row.original.customerFullName;
+          return (
+            <p>
+              {!value || value.trim().length === 0 ? "Patient" : value.trim()}
+            </p>
+          );
+        },
       },
       {
         accessorFn: (row) => formatDateSlotString(row.timeSlot, row.startDate),
@@ -103,13 +116,12 @@ const RescheduleRequest = () => {
         border: "1px solid rgba(81, 81, 81, .5)",
       },
     },
-    renderRowActionMenuItems: ({ closeMenu }) => [
+    renderRowActionMenuItems: ({ row }) => [
       <MenuItem
         key={0}
-        onClick={() => {
-          // View profile logic...
-          closeMenu();
-        }}
+        onClick={() =>
+          handleAction(row.original.appointmentId, setData, "approve")
+        }
         sx={{ m: 0, color: "green" }}
       >
         <ListItemIcon sx={{ color: "green" }}>
@@ -119,10 +131,9 @@ const RescheduleRequest = () => {
       </MenuItem>,
       <MenuItem
         key={1}
-        onClick={() => {
-          // Send email logic...
-          closeMenu();
-        }}
+        onClick={() =>
+          handleAction(row.original.appointmentId, setData, "reject")
+        }
         sx={{ m: 0, color: "red" }}
       >
         <ListItemIcon sx={{ color: "red" }}>
@@ -133,7 +144,15 @@ const RescheduleRequest = () => {
     ],
   });
 
-  return <MRT_Table table={table} />;
+  return (
+    <Box sx={{ p: "24px" }}>
+      <MiniHeader
+        content="Dentist Reschedule Request"
+        IconComponent={NotificationImportantIcon}
+      />
+      <MRT_Table table={table} />
+    </Box>
+  );
 };
 
 export default RescheduleRequest;
