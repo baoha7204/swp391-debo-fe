@@ -10,7 +10,6 @@ import { decodeToken } from "react-jwt";
 import useAuth from "@/hooks/useAuth";
 import { Token } from "@/types/core";
 import userApi from "@/utils/api/userApi";
-import { errorToastHandler } from "@/utils/toast/actions";
 import { MetadataFile } from "@/components/FilePicker/types/core";
 
 type UserType = {
@@ -71,13 +70,13 @@ const UserProvider = ({ children }: PropsWithChildren) => {
         );
         const data = res.data;
         if (!res.success || !data) {
-          errorToastHandler(res);
+          console.log(res);
           return;
         }
         setUser(res.data);
       } catch (error) {
         if (error.name !== "CanceledError") {
-          errorToastHandler(error.response);
+          console.log(error.response);
         }
         setUser(null);
       } finally {

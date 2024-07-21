@@ -1,5 +1,6 @@
 import { PieChart } from "@mui/x-charts";
 import useAppointmentState from "../hooks/useAppointmentState";
+import { Box } from "@mui/material";
 
 const AppointmentState = () => {
   const { data } = useAppointmentState();
@@ -20,6 +21,7 @@ const AppointmentState = () => {
       ]}
       height={300}
     />
+
   );
 };
 

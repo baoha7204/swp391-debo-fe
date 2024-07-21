@@ -2,7 +2,6 @@ import { AxiosInstance, GenericAbortSignal } from "axios";
 import { UserType } from "@/pages/User/user.context";
 import { get, post, put } from "@/utils/apiCaller";
 import { API_ENDPOINTS } from "..";
-import { errorToastHandler } from "@/utils/toast/actions";
 import { TreatmentCardProps } from "@/components/Treatment/TreatmentCard";
 import { ApiResponse } from "@/types/core";
 
@@ -25,7 +24,7 @@ const userApi = {
     )
       .then((res) => res.data)
       .catch((err) => {
-        errorToastHandler(err.response);
+        console.log(err.response);
         return err;
       });
   },

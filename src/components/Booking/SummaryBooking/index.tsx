@@ -11,12 +11,11 @@ import DateSlotSummary from "./components/DateSlotCard";
 import { ProgressContext } from "../progress.context";
 import { errorToastHandler } from "@/utils/toast/actions";
 import { ExitWarningModalStyle } from "./style";
-import useCancelBulk from "../hooks/useCancel";
 
 const SummaryBooking = () => {
   const { handleDoneDecrement } = useContext(ProgressContext);
-  const { data, setData, isLoading, appointments } = useCreateAppointment();
-  const { cancelBulk } = useCancelBulk();
+  const { data, setData, isLoading, appointments, cancelBulk } =
+    useCreateAppointment();
 
   useEffect(() => {
     if (appointments && appointments.length > 0) {
