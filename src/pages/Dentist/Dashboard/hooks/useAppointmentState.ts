@@ -37,7 +37,7 @@ const useAppointmentState = () => {
         setData(data);
       } catch (error) {
         if (error.name !== "CanceledError") {
-          errorToastHandler(error.response);
+          console.log(error.response);
         }
         setData(null);
       }

@@ -91,7 +91,7 @@ const useTotalPaid = () => {
         }));
       } catch (error) {
         if (error.name !== "CanceledError") {
-          errorToastHandler(error.response);
+          console.log(error.response);
         }
       } finally {
         setIsLoading(false);

@@ -30,6 +30,11 @@ const useFetchTreatments = () => {
           errorToastHandler(result);
           return;
         }
+
+        if (result.data.length === 0) {
+          errorToastHandler({ message: "No treatments available." });
+        }
+
         setTreatments(result.data);
       } catch (error) {
         if (error.name !== "CanceledError") {

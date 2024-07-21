@@ -84,8 +84,9 @@ const MyTable = <T extends RowData>({ url, columns }: TableProps<T>) => {
                       ) : column.isPatientDetail ? (
                         <LinkRouter
                           to={
-                            `/${formatRole(user!.roleName)}/patients/` +
-                            row.cusId
+                            `/${formatRole(
+                              user?.roleName || "dentist"
+                            )}/patients/` + row.cusId
                           }
                         >
                           {(formattedValue as string) || "User"}
