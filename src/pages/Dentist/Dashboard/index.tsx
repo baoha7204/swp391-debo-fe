@@ -12,7 +12,7 @@ const data = [
     flex: 1,
   },
   {
-    label: "Your Patients",
+    label: "Your Appointment Stat",
     component: <TotalPatient />,
     flex: 2,
   },

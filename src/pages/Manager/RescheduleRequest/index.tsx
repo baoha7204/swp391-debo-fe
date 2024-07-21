@@ -85,6 +85,7 @@ const RescheduleRequest = () => {
     enablePagination: false,
     enableRowActions: true,
     enableSorting: true,
+    columnFilterDisplayMode: "popover",
     initialState: {
       showColumnFilters: true,
       showGlobalFilter: true,

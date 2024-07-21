@@ -90,6 +90,6 @@ export const API_ENDPOINTS = {
     BRANCH_TOTAL: "dashboard/branchtotalrevenue",
     BRANCH_TREATMENT: "dashboard/branch/distribution/treatment",
     BRANCH_CATEGORY: "dashboard/branch/distribution/category",
-    DENTIST_TOTAL_PATIENT: "dashboard/dentist/totalPatient",
+    DENTIST_TOTAL_APPOINTMENT: "dashboard/dentist/totalAppointment",
   },
 };
