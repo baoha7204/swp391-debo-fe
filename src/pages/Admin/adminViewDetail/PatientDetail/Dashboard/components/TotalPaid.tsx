@@ -47,6 +47,7 @@ const TotalPaid = () => {
                       valueFormatter: formatVnMoney,
                       stack: "total",
                     }))}
+                  margin={{ left: 100 }}
                   xAxis={[
                     {
                       scaleType: "band" as const,

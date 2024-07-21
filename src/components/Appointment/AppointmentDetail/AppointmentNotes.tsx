@@ -1,6 +1,5 @@
 import { toastSuccess } from "@/utils/toast";
 import { put } from "@/utils/apiCaller";
-import { errorToastHandler } from "@/utils/toast/actions";
 import { API_ENDPOINTS } from "@/utils/api";
 import { Box } from "@mui/material";
 import AppointmentDetail from "./AppointmentDetail";

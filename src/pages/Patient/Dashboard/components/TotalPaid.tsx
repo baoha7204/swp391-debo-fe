@@ -53,6 +53,7 @@ const TotalPaid = () => {
                       dataKey: "month",
                     },
                   ]}
+                  margin={{ left: 100 }}
                   {...barChartSettings}
                 />
               )}
