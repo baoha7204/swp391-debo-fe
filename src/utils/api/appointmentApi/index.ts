@@ -5,6 +5,7 @@ import { get, post, put, remove } from "@/utils/apiCaller";
 import { ApiResponse } from "@/types/core";
 import { AppointmentResponse } from "@/components/Booking/SummaryBooking/hooks/useCreateAppointment";
 import { ListDataResponse } from "@/hooks/useFetchTableList";
+import { AppRescheduleRequest } from "@/pages/Manager/RescheduleRequest";
 
 const appointmentApi = {
   createBulk: async (
@@ -158,6 +159,18 @@ const appointmentApi = {
     return await remove(`${API_ENDPOINTS.APPOINTMENT.ONE}/${id}`, undefined, {
       signal,
     });
+  },
+  getMangerRescheduleRequest: async (
+    id: number,
+    signal?: GenericAbortSignal
+  ) => {
+    return await get<ListDataResponse<AppRescheduleRequest>>(
+      `${API_ENDPOINTS.APPOINTMENT.MANAGER_RESCHEDULE_REQUEST}/${id}`,
+      undefined,
+      {
+        signal,
+      }
+    );
   },
 };
 

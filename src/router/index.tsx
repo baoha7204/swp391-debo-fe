@@ -37,6 +37,7 @@ import DentistReschedulePage from "@/pages/Dentist/Reschedule";
 import ManagerLayout from "@/pages/Manager/ManagerLayout";
 import ManagerAllStaffList from "@/pages/Manager/Employees/ManagerAllStaffList";
 import ManagerStaffsDetailBody from "@/pages/Manager/components/EmployeesDetail";
+import RescheduleRequest from "@/pages/Manager/RescheduleRequest";
 
 ////Admin////
 import AdminLayout from "@/pages/Admin";
@@ -317,6 +318,10 @@ const RouterComponent = () => {
                 {
                   path: "managerAllStaffList/:id/update",
                   element: <EmployeeUpdate />,
+                },
+                {
+                  path: "reschedule-request",
+                  element: <RescheduleRequest />,
                 },
               ],
             },
