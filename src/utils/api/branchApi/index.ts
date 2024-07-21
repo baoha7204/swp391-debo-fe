@@ -5,6 +5,17 @@ import { errorToastHandler } from "@/utils/toast/actions";
 import { ListDataResponse } from "@/hooks/useFetchTableList";
 import { BranchCardProps } from "@/components/Branch/BranchCard";
 
+type BranchResponse = {
+  id: number;
+  mngId: string;
+  mngName: string | null;
+  name: string;
+  address: string;
+  phone: string;
+  email: string;
+  avt: string;
+};
+
 const branchApi = {
   getAllList: async (signal?: GenericAbortSignal) => {
     return await get<ListDataResponse<BranchCardProps>>(
@@ -22,6 +33,15 @@ const branchApi = {
         errorToastHandler(err.response);
         return err;
       });
+  },
+  getBranchManager: async (id: string, signal?: GenericAbortSignal) => {
+    return await get<BranchResponse>(
+      `${API_ENDPOINTS.BRANCH.GET_BRANCH_MANAGER}/${id}`,
+      undefined,
+      {
+        signal,
+      }
+    );
   },
 };
 

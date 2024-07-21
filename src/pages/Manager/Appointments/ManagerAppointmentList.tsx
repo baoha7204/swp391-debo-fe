@@ -10,12 +10,12 @@ import { UserContext } from "@/pages/User/user.context";
 import axios from "@/config/axios";
 
 export type AppointmentListData = {
-    id: string;
-    name: string;
-    status: string;
-    description: string;
-    dentistFullName: string;
-    startDate: Date;
+        id: string;
+        name: string;
+        status: string;
+        description: string;
+        dentistFullName: string;
+        startDate: Date;
 };
 
 type Branch = {
