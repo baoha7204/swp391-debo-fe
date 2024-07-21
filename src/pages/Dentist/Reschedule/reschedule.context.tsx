@@ -122,6 +122,15 @@ const RescheduleProvider = ({ children }: PropsWithChildren) => {
           return;
         }
 
+        // check is requested yet
+        if (detailData.isRequestedDentReschedule) {
+          errorToastHandler({
+            message: "This appointment has been requested rescheduling already",
+          });
+          setIsAllowed(false);
+          return;
+        }
+
         // Fetch temp dentists
         const responseTempDents = await appointmentApi.getRescheduleDentists02(
           {

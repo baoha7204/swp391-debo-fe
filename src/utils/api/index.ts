@@ -47,8 +47,9 @@ export const API_ENDPOINTS = {
     UPDATEAPPOINTMENTNOTES: "updateappointmentnote",
     RESCHEDULE_BY_DENTIST: "reschedulebydentist",
     RESCHEDULE_TEMP_DENT: "rescheduletempdent",
-    RESCHEDULE_TOKEN: "generateconfirmtoken",
-
+    RESCHEDULE_TOKEN: "dentist/generateconfirmtoken",
+    RESCHEDULE_CONFIRM: "manager/confirmreschedulerequest",
+    MANAGER_RESCHEDULE_REQUEST: "manager/reschedule-request",
   },
   USERS: {
     //User
@@ -86,7 +87,7 @@ export const API_ENDPOINTS = {
     TREATMENT: "dashboard/distribution/treatment",
     TOTAL_REVENEUE: "dashboard/totalrevenue",
     EMPLOYEE: "dashboard/employeesalarydistribution",
-    //Manager Dashboard 
+    //Manager Dashboard
     BRANCH_TOTAL: "dashboard/branchtotalrevenue",
     BRANCH_TREATMENT: "dashboard/branch/distribution/treatment",
     BRANCH_CATEGORY: "dashboard/branch/distribution/category",

@@ -16,6 +16,7 @@ export type AppointmentResponse = {
   rescheduleToken: string | null;
   cus_Id: string;
   temp_Dent_Id: string | null;
+  isRequestedDentReschedule: boolean;
 };
 
 const useCreateAppointment = () => {
