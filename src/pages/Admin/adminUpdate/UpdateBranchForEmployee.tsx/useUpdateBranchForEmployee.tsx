@@ -7,9 +7,7 @@ import { z } from "zod";
 import { API_ENDPOINTS } from "@/utils/api";
 import { useNavigate, useParams } from "react-router-dom";
 import { toastSuccess } from "@/utils/toast";
-import { errorToastHandler } from "@/utils/toast/actions";
 import { put } from "@/utils/apiCaller";
-import { formatVnMoney } from "@/utils/helper";
 
 export type UpdateBranchForEmployeeInputs = z.infer<
   typeof updateEmployeeSchema
@@ -46,11 +44,6 @@ export default function useUpdateBranchForEmployee() {
 
     const { id, brId, salary } = data;
 
-    console.log("Employee ID:", id);
-    console.log(brId);
-
-    console.log(`${API_ENDPOINTS.USERS.UPDATE_BRANCH_FOR_EMPLOYEE}/${id}`);
-
     put(`${API_ENDPOINTS.USERS.UPDATE_BRANCH_FOR_EMPLOYEE}/${id}`, {
       id,
       brId,
@@ -59,17 +52,15 @@ export default function useUpdateBranchForEmployee() {
       .then((res) => {
         const { data } = res;
         if (!data.success) {
-          console.log("1");
-          return errorToastHandler(data);
+          console.log(data);
+          return;
         }
         // successfully
         toastSuccess("Add successfully!");
         navigate("/admin/adminAllStaffList");
       })
       .catch((err) => {
-        console.log("2");
         console.log(err.response);
-        errorToastHandler(err.response);
       });
   };
 

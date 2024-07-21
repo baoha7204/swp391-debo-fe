@@ -34,7 +34,9 @@ const useFetchTableList = <T>({
         });
         const data = response.data;
         if (!data.success) {
-          errorToastHandler(data);
+          // errorToastHandler(data);
+          console.log(data);
+          
           return;
         }
         setList(data.data.list);
@@ -42,7 +44,8 @@ const useFetchTableList = <T>({
       } catch (error) {
         console.log(error.response);
         if (error.name !== "CanceledError") {
-          errorToastHandler(error.response);
+          // errorToastHandler(error.response);
+          console.log(error.response);
         }
       }
     };

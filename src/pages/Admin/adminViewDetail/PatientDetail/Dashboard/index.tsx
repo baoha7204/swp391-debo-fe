@@ -1,9 +1,6 @@
 import DashboardList from "@/components/Dashboard/List";
 import AppointmentState from "./components/AppointmentState";
 import TotalPaid from "./components/TotalPaid";
-import MiniHeader from "@/pages/Admin/components/MiniHeader/MiniHeader";
-import { Box } from "@mui/material";
-import DashboardIcon from "@mui/icons-material/Dashboard";
 
 const data = [
   {
@@ -19,12 +16,7 @@ const data = [
 ];
 
 const DashboardPage = () => {
-  return (
-    <Box sx={{ p: "24px" }}>
-      <MiniHeader content="Dashboard" IconComponent={DashboardIcon} />
-      <DashboardList data={data} />
-    </Box>
-  );
+  return <DashboardList data={data} />;
 };
 
 export default DashboardPage;

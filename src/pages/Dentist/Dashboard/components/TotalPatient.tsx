@@ -7,7 +7,7 @@ import useTotalPatient from "../hooks/useTotalPatient";
 const TotalPatient = () => {
   const { isLoading, data } = useTotalPatient();
   return (
-    <Box display="flex" flexDirection="column" gap={2} p={2}>
+    <Box display="flex" flexDirection="row" gap={2} p={2}>
       {isLoading ? (
         <CircularIndeterminate />
       ) : (

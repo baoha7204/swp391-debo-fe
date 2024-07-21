@@ -4,13 +4,12 @@ import PatientDetailBody from "./PetientDetailBody";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
 function PatientDetail() {
-
-    return (
-        <Box sx={{ p: '24px' }}>
-            <MiniHeader content="Patient Detail" IconComponent={AccountCircleIcon} />
-            <PatientDetailBody />
-        </Box>
-    );
+  return (
+    <Box sx={{ p: "24px" }}>
+      <MiniHeader content="Patient Detail" IconComponent={AccountCircleIcon} />
+      <PatientDetailBody />
+    </Box>
+  );
 }
 
 export default PatientDetail;
