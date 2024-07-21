@@ -11,51 +11,37 @@ const TotalPatient = () => {
       {isLoading ? (
         <CircularIndeterminate />
       ) : (
-        <>
-          <Box>
-            <Typography
-              sx={{
-                fontWeight: "bold",
-              }}
-            >
-              Total patient
-            </Typography>
-            <Typography color="primary.main" fontWeight="700" fontSize={28}>
-              {data.total}
-            </Typography>
+        <Box display="flex" flexDirection="column">
+          <Typography
+            sx={{
+              fontWeight: "bold",
+            }}
+          >
+            Your appointments in {data.currentYear}
+          </Typography>
+          <Box display="flex" justifyContent="center">
+            {data.dataset.length === 0 ? (
+              <CircularIndeterminate />
+            ) : (
+              <BarChart
+                dataset={data.dataset}
+                series={[
+                  {
+                    dataKey: "total",
+                    label: "Total appointments",
+                  },
+                ]}
+                xAxis={[
+                  {
+                    scaleType: "band" as const,
+                    dataKey: "month",
+                  },
+                ]}
+                {...barChartSettings}
+              />
+            )}
           </Box>
-          <Box display="flex" flexDirection="column">
-            <Typography
-              sx={{
-                fontWeight: "bold",
-              }}
-            >
-              Your patients in {data.currentYear}
-            </Typography>
-            <Box display="flex" justifyContent="center">
-              {data.dataset.length === 0 ? (
-                <CircularIndeterminate />
-              ) : (
-                <BarChart
-                  dataset={data.dataset}
-                  series={[
-                    {
-                      dataKey: "total",
-                      label: "Total patients",
-                    },
-                  ]}
-                  xAxis={[
-                    {
-                      scaleType: "band" as const,
-                      dataKey: "month",
-                    },
-                  ]}
-                  {...barChartSettings}
-                />
-              )}
-            </Box>
-          </Box>
-        </>
+        </Box>
       )}
     </Box>
   );

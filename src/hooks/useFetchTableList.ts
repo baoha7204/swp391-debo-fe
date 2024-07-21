@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { TableControl } from "./useControlTable";
-import { errorToastHandler } from "@/utils/toast/actions";
 import useAxiosPrivate from "./useAxiosPrivate";
 
 export type ListDataResponse<T> = {
@@ -34,9 +33,7 @@ const useFetchTableList = <T>({
         });
         const data = response.data;
         if (!data.success) {
-          // errorToastHandler(data);
           console.log(data);
-          
           return;
         }
         setList(data.data.list);
@@ -44,8 +41,7 @@ const useFetchTableList = <T>({
       } catch (error) {
         console.log(error.response);
         if (error.name !== "CanceledError") {
-          // errorToastHandler(error.response);
-          console.log(error.response);
+          console.error(error.response);
         }
       }
     };

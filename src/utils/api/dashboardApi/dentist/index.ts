@@ -21,7 +21,10 @@ const dentistDashboardApi = {
       }
     );
   },
-  getTotalPatient: async (dentistId: string, signal?: GenericAbortSignal) => {
+  getTotalAppointments: async (
+    dentistId: string,
+    signal?: GenericAbortSignal
+  ) => {
     return await get<
       ListDataResponse<{
         year: number;
@@ -29,7 +32,7 @@ const dentistDashboardApi = {
         totalPatients: number;
       }>
     >(
-      `${API_ENDPOINTS.DASHBOARD.DENTIST_TOTAL_PATIENT}/${dentistId}`,
+      `${API_ENDPOINTS.DASHBOARD.DENTIST_TOTAL_APPOINTMENT}/${dentistId}`,
       undefined,
       {
         signal,

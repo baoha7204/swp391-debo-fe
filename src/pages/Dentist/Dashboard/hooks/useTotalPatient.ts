@@ -8,7 +8,6 @@ import { UserContext } from "@/pages/User/user.context";
 export type UsageData = { month: string; total: number };
 
 export type CostUsageType = {
-  total: number;
   currentYear: number;
   dataset: UsageData[];
 };
@@ -25,7 +24,6 @@ const useTotalPatient = () => {
       });
     }
     return {
-      total: 0,
       currentYear: dayjs().get("year"),
       dataset,
     };
@@ -42,7 +40,7 @@ const useTotalPatient = () => {
 
     const fetchRemote = async () => {
       try {
-        const response = await dentistDashboardApi.getTotalPatient(
+        const response = await dentistDashboardApi.getTotalAppointments(
           user.id,
           abortController.signal
         );
@@ -52,12 +50,6 @@ const useTotalPatient = () => {
           errorToastHandler(result);
           return;
         }
-
-        // Calculate total
-        const total = result.data.list.reduce(
-          (acc, cur) => acc + cur.totalPatients,
-          0
-        );
 
         // Filter this year
         const currentYearData = result.data.list.filter(
@@ -78,7 +70,6 @@ const useTotalPatient = () => {
 
         setData((prev) => ({
           ...prev,
-          total,
           dataset,
         }));
       } catch (error) {
