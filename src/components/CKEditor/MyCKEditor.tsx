@@ -17,7 +17,6 @@ import { useParams } from "react-router-dom";
 import { API_ENDPOINTS } from "@/utils/api";
 import axios from "@/config/axios";
 import { UserContext } from "@/pages/User/user.context";
-import { set } from "react-hook-form";
 
 interface MyCKEditorProps {
   onChange: (data: string) => void;

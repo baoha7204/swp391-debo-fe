@@ -82,12 +82,21 @@ function AppointmentDetail({ onSubmit }: MyCKEditorProps) {
   const exportToPDF = async () => {
     const doc = new jsPDF();
 
-    // Create a new div to hold the HTML content temporarily
-    const contentDiv = document.createElement("div");
-    contentDiv.innerHTML = formData.note || "";
-    contentDiv.style.position = "absolute";
-    contentDiv.style.top = "-9999px"; // Hide it offscreen
-    document.body.appendChild(contentDiv);
+    const convertHtmlToPlainText = (html: string) => {
+      // Replace newlines and carriage returns with spaces
+      let text = html.replace(/(\r\n|\n|\r)/gm, " ");
+
+      // Replace <br> and <br/> with newlines
+      text = text.replace(/<br\s*\/?>/gi, "\n");
+
+      // Handle <b>, <i>, and <u> tags
+      text = text.replace(/<\/?(b|i|u)>/gi, "");
+
+      // Remove all other HTML tags
+      text = text.replace(/<\/?[^>]+(>|$)/g, "");
+
+      return text;
+    };
 
     // Define styles
     const titleStyle = { fontSize: 16, fontStyle: "bold" };
@@ -95,13 +104,8 @@ function AppointmentDetail({ onSubmit }: MyCKEditorProps) {
     const textStyle = { fontSize: 12 };
 
     try {
-      // Add the image content (CKEditor notes)
-      const simpleContentDiv = document.createElement("div");
-      simpleContentDiv.innerHTML = `${formData.note}`;
-      document.body.appendChild(simpleContentDiv);
-
-      const canvas = await html2canvas(simpleContentDiv, { scale: 2 });
-      const imgData = canvas.toDataURL("image/png");
+      // Strip HTML tags from formData.note
+      const plainTextNote = convertHtmlToPlainText(formData.note as string);
 
       // Add title
       doc.setFontSize(titleStyle.fontSize);
@@ -111,10 +115,10 @@ function AppointmentDetail({ onSubmit }: MyCKEditorProps) {
       // Add patient and appointment details
       doc.setFontSize(headerStyle.fontSize);
       doc.setFont("helvetica", "bold");
-      doc.setFontSize(textStyle.fontSize);
-      doc.setFont("helvetica", "normal");
       doc.text(`Patient: ${formData.customerName}`, 10, 30);
       doc.text(`Dentist: ${formData.dentistName}`, 10, 40);
+      doc.setFontSize(textStyle.fontSize);
+      doc.setFont("helvetica", "normal");
       doc.text(`Created Date: ${formatDate(formData.createdDate)}`, 10, 50);
       doc.text(`Treatment: ${formData.treatmentName}`, 10, 60);
       doc.text(`Started Date: ${formatDate(formData.startDate)}`, 10, 70);
@@ -131,14 +135,16 @@ function AppointmentDetail({ onSubmit }: MyCKEditorProps) {
       doc.setFont("helvetica", "bold");
       doc.text("Notes", 10, 120);
 
-      doc.addImage(imgData, "PNG", 10, 130, 190, 0);
+      // Add the plain text note
+      doc.setFontSize(textStyle.fontSize);
+      doc.setFont("helvetica", "normal");
+      const lines = doc.splitTextToSize(plainTextNote, 180); // Split long text into multiple lines
+      doc.text(lines, 10, 130);
+
       // Save the PDF
       doc.save("medical-record.pdf");
     } catch (error) {
       console.error("Error generating PDF: ", error);
-    } finally {
-      // Clean up
-      document.body.removeChild(contentDiv);
     }
   };
 

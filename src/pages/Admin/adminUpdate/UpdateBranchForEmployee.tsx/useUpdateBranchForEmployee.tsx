@@ -7,7 +7,7 @@ import { z } from "zod";
 import { API_ENDPOINTS } from "@/utils/api";
 import { useNavigate, useParams } from "react-router-dom";
 import { toastSuccess } from "@/utils/toast";
-import { put } from "@/utils/apiCaller";
+import { put, post } from "@/utils/apiCaller";
 
 export type UpdateBranchForEmployeeInputs = z.infer<
   typeof updateEmployeeSchema
@@ -16,7 +16,6 @@ export type UpdateBranchForEmployeeInputs = z.infer<
 export default function useUpdateBranchForEmployee() {
   const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
-  console.log("getEmployee ID:", id);
 
   const {
     handleSubmit,
@@ -30,10 +29,9 @@ export default function useUpdateBranchForEmployee() {
       id: id,
       brId: 0,
       salary: 0,
+      treatmentId: 0,
     },
   });
-
-  console.log("Join");
 
   const onSubmit: SubmitHandler<UpdateBranchForEmployeeInputs> = (data) => {
     const result = handleSubmitForm(data, updateEmployeeSchema);
@@ -42,8 +40,11 @@ export default function useUpdateBranchForEmployee() {
       return;
     }
 
-    const { id, brId, salary } = data;
+    const { id, brId, salary, treatmentId } = data;
 
+    console.log("Data: ", data);
+
+    // Update branch information for employee
     put(`${API_ENDPOINTS.USERS.UPDATE_BRANCH_FOR_EMPLOYEE}/${id}`, {
       id,
       brId,
@@ -52,14 +53,33 @@ export default function useUpdateBranchForEmployee() {
       .then((res) => {
         const { data } = res;
         if (!data.success) {
-          console.log(data);
+          console.log("put", data);
           return;
         }
-        // successfully
-        toastSuccess("Add successfully!");
-        navigate("/admin/adminAllStaffList");
+
+        // Post treatmentId to the assigned API
+        post(`${API_ENDPOINTS.DENTIST.ASSIGN_TREATMENT}`, {
+          dentId: id,
+          clinicTreatIds: [treatmentId],
+        })
+          .then((res) => {
+            const { data } = res;
+            if (!data.success) {
+              console.log("post", data);
+              return;
+            }
+
+            // Successfully updated
+            toastSuccess("Add successfully!");
+            navigate("/admin/adminAllStaffList");
+          })
+          .catch((err) => {
+            console.log("1");
+            console.log(err.response);
+          });
       })
       .catch((err) => {
+        console.log("2");
         console.log(err.response);
       });
   };
