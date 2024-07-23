@@ -9,7 +9,6 @@ import axios from "@/config/axios";
 import { formatDate } from "@/utils/helper";
 import MyTextField from "@/components/MyTextField";
 import { jsPDF } from "jspdf"; // Import jsPDF
-import html2canvas from "html2canvas"; // Import html2canvas
 
 interface MyCKEditorProps {
   onSubmit: (data: AppointmentProp) => void;

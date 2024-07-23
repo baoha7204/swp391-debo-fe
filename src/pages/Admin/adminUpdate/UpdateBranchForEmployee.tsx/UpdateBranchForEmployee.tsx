@@ -2,7 +2,7 @@ import FormInputText from "@/components/Form/FormInputText";
 import axios from "@/config/axios";
 import { API_ENDPOINTS } from "@/utils/api";
 import { Box, Grid } from "@mui/material";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import FormSelect from "@/components/Form/FormSelect";
 import useUpdateBranchForEmployee from "./useUpdateBranchForEmployee";
 import MyButton from "@/components/MyButton";
@@ -89,15 +89,7 @@ function UpdateBranchForEmployee() {
       // Log response data to check what is returned
       console.log("API Response Data:", res.data.data.list);
 
-      // Filter out treatment with id = 8
-      const filteredTreatments = res.data.data.list.filter(
-        (treatment: TreatmentProps) => treatment.id !== 8
-      );
-
-      // Log filtered treatments
-      console.log("Filtered Treatments: ", filteredTreatments);
-
-      setTreatments(filteredTreatments);
+      setTreatments(res.data.data.list);
     } catch (error) {
       console.error("Failed to fetch treatments:", error);
     }
